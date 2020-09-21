@@ -19,9 +19,10 @@ gem 'webpacker', '~> 5.2'
 gem 'jbuilder', '~> 2.10'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.16'
-
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
+# Handle Authentication for users
+gem 'devise', '~> 4.7.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
