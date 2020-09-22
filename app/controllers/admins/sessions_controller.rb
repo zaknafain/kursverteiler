@@ -20,7 +20,11 @@ class Admins::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def authenticated_admin_root_path
+    rails_admin_path
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

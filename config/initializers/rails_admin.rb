@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 RailsAdmin.config do |config|
+  config.main_app_name = ['Kursverteiler Web', 'Administration']
+  config.show_gravatar = false
 
   ### Popular gems integration
 
@@ -24,15 +28,17 @@ RailsAdmin.config do |config|
   # config.show_gravatar = true
 
   config.actions do
-    dashboard                     # mandatory
+    dashboard do                  # mandatory
+      link_icon 'icon-list'
+    end
     index                         # mandatory
     new
     export
-    bulk_delete
+    # bulk_delete
     show
     edit
-    delete
-    show_in_app
+    # delete
+    # show_in_app
 
     ## With an audit adapter, you can add:
     # history_index
