@@ -23,6 +23,8 @@ gem 'bcrypt', '~> 3.1.16'
 gem 'bootsnap', '>= 1.4.2', require: false
 # Handle Authentication for users
 gem 'devise', '~> 4.7.3'
+# Dashboard for admins
+gem 'rails_admin', '~> 2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

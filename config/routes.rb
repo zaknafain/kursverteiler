@@ -3,11 +3,13 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
   root to: 'students#home'
 
   devise_scope :admin do
     scope :admins do
-      root to: 'admins#home', as: 'authenticated_admin_root'
+      root 'rails_admin/main#dashboard', as: 'authenticated_admin_root'
     end
   end
   devise_for :admins, path: 'admins', controllers: { sessions: 'admins/sessions' }
