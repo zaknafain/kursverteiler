@@ -1,3 +1,7 @@
-STUDENT PAGE
+<div>
+  Hello <%= current_student.first_name %> <%= current_student.last_name %>
+</div>
 
-<button type="button"><%= link_to('Sign Out', destroy_student_session_path, method: :delete) %></button>
+<div>
+  <button type="button"><%= link_to('Sign Out', destroy_student_session_path, method: :delete) %></button>
+</div>
