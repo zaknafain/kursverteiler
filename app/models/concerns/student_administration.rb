@@ -9,6 +9,14 @@ module StudentAdministration
       field :email
       field :first_name
       field :last_name
+
+      import do
+        mapping_key :email
+      end
     end
+  end
+
+  def before_import_save(_)
+    self.password = self.password_confirmation = SecureRandom.hex unless persisted?
   end
 end

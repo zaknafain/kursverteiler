@@ -27,6 +27,18 @@ RailsAdmin.config do |config|
   ## To disable Gravatar integration in Navigation Bar set to false
   # config.show_gravatar = true
 
+  # Global RailsAdminImport options
+  config.configure_with(:import) do |import_config|
+    import_config.logging = false
+    import_config.line_item_limit = 1000
+    import_config.update_if_exists = true
+    import_config.rollback_on_error = true
+    import_config.header_converter = lambda do |header|
+      header.parameterize.underscore if header.present?
+    end
+    import_config.csv_options = {}
+  end
+
   config.actions do
     dashboard do                  # mandatory
       link_icon 'icon-list'
@@ -34,6 +46,7 @@ RailsAdmin.config do |config|
     index                         # mandatory
     new
     export
+    import
     # bulk_delete
     show
     edit
