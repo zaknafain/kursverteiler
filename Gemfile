@@ -32,6 +32,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Generate fake data for development and testing
   gem 'faker', '~> 2.14.0'
+  # RSpec for testing
+  gem 'rspec-rails', '~> 4.0.1'
 end
 
 group :development do
