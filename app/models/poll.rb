@@ -4,7 +4,7 @@
 class Poll < ApplicationRecord
   include PollAdministration
 
-  has_many :courses
+  has_many :courses, dependent: :destroy
 
   scope :running_at, ->(date) { where('valid_from <= ? AND valid_until >= ?', date, date) }
 

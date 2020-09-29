@@ -44,6 +44,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
+  # Rubocop for linting
+  gem 'rubocop', '~> 0.92.0', require: false
+  gem 'rubocop-rails', '~> 2.8.1', require: false
 end
 
 group :test do

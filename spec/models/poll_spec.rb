@@ -5,6 +5,15 @@ require 'rails_helper'
 RSpec.describe Poll, type: :model do
   let(:poll) { build(:poll) }
 
+  context 'relations' do
+    let(:course) { create(:course) }
+    let!(:poll)  { course.poll }
+
+    it 'destroys all its courses on deletion' do
+      expect { poll.destroy }.to change(Course, :count).by(-1)
+    end
+  end
+
   context 'validations' do
     it 'validates presence of title' do
       expect(poll).to be_valid
@@ -62,10 +71,10 @@ RSpec.describe Poll, type: :model do
       let!(:future_poll)  { create(:poll, valid_from: 6.months.from_now, valid_until: 18.months.from_now) }
 
       it 'includes all polls with valid_from before and valid_until after the requested date' do
-        expect(Poll.running_at(Date.today).count).to be(1)
-        expect(Poll.running_at(Date.today).first.id).to be(current_poll.id)
-        expect(Poll.running_at(12.month.ago).count).to be(1)
-        expect(Poll.running_at(12.month.ago).first.id).to be(old_poll.id)
+        expect(Poll.running_at(Time.zone.today).count).to be(1)
+        expect(Poll.running_at(Time.zone.today).first.id).to be(current_poll.id)
+        expect(Poll.running_at(12.months.ago).count).to be(1)
+        expect(Poll.running_at(12.months.ago).first.id).to be(old_poll.id)
         expect(Poll.running_at(12.months.from_now).count).to be(1)
         expect(Poll.running_at(12.months.from_now).first.id).to be(future_poll.id)
       end
