@@ -6,7 +6,7 @@ class Poll < ApplicationRecord
 
   has_many :courses
 
-  scope :running_at, ->(time) { where('valid_from <= ? AND valid_until >= ?', time, time) }
+  scope :running_at, ->(date) { where('valid_from <= ? AND valid_until >= ?', date, date) }
 
   validates :title, :valid_from, :valid_until, presence: true
   validate :time_frame_to_be_positive
@@ -15,9 +15,9 @@ class Poll < ApplicationRecord
 
   def time_frame_to_be_positive
     return unless valid_from && valid_until
-    return unless valid_from > valid_until
+    return unless valid_from >= valid_until
 
-    errors.add(:valid_from, "can't be after valid_until")
-    errors.add(:valid_until, "can't be before valid_from")
+    errors.add(:valid_from, 'must be before valid_until')
+    errors.add(:valid_until, 'must be after valid_from')
   end
 end

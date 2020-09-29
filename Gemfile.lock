@@ -88,6 +88,8 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.4.4)
     erubi (1.9.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
     faker (2.14.0)
       i18n (>= 1.6, < 2)
     ffi (1.13.1)
@@ -287,6 +289,7 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   devise (~> 4.7.3)
+  factory_bot (~> 6.1.0)
   faker (~> 2.14.0)
   jbuilder (~> 2.10)
   listen (~> 3.2)
