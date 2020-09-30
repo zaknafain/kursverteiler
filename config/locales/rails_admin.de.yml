@@ -98,9 +98,13 @@ de:
     home:
       name: Home
     js:
+      add: Hinzufügen
       between_and_: Zwischen ... und ...
+      choose_all: Alle wählen
+      clear_all: Alle abwählen
       contains: Enthält
       date: Datum ...
+      down: Runter
       ends_with: Endet mit
       'false': Nein
       is_blank: Ist leer
@@ -109,11 +113,14 @@ de:
       last_week: Letzte Woche
       no_objects: Nichts gefunden
       number: Nummer ...
+      remove: Entfernen
+      search: Suche
       starts_with: Beginnt mit
       this_week: Diese Woche
       today: Heute
       too_many_objects: Zu viele Einträge. Nutze die Suchfilter oben
       'true': Ja
+      up: Hoch
       yesterday: Gestern
     loading: Lädt...
     misc:

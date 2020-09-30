@@ -98,9 +98,13 @@ en:
     home:
       name: Home
     js:
+      add: Add
       between_and_: Between ... and ...
+      choose_all: Choose all
+      clear_all: Clear all
       contains: Contains
       date: Date ...
+      down: Down
       ends_with: Ends with
       'false': false
       is_blank: Is blank
@@ -109,11 +113,14 @@ en:
       last_week: Last week
       no_objects: No objects found
       number: Number ...
+      remove: Remove
+      search: Search
       starts_with: Starts with
       this_week: This week
       today: Today
       too_many_objects: 'Too many objects, use search box above'
       'true': true
+      up: Up
       yesterday: Yesterday
     loading: Loading...
     misc:
