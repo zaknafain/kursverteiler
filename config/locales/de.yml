@@ -1,0 +1,27 @@
+de:
+  activerecord:
+    attributes:
+      admin:
+        email: E-Mail
+        first_name: Vorname
+        last_name: Nachname
+      course:
+        description: Beschreibung
+        maximum: Maximale Schülerzahl
+        minimum: Minimale Schülerzahl
+        poll: Wahlkurs
+        teacher_name: Name der Lehrkraft
+        title: Titel
+      poll:
+        title: Titel
+        valid_from: Startet am
+        valid_until: Endet am
+      student:
+        email: E-Mail
+        first_name: Vorname
+        last_name: Nachname
+    models:
+      admin: Koordinator
+      course: Kurs
+      poll: Kurswahl
+      student: Schüler

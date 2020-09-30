@@ -23,6 +23,7 @@ gem 'bcrypt', '~> 3.1.16'
 gem 'bootsnap', '>= 1.4.2', require: false
 # Handle Authentication for users
 gem 'devise', '~> 4.7.3'
+gem 'devise-i18n', '~> 1.9.2'
 # Dashboard for admins
 gem 'rails_admin', '~> 2.0'
 gem 'rails_admin_import', '~> 2.2'
