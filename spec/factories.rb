@@ -31,4 +31,11 @@ FactoryBot.define do
     teacher_name { Faker::FunnyName.two_word_name }
     poll
   end
+
+  factory :selection do
+    priority { 0 }
+    poll
+    student
+    course
+  end
 end

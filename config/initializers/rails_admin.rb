@@ -39,6 +39,8 @@ RailsAdmin.config do |config|
     import_config.csv_options = {}
   end
 
+  config.label_methods = [:to_pretty_value]
+
   config.actions do
     dashboard do                  # mandatory
       link_icon 'icon-list'

@@ -4,16 +4,33 @@
 module CourseAdministration
   extend ActiveSupport::Concern
 
+  def to_pretty_value
+    title
+  end
+
   included do
     rails_admin do
       field :title
-      field :minimum
-      field :maximum
-      field :description
+      %i[minimum maximum description].each do |attribute|
+        field attribute do
+          searchable false
+          sortable false
+        end
+      end
       field :teacher_name
       field :poll do
         inline_add false
         inline_edit false
+        queryable true
+        searchable [:title]
+        sortable :title
+      end
+
+      list do
+        sort_by :title
+      end
+      import do
+        mapping_key :title
       end
     end
   end

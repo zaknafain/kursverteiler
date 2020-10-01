@@ -149,6 +149,15 @@ en:
       next: Next &raquo;
       previous: '&laquo; Prev'
       truncate: …
+    scopes:
+      poll:
+        _all: All
+        running_at: Current Polls
+      selection:
+        _all: All
+        top_priority: First choices
+        medium_priority: Second choices
+        low_priority: Third choices
     table_headers:
       changes: Changes
       created_at: Date/Time

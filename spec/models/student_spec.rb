@@ -5,6 +5,14 @@ require 'rails_helper'
 RSpec.describe Student, type: :model do
   let(:student) { build(:student) }
 
+  context 'relations' do
+    let!(:selection) { create(:selection, student: student) }
+
+    it 'destroys all its selections on deletion' do
+      expect { student.destroy }.to change(Selection, :count).by(-1)
+    end
+  end
+
   context 'validations' do
     it 'validates presence of first_name' do
       expect(student).to be_valid

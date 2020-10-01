@@ -16,12 +16,37 @@ en:
         title: Title
         valid_from: Beginns at
         valid_until: Ends at
+      selection:
+        poll: Poll
+        student: Student
+        course: Course
+        priority: Priority
       student:
         email: Email
         first_name: First name
         last_name: Last name
     models:
-      admin: Coordinator
-      course: Course
-      poll: Poll
-      student: Student
+      admin:
+        one: Coordinator
+        other: Coordinators
+      course:
+        one: Course
+        other: Courses
+      poll:
+        one: Poll
+        other: Polls
+      selection:
+        one: Selection
+        other: Selections
+      student:
+        one: Student
+        other: Students
+    values:
+      selection:
+        priority:
+          '0': First choice
+          '1': Second choice
+          '2': Third choice
+  selections:
+    form:
+      help: 'Required. 0: First choice, 1: Second choice, 2: Third choice'

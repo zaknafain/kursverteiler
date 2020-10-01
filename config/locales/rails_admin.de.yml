@@ -26,7 +26,7 @@ de:
         breadcrumb: Exportieren
         bulk_link: 'Export ausgewählt %{model_label_plural}'
         done: exportiert
-        link: 'Export gefunden %{model_label_plural}'
+        link: 'Exportiere gefiltere %{model_label_plural}'
         menu: Exportieren
         title: '%{model_label_plural} exportieren'
       history_index:
@@ -149,6 +149,15 @@ de:
       next: Zurück &raquo;
       previous: '&laquo; Vor'
       truncate: …
+    scopes:
+      poll:
+        _all: Alle
+        running_at: Aktuelle Kurswahlen
+      selection:
+        _all: Alle
+        top_priority: Erstwahlen
+        medium_priority: Zweitwahlen
+        low_priority: Drittwahlen
     table_headers:
       changes: Änderungen
       created_at: Datum/uhrzeit

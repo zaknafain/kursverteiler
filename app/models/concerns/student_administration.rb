@@ -4,12 +4,19 @@
 module StudentAdministration
   extend ActiveSupport::Concern
 
+  def to_pretty_value
+    "#{first_name} #{last_name} (#{email})"
+  end
+
   included do
     rails_admin do
       field :email
       field :first_name
       field :last_name
 
+      list do
+        sort_by :last_name
+      end
       import do
         mapping_key :email
       end

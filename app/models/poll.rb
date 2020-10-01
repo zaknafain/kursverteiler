@@ -4,12 +4,13 @@
 class Poll < ApplicationRecord
   include PollAdministration
 
-  has_many :courses, dependent: :destroy
+  has_many :courses,    dependent: :destroy
+  has_many :selections, dependent: :destroy
 
-  scope :running_at, ->(date) { where('valid_from <= ? AND valid_until >= ?', date, date) }
+  scope :running_at, ->(date = DateTime.now) { where('valid_from <= ? AND valid_until >= ?', date, date) }
 
   validates :title, :valid_from, :valid_until, presence: true
-  validate :time_frame_to_be_positive
+  validate  :time_frame_to_be_positive
 
   private
 

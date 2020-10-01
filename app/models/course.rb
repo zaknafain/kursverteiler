@@ -5,6 +5,7 @@ class Course < ApplicationRecord
   include CourseAdministration
 
   belongs_to :poll
+  has_many   :selections, dependent: :destroy
 
   validates :poll, :title, presence: true
   validates :minimum, :maximum, numericality: { only_integer: true, greater_than: 0, less_than: 100 }

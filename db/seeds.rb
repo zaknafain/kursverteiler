@@ -47,3 +47,15 @@ puts '----------------------- Create 200 dummy Students -----------------------'
                               password: password, password_confirmation: password })
   student.save!
 end
+
+# Create Selections for all Students to have a real Poll running
+puts '-------------------- Create Selections  for Students --------------------'
+Student.all.each do |student|
+  selection_amount = (0..3).to_a.sample
+  selected_courses = Course.order(Arel.sql('RAND()')).first(selection_amount)
+  puts "Student #{(student.id + 1).to_s.rjust(3)} selected following courses: #{selected_courses.map(&:title).join(', ')}"
+  selection_amount.times do |priority|
+    selection = student.selections.build(poll: poll, priority: priority, course: selected_courses.pop)
+    selection.save!
+  end
+end

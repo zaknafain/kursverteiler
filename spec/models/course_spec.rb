@@ -5,6 +5,15 @@ require 'rails_helper'
 RSpec.describe Course, type: :model do
   let(:course) { build(:course) }
 
+  context 'relations' do
+    let(:selection) { create(:selection) }
+    let!(:course)   { selection.course }
+
+    it 'destroys all its selections on deletion' do
+      expect { course.destroy }.to change(Selection, :count).by(-1)
+    end
+  end
+
   context 'validations' do
     it 'validates presence of title' do
       expect(course).to be_valid

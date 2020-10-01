@@ -16,12 +16,37 @@ de:
         title: Titel
         valid_from: Startet am
         valid_until: Endet am
+      selection:
+        poll: Kurswahl
+        student: Schüler
+        course: Kurs
+        priority: Priorität
       student:
         email: E-Mail
         first_name: Vorname
         last_name: Nachname
     models:
-      admin: Koordinator
-      course: Kurs
-      poll: Kurswahl
-      student: Schüler
+      admin:
+        one: Koordinator
+        other: Koordinatoren
+      course:
+        one: Kurs
+        other: Kurse
+      poll:
+        one: Kurswahl
+        other: Kurswahlen
+      selection:
+        one: Wahl
+        other: Wahlen
+      student:
+        one: Schüler
+        other: Schüler
+    values:
+      selection:
+        priority:
+          '0': Erstwahl
+          '1': Zweitwahl
+          '2': Drittwahl
+  selections:
+    form:
+      help: 'Erforderlich. 0: Erstwahl, 1: Zweitwahl, 2: Drittwahl'

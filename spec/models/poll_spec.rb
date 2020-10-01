@@ -6,11 +6,16 @@ RSpec.describe Poll, type: :model do
   let(:poll) { build(:poll) }
 
   context 'relations' do
-    let(:course) { create(:course) }
-    let!(:poll)  { course.poll }
+    let(:selection) { create(:selection) }
+    let(:course)    { selection.course }
+    let!(:poll)     { course.poll }
 
     it 'destroys all its courses on deletion' do
       expect { poll.destroy }.to change(Course, :count).by(-1)
+    end
+
+    it 'destroys all its selections on deletion' do
+      expect { poll.destroy }.to change(Selection, :count).by(-1)
     end
   end
 
