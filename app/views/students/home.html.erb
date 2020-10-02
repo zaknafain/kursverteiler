@@ -3,5 +3,27 @@
 </div>
 
 <div>
+  <div>Your choices are:</div>
+  <div>
+    <ol>
+      <% @selections.each do |selection| %>
+        <li>
+          <%= selection.course.title %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>
+
+<ul>
+  <% @courses.each do |course| %>
+    <li style="<%= 'border: 1px solid grey; background-color: #ddd;' if @selections.any? {|s| s.course_id == course.id } %>%">
+      <span><%= course.title %></span>
+      <small><em><%= course.description %></em></small>
+    </li>
+  <% end %>
+</ul>
+
+<div>
   <button type="button"><%= link_to('Sign Out', destroy_student_session_path, method: :delete) %></button>
 </div>
