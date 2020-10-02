@@ -136,7 +136,7 @@ en:
       log_out: Log out
       more: 'Plus %{count} more %{models_name}'
       navigation: Navigation
-      navigation_static_label: Links
+      navigation_static_label: Languages
       refresh: Refresh
       remove: Remove
       reset_filters: Reset filters
@@ -155,9 +155,9 @@ en:
         running_at: Current Polls
       selection:
         _all: All
-        top_priority: First choices
-        medium_priority: Second choices
         low_priority: Third choices
+        medium_priority: Second choices
+        top_priority: First choices
     table_headers:
       changes: Changes
       created_at: Date/Time

@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_locale
-    I18n.locale = session[:locale] || I18n.default_locale
+    possible_locales = [params[:locale], session[:locale], I18n.default_locale]
+    I18n.locale = possible_locales.compact.detect { |l| I18n.available_locales.include?(l.to_sym) }
     session[:locale] = I18n.locale
   end
 end

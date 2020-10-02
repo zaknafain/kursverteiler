@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RailsAdmin.config do |config|
+  config.parent_controller = '::ApplicationController'
+
   config.main_app_name = ['Kursverteiler Web', 'Administration']
   config.show_gravatar = false
 
@@ -59,4 +61,9 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+
+  config.navigation_static_links = {
+    'English' => '?locale=en',
+    'Deutsch' => '?locale=de',
+  }
 end
