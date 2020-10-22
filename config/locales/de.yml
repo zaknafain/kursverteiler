@@ -14,6 +14,8 @@ de:
         title: Titel
       educational_program:
         name: Name
+      grade:
+        name: Name
       poll:
         title: Titel
         valid_from: Startet am
@@ -37,6 +39,9 @@ de:
       educational_program:
         one: Bildungsgang
         other: Bildungsgänge
+      grade:
+        one: Klasse
+        other: Klassen
       poll:
         one: Kurswahl
         other: Kurswahlen

@@ -8,6 +8,7 @@ class Student < ApplicationRecord
   # :registerable, :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :recoverable, :rememberable, :validatable
 
+  belongs_to :grade
   has_many :selections, dependent: :destroy
 
   validates :first_name, :last_name, presence: true

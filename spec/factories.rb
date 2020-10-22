@@ -13,12 +13,18 @@ FactoryBot.define do
     name { Faker::Educator.degree }
   end
 
+  factory :grade do
+    sequence(:name) { |n| "Class #{n + 1}" }
+    educational_program
+  end
+
   factory :student do
     email                 { Faker::Internet.safe_email }
     first_name            { Faker::Name.first_name }
     last_name             { Faker::Name.last_name }
     password              { '12345678' }
     password_confirmation { '12345678' }
+    grade
   end
 
   factory :poll do

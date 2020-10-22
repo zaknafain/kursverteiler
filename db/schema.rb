@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_30_095756) do
+ActiveRecord::Schema.define(version: 2020_10_22_143111) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2020_09_30_095756) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_educational_programs_on_name", unique: true
+  end
+
+  create_table "grades", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "educational_program_id"
+    t.index ["educational_program_id"], name: "index_grades_on_educational_program_id"
+    t.index ["name"], name: "index_grades_on_name", unique: true
   end
 
   create_table "polls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -78,13 +87,17 @@ ActiveRecord::Schema.define(version: 2020_09_30_095756) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.bigint "grade_id"
     t.index ["email"], name: "index_students_on_email", unique: true
+    t.index ["grade_id"], name: "index_students_on_grade_id"
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
   end
 
   add_foreign_key "courses", "polls"
+  add_foreign_key "grades", "educational_programs"
   add_foreign_key "polls", "educational_programs"
   add_foreign_key "selections", "courses"
   add_foreign_key "selections", "polls"
   add_foreign_key "selections", "students"
+  add_foreign_key "students", "grades"
 end
