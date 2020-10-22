@@ -4,6 +4,7 @@
 class Poll < ApplicationRecord
   include PollAdministration
 
+  belongs_to :educational_program
   has_many :courses,    dependent: :destroy
   has_many :selections, dependent: :destroy
 

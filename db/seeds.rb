@@ -9,6 +9,10 @@ admin.assign_attributes({ first_name: 'John', last_name: 'Doe', password: 'fooba
                           password_confirmation: 'foobar20' })
 admin.save!
 
+# Creates some dummy educational programs
+puts 'Create some dummy educational programs'
+program = EducationalProgram.find_or_create_by!(name: 'EP 1234')
+
 # Creates a dummy Student for testing
 puts 'Create a dummy Student for testing (foo@bar.com)'
 student = Student.find_or_initialize_by(email: 'foo@bar.com')
@@ -18,7 +22,7 @@ student.save!
 
 # Creates a poll for the courses following
 puts 'Create a poll that is running'
-poll = Poll.find_or_initialize_by(title: "#{Faker::Lorem.word.capitalize} #{DateTime.now.strftime('%Y')}")
+poll = Poll.find_or_initialize_by(educational_program: program, title: "#{Faker::Lorem.word.capitalize} #{DateTime.now.strftime('%Y')}")
 poll.assign_attributes({ valid_from: 1.month.ago, valid_until: 1.month.from_now })
 poll.save!
 

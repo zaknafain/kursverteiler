@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_09_30_095756) do
 
-  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_09_30_095756) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "courses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "courses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.integer "minimum", null: false
     t.integer "maximum", null: false
@@ -38,15 +38,24 @@ ActiveRecord::Schema.define(version: 2020_09_30_095756) do
     t.index ["poll_id"], name: "index_courses_on_poll_id"
   end
 
-  create_table "polls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "educational_programs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_educational_programs_on_name", unique: true
+  end
+
+  create_table "polls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title", null: false
     t.date "valid_from", null: false
     t.date "valid_until", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "educational_program_id"
+    t.index ["educational_program_id"], name: "index_polls_on_educational_program_id"
   end
 
-  create_table "selections", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "selections", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "student_id", null: false
     t.bigint "poll_id", null: false
     t.bigint "course_id", null: false
@@ -59,7 +68,7 @@ ActiveRecord::Schema.define(version: 2020_09_30_095756) do
     t.index ["student_id"], name: "index_selections_on_student_id"
   end
 
-  create_table "students", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "students", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -74,6 +83,7 @@ ActiveRecord::Schema.define(version: 2020_09_30_095756) do
   end
 
   add_foreign_key "courses", "polls"
+  add_foreign_key "polls", "educational_programs"
   add_foreign_key "selections", "courses"
   add_foreign_key "selections", "polls"
   add_foreign_key "selections", "students"

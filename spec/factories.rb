@@ -9,6 +9,10 @@ FactoryBot.define do
     password_confirmation { '12345678' }
   end
 
+  factory :educational_program do
+    name { Faker::Educator.degree }
+  end
+
   factory :student do
     email                 { Faker::Internet.safe_email }
     first_name            { Faker::Name.first_name }
@@ -21,6 +25,7 @@ FactoryBot.define do
     title       { "#{Faker::Lorem.word.capitalize} #{DateTime.now.strftime('%Y')}" }
     valid_from  { 6.months.ago }
     valid_until { 6.months.from_now }
+    educational_program
   end
 
   factory :course do

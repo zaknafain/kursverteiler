@@ -12,6 +12,8 @@ de:
         poll: Wahlkurs
         teacher_name: Name der Lehrkraft
         title: Titel
+      educational_program:
+        name: Name
       poll:
         title: Titel
         valid_from: Startet am
@@ -32,6 +34,9 @@ de:
       course:
         one: Kurs
         other: Kurse
+      educational_program:
+        one: Bildungsgang
+        other: Bildungsgänge
       poll:
         one: Kurswahl
         other: Kurswahlen

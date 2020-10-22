@@ -9,7 +9,7 @@ class Course < ApplicationRecord
 
   validates :poll, :title, presence: true
   validates :minimum, :maximum, numericality: { only_integer: true, greater_than: 0, less_than: 100 }
-  validate :minimum_is_lesser_or_equal_than_maximum
+  validate  :minimum_is_lesser_or_equal_than_maximum
 
   private
 

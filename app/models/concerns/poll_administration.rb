@@ -13,6 +13,7 @@ module PollAdministration
       field :title
       field :valid_from
       field :valid_until
+      field :educational_program
 
       list do
         sort_by :valid_from

@@ -12,6 +12,8 @@ en:
         poll: Poll
         teacher_name: Teacher name
         title: Title
+      educational_program:
+        name: Name
       poll:
         title: Title
         valid_from: Beginns at
@@ -32,6 +34,9 @@ en:
       course:
         one: Course
         other: Courses
+      educational_program:
+        one: Bildungsgang
+        other: Bildungsgänge
       poll:
         one: Poll
         other: Polls
