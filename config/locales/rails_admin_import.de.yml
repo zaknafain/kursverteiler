@@ -12,6 +12,14 @@ de:
       association_fields: Zuordnungen
       association_not_found: 'Zuordnung nicht gefunden. %{error}'
       encoding: Kodierung
+      enumeration:
+        add: Hinzufügen
+        choose_all: Alle auswählen
+        clear_all: Alle abwählen
+        down: Runter
+        remove: Entfernen
+        search: Suche
+        up: Hoch
       file: Datei
       format: Dateiformat
       help:

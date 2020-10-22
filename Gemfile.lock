@@ -1,7 +1,7 @@
 GIT
   remote: git@github.com:zaknafain/rails_admin.git
-  revision: 6c7c169914b3cf6d2b58a4432e767a6697162d80
-  branch: master
+  revision: a1bf08da601ea1c98f487b442fbfcdfcc85f9480
+  branch: multiselect_options
   specs:
     rails_admin (2.0.2)
       activemodel-serializers-xml (>= 1.0)
@@ -15,6 +15,17 @@ GIT
       rails (>= 5.0, < 7)
       remotipart (~> 1.3)
       sassc-rails (>= 1.3, < 3)
+
+GIT
+  remote: git@github.com:zaknafain/rails_admin_import.git
+  revision: 6fd826c687a43f98143e9726586d3447569a68af
+  branch: enumeration_translation
+  specs:
+    rails_admin_import (2.2.0)
+      charlock_holmes (~> 0.6)
+      rails (>= 3.2)
+      rails_admin (>= 0.6.6)
+      simple_xlsx_reader (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -197,11 +208,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
-    rails_admin_import (2.2.0)
-      charlock_holmes (~> 0.6)
-      rails (>= 3.2)
-      rails_admin (>= 0.6.6)
-      simple_xlsx_reader (~> 1.0)
     railties (6.0.3.4)
       actionpack (= 6.0.3.4)
       activesupport (= 6.0.3.4)
@@ -329,7 +335,7 @@ DEPENDENCIES
   puma (~> 5.0.0)
   rails (~> 6.0.3, >= 6.0.3.3)
   rails_admin!
-  rails_admin_import (~> 2.2)
+  rails_admin_import!
   rspec-rails (~> 4.0.1)
   rubocop (~> 0.92.0)
   rubocop-rails (~> 2.8.1)

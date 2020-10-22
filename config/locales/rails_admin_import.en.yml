@@ -12,6 +12,14 @@ en:
       association_fields: Association fields
       association_not_found: 'Association not found. %{error}'
       encoding: Encoding
+      enumeration:
+        add: Add new
+        choose_all: Choose all
+        clear_all: Clear all
+        down: Down
+        remove: Remove
+        search: Search
+        up: Up
       file: Data file
       format: File format
       help:

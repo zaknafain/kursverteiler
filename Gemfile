@@ -25,8 +25,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise', '~> 4.7.3'
 gem 'devise-i18n', '~> 1.9.2'
 # Dashboard for admins
-gem 'rails_admin', git: 'git@github.com:zaknafain/rails_admin.git', branch: 'master'
-gem 'rails_admin_import', '~> 2.2'
+gem 'rails_admin', git: 'git@github.com:zaknafain/rails_admin.git', branch: 'multiselect_options'
+gem 'rails_admin_import', git: 'git@github.com:zaknafain/rails_admin_import.git', branch: 'enumeration_translation'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
