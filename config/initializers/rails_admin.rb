@@ -50,7 +50,9 @@ RailsAdmin.config do |config|
     index                         # mandatory
     new
     export
-    import
+    import do
+      except ['EducationalProgram']
+    end
     # bulk_delete
     show
     edit
