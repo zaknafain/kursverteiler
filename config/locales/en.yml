@@ -8,6 +8,7 @@ en:
       course:
         description: Description
         maximum: Maximum students
+        mandatory: Mandatory
         minimum: Minimum students
         poll: Poll
         teacher_name: Teacher name

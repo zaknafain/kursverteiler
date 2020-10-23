@@ -8,6 +8,7 @@ de:
       course:
         description: Beschreibung
         maximum: Maximale Schülerzahl
+        mandatory: Pflicht
         minimum: Minimale Schülerzahl
         poll: Wahlkurs
         teacher_name: Name der Lehrkraft
