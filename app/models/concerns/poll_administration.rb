@@ -13,7 +13,14 @@ module PollAdministration
       field :title
       field :valid_from
       field :valid_until
-      field :educational_program
+      field :educational_program do
+        inline_add false
+        inline_edit false
+        queryable true
+        searchable :name
+        sortable :name
+        filterable true
+      end
 
       list do
         sort_by :valid_from

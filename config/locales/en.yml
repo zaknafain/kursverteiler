@@ -19,6 +19,7 @@ en:
         educational_program: Educational Program
         name: Name
       poll:
+        educational_program: Educational Program
         title: Title
         valid_from: Beginns at
         valid_until: Ends at

@@ -19,6 +19,7 @@ de:
         educational_program: Bildungsgang
         name: Name
       poll:
+        educational_program: Bildungsgang
         title: Titel
         valid_from: Startet am
         valid_until: Endet am
