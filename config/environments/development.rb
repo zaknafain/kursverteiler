@@ -63,6 +63,8 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Logging
-  config.logger = Logger.new(STDOUT)
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.logger    = ActiveSupport::TaggedLogging.new(logger)
   config.log_level = :info
 end
