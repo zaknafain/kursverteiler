@@ -10,7 +10,7 @@ de:
         maximum: Maximale Schülerzahl
         mandatory: Pflicht
         minimum: Minimale Schülerzahl
-        poll: Wahlkurs
+        poll: Kurswahl
         teacher_name: Name der Lehrkraft
         title: Titel
       educational_program:
