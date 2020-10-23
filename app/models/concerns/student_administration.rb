@@ -13,6 +13,14 @@ module StudentAdministration
       field :email
       field :first_name
       field :last_name
+      field :grade do
+        inline_add false
+        inline_edit false
+        queryable true
+        searchable :name
+        sortable :name
+        filterable true
+      end
 
       list do
         sort_by :last_name

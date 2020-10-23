@@ -16,6 +16,7 @@ en:
       educational_program:
         name: Name
       grade:
+        educational_program: Educational Program
         name: Name
       poll:
         title: Title
@@ -29,6 +30,7 @@ en:
       student:
         email: Email
         first_name: First name
+        grade: Class
         last_name: Last name
     models:
       admin:
