@@ -10,6 +10,7 @@ module AdminAdministration
 
   included do
     rails_admin do
+      weight 0
       field :email
       field :first_name
       field :last_name

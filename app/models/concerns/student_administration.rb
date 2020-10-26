@@ -10,6 +10,7 @@ module StudentAdministration
 
   included do
     rails_admin do
+      parent Grade
       field :email
       field :first_name
       field :last_name

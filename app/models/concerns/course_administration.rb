@@ -10,6 +10,7 @@ module CourseAdministration
 
   included do
     rails_admin do
+      parent Poll
       field :title
       %i[minimum maximum description].each do |attribute|
         field attribute do

@@ -10,6 +10,7 @@ module EducationalProgramAdministration
 
   included do
     rails_admin do
+      weight 1
       field :name
 
       list do

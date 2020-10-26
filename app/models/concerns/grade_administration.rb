@@ -10,6 +10,7 @@ module GradeAdministration
 
   included do
     rails_admin do
+      parent EducationalProgram
       field :name
       field :educational_program do
         inline_add false
