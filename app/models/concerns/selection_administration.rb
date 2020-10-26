@@ -36,7 +36,7 @@ module SelectionAdministration
       end
 
       list do
-        scopes [nil, :top_priority, :medium_priority, :low_priority]
+        scopes [:current, :top_priority, :medium_priority, :low_priority, nil]
       end
       import do
         mapping_key_list %i[poll student priority]

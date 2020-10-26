@@ -15,4 +15,5 @@ class Selection < ApplicationRecord
   scope :top_priority,    -> { where(priority: 0) }
   scope :medium_priority, -> { where(priority: 1) }
   scope :low_priority,    -> { where(priority: 2) }
+  scope :current,         -> { where(poll: Poll.running_at(Time.zone.today)) }
 end

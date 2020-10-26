@@ -66,4 +66,20 @@ RSpec.describe Selection, type: :model do
       expect(selection.errors[:priority]).to be_present
     end
   end
+
+  context 'scopes' do
+    let(:old_poll)       { create(:poll, valid_from: 18.months.ago, valid_until: 6.months.ago) }
+    let!(:selection)     { create(:selection, student: student, poll: poll) }
+    let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
+
+    context 'current' do
+      it 'returns selections of running polls' do
+        expect(Selection.count).to be(2)
+        expect(Selection.pluck(:id)).to include(selection.id)
+        expect(Selection.pluck(:id)).to include(old_selection.id)
+        expect(Selection.current.count).to be(1)
+        expect(Selection.current.first.id).to be(selection.id)
+      end
+    end
+  end
 end

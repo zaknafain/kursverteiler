@@ -147,6 +147,7 @@ de:
         running_at: Aktuelle Kurswahlen
       selection:
         _all: Alle
+        current: Aktuelle Wahlen
         low_priority: Drittwahlen
         medium_priority: Zweitwahlen
         top_priority: Erstwahlen
