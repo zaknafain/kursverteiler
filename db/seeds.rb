@@ -43,10 +43,10 @@ if Rails.env.development?
     course = Course.find_or_initialize_by(title: title)
     course.poll = poll
     course.assign_attributes({ minimum: Faker::Number.within(range: 8..12),
-                              maximum: Faker::Number.within(range: 14..30),
-                              description: Faker::Lorem.paragraph(sentence_count: 10),
-                              teacher_name: Faker::FunnyName.two_word_name,
-                              mandatory: mandatory })
+                               maximum: Faker::Number.within(range: 14..30),
+                               description: Faker::Lorem.paragraph(sentence_count: 10),
+                               teacher_name: Faker::FunnyName.two_word_name,
+                               mandatory: mandatory })
     course.save!
   end
 
@@ -77,7 +77,7 @@ if Rails.env.development?
   log('-------------------- Create Selections  for Students --------------------')
   Student.all.each do |student|
     selection_amount = (0..3).to_a.sample
-    selected_courses = Course.where(mandatory: false).order(Arel.sql('RAND()')).first(selection_amount)
+    selected_courses = Course.where(mandatory: false).order(Arel.sql('RANDOM()')).first(selection_amount)
     course_names = selected_courses.map(&:title).join(', ')
     log("Student #{student.id.to_s.rjust(3)} selected following courses: #{course_names}") unless selection_amount.zero?
     selection_amount.times do |priority|
