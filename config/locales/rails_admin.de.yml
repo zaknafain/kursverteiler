@@ -154,9 +154,9 @@ de:
       changes: Änderungen
       created_at: Datum/uhrzeit
       item: Element
-      last_used: zuletzt benutzt
+      last_created: Letzte Aktivität
       message: Meldung
-      model_name: Modellname
-      records: Datensatz
+      model_name: Typ
+      records: Datensätze
       username: Nutzer
     toggle_navigation: Navigation umschalten

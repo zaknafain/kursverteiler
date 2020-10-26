@@ -156,7 +156,7 @@ en:
       item: Item
       last_created: Last created
       message: Message
-      model_name: Model name
+      model_name: Type
       records: Records
       username: User
     toggle_navigation: Toggle navigation
