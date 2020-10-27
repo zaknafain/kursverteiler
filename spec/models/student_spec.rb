@@ -6,10 +6,21 @@ RSpec.describe Student, type: :model do
   let(:student) { build(:student) }
 
   context 'relations' do
-    let!(:selection) { create(:selection, student: student) }
+    let!(:selection)     { create(:selection, student: student) }
+    let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
+    let(:old_poll)       { create(:poll, valid_from: 18.months.ago, valid_until: 6.months.ago) }
 
     it 'destroys all its selections on deletion' do
-      expect { student.destroy }.to change(Selection, :count).by(-1)
+      expect { student.destroy }.to change(Selection, :count).by(-2)
+    end
+
+    it 'has many current selections' do
+      expect(student.selections.count).to be(2)
+      expect(student.selections.pluck(:id)).to include(selection.id)
+      expect(student.selections.pluck(:id)).to include(old_selection.id)
+
+      expect(student.current_selections.count).to be(1)
+      expect(student.current_selections.pluck(:id)).to include(selection.id)
     end
   end
 
