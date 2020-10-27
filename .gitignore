@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+.irb_history
 
 # Ignore pidfiles, but keep the directory.
 /tmp/pids/*
@@ -25,16 +26,15 @@
 /public/assets
 .byebug_history
 
-# Ignore master key for decrypting credentials and more.
+# Ignore keys for decrypting credentials and more.
 /config/master.key
+/config/credentials/development.key
+/config/credentials/test.key
 
+# Ignore downloaded or compiled assets
 /public/packs
 /public/packs-test
 /node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-
-/config/credentials/development.key
-
-/config/credentials/test.key
