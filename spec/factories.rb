@@ -10,7 +10,7 @@ FactoryBot.define do
   end
 
   factory :educational_program do
-    name { Faker::Educator.unique.degree }
+    sequence(:name) { |n| "#{Faker::Educator.degree} #{n}" }
   end
 
   factory :grade do
