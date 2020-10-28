@@ -7,6 +7,7 @@ class EducationalProgram < ApplicationRecord
 
   has_many :polls,  dependent: :destroy
   has_many :grades, dependent: :destroy
+  has_one  :running_poll, -> { running_at(Time.zone.today) }, class_name: 'Poll', inverse_of: :educational_program
 
   validates :name, uniqueness: { case_sensitive: false }
 end

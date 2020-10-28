@@ -12,6 +12,16 @@ RSpec.describe EducationalProgram, type: :model do
     it 'destroys all its polls on deletion' do
       expect { educational_program.destroy }.to change(Poll, :count).by(-1)
     end
+
+    it 'has one running poll' do
+      old_poll = create(:poll, :ended, educational_program: educational_program)
+
+      expect(educational_program.polls.count).to be(2)
+      expect(educational_program.polls.pluck(:id)).to include(poll.id)
+      expect(educational_program.polls.pluck(:id)).to include(old_poll.id)
+
+      expect(educational_program.running_poll.id).to be(poll.id)
+    end
   end
 
   context 'validations' do
