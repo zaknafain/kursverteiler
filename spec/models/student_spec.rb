@@ -6,50 +6,61 @@ RSpec.describe Student, type: :model do
   let(:student) { build(:student) }
 
   context 'relations' do
-    let!(:selection)     { create(:selection, student: student, poll: poll) }
-    let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
-    let(:poll)           { create(:poll) }
-    let(:old_poll)       { create(:poll, :ended) }
+    context 'educational program' do
+      it 'has one educational program, that matches the program of the class' do
+        student.save!
 
-    it 'destroys all its selections on deletion' do
-      expect { student.destroy }.to change(Selection, :count).by(-2)
+        expect(student.educational_program).to_not be_nil
+        expect(student.grade.educational_program.id).to be(student.educational_program.id)
+      end
     end
 
-    it 'has many current selections' do
-      expect(student.selections.count).to be(2)
-      expect(student.selections.pluck(:id)).to include(selection.id)
-      expect(student.selections.pluck(:id)).to include(old_selection.id)
+    context 'selections' do
+      let!(:selection)     { create(:selection, student: student, poll: poll) }
+      let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
+      let(:poll)           { create(:poll) }
+      let(:old_poll)       { create(:poll, :ended) }
 
-      expect(student.current_selections.count).to be(1)
-      expect(student.current_selections.pluck(:id)).to include(selection.id)
-    end
+      it 'destroys all its selections on deletion' do
+        expect { student.destroy }.to change(Selection, :count).by(-2)
+      end
 
-    it 'has one current top selection' do
-      expect(student.selections.count).to be(2)
-      expect(student.selections.pluck(:id)).to include(selection.id)
-      expect(student.selections.pluck(:id)).to include(old_selection.id)
+      it 'has many current selections' do
+        expect(student.selections.count).to be(2)
+        expect(student.selections.pluck(:id)).to include(selection.id)
+        expect(student.selections.pluck(:id)).to include(old_selection.id)
 
-      expect(student.top_selection.id).to be(selection.id)
-    end
+        expect(student.current_selections.count).to be(1)
+        expect(student.current_selections.pluck(:id)).to include(selection.id)
+      end
 
-    it 'has one current mid selection' do
-      mid_selection = create(:selection, student: student, priority: 1, poll: poll)
+      it 'has one current top selection' do
+        expect(student.selections.count).to be(2)
+        expect(student.selections.pluck(:id)).to include(selection.id)
+        expect(student.selections.pluck(:id)).to include(old_selection.id)
 
-      expect(student.selections.count).to be(3)
-      expect(student.selections.pluck(:id)).to include(selection.id)
-      expect(student.selections.pluck(:id)).to include(mid_selection.id)
+        expect(student.top_selection.id).to be(selection.id)
+      end
 
-      expect(student.mid_selection.id).to be(mid_selection.id)
-    end
+      it 'has one current mid selection' do
+        mid_selection = create(:selection, student: student, priority: 1, poll: poll)
 
-    it 'has one current low selection' do
-      low_selection = create(:selection, student: student, priority: 2, poll: poll)
+        expect(student.selections.count).to be(3)
+        expect(student.selections.pluck(:id)).to include(selection.id)
+        expect(student.selections.pluck(:id)).to include(mid_selection.id)
 
-      expect(student.selections.count).to be(3)
-      expect(student.selections.pluck(:id)).to include(selection.id)
-      expect(student.selections.pluck(:id)).to include(low_selection.id)
+        expect(student.mid_selection.id).to be(mid_selection.id)
+      end
 
-      expect(student.low_selection.id).to be(low_selection.id)
+      it 'has one current low selection' do
+        low_selection = create(:selection, student: student, priority: 2, poll: poll)
+
+        expect(student.selections.count).to be(3)
+        expect(student.selections.pluck(:id)).to include(selection.id)
+        expect(student.selections.pluck(:id)).to include(low_selection.id)
+
+        expect(student.low_selection.id).to be(low_selection.id)
+      end
     end
   end
 
