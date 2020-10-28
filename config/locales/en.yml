@@ -33,6 +33,9 @@ en:
         first_name: First name
         grade: Class
         last_name: Last name
+        low_selection: Third choice
+        mid_selection: Second choice
+        top_selection: First choice
     models:
       admin:
         one: Coordinator

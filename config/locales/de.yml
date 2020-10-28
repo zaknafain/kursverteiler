@@ -33,6 +33,9 @@ de:
         first_name: Vorname
         grade: Klasse
         last_name: Nachname
+        low_selection: Drittwahl
+        mid_selection: Zweitwahl
+        top_selection: Erstwahl
     models:
       admin:
         one: Koordinator
