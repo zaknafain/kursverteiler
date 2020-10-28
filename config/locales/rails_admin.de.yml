@@ -142,6 +142,9 @@ de:
       previous: '&laquo; Vor'
       truncate: …
     scopes:
+      course:
+        _all: Alle
+        current: Aktuelle Kurse
       poll:
         _all: Alle
         running_at: Aktuelle Kurswahlen

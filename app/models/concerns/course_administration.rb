@@ -29,6 +29,7 @@ module CourseAdministration
 
       list do
         sort_by :title
+        scopes [:current, nil]
       end
       import do
         mapping_key :title

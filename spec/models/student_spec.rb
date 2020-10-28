@@ -9,7 +9,7 @@ RSpec.describe Student, type: :model do
     let!(:selection)     { create(:selection, student: student, poll: poll) }
     let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
     let(:poll)           { create(:poll) }
-    let(:old_poll)       { create(:poll, valid_from: 18.months.ago, valid_until: 6.months.ago) }
+    let(:old_poll)       { create(:poll, :ended) }
 
     it 'destroys all its selections on deletion' do
       expect { student.destroy }.to change(Selection, :count).by(-2)

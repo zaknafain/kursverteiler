@@ -68,7 +68,7 @@ RSpec.describe Selection, type: :model do
   end
 
   context 'scopes' do
-    let(:old_poll)       { create(:poll, valid_from: 18.months.ago, valid_until: 6.months.ago) }
+    let(:old_poll)       { create(:poll, :ended) }
     let!(:selection)     { create(:selection, student: student, poll: poll) }
     let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
 

@@ -142,6 +142,9 @@ en:
       previous: '&laquo; Prev'
       truncate: …
     scopes:
+      course:
+        _all: All
+        current: Current Courses
       poll:
         _all: All
         running_at: Current Polls

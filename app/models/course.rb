@@ -12,6 +12,8 @@ class Course < ApplicationRecord
   validates :minimum, :maximum, numericality: { only_integer: true, greater_than: 0, less_than: 100 }
   validate  :minimum_is_lesser_or_equal_than_maximum
 
+  scope :current, -> { where(poll: Poll.running_at(Time.zone.today)) }
+
   private
 
   def minimum_is_lesser_or_equal_than_maximum

@@ -32,6 +32,11 @@ FactoryBot.define do
     valid_from  { 6.months.ago }
     valid_until { 6.months.from_now }
     educational_program
+
+    trait :ended do
+      valid_from  { 18.months.ago }
+      valid_until { 6.months.ago }
+    end
   end
 
   factory :course do

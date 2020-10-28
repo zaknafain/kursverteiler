@@ -120,4 +120,20 @@ RSpec.describe Course, type: :model do
       expect(course.errors[:mandatory]).to be_present
     end
   end
+
+  context 'scopes' do
+    context 'current' do
+      let!(:course)     { create(:course, poll: poll) }
+      let!(:old_course) { create(:course, poll: old_poll) }
+      let(:poll)        { create(:poll) }
+      let(:old_poll)    { create(:poll, :ended) }
+
+      it 'shows all courses for active polls' do
+        expect(Course.all.count).to be(2)
+
+        expect(Course.current.count).to be(1)
+        expect(Course.current.pluck(:id)).to include(course.id)
+      end
+    end
+  end
 end

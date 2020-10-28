@@ -71,7 +71,7 @@ RSpec.describe Poll, type: :model do
 
   context 'scopes' do
     context 'running_at' do
-      let!(:old_poll)     { create(:poll, valid_from: 18.months.ago, valid_until: 6.months.ago) }
+      let!(:old_poll)     { create(:poll, :ended) }
       let!(:current_poll) { create(:poll) }
       let!(:future_poll)  { create(:poll, valid_from: 6.months.from_now, valid_until: 18.months.from_now) }
 
