@@ -5,7 +5,10 @@ class StudentsController < ApplicationController
   before_action :authenticate_student!
 
   def home
-    @courses = Course.current.order(:title)
+    @grade      = current_student.grade
+    @poll       = @grade.running_poll
+    @courses    = @poll.courses.order(:title)
     @selections = current_student.current_selections.order(:priority)
   end
+
 end

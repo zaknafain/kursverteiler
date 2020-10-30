@@ -1,29 +1,20 @@
-<div>
-  Hello <%= current_student.first_name %> <%= current_student.last_name %>
+<div style="text-align: right; margin-bottom: 10px">
+  <%= current_student.first_name %> <%= current_student.last_name %>
+  <button type="button"><%= link_to('Ausloggen', destroy_student_session_path, method: :delete) %></button>
 </div>
 
-<div>
-  <div>Your choices are:</div>
-  <div>
-    <ol>
-      <% @selections.each do |selection| %>
-        <li>
-          <%= selection.course.title %>
-        </li>
-      <% end %>
-    </ol>
-  </div>
+<div style="color: #3378b3; text-transform: uppercase; margin: 0; padding: 0; border: 0; font-size: 1rem;">
+  Kurswahlen (<%= @grade.name %>)
+</div>
+<div style="padding-bottom: 28px; font-size: 1.875rem; line-height: 2.25rem; color: #000; text-transform: uppercase; margin: 0; padding: 0; border: 0; font-weight: bold;">
+  <%= @poll.title %>
 </div>
 
-<ul>
+<div style="display: flex; flex-wrap: wrap;">
   <% @courses.each do |course| %>
-    <li style="<%= 'border: 1px solid grey; background-color: #ddd;' if @selections.any? {|s| s.course_id == course.id } %>%">
-      <span><%= course.title %></span>
-      <small><em><%= course.description %></em></small>
-    </li>
+    <div style="padding: 4px; min-width: 300px; max-width: 300px; <%= "border: 1px solid grey; background-color: hsl(#{120 - (@selections.map(&:course_id).index(course.id) * 60)} 50% 50% / 1);" if @selections.any? {|s| s.course_id == course.id } %>">
+      <div style="color: #3378b3; font-weight: bold; padding: 10px 0 5px"><%= course.title %></div>
+      <div style="color: #565655;"><%= course.description %></div>
+    </div>
   <% end %>
-</ul>
-
-<div>
-  <button type="button"><%= link_to('Sign Out', destroy_student_session_path, method: :delete) %></button>
 </div>
