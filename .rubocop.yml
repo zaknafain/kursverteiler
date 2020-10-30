@@ -145,7 +145,7 @@ AllCops:
 
 Layout/EmptyLinesAroundClassBody:
   Enabled: true
-  EnforcedStyle: empty_lines_except_namespace
+  EnforcedStyle: empty_lines_special
 
 Metrics/BlockLength:
   Enabled: true
