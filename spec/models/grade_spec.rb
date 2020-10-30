@@ -1,14 +1,23 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Grade, type: :model do
   let(:grade) { build(:grade) }
 
   context 'relations' do
-    let(:student) { create(:student) }
-    let!(:grade)  { student.grade }
+    let(:grade) { create(:grade) }
 
     it 'destroys all its students on deletion' do
+      create(:student, grade: grade)
+
       expect { grade.destroy }.to change(Student, :count).by(-1)
+    end
+
+    it 'deletes all grades_polls on deletion' do
+      grade.polls << create(:poll)
+
+      expect { grade.destroy }.to change(GradesPoll, :count).by(-1)
     end
   end
 

@@ -7,7 +7,6 @@ class CreateGrades < ActiveRecord::Migration[6.0]
     end
 
     add_index :grades, :name, unique: true
-    add_reference :grades, :educational_program, foreign_key: true
     add_reference :students, :grade, foreign_key: true
   end
 end

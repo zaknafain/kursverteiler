@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_22_143111) do
+ActiveRecord::Schema.define(version: 2020_10_30_153248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,20 +42,17 @@ ActiveRecord::Schema.define(version: 2020_10_22_143111) do
     t.index ["poll_id"], name: "index_courses_on_poll_id"
   end
 
-  create_table "educational_programs", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_educational_programs_on_name", unique: true
-  end
-
   create_table "grades", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "educational_program_id"
-    t.index ["educational_program_id"], name: "index_grades_on_educational_program_id"
     t.index ["name"], name: "index_grades_on_name", unique: true
+  end
+
+  create_table "grades_polls", id: false, force: :cascade do |t|
+    t.bigint "grade_id", null: false
+    t.bigint "poll_id", null: false
+    t.index ["grade_id", "poll_id"], name: "index_grades_polls_on_grade_id_and_poll_id", unique: true
   end
 
   create_table "polls", force: :cascade do |t|
@@ -64,20 +61,16 @@ ActiveRecord::Schema.define(version: 2020_10_22_143111) do
     t.date "valid_until", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "educational_program_id"
-    t.index ["educational_program_id"], name: "index_polls_on_educational_program_id"
   end
 
   create_table "selections", force: :cascade do |t|
     t.bigint "student_id", null: false
-    t.bigint "poll_id", null: false
     t.bigint "course_id", null: false
     t.integer "priority", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id", "student_id"], name: "index_selections_on_course_id_and_student_id", unique: true
     t.index ["course_id"], name: "index_selections_on_course_id"
-    t.index ["poll_id"], name: "index_selections_on_poll_id"
-    t.index ["student_id", "poll_id", "priority"], name: "index_selections_on_student_id_and_poll_id_and_priority", unique: true
     t.index ["student_id"], name: "index_selections_on_student_id"
   end
 
@@ -98,10 +91,7 @@ ActiveRecord::Schema.define(version: 2020_10_22_143111) do
   end
 
   add_foreign_key "courses", "polls"
-  add_foreign_key "grades", "educational_programs"
-  add_foreign_key "polls", "educational_programs"
   add_foreign_key "selections", "courses"
-  add_foreign_key "selections", "polls"
   add_foreign_key "selections", "students"
   add_foreign_key "students", "grades"
 end

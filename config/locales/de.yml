@@ -13,13 +13,11 @@ de:
         poll: Kurswahl
         teacher_name: Name der Lehrkraft
         title: Titel
-      educational_program:
-        name: Name
       grade:
-        educational_program: Bildungsgang
         name: Name
+        polls: Kurswahlen
       poll:
-        educational_program: Bildungsgang
+        grades: Klassen
         title: Titel
         valid_from: Startet am
         valid_until: Endet am
@@ -43,9 +41,6 @@ de:
       course:
         one: Kurs
         other: Kurse
-      educational_program:
-        one: Bildungsgang
-        other: Bildungsgänge
       grade:
         one: Klasse
         other: Klassen

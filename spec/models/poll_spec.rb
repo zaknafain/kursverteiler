@@ -3,23 +3,25 @@
 require 'rails_helper'
 
 RSpec.describe Poll, type: :model do
-  let(:poll) { build(:poll) }
-
   context 'relations' do
-    let(:selection) { create(:selection) }
-    let(:course)    { selection.course }
-    let!(:poll)     { course.poll }
+    let(:poll) { create(:poll) }
 
     it 'destroys all its courses on deletion' do
+      create(:course, poll: poll)
+
       expect { poll.destroy }.to change(Course, :count).by(-1)
     end
 
-    it 'destroys all its selections on deletion' do
-      expect { poll.destroy }.to change(Selection, :count).by(-1)
+    it 'deletes all its grades_polls on deletion' do
+      poll.grades << create(:grade)
+
+      expect { poll.destroy }.to change(GradesPoll, :count).by(-1)
     end
   end
 
   context 'validations' do
+    let(:poll) { build(:poll) }
+
     it 'validates presence of title' do
       expect(poll).to be_valid
 

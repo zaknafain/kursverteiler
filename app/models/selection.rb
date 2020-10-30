@@ -4,16 +4,29 @@
 class Selection < ApplicationRecord
   include SelectionAdministration
 
-  belongs_to :poll
   belongs_to :student
   belongs_to :course
+  has_one :poll, through: :course
 
-  validates :priority, uniqueness:   { scope: %i[student poll] }
+  validates :course,   uniqueness:   { scope: [:student] }
   validates :priority, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 3 }
   # priority: 0 -> Top Prio / priority: 1 -> Medium Prio / priority: 2 -> Low Prio
+  validate :uniqueness_of_poll_priority_and_student
 
   scope :top_priority,    -> { where(priority: 0) }
   scope :medium_priority, -> { where(priority: 1) }
   scope :low_priority,    -> { where(priority: 2) }
-  scope :current,         -> { where(poll: Poll.running_at(Time.zone.today)) }
+  scope :current,         -> { where(course: Course.where(poll: Poll.running_at(Time.zone.today))) }
+
+  private
+
+  def uniqueness_of_poll_priority_and_student
+    return if student.blank? || course&.poll.blank? || priority.nil?
+
+    courses = Course.where(poll: course.poll)
+    return unless Selection.exists?(course: courses, priority: priority, student: student)
+
+    errors.add(:priority, :taken)
+  end
+
 end

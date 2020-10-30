@@ -41,7 +41,7 @@ RailsAdmin.config do |config|
     import_config.csv_options = {}
   end
 
-  config.included_models = %w[Admin EducationalProgram Grade Student Poll Course Selection]
+  config.included_models = %w[Admin Grade Student Poll Course Selection]
   config.label_methods = [:to_pretty_value]
 
   config.actions do
@@ -52,7 +52,7 @@ RailsAdmin.config do |config|
     new
     export
     import do
-      except %w[Admin EducationalProgram]
+      except %w[Admin]
     end
     # bulk_delete
     show

@@ -14,43 +14,46 @@ if Rails.env.development?
                             password_confirmation: 'foobar20' })
   admin.save!
 
-  # Creates some dummy Educational Program
-  log('Create some dummy educational program')
-  program = EducationalProgram.find_or_create_by!(name: 'EP 1234')
-
-  # Creates a Poll for the courses following
-  log('Create a poll that is running')
-  poll = Poll.find_or_initialize_by(educational_program: program,
-                                    title: "#{Faker::Lorem.word.capitalize} #{DateTime.now.strftime('%Y')}")
-  poll.assign_attributes({ valid_from: 1.month.ago, valid_until: 1.month.from_now })
-  poll.save!
+  # Create 2 dummy Polls for the courses following
+  log('------------------------- Create 2  dummy Polls -------------------------')
+  [Time.zone.today.year - 1, Time.zone.today.year].each do |year|
+    title = "Kurswahl #{year}"
+    log("Create #{title}")
+    poll = Poll.find_or_initialize_by(title: title)
+    poll.assign_attributes({ valid_from: Date.new(year), valid_until: Date.new(year, 12, 31) })
+    poll.save!
+  end
 
   # Create 10 dummy Classes for the upcomming Students
   log('------------------------ Create 10 dummy Classes ------------------------')
   10.times do |index|
-    name = "Class #{('A'.ord + index).chr}"
+    name = "Klasse #{('A'.ord + index).chr}"
     log("Create dummy #{name}")
-    Grade.find_or_create_by!(educational_program: program, name: name)
+    grade = Grade.find_or_create_by!(name: name)
+    grade.polls << Poll.all
   end
 
-  # Create 10 dummy Courses to fill the list
-  log('------------------------ Create 10 dummy Courses ------------------------')
-  mandatory_course = (0..9).to_a.sample
-  10.times do |index|
-    title = Faker::Educator.course_name
-    mandatory = mandatory_course == index
-    log("Create dummy Course #{(index + 1).to_s.rjust(2)} #{"(#{title})".ljust(40)} #{'mandatory' if mandatory}")
-    course = Course.find_or_initialize_by(title: title)
-    course.poll = poll
-    course.assign_attributes({ minimum: Faker::Number.within(range: 8..12),
-                               maximum: Faker::Number.within(range: 14..30),
-                               description: Faker::Lorem.paragraph(sentence_count: 10),
-                               teacher_name: Faker::FunnyName.two_word_name,
-                               mandatory: mandatory })
-    course.save!
+  # Create 20 dummy Courses to fill the list
+  log('------------------------ Create 20 dummy Courses ------------------------')
+  Poll.all.each_with_index do |poll, poll_index|
+    mandatory_course = (0..9).to_a.sample
+    10.times do |index|
+      title = Faker::Educator.course_name
+      mandatory = mandatory_course == index
+      course_number = ((index + 1) + (10 * poll_index))
+      log("Create dummy Course #{course_number.to_s.rjust(2)} #{"(#{title})".ljust(40)} #{'mandatory' if mandatory}")
+      course = Course.find_or_initialize_by(title: title)
+      course.poll = poll
+      course.assign_attributes({ minimum: Faker::Number.within(range: 8..12),
+                                 maximum: Faker::Number.within(range: 14..30),
+                                 description: Faker::Lorem.paragraph(sentence_count: 10),
+                                 teacher_name: Faker::FunnyName.two_word_name,
+                                 mandatory: mandatory })
+      course.save!
+    end
   end
 
-  # Create 200 more dummy Students to fill the list
+  # Create 201 more dummy Students to fill the list
   log('----------------------- Create 201 dummy Students -----------------------')
 
   # Creates first dummy Student for testing
@@ -60,10 +63,10 @@ if Rails.env.development?
                                       password_confirmation: 'foobar20', grade: Grade.first })
   foo_bar_student.save!
 
-  Grade.limit(10).each_with_index do |grade, g_index|
+  Grade.limit(10).each_with_index do |grade, grade_index|
     20.times do |index|
       email = Faker::Internet.safe_email
-      student_number = (((index + 1) + (20 * g_index)) + 1)
+      student_number = (((index + 1) + (20 * grade_index)) + 1)
       log("Create dummy Student #{student_number.to_s.rjust(3)} #{"(#{email})".ljust(37)} in #{grade.name}")
       password = Faker::Internet.password(min_length: 8, max_length: 20, mix_case: true, special_characters: true)
       student  = Student.find_or_initialize_by(email: email)
@@ -73,22 +76,26 @@ if Rails.env.development?
     end
   end
 
-  # Create Selections for all Students to have a real Poll running
+  # Create Selections for all Students and Polls
   log('-------------------- Create Selections  for Students --------------------')
-  Student.all.each do |student|
-    selection_amount = (0..3).to_a.sample
-    selected_courses = Course.where(mandatory: false).order(Arel.sql('RANDOM()')).first(selection_amount)
-    course_names = selected_courses.map(&:title).join(', ')
-    log("Student #{student.id.to_s.rjust(3)} selected following courses: #{course_names}") unless selection_amount.zero?
-    selection_amount.times do |priority|
-      selection = student.selections.build(poll: poll, priority: priority, course: selected_courses.pop)
-      selection.save!
-    end
-    next unless selection_amount.zero?
+  Poll.all.each do |poll|
+    Student.all.each do |student|
+      selection_amount = (0..3).to_a.sample
+      selected_courses = poll.courses.where(mandatory: false).order(Arel.sql('RANDOM()')).first(selection_amount)
+      course_names = selected_courses.map(&:title).join(', ')
+      unless selection_amount.zero?
+        log("Student #{student.id.to_s.rjust(3)} selected following courses: #{course_names}")
+      end
+      selection_amount.times do |priority|
+        selection = student.selections.build(priority: priority, course: selected_courses.pop)
+        selection.save!
+      end
+      next unless selection_amount.zero?
 
-    mandatory_course = Course.where(mandatory: true).first
-    student.selections.create!(poll: poll, priority: 0, course: mandatory_course)
-    log("Student #{student.id.to_s.rjust(3)} selected mandatory  course: #{mandatory_course.title}")
+      mandatory_course = poll.courses.find_by(mandatory: true)
+      student.selections.create!(priority: 0, course: mandatory_course)
+      log("Student #{student.id.to_s.rjust(3)} selected mandatory  course: #{mandatory_course.title}")
+    end
   end
 else
   # Create new Administrator

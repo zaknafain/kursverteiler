@@ -13,13 +13,11 @@ en:
         poll: Poll
         teacher_name: Teacher name
         title: Title
-      educational_program:
-        name: Name
       grade:
-        educational_program: Educational Program
         name: Name
+        polls: Polls
       poll:
-        educational_program: Educational Program
+        grades: Classes
         title: Title
         valid_from: Beginns at
         valid_until: Ends at
@@ -43,9 +41,6 @@ en:
       course:
         one: Course
         other: Courses
-      educational_program:
-        one: Bildungsgang
-        other: Bildungsgänge
       grade:
         one: Class
         other: Classes

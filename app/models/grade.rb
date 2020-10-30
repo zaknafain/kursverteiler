@@ -4,8 +4,11 @@
 class Grade < ApplicationRecord
   include GradeAdministration
 
-  belongs_to :educational_program
-  has_many :students, dependent: :destroy
+  has_many :grades_polls, dependent: :delete_all
+  has_many :polls,        through:   :grades_polls
+  has_many :students,     dependent: :destroy
+  has_one  :running_poll, -> { running_at(Time.zone.today) }, inverse_of: :grades
 
   validates :name, uniqueness: { case_sensitive: false }
+
 end

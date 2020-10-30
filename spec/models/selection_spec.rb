@@ -4,19 +4,10 @@ require 'rails_helper'
 
 RSpec.describe Selection, type: :model do
   let(:student)   { create(:student) }
-  let(:poll)      { create(:poll) }
-  let(:selection) { build(:selection, student: student, poll: poll) }
+  let(:course)    { create(:course) }
+  let(:selection) { build(:selection, student: student, course: course) }
 
   context 'validations' do
-    it 'presence of poll' do
-      expect(selection).to be_valid
-
-      selection.poll = nil
-
-      expect(selection).to be_invalid
-      expect(selection.errors[:poll]).to be_present
-    end
-
     it 'presence of student' do
       expect(selection).to be_valid
 
@@ -35,10 +26,20 @@ RSpec.describe Selection, type: :model do
       expect(selection.errors[:course]).to be_present
     end
 
-    it 'uniqueness of poll, student and priority' do
+    it 'uniqueness of student and course' do
       expect(selection).to be_valid
 
-      create(:selection, poll: poll, student: student)
+      create(:selection, student: student, course: course, priority: selection.priority)
+      expect(selection).to be_invalid
+      expect(selection.errors[:course]).to be_present
+    end
+
+    it 'validates uniqueness of priority student and poll' do
+      expect(selection).to be_valid
+
+      create(:selection, student: student, course: course, priority: selection.priority)
+      other_course = create(:course, poll: course.poll)
+      selection.course = other_course
 
       expect(selection).to be_invalid
       expect(selection.errors[:priority]).to be_present
@@ -69,8 +70,9 @@ RSpec.describe Selection, type: :model do
 
   context 'scopes' do
     let(:old_poll)       { create(:poll, :ended) }
-    let!(:selection)     { create(:selection, student: student, poll: poll) }
-    let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
+    let(:old_course)     { create(:course, poll: old_poll) }
+    let!(:selection)     { create(:selection, student: student) }
+    let!(:old_selection) { create(:selection, student: student, course: old_course) }
 
     context 'current' do
       it 'returns selections of running polls' do

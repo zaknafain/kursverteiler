@@ -7,7 +7,5 @@ class CreatePolls < ActiveRecord::Migration[6.0]
 
       t.timestamps null: false
     end
-
-    add_reference :polls, :educational_program, foreign_key: true
   end
 end

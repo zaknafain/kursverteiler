@@ -4,9 +4,10 @@
 class Poll < ApplicationRecord
   include PollAdministration
 
-  belongs_to :educational_program
-  has_many :courses,    dependent: :destroy
-  has_many :selections, dependent: :destroy
+  has_many :grades_polls, dependent: :delete_all
+  has_many :grades,       through:   :grades_polls
+  has_many :courses,      dependent: :destroy
+  has_many :selections,   through:   :courses
 
   scope :running_at, ->(date = Time.zone.today) { where('valid_from <= ? AND valid_until >= ?', date, date) }
 
@@ -16,10 +17,11 @@ class Poll < ApplicationRecord
   private
 
   def time_frame_to_be_positive
-    return unless valid_from && valid_until
-    return unless valid_from >= valid_until
+    return if valid_from.blank? || valid_until.blank?
+    return if valid_from < valid_until
 
     errors.add(:valid_from, 'must be before valid_until')
     errors.add(:valid_until, 'must be after valid_from')
   end
+
 end

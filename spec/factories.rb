@@ -9,13 +9,8 @@ FactoryBot.define do
     password_confirmation { '12345678' }
   end
 
-  factory :educational_program do
-    sequence(:name) { |n| "#{Faker::Educator.degree} #{n}" }
-  end
-
   factory :grade do
     sequence(:name) { |n| "Class #{n + 1}" }
-    educational_program
   end
 
   factory :student do
@@ -31,12 +26,16 @@ FactoryBot.define do
     title       { "#{Faker::Lorem.unique.word.capitalize} #{DateTime.now.strftime('%Y')}" }
     valid_from  { 6.months.ago }
     valid_until { 6.months.from_now }
-    educational_program
 
     trait :ended do
       valid_from  { 18.months.ago }
-      valid_until { 6.months.ago }
+      valid_until { 6.months.ago - 1.day }
     end
+  end
+
+  factory :grades_poll do
+    grade
+    poll
   end
 
   factory :course do
@@ -51,7 +50,6 @@ FactoryBot.define do
 
   factory :selection do
     priority { 0 }
-    poll
     student
     course
   end

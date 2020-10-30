@@ -6,19 +6,11 @@ RSpec.describe Student, type: :model do
   let(:student) { build(:student) }
 
   context 'relations' do
-    context 'educational program' do
-      it 'has one educational program, that matches the program of the class' do
-        student.save!
-
-        expect(student.educational_program).to_not be_nil
-        expect(student.grade.educational_program.id).to be(student.educational_program.id)
-      end
-    end
-
     context 'selections' do
-      let!(:selection)     { create(:selection, student: student, poll: poll) }
-      let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
-      let(:poll)           { create(:poll) }
+      let!(:selection)     { create(:selection, student: student) }
+      let!(:old_selection) { create(:selection, student: student, course: old_course) }
+      let(:course)         { create(:course, poll: selection.course.poll) }
+      let(:old_course)     { create(:course, poll: old_poll) }
       let(:old_poll)       { create(:poll, :ended) }
 
       it 'destroys all its selections on deletion' do
@@ -43,7 +35,7 @@ RSpec.describe Student, type: :model do
       end
 
       it 'has one current mid selection' do
-        mid_selection = create(:selection, student: student, priority: 1, poll: poll)
+        mid_selection = create(:selection, student: student, priority: 1, course: course)
 
         expect(student.selections.count).to be(3)
         expect(student.selections.pluck(:id)).to include(selection.id)
@@ -53,7 +45,7 @@ RSpec.describe Student, type: :model do
       end
 
       it 'has one current low selection' do
-        low_selection = create(:selection, student: student, priority: 2, poll: poll)
+        low_selection = create(:selection, student: student, priority: 2, course: course)
 
         expect(student.selections.count).to be(3)
         expect(student.selections.pluck(:id)).to include(selection.id)
