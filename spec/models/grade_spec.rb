@@ -48,4 +48,15 @@ RSpec.describe Grade, type: :model do
       expect(grade.student_count).to be(3)
     end
   end
+
+  context '#running_poll' do
+    let(:grade)    { create(:grade, polls: [poll, old_poll]) }
+    let(:poll)     { create(:poll) }
+    let(:old_poll) { create(:poll, :ended) }
+
+    it 'has one running poll' do
+      expect(grade.polls.count).to     be(2)
+      expect(grade.running_poll.id).to be(poll.id)
+    end
+  end
 end

@@ -16,6 +16,7 @@ en:
       grade:
         name: Name
         polls: Polls
+        running_poll: Running poll
         student_count: Student count
       poll:
         grades: Classes

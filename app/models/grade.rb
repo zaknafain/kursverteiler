@@ -7,12 +7,15 @@ class Grade < ApplicationRecord
   has_many :grades_polls, dependent: :delete_all
   has_many :polls,        through:   :grades_polls
   has_many :students,     dependent: :destroy
-  has_one  :running_poll, -> { running_at(Time.zone.today) }, inverse_of: :grades
 
   validates :name, uniqueness: { case_sensitive: false }
 
   def student_count
     students.length
+  end
+
+  def running_poll
+    polls.running_at(Time.zone.today).first
   end
 
 end

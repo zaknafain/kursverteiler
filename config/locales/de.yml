@@ -16,6 +16,7 @@ de:
       grade:
         name: Name
         polls: Kurswahlen
+        running_poll: Laufende Kurswahl
         student_count: Anzahl Schüler
       poll:
         grades: Klassen
