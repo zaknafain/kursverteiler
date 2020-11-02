@@ -12,9 +12,61 @@
 
 <div style="display: flex; flex-wrap: wrap;">
   <% @courses.each do |course| %>
-    <div style="padding: 4px; min-width: 300px; max-width: 300px; <%= "border: 1px solid grey; background-color: hsl(#{120 - (@selections.map(&:course_id).index(course.id) * 60)} 50% 50% / 1);" if @selections.any? {|s| s.course_id == course.id } %>">
-      <div style="color: #3378b3; font-weight: bold; padding: 10px 0 5px"><%= course.title %></div>
-      <div style="color: #565655;"><%= course.description %></div>
+    <div style="
+        margin-bottom: 12px;
+        margin-right: 12px;
+        min-width: 300px;
+        max-width: 300px;
+        display: flex;
+        flex-direction: row;
+        border: 1px solid grey;
+        <%= "background-color: hsl(#{120 - (@selections.detect { |s| s.course_id == course.id }&.priority * 60)} 50% 50% / 1);" if @selections.any? {|s| s.course_id == course.id } %>
+    ">
+      <div style="padding: 4px;">
+        <div style="color: #3378b3; font-weight: bold; padding: 10px 0 5px"><%= course.title %></div>
+        <div style="color: #565655;"><%= course.description %></div>
+      </div>
+      <div style="min-width: 50px; display: flex; flex-direction: column; justify-content: center; align-items: stretch; font-size: 1.75rem;">
+        <div style="
+          flex: 1 1 auto;
+          border-color: grey;
+          border-style: solid;
+          border-top-width: 0;
+          border-right-width: 0;
+          border-left-width: <%= @selections.detect { |s| s.course_id == course.id }&.priority == 0 ? '0' : '1px' %>;
+          border-bottom-width: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: hsl(120 50% 50% / 1);
+        "><div>1</div></div>
+        <div style="
+          flex: 1 1 auto;
+          border-color: grey;
+          border-style: solid;
+          border-top-width: 1px;
+          border-left-width: <%= @selections.detect { |s| s.course_id == course.id }&.priority == 1 ? '0' : '1px' %>;
+          border-right-width: 0;
+          border-bottom-width: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: hsl(60 50% 50% / 1);
+        "><div>2</div></div>
+        <div style="
+          flex: 1 1 auto;
+          border-color: grey;
+          border-style: solid;
+          border-top-width: 1px;
+          border-left-width: <%= @selections.detect { |s| s.course_id == course.id }&.priority == 2 ? '0' : '1px' %>;
+          border-right-width: 0;
+          border-bottom-width: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: hsl(0 50% 50% / 1);
+        "><div>3</div></div>
+      </div>
     </div>
   <% end %>
 </div>
