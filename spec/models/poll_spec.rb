@@ -87,4 +87,14 @@ RSpec.describe Poll, type: :model do
       end
     end
   end
+
+  context '#grades_count' do
+    let(:grade_a) { create(:grade) }
+    let(:grade_b) { create(:grade) }
+    let(:poll)    { create(:poll, grades: [grade_a, grade_b]) }
+
+    it 'returns the amount of related grades' do
+      expect(poll.grades_count).to be(2)
+    end
+  end
 end

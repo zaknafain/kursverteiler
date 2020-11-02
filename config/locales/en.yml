@@ -20,6 +20,7 @@ en:
         student_count: Student count
       poll:
         grades: Classes
+        grades_count: Classes count
         title: Title
         valid_from: Beginns at
         valid_until: Ends at

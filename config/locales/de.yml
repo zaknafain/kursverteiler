@@ -20,6 +20,7 @@ de:
         student_count: Anzahl Schüler
       poll:
         grades: Klassen
+        grades_count: Anzahl Klassen
         title: Titel
         valid_from: Startet am
         valid_until: Endet am

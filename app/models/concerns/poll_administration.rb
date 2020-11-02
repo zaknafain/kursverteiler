@@ -18,6 +18,7 @@ module PollAdministration
       list do
         sort_by :valid_from
         scopes [:running_at, nil]
+        field :grades_count
       end
       import do
         mapping_key :title
