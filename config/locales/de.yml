@@ -8,7 +8,7 @@ de:
       course:
         description: Beschreibung
         maximum: Maximale Schülerzahl
-        mandatory: Pflicht
+        guaranteed: Garantiert
         minimum: Minimale Schülerzahl
         poll: Kurswahl
         teacher_name: Name der Lehrkraft

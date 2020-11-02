@@ -8,7 +8,7 @@ class Course < ApplicationRecord
   has_many   :selections, dependent: :destroy
 
   validates :poll, :title, presence: true
-  validates :mandatory, inclusion: { in: [true, false] }
+  validates :guaranteed, inclusion: { in: [true, false] }
   validates :minimum, :maximum, numericality: { only_integer: true, greater_than: 0, less_than: 100 }
   validate  :minimum_is_lesser_or_equal_than_maximum
 

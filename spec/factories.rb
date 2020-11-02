@@ -44,7 +44,7 @@ FactoryBot.define do
     maximum      { Faker::Number.within(range: 14..30) }
     description  { Faker::Lorem.paragraph(sentence_count: 10) }
     teacher_name { Faker::FunnyName.two_word_name }
-    mandatory    { false }
+    guaranteed   { false }
     poll
   end
 

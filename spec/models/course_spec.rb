@@ -112,12 +112,12 @@ RSpec.describe Course, type: :model do
       expect(course.errors[:minimum]).to be_present
     end
 
-    it 'validates mandatory to be false or true' do
+    it 'validates guaranteed to be false or true' do
       expect(course).to be_valid
 
-      course.mandatory = nil
+      course.guaranteed = nil
       expect(course).to be_invalid
-      expect(course.errors[:mandatory]).to be_present
+      expect(course.errors[:guaranteed]).to be_present
     end
   end
 

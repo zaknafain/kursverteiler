@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_10_30_153248) do
     t.integer "maximum", null: false
     t.text "description"
     t.string "teacher_name"
-    t.boolean "mandatory", default: false, null: false
+    t.boolean "guaranteed", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "poll_id"

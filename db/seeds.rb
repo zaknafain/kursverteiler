@@ -36,19 +36,19 @@ if Rails.env.development?
   # Create 20 dummy Courses to fill the list
   log('------------------------ Create 20 dummy Courses ------------------------')
   Poll.all.each_with_index do |poll, poll_index|
-    mandatory_course = (0..9).to_a.sample
+    guaranteed_course = (0..9).to_a.sample
     10.times do |index|
       title = Faker::Educator.course_name
-      mandatory = mandatory_course == index
+      guaranteed = guaranteed_course == index
       course_number = ((index + 1) + (10 * poll_index))
-      log("Create dummy Course #{course_number.to_s.rjust(2)} #{"(#{title})".ljust(40)} #{'mandatory' if mandatory}")
+      log("Create dummy Course #{course_number.to_s.rjust(2)} #{"(#{title})".ljust(39)} #{'guaranteed' if guaranteed}")
       course = Course.find_or_initialize_by(title: title)
       course.poll = poll
       course.assign_attributes({ minimum: Faker::Number.within(range: 8..12),
                                  maximum: Faker::Number.within(range: 14..30),
                                  description: Faker::Lorem.paragraph(sentence_count: 10),
                                  teacher_name: Faker::FunnyName.two_word_name,
-                                 mandatory: mandatory })
+                                 guaranteed: guaranteed })
       course.save!
     end
   end
@@ -67,7 +67,7 @@ if Rails.env.development?
     20.times do |index|
       email = Faker::Internet.safe_email
       student_number = (((index + 1) + (20 * grade_index)) + 1)
-      log("Create dummy Student #{student_number.to_s.rjust(3)} #{"(#{email})".ljust(37)} in #{grade.name}")
+      log("Create dummy Student #{student_number.to_s.rjust(3)} #{"(#{email})".ljust(36)} in #{grade.name}")
       password = Faker::Internet.password(min_length: 8, max_length: 20, mix_case: true, special_characters: true)
       student  = Student.find_or_initialize_by(email: email)
       student.assign_attributes({ first_name: Faker::Name.first_name, last_name: Faker::Name.last_name,
@@ -81,7 +81,7 @@ if Rails.env.development?
   Poll.all.each do |poll|
     Student.all.each do |student|
       selection_amount = (0..3).to_a.sample
-      selected_courses = poll.courses.where(mandatory: false).order(Arel.sql('RANDOM()')).first(selection_amount)
+      selected_courses = poll.courses.where(guaranteed: false).order(Arel.sql('RANDOM()')).first(selection_amount)
       course_names = selected_courses.map(&:title).join(', ')
       unless selection_amount.zero?
         log("Student #{student.id.to_s.rjust(3)} selected following courses: #{course_names}")
@@ -92,9 +92,9 @@ if Rails.env.development?
       end
       next unless selection_amount.zero?
 
-      mandatory_course = poll.courses.find_by(mandatory: true)
-      student.selections.create!(priority: 0, course: mandatory_course)
-      log("Student #{student.id.to_s.rjust(3)} selected mandatory  course: #{mandatory_course.title}")
+      guaranteed_course = poll.courses.find_by(guaranteed: true)
+      student.selections.create!(priority: 0, course: guaranteed_course)
+      log("Student #{student.id.to_s.rjust(3)} selected guaranteed course: #{guaranteed_course.title}")
     end
   end
 else

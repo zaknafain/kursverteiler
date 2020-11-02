@@ -6,7 +6,7 @@ class CreateCourses < ActiveRecord::Migration[6.0]
       t.integer :maximum, null: false
       t.text    :description
       t.string  :teacher_name
-      t.boolean :mandatory, null: false, default: false
+      t.boolean :guaranteed, null: false, default: false
 
       t.timestamps null: false
     end
