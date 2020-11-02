@@ -18,6 +18,13 @@ module AdminAdministration
       list do
         sort_by :last_name
       end
+      edit do
+        %i[password password_confirmation].each do |field_name|
+          field field_name do
+            default_value ''
+          end
+        end
+      end
       import do
         mapping_key :email
       end
