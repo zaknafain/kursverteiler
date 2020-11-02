@@ -10,6 +10,7 @@ module PollAdministration
 
   included do
     rails_admin do
+      weight 2
       field :title
       field :valid_from
       field :valid_until

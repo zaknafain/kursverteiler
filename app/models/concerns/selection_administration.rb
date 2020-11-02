@@ -10,7 +10,7 @@ module SelectionAdministration
 
   included do
     rails_admin do
-      weight 2
+      weight 3
       {
         poll: [:title],
         student: %i[email first_name last_name],
