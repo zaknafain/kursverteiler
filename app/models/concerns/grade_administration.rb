@@ -32,7 +32,9 @@ module GradeAdministration
         field :students
       end
       edit do
-        field :students
+        field :students do
+          inline_add false
+        end
       end
       import do
         mapping_key :name

@@ -20,13 +20,15 @@ module PollAdministration
         scopes [:running_at, nil]
         field :grades_count
       end
-      show do
-        field :courses
-        field :grades
-      end
-      edit do
-        field :courses
-        field :grades
+      %i[courses grades].each do |asso|
+        show do
+          field asso
+        end
+        edit do
+          field asso do
+            inline_add false
+          end
+        end
       end
       import do
         mapping_key :title
