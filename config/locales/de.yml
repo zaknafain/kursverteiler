@@ -7,8 +7,8 @@ de:
         last_name: Nachname
       course:
         description: Beschreibung
-        maximum: Maximale Schülerzahl
         guaranteed: Garantiert
+        maximum: Maximale Schülerzahl
         minimum: Minimale Schülerzahl
         poll: Kurswahl
         teacher_name: Name der Lehrkraft
@@ -18,17 +18,19 @@ de:
         polls: Kurswahlen
         running_poll: Laufende Kurswahl
         student_count: Anzahl Schüler
+        students: Schüler
       poll:
+        courses: Kurse
         grades: Klassen
         grades_count: Anzahl Klassen
         title: Titel
         valid_from: Startet am
         valid_until: Endet am
       selection:
-        poll: Kurswahl
-        student: Schüler
         course: Kurs
+        poll: Kurswahl
         priority: Priorität
+        student: Schüler
       student:
         email: E-Mail
         first_name: Vorname

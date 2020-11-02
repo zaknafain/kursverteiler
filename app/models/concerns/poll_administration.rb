@@ -20,6 +20,14 @@ module PollAdministration
         scopes [:running_at, nil]
         field :grades_count
       end
+      show do
+        field :courses
+        field :grades
+      end
+      edit do
+        field :courses
+        field :grades
+      end
       import do
         mapping_key :title
       end

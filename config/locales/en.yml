@@ -7,8 +7,8 @@ en:
         last_name: Last name
       course:
         description: Description
-        maximum: Maximum students
         guaranteed: Guaranteed
+        maximum: Maximum students
         minimum: Minimum students
         poll: Poll
         teacher_name: Teacher name
@@ -18,17 +18,19 @@ en:
         polls: Polls
         running_poll: Running poll
         student_count: Student count
+        students: Students
       poll:
+        courses: Courses
         grades: Classes
         grades_count: Classes count
         title: Title
         valid_from: Beginns at
         valid_until: Ends at
       selection:
-        poll: Poll
-        student: Student
         course: Course
+        poll: Poll
         priority: Priority
+        student: Student
       student:
         email: Email
         first_name: First name

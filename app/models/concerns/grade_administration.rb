@@ -28,6 +28,12 @@ module GradeAdministration
           end
         end
       end
+      show do
+        field :students
+      end
+      edit do
+        field :students
+      end
       import do
         mapping_key :name
       end
