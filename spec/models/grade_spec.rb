@@ -40,4 +40,12 @@ RSpec.describe Grade, type: :model do
       expect(grade.errors[:name]).to be_present
     end
   end
+
+  context '#student_count' do
+    it 'fetches the latest amount of students' do
+      3.times { create(:student, grade: grade) }
+
+      expect(grade.student_count).to be(3)
+    end
+  end
 end

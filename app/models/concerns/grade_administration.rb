@@ -15,6 +15,7 @@ module GradeAdministration
 
       list do
         sort_by :name
+        field :student_count
       end
       import do
         mapping_key :name

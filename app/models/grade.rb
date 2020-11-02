@@ -11,4 +11,8 @@ class Grade < ApplicationRecord
 
   validates :name, uniqueness: { case_sensitive: false }
 
+  def student_count
+    students.length
+  end
+
 end
