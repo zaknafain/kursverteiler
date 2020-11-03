@@ -4,7 +4,6 @@ RailsAdmin.config do |config|
   config.parent_controller = '::ApplicationController'
 
   config.main_app_name = ['Kursverteiler Web', 'Administration']
-  config.show_gravatar = false
 
   ### Popular gems integration
 
@@ -27,7 +26,7 @@ RailsAdmin.config do |config|
 
   ## == Gravatar integration ==
   ## To disable Gravatar integration in Navigation Bar set to false
-  # config.show_gravatar = true
+  config.show_gravatar = false
 
   # Global RailsAdminImport options
   config.configure_with(:import) do |import_config|
@@ -38,7 +37,7 @@ RailsAdmin.config do |config|
     import_config.header_converter = lambda do |header|
       header.parameterize.underscore if header.present?
     end
-    import_config.csv_options = {}
+    import_config.csv_options = { col_sep: ';' }
   end
 
   config.included_models = %w[Admin Grade Student Poll Course Selection]
