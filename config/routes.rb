@@ -9,4 +9,6 @@ Rails.application.routes.draw do
 
   devise_for :admins,   path: 'admins',   controllers: { sessions: 'admins/sessions'   }
   devise_for :students, path: 'students', controllers: { sessions: 'students/sessions' }
+
+  post :update_selections, controller: :students
 end

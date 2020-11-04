@@ -67,3 +67,8 @@ de:
   selections:
     form:
       help: 'Erforderlich. 0: Erstwahl, 1: Zweitwahl, 2: Drittwahl'
+  students:
+    home:
+      headline: Kurswahlen
+      sign_out: Ausloggen
+      submit: Wahl speichern

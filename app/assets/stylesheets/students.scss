@@ -15,3 +15,124 @@ body .page-wrapper {
   align-content: flex-start;
   align-items: stretch;
 }
+
+.current-student {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.headline {
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.headline--general {
+  color: #3378b3;
+}
+
+.headline--title {
+  padding-bottom: 28px;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  color: #000;
+  font-weight: bold;
+}
+
+.selections-form--courses {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.course {
+  margin-bottom: 12px;
+  margin-right: 12px;
+  min-width: 300px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid grey;
+
+  &.course__selected {
+    background-color: hsl(120, 50%, 50%);
+  }
+  &.course__selected--0 {
+    background-color: hsl(120, 50%, 50%);
+  }
+  &.course__selected--1 {
+    background-color: hsl(60, 50%, 50%);
+  }
+  &.course__selected--2 {
+    background-color: hsl(0, 50%, 50%);
+  }
+}
+
+.course-description {
+  padding: 4px;
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.course-description--title {
+  color: #565655;
+  font-weight: bold;
+  padding: 10px 0 5px
+}
+
+.course-description--description {
+  color: #565655;
+}
+
+.course-priority {
+  min-width: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  font-size: 1.75rem;
+}
+
+.course-priority--container {
+  cursor: pointer;
+  flex: 1 1 auto;
+  border-color: grey;
+  border-style: solid;
+  border-right-width: 0;
+  border-left-width: 1px;
+  border-top-width: 1px;
+  border-bottom-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.course-priority--container__0 {
+    background-color: hsl(120, 50%, 50%);
+    border-top-width: 0;
+  }
+  &.course-priority--container__1 {
+    background-color: hsl(60, 50%, 50%);
+  }
+  &.course-priority--container__2 {
+    background-color: hsl(0, 50%, 50%);
+  }
+  &.course-priority--container__selected {
+    border-left-width: 0;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+}
+
+.selections-form--submit {
+  appearance: none;
+  display: inline-block;
+  padding: 11px;
+  background-color: #68346b;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}

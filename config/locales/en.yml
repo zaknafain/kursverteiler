@@ -67,3 +67,8 @@ en:
   selections:
     form:
       help: 'Required. 0: First choice, 1: Second choice, 2: Third choice'
+  students:
+    home:
+      headline: Course poll
+      sign_out: Sign out
+      submit: Save choices
