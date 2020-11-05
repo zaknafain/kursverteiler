@@ -37,7 +37,8 @@ RSpec.describe Selection, type: :model do
     it 'validates uniqueness of priority student and poll' do
       expect(selection).to be_valid
 
-      create(:selection, student: student, course: course, priority: selection.priority)
+      new_selection = create(:selection, student: student, course: course, priority: selection.priority)
+      expect(new_selection).to be_valid
       other_course = create(:course, poll: course.poll)
       selection.course = other_course
 

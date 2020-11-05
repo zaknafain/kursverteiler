@@ -21,10 +21,11 @@ class Selection < ApplicationRecord
   private
 
   def uniqueness_of_poll_priority_and_student
-    return if student.blank? || course&.poll.blank? || priority.nil?
+    return if course&.poll.blank?
 
     courses = Course.where(poll: course.poll)
-    return unless Selection.exists?(course: courses, priority: priority, student: student)
+    scope   = persisted? ? Selection.where.not(id: id) : Selection.all
+    return unless scope.exists?(course: courses, priority: priority, student: student)
 
     errors.add(:priority, :taken)
   end
