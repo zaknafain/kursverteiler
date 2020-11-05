@@ -64,9 +64,7 @@ module StudentAdministration
     end
   end
 
-  def before_import_save(record)
-    record[:name_class] = record[:name_class] || record[:klassenname]
-
+  def before_import_save(_)
     self.password = self.password_confirmation = SecureRandom.hex unless persisted?
   end
 end
