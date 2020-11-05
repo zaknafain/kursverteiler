@@ -33,7 +33,7 @@ RailsAdmin.config do |config|
     import_config.logging = false
     import_config.line_item_limit = 1000
     import_config.update_if_exists = true
-    import_config.rollback_on_error = true
+    import_config.rollback_on_error = false
     import_config.header_converter = lambda do |header|
       header.parameterize.underscore if header.present?
     end
