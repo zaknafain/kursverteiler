@@ -62,6 +62,10 @@ module StudentAdministration
         mapping_key_list [:email]
       end
     end
+
+    def self.before_import_find(record)
+      record[:email] = record[:email]&.downcase
+    end
   end
 
   def before_import_save(_)
