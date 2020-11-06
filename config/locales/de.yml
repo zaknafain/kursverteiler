@@ -39,6 +39,12 @@ de:
         low_selection: Drittwahl
         mid_selection: Zweitwahl
         top_selection: Erstwahl
+    errors:
+      models:
+        selection:
+          attributes:
+            course:
+              required: Ohne Kurs ist die Wahl nicht gültig
     models:
       admin:
         one: Koordinator
@@ -72,3 +78,5 @@ de:
       headline: Kurswahlen
       sign_out: Ausloggen
       submit: Wahl speichern
+    update_selections:
+      saved: Die Wahl wurde gespeichert

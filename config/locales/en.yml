@@ -72,3 +72,5 @@ en:
       headline: Course poll
       sign_out: Sign out
       submit: Save choices
+    update_selections:
+      saved: Your choices are saved

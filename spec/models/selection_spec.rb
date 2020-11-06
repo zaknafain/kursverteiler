@@ -34,18 +34,6 @@ RSpec.describe Selection, type: :model do
       expect(selection.errors[:course]).to be_present
     end
 
-    it 'validates uniqueness of priority student and poll' do
-      expect(selection).to be_valid
-
-      new_selection = create(:selection, student: student, course: course, priority: selection.priority)
-      expect(new_selection).to be_valid
-      other_course = create(:course, poll: course.poll)
-      selection.course = other_course
-
-      expect(selection).to be_invalid
-      expect(selection.errors[:priority]).to be_present
-    end
-
     it 'validates priority to be 0 to 2' do
       expect(selection).to be_valid
 
