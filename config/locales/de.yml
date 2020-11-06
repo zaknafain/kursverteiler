@@ -74,9 +74,9 @@ de:
     form:
       help: 'Erforderlich. 0: Erstwahl, 1: Zweitwahl, 2: Drittwahl'
   students:
-    home:
+    show:
       headline: Kurswahlen
       sign_out: Ausloggen
       submit: Wahl speichern
-    update_selections:
+    update:
       saved: Die Wahl wurde gespeichert

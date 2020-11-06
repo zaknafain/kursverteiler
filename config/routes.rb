@@ -5,10 +5,10 @@ Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/administration', as: 'rails_admin'
 
-  root to: 'students#home'
+  root to: 'students#show'
 
   devise_for :admins,   path: 'admins',   controllers: { sessions: 'admins/sessions'   }
   devise_for :students, path: 'students', controllers: { sessions: 'students/sessions' }
 
-  post :update_selections, controller: :students
+  resources :students, only: %i[show update]
 end

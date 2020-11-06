@@ -5,9 +5,7 @@ class StudentsController < ApplicationController
   before_action :authenticate_student!
   before_action :fetch_data
 
-  def home; end
-
-  def update_selections
+  def update
     %i[top_selection mid_selection low_selection].each do |selection|
       send(selection).course_id = update_params[selection][:course_id]
     end
@@ -18,7 +16,7 @@ class StudentsController < ApplicationController
       flash.now[:alert] = collect_error_messages
     end
 
-    render 'home'
+    render :show
   end
 
   private
