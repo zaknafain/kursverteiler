@@ -45,7 +45,8 @@ module Kursverteiler
     config.action_dispatch.default_headers = {
       'X-Frame-Options' => 'ALLOWALL',
       'X-XSS-Protection' => '1; mode=block',
-      'X-Content-Type-Options' => 'nosniff'
+      'X-Content-Type-Options' => 'nosniff',
+      'P3P' => 'CP="NOI ADM DEV PSAi COM NAV OUR OTRo STP IND DEM"'
     }
   end
 end
