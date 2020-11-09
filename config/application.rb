@@ -48,5 +48,8 @@ module Kursverteiler
       'X-Content-Type-Options' => 'nosniff',
       'P3P' => 'CP="NOI ADM DEV PSAi COM NAV OUR OTRo STP IND DEM"'
     }
+
+    # Session same site protection
+    config.action_dispatch.cookies_same_site_protection = :lax
   end
 end
