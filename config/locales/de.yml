@@ -77,6 +77,11 @@ de:
       help: 'Erforderlich. 0: Erstwahl, 1: Zweitwahl, 2: Drittwahl'
   students:
     show:
+      course:
+        focus_areas: "mögliche Schwerpunkte: %{focus_areas}"
+        min_to_max: "%{min} - %{max} Plätze"
+        teacher: "Lehrkraft: %{teacher_name}"
+        variants: "mögliche Varianten: %{variants}"
       headline: Kurswahlen
       sign_out: Ausloggen
       submit: Wahl speichern

@@ -71,6 +71,11 @@ en:
       help: 'Required. 0: First choice, 1: Second choice, 2: Third choice'
   students:
     show:
+      course:
+        focus_areas: "possible focus areas: %{focus_areas}"
+        min_to_max: "%{min} to %{max} students"
+        teacher: "Teacher: %{teacher_name}"
+        variants: "possible variants: %{variants}"
       headline: Course poll
       sign_out: Sign out
       submit: Save choices

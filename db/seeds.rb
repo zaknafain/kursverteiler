@@ -48,6 +48,8 @@ if Rails.env.development?
                                  maximum: Faker::Number.within(range: 14..30),
                                  description: Faker::Lorem.paragraph(sentence_count: 10),
                                  teacher_name: Faker::FunnyName.two_word_name,
+                                 focus_areas: Faker::Lorem.sentence(word_count: 0, random_words_to_add: 7),
+                                 variants: Faker::Lorem.sentence(word_count: 4, random_words_to_add: 7),
                                  guaranteed: guaranteed })
       course.save!
     end

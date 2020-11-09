@@ -30,8 +30,12 @@
       <% selected_prio = @selections.detect { |s| s.course_id == course.id }&.priority %>
       <%= content_tag :div, id: "course-container-#{course.id}", class: "course #{'course__selected' if selected_prio} #{"course__selected--#{selected_prio}" if selected_prio}", data: { selected: selected_prio } do %>
         <div class="course-description">
-          <div class="course-description--title"><%= course.title %></div>
+          <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
+          <div class="course-description--teacher"><%= t('.course.teacher', teacher_name: course.teacher_name) %></div>
+          <div class="course-description--min-to-max"><%= t('.course.min_to_max', min: course.minimum, max: course.maximum) %></div>
+          <div class="course-description--focus-area"><%= t('.course.focus_areas', focus_areas: course.focus_areas) %></div>
           <div class="course-description--description"><%= course.description %></div>
+          <div class="course-description--variants"><%= t('.course.variants', variants: course.variants) %></div>
         </div>
         <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "course-priority" do %>
           <% [0, 1, 2].each do |priority| %>
