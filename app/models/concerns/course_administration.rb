@@ -12,12 +12,14 @@ module CourseAdministration
     rails_admin do
       parent Poll
       field :title
+      field :focus_areas
       %i[minimum maximum description].each do |attribute|
         field attribute do
           searchable false
           sortable false
         end
       end
+      field :variants
       field :teacher_name
       field :poll do
         inline_add false
@@ -30,6 +32,7 @@ module CourseAdministration
       list do
         sort_by :title
         scopes [:current, nil]
+        exclude_fields :focus_areas, :description, :variants, :teacher_name
       end
       import do
         mapping_key :title

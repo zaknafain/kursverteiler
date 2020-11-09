@@ -31,16 +31,18 @@ RailsAdmin.config do |config|
   # Global RailsAdminImport options
   config.configure_with(:import) do |import_config|
     IMPORT_HEADER_MAPPING = {
-      e_mail:               :email,
-      klassenname:          :grade,
-      kursbeschreibung:     :description,
-      kurstitel:            :title,
-      lehrkraft:            :teacher_name,
-      maximale_schulerzahl: :maximum,
-      minimale_schulerzahl: :minimum,
-      nachname:             :last_name,
-      name:                 :name,
-      vorname:              :first_name,
+      e_mail:                :email,
+      klassenname:           :grade,
+      kursbeschreibung:      :description,
+      kurstitel:             :title,
+      lehrkraft:             :teacher_name,
+      maximale_schulerzahl:  :maximum,
+      minimale_schulerzahl:  :minimum,
+      mogliche_schwerpunkte: :focus_areas,
+      mogliche_varianten:    :variants,
+      nachname:              :last_name,
+      name:                  :name,
+      vorname:               :first_name,
     }
 
     import_config.logging = false

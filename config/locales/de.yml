@@ -7,12 +7,14 @@ de:
         last_name: Nachname
       course:
         description: Beschreibung
+        focus_areas: Mögliche Schwerpunkte
         guaranteed: Garantiert
         maximum: Maximale Schülerzahl
         minimum: Minimale Schülerzahl
         poll: Kurswahl
         teacher_name: Name der Lehrkraft
         title: Titel
+        variants: Mögliche Varianten
       grade:
         name: Name
         polls: Kurswahlen

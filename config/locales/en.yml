@@ -7,12 +7,14 @@ en:
         last_name: Last name
       course:
         description: Description
+        focus_areas: Possible focus areas
         guaranteed: Guaranteed
         maximum: Maximum students
         minimum: Minimum students
         poll: Poll
         teacher_name: Teacher name
         title: Title
+        variants: Possible variants
       grade:
         name: Name
         polls: Polls
