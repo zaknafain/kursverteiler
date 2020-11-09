@@ -3,6 +3,7 @@
 # Rails base controller
 class ApplicationController < ActionController::Base
   before_action :set_locale
+  skip_after_action :verify_same_origin_request
 
   private
 
