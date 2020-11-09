@@ -49,7 +49,11 @@ module Kursverteiler
       'P3P' => 'CP="NOI ADM DEV PSAi COM NAV OUR OTRo STP IND DEM"'
     }
 
-    # Session same site protection
-    config.action_dispatch.cookies_same_site_protection = :lax
+    # Session configuration
+    config.session_store :cookie_store,
+      key: '_kursverteiler_session',
+      expire_after: 1.year,
+      same_site: :lax,
+      secure: Rails.env.production?
   end
 end
