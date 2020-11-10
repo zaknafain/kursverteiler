@@ -1,0 +1,57 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:12.4
+        env:
+          POSTGRES_USER: test-user
+          POSTGRES_PASSWORD: test-pass
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Ruby 2.7.2
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7.2
+    - name: Ruby gem cache
+      uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/.ruby-version') }}-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-${{ hashFiles('**/.ruby-version') }}-
+          ${{ runner.os }}-gems-
+    - name: Install Gems
+      run: |
+        gem install bundler
+        bundle config set path 'vendor/bundle'
+        bundle install --jobs 4 --retry 3
+    - name: DB Init
+      env:
+        RAILS_ENV: test
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_USERNAME: test-user
+        DB_PASSWORD: test-pass
+      run: bin/rails db:prepare
+    - name: Run Tests
+      env:
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_USERNAME: test-user
+        DB_PASSWORD: test-pass
+      run: bundle exec rspec
