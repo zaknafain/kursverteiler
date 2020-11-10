@@ -17,6 +17,18 @@ RSpec.describe Poll, type: :model do
 
       expect { poll.destroy }.to change(GradesPoll, :count).by(-1)
     end
+
+    it 'has many students' do
+      student_a = create(:student)
+      student_b = create(:student)
+      student_c = create(:student)
+
+      poll.grades = [student_a.grade, student_b.grade]
+
+      expect(poll.students.map(&:id)).to     include(student_a.id)
+      expect(poll.students.map(&:id)).to     include(student_b.id)
+      expect(poll.students.map(&:id)).to_not include(student_c.id)
+    end
   end
 
   context 'validations' do

@@ -6,6 +6,7 @@ class Poll < ApplicationRecord
 
   has_many :grades_polls, dependent: :delete_all
   has_many :grades,       through:   :grades_polls
+  has_many :students,     through:   :grades
   has_many :courses,      dependent: :destroy
   has_many :selections,   through:   :courses
 
