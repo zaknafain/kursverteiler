@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_145019) do
+ActiveRecord::Schema.define(version: 2020_11_10_150425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(version: 2020_11_10_145019) do
 
   create_table "selections", force: :cascade do |t|
     t.bigint "student_id", null: false
-    t.bigint "course_id", null: false
-    t.integer "priority", default: 0, null: false
+    t.bigint "course_id"
+    t.integer "priority", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "top_course_id"
