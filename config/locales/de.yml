@@ -29,18 +29,17 @@ de:
         valid_from: Startet am
         valid_until: Endet am
       selection:
-        course: Kurs
+        low_course: Drittwahl
+        mid_course: Zweitwahl
         poll: Kurswahl
-        priority: Priorität
         student: Schüler
+        top_course: Erstwahl
       student:
+        current_selection: Aktuelle Wahl
         email: E-Mail
         first_name: Vorname
         grade: Klasse
         last_name: Nachname
-        low_selection: Drittwahl
-        mid_selection: Zweitwahl
-        top_selection: Erstwahl
     errors:
       models:
         selection:
@@ -72,9 +71,6 @@ de:
           '0': Erstwahl
           '1': Zweitwahl
           '2': Drittwahl
-  selections:
-    form:
-      help: 'Erforderlich. 0: Erstwahl, 1: Zweitwahl, 2: Drittwahl'
   students:
     show:
       course:

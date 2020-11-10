@@ -88,14 +88,15 @@ if Rails.env.development?
       unless selection_amount.zero?
         log("Student #{student.id.to_s.rjust(3)} selected following courses: #{course_names}")
       end
-      selection_amount.times do |priority|
-        selection = student.selections.build(priority: priority, course: selected_courses.pop)
-        selection.save!
-      end
+      selection = student.selections.build(poll: poll)
+      selection.top_course = selected_courses.pop
+      selection.mid_course = selected_courses.pop
+      selection.low_course = selected_courses.pop
+      selection.save!
       next unless selection_amount.zero?
 
       guaranteed_course = poll.courses.find_by(guaranteed: true)
-      student.selections.create!(priority: 0, course: guaranteed_course)
+      selection.update!(top_course: guaranteed_course)
       log("Student #{student.id.to_s.rjust(3)} selected guaranteed course: #{guaranteed_course.title}")
     end
   end
