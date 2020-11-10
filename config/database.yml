@@ -1,9 +1,9 @@
 default: &default
   adapter: postgresql
-  host: <%= Rails.application.credentials.db[:db_host] %>
-  port: <%= Rails.application.credentials.db[:db_port] %>
-  username: <%= Rails.application.credentials.db[:db_username] %>
-  password: <%= Rails.application.credentials.db[:db_password] %>
+  host: <%= ENV.fetch('DB_HOST') {} || Rails.application.credentials.db[:db_host] %>
+  port: <%= ENV.fetch('DB_PORT') {} || Rails.application.credentials.db[:db_port] %>
+  username: <%= ENV.fetch('DB_USERNAME') {} || Rails.application.credentials.db[:db_username] %>
+  password: <%= ENV.fetch('DB_PASSWORD') {} || Rails.application.credentials.db[:db_password] %>
   pool: 5
   timeout: 5000
 
