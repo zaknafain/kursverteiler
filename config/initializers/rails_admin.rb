@@ -88,5 +88,6 @@ RailsAdmin.config do |config|
   config.navigation_static_links = {
     'English' => '?locale=en',
     'Deutsch' => '?locale=de',
+    'Distribution' => 'admins/distribution',
   }
 end

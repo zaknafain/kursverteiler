@@ -1,0 +1,12 @@
+<div style="margin-bottom: 20px;">
+  <button type="button"><%= link_to t('.back_to_administration'), rails_admin_path %></button>
+</div>
+
+<% @polls.each do |poll| %>
+  <h2><%= poll.title %></h2>
+  <button type="button"><%= t('.distribute_students', count: poll.students.length) %></button>
+  <% poll.courses.each do |course| %>
+    <div><%= course.title %></div>
+  <% end %>
+  <hr style="width: 100%;">
+<% end %>

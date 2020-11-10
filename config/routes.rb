@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   devise_for :students, path: 'students', controllers: { sessions: 'students/sessions' }
 
   resources :students, only: %i[show update]
+
+  resources :admins, only: [] do
+    get :distribution, on: :collection
+  end
 end

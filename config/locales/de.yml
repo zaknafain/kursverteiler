@@ -72,6 +72,10 @@ de:
           '0': Erstwahl
           '1': Zweitwahl
           '2': Drittwahl
+  admins:
+    distribution:
+      back_to_administration: zurück zur Administration
+      distribute_students: Verteile %{count} Schüler
   selections:
     form:
       help: 'Erforderlich. 0: Erstwahl, 1: Zweitwahl, 2: Drittwahl'

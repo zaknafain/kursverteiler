@@ -29,6 +29,10 @@ module Admins
       rails_admin_path
     end
 
+    def authenticated_student_root_path
+      root_path
+    end
+
     def after_sign_out_path_for(_)
       new_admin_session_path
     end
