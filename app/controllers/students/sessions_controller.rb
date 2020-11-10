@@ -25,6 +25,10 @@ module Students
 
     protected
 
+    def authenticated_admin_root_path
+      rails_admin_path
+    end
+
     def authenticated_student_root_path
       root_path
     end
