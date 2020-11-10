@@ -25,30 +25,6 @@ module StudentAdministration
 
       list do
         sort_by :last_name
-        %i[top_selection mid_selection low_selection].each do |selection|
-          field selection do
-            inline_add false
-            inline_edit true
-            queryable false
-            searchable false
-            sortable false
-            filterable false
-
-            formatted_value do
-              value&.course&.id
-            end
-
-            pretty_value do
-              if value
-                view = bindings[:view]
-                url  = view.rails_admin.show_path(model_name: 'course', id: value.course_id)
-                view.link_to(value&.course&.to_pretty_value, url, class: 'pjax')
-              else
-                '-'
-              end
-            end
-          end
-        end
       end
       edit do
         %i[password password_confirmation].each do |field_name|
