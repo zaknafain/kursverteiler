@@ -1,24 +1,7 @@
-# README
+# Kursverteiler-Web
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![Tests](https://github.com/zaknafain/kursverteiler/workflows/Tests/badge.svg?branch=master)
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Kursverteiler-Web is the new application for distributing students to chosen
+courses. The app was created for the [BS 30 - Fröbelseminar -
+Staatliche Fachschule für Sozialpädagogik](https://bs30.de) in Hamburg Germany.
