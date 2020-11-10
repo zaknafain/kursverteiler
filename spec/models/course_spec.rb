@@ -6,11 +6,15 @@ RSpec.describe Course, type: :model do
   let(:course) { build(:course) }
 
   context 'relations' do
-    let(:selection) { create(:selection) }
-    let!(:course)   { selection.course }
+    let(:selection)   { create(:selection) }
+    let!(:top_course) { selection.top_course }
+    let!(:mid_course) { selection.mid_course }
+    let!(:low_course) { selection.low_course }
 
-    it 'destroys all its selections on deletion' do
-      expect { course.destroy }.to change(Selection, :count).by(-1)
+    it 'nullifies all its selections on deletion' do
+      expect { top_course.destroy }.to change { selection.reload.top_course_id }.from(top_course.id).to(nil)
+      expect { mid_course.destroy }.to change { selection.reload.mid_course_id }.from(mid_course.id).to(nil)
+      expect { low_course.destroy }.to change { selection.reload.low_course_id }.from(low_course.id).to(nil)
     end
   end
 
@@ -134,6 +138,19 @@ RSpec.describe Course, type: :model do
         expect(Course.current.count).to be(1)
         expect(Course.current.pluck(:id)).to include(course.id)
       end
+    end
+  end
+
+  context '#selections' do
+    let!(:top_selection) { create(:selection, top_course: course) }
+    let!(:mid_selection) { create(:selection, mid_course: course) }
+    let!(:low_selection) { create(:selection, low_course: course) }
+
+    it 'returns top, mid and low selections' do
+      expect(course.selections.length).to be(3)
+      expect(course.selections.map(&:id)).to include(top_selection.id)
+      expect(course.selections.map(&:id)).to include(mid_selection.id)
+      expect(course.selections.map(&:id)).to include(low_selection.id)
     end
   end
 end
