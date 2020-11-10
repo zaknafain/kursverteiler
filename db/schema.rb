@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_130141) do
+ActiveRecord::Schema.define(version: 2020_11_10_145019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,10 +74,12 @@ ActiveRecord::Schema.define(version: 2020_11_10_130141) do
     t.bigint "top_course_id"
     t.bigint "mid_course_id"
     t.bigint "low_course_id"
+    t.bigint "poll_id"
     t.index ["course_id", "student_id"], name: "index_selections_on_course_id_and_student_id", unique: true
     t.index ["course_id"], name: "index_selections_on_course_id"
     t.index ["low_course_id"], name: "index_selections_on_low_course_id"
     t.index ["mid_course_id"], name: "index_selections_on_mid_course_id"
+    t.index ["poll_id"], name: "index_selections_on_poll_id"
     t.index ["student_id"], name: "index_selections_on_student_id"
     t.index ["top_course_id"], name: "index_selections_on_top_course_id"
   end
@@ -103,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_130141) do
   add_foreign_key "selections", "courses", column: "low_course_id"
   add_foreign_key "selections", "courses", column: "mid_course_id"
   add_foreign_key "selections", "courses", column: "top_course_id"
+  add_foreign_key "selections", "polls"
   add_foreign_key "selections", "students"
   add_foreign_key "students", "grades"
 end
