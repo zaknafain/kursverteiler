@@ -99,7 +99,7 @@ if Rails.env.development?
       log("Student #{student.id.to_s.rjust(3)} selected guaranteed course: #{guaranteed_course.title}")
     end
   end
-else
+elsif Rails.env.production?
   # Create new Administrator
   log('-------------------- Create new Admin  to the Rescue --------------------')
   Admin.create!(email: Rails.application.credentials.admin[:email],
