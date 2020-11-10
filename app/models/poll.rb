@@ -7,7 +7,7 @@ class Poll < ApplicationRecord
   has_many :grades_polls, dependent: :delete_all
   has_many :grades,       through:   :grades_polls
   has_many :courses,      dependent: :destroy
-  has_many :selections,   through:   :courses
+  has_many :selections,   dependent: :destroy
 
   scope :running_at, ->(date = Time.zone.today) { where('valid_from <= ? AND valid_until >= ?', date, date) }
 

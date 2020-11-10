@@ -29,18 +29,17 @@ en:
         valid_from: Beginns at
         valid_until: Ends at
       selection:
-        course: Course
+        low_course: Third choice
+        mid_course: Second choice
         poll: Poll
-        priority: Priority
         student: Student
+        top_course: First choice
       student:
+        current_selection: Current choices
         email: Email
         first_name: First name
         grade: Class
         last_name: Last name
-        low_selection: Third choice
-        mid_selection: Second choice
-        top_selection: First choice
     models:
       admin:
         one: Coordinator
@@ -66,9 +65,6 @@ en:
           '0': First choice
           '1': Second choice
           '2': Third choice
-  selections:
-    form:
-      help: 'Required. 0: First choice, 1: Second choice, 2: Third choice'
   students:
     show:
       course:

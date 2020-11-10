@@ -12,6 +12,12 @@ RSpec.describe Poll, type: :model do
       expect { poll.destroy }.to change(Course, :count).by(-1)
     end
 
+    it 'destroys all its selections on deletion' do
+      create(:selection, poll: poll)
+
+      expect { poll.destroy }.to change(Selection, :count).by(-1)
+    end
+
     it 'deletes all its grades_polls on deletion' do
       poll.grades << create(:grade)
 

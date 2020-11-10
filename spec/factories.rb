@@ -38,7 +38,7 @@ FactoryBot.define do
     poll
   end
 
-  factory :course do
+  factory :course, aliases: %i[top_course mid_course low_course] do
     title        { Faker::Educator.unique.course_name }
     minimum      { Faker::Number.within(range: 8..12) }
     maximum      { Faker::Number.within(range: 14..30) }
@@ -49,8 +49,10 @@ FactoryBot.define do
   end
 
   factory :selection do
-    priority { 0 }
+    poll
     student
-    course
+    top_course
+    mid_course
+    low_course
   end
 end
