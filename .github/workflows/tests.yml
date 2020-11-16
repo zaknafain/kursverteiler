@@ -46,6 +46,14 @@ jobs:
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-yarn-
+    - name: Assets cache
+      id: assets-cache
+      uses: actions/cache@v2
+      with:
+        path: public/packs-test
+        key: ${{ runner.os }}-assets-${{ steps.extract_branch.outputs.branch }}
+        restore-keys: |
+          ${{ runner.os }}-assets-
     - name: Install Gems
       run: |
         gem install bundler
@@ -60,7 +68,12 @@ jobs:
         DB_PORT: 5432
         DB_USERNAME: test-user
         DB_PASSWORD: test-pass
-      run: bin/rails webpacker:compile
+      run: |
+        if [[ ! -d public/packs-test ]]; then
+          bin/rails webpacker:compile
+        else
+          echo "No need to compile assets."
+        fi
     - name: DB Init
       env:
         RAILS_ENV: test
