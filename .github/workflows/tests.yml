@@ -40,15 +40,10 @@ jobs:
         gem install bundler
         bundle config set path 'vendor/bundle'
         bundle install --jobs 4 --retry 3
+    - name: Yarn Install
+      run: yarn check || bin/rails yarn:install
     - name: Compile Packs
-      env:
-        RAILS_ENV: test
-        DB_HOST: localhost
-        DB_PORT: 5432
-        DB_USERNAME: test-user
-        DB_PASSWORD: test-pass
-      run: |
-        bundle exec rails webpacker:compile
+      run: bin/rails webpacker:compile
     - name: DB Init
       env:
         RAILS_ENV: test
