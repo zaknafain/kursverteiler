@@ -41,9 +41,10 @@ jobs:
         bundle config set path 'vendor/bundle'
         bundle install --jobs 4 --retry 3
     - name: Compile Packs
+      env:
+        RAILS_ENV: test
       run: |
-        rails webpacker:install
-        RAILS_ENV=test bundle exec rails webpacker:compile
+        bundle exec rails webpacker:compile
     - name: DB Init
       env:
         RAILS_ENV: test
