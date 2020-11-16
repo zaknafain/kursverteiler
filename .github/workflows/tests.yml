@@ -35,14 +35,31 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gems-${{ hashFiles('**/.ruby-version') }}-
           ${{ runner.os }}-gems-
+    - name: Get Yarn cache
+      id: yarn-cache
+      run: echo "::set-output name=dir::$(yarn cache dir)"
+    - name: Node Modules cache
+      id: node-modules-cache
+      uses: actions/cache@v2
+      with:
+        path: ${{ steps.yarn-cache.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
     - name: Install Gems
       run: |
         gem install bundler
         bundle config set path 'vendor/bundle'
-        bundle install --jobs 4 --retry 3
+        bundle check || bundle install --jobs 4 --retry 3
     - name: Yarn Install
       run: yarn check || bin/rails yarn:install
     - name: Compile Packs
+      env:
+        RAILS_ENV: test
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_USERNAME: test-user
+        DB_PASSWORD: test-pass
       run: bin/rails webpacker:compile
     - name: DB Init
       env:
