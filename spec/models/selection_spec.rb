@@ -64,4 +64,37 @@ RSpec.describe Selection, type: :model do
       end
     end
   end
+
+  context '#prio_for?' do
+    let(:selection) { create(:selection) }
+
+    it 'returns nil if the requested course has no prio' do
+      course = create(:course)
+
+      expect(selection.prio_for?(course)).to be_falsey
+    end
+
+    it 'returns :top if the requested course is top prio' do
+      expect(selection.prio_for?(selection.top_course)).to be(:top)
+    end
+
+    it 'returns :mid if the requested course is mid prio' do
+      expect(selection.prio_for?(selection.mid_course)).to be(:mid)
+    end
+
+    it 'returns :low if the requested course is low prio' do
+      expect(selection.prio_for?(selection.low_course)).to be(:low)
+    end
+
+    it 'returns nil if there are no courses selected' do
+      selection = create(:selection, top_course: nil, mid_course: nil, low_course: nil)
+      course    = create(:course)
+
+      expect(selection.prio_for?(course)).to be_falsey
+    end
+
+    it 'returns false if the requested course is nil' do
+      expect(selection.prio_for?(nil)).to be_falsey
+    end
+  end
 end
