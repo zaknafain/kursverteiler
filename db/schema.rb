@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_150425) do
+ActiveRecord::Schema.define(version: 2020_11_16_204612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,16 +67,12 @@ ActiveRecord::Schema.define(version: 2020_11_10_150425) do
 
   create_table "selections", force: :cascade do |t|
     t.bigint "student_id", null: false
-    t.bigint "course_id"
-    t.integer "priority", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "top_course_id"
     t.bigint "mid_course_id"
     t.bigint "low_course_id"
     t.bigint "poll_id"
-    t.index ["course_id", "student_id"], name: "index_selections_on_course_id_and_student_id", unique: true
-    t.index ["course_id"], name: "index_selections_on_course_id"
     t.index ["low_course_id"], name: "index_selections_on_low_course_id"
     t.index ["mid_course_id"], name: "index_selections_on_mid_course_id"
     t.index ["poll_id"], name: "index_selections_on_poll_id"
@@ -101,7 +97,6 @@ ActiveRecord::Schema.define(version: 2020_11_10_150425) do
   end
 
   add_foreign_key "courses", "polls"
-  add_foreign_key "selections", "courses"
   add_foreign_key "selections", "courses", column: "low_course_id"
   add_foreign_key "selections", "courses", column: "mid_course_id"
   add_foreign_key "selections", "courses", column: "top_course_id"
