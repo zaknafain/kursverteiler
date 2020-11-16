@@ -59,12 +59,6 @@ en:
       student:
         one: Student
         other: Students
-    values:
-      selection:
-        priority:
-          '0': First choice
-          '1': Second choice
-          '2': Third choice
   students:
     show:
       course:
@@ -73,6 +67,10 @@ en:
         teacher: "Teacher: %{teacher_name}"
         variants: "possible variants: %{variants}"
       headline: Course poll
+      prio:
+        low: 3
+        mid: 2
+        top: 1
       sign_out: Sign out
       submit: Save choices
     update:
