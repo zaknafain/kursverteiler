@@ -5,7 +5,7 @@ module SelectionAdministration
   extend ActiveSupport::Concern
 
   def to_pretty_value
-    "#{top_course.to_pretty_value || '-'} #{mid_course.to_pretty_value || '-'} #{low_course.to_pretty_value || '-'}"
+    "#{top_course&.to_pretty_value || '-'} #{mid_course&.to_pretty_value || '-'} #{low_course&.to_pretty_value || '-'}"
   end
 
   included do
