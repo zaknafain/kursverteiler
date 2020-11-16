@@ -65,12 +65,6 @@ de:
       student:
         one: Schüler
         other: Schüler
-    values:
-      selection:
-        priority:
-          '0': Erstwahl
-          '1': Zweitwahl
-          '2': Drittwahl
   students:
     show:
       course:
@@ -79,6 +73,10 @@ de:
         teacher: "Lehrkraft: %{teacher_name}"
         variants: "mögliche Varianten: %{variants}"
       headline: Kurswahlen
+      prio:
+        low: 3
+        mid: 2
+        top: 1
       sign_out: Ausloggen
       submit: Wahl speichern
     update:

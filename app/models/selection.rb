@@ -14,4 +14,12 @@ class Selection < ApplicationRecord
 
   scope :current, -> { where(poll: Poll.running_at(Time.zone.today)) }
 
+  def prio_for?(course)
+    return false unless course
+
+    %i[top mid low].detect do |prio|
+      prio if public_send("#{prio}_course_id") == course.id
+    end
+  end
+
 end
