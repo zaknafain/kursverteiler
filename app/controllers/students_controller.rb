@@ -20,7 +20,7 @@ class StudentsController < ApplicationController
   def fetch_data
     @grade   = current_student.grade
     @poll    = @grade.running_poll
-    @courses = @poll.courses.order(:title)
+    @courses = @poll&.courses&.order(:title)
     selection
   end
 
