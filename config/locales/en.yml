@@ -67,6 +67,7 @@ en:
         teacher: "Teacher: %{teacher_name}"
         variants: "possible variants: %{variants}"
       headline: Course poll
+      no_poll: Sadly there is no poll at the moment.
       prio:
         low: 3
         mid: 2
