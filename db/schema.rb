@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_204612) do
+ActiveRecord::Schema.define(version: 2020_11_16_204954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_204612) do
     t.bigint "poll_id"
     t.index ["low_course_id"], name: "index_selections_on_low_course_id"
     t.index ["mid_course_id"], name: "index_selections_on_mid_course_id"
+    t.index ["poll_id", "student_id"], name: "index_selections_on_poll_id_and_student_id", unique: true
     t.index ["poll_id"], name: "index_selections_on_poll_id"
     t.index ["student_id"], name: "index_selections_on_student_id"
     t.index ["top_course_id"], name: "index_selections_on_top_course_id"
