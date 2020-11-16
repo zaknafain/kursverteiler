@@ -73,6 +73,7 @@ de:
         teacher: "Lehrkraft: %{teacher_name}"
         variants: "mögliche Varianten: %{variants}"
       headline: Kurswahlen
+      no_poll: Leider findet gerade keine Wahl statt.
       prio:
         low: 3
         mid: 2

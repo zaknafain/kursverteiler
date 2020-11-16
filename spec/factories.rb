@@ -54,5 +54,11 @@ FactoryBot.define do
     top_course
     mid_course
     low_course
+
+    trait :clean do
+      top_course { nil }
+      mid_course { nil }
+      low_course { nil }
+    end
   end
 end

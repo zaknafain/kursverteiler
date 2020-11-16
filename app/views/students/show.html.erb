@@ -10,41 +10,47 @@
 <div class="headline headline--general">
   <%= t('.headline') %> (<%= @grade.name %>)
 </div>
-<div class="headline headline--title">
-  <%= @poll.title %>
-</div>
+<% if @poll %>
+  <div class="headline headline--title">
+    <%= @poll.title %>
+  </div>
 
-<%= form_for(current_student, url: student_path(current_student.id), method: :put, class: "selections-form") do |form| %>
-  <%= form.fields_for(:current_selection) do |top_form| %>
-    <%= top_form.hidden_field :top_course_id, value: @selection.top_course_id, data: { priority: :top } %>
-    <%= top_form.hidden_field :mid_course_id, value: @selection.mid_course_id, data: { priority: :mid } %>
-    <%= top_form.hidden_field :low_course_id, value: @selection.low_course_id, data: { priority: :low } %>
-  <% end %>
+  <%= form_for(current_student, url: student_path(current_student.id), method: :put, class: "selections-form") do |form| %>
+    <%= form.fields_for(:current_selection) do |top_form| %>
+      <%= top_form.hidden_field :top_course_id, value: @selection.top_course_id, data: { priority: :top } %>
+      <%= top_form.hidden_field :mid_course_id, value: @selection.mid_course_id, data: { priority: :mid } %>
+      <%= top_form.hidden_field :low_course_id, value: @selection.low_course_id, data: { priority: :low } %>
+    <% end %>
 
-  <div class="selections-form--courses">
-    <% @courses.each do |course| %>
-      <% selected_prio = @selection.prio_for?(course) %>
-      <%= content_tag :div, id: "course-container-#{course.id}", class: "course #{'course__selected' if selected_prio} #{"course__selected--#{selected_prio}" if selected_prio}", data: { selected: selected_prio } do %>
-        <div class="course-description">
-          <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
-          <div class="course-description--teacher"><%= t('.course.teacher', teacher_name: course.teacher_name) %></div>
-          <div class="course-description--min-to-max"><%= t('.course.min_to_max', min: course.minimum, max: course.maximum) %></div>
-          <div class="course-description--focus-area"><%= t('.course.focus_areas', focus_areas: course.focus_areas) %></div>
-          <div class="course-description--description"><%= course.description %></div>
-          <div class="course-description--variants"><%= t('.course.variants', variants: course.variants) %></div>
-        </div>
-        <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "course-priority" do %>
-          <% %i[top mid low].each do |priority| %>
-            <%= content_tag :div, id: "course-#{course.id}-priority-#{priority}", class: "course-priority--container course-priority--container__#{priority} #{'course-priority--container__selected' if selected_prio == priority}", data: { course_id: course.id, priority: priority, selected: selected_prio } do %>
-              <%= content_tag :div, t(".prio.#{priority}"), class: "course-priority--text" %>
+    <div class="selections-form--courses">
+      <% @courses.each do |course| %>
+        <% selected_prio = @selection.prio_for?(course) %>
+        <%= content_tag :div, id: "course-container-#{course.id}", class: "course #{'course__selected' if selected_prio} #{"course__selected--#{selected_prio}" if selected_prio}", data: { selected: selected_prio } do %>
+          <div class="course-description">
+            <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
+            <div class="course-description--teacher"><%= t('.course.teacher', teacher_name: course.teacher_name) %></div>
+            <div class="course-description--min-to-max"><%= t('.course.min_to_max', min: course.minimum, max: course.maximum) %></div>
+            <div class="course-description--focus-area"><%= t('.course.focus_areas', focus_areas: course.focus_areas) %></div>
+            <div class="course-description--description"><%= course.description %></div>
+            <div class="course-description--variants"><%= t('.course.variants', variants: course.variants) %></div>
+          </div>
+          <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "course-priority" do %>
+            <% %i[top mid low].each do |priority| %>
+              <%= content_tag :div, id: "course-#{course.id}-priority-#{priority}", class: "course-priority--container course-priority--container__#{priority} #{'course-priority--container__selected' if selected_prio == priority}", data: { course_id: course.id, priority: priority, selected: selected_prio } do %>
+                <%= content_tag :div, t(".prio.#{priority}"), class: "course-priority--text" %>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
+
+    <%= form.submit t('.submit'), class: "selections-form--submit" %>
+  <% end %>
+
+  <%= javascript_pack_tag 'selections' %>
+<% else %>
+  <div class="headline headline--title">
+    <%= t('.no_poll') %>
   </div>
-
-  <%= form.submit t('.submit'), class: "selections-form--submit" %>
 <% end %>
-
-<%= javascript_pack_tag 'selections' %>
