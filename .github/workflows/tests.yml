@@ -46,7 +46,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: public/packs-test
-        key: ${{ runner.os }}-assets-${{ steps.extract_branch.outputs.branch }}
+        key: ${{ runner.os }}-assets-${{ hashFiles('./app/javascript/packs/**') }}
         restore-keys: |
           ${{ runner.os }}-assets-
     - name: Install Gems
