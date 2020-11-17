@@ -35,11 +35,16 @@ de:
         student: Schüler
         top_course: Erstwahl
       student:
+        current_low_course: Aktuelle Drittwahl
+        current_mid_course: Aktuelle Zweitwahl
         current_selection: Aktuelle Wahl
+        current_top_course: Aktuelle Erstwahl
         email: E-Mail
         first_name: Vorname
         grade: Klasse
         last_name: Nachname
+        password: Passwort
+        password_confirmation: Passwort Bestätigung
     errors:
       models:
         selection:

@@ -59,7 +59,7 @@ RailsAdmin.config do |config|
     import_config.csv_options = { col_sep: ';' }
   end
 
-  config.included_models = %w[Admin Grade Student Poll Course Selection]
+  config.included_models = %w[Admin Grade Student Poll Course]
   config.label_methods = [:to_pretty_value]
 
   config.actions do
