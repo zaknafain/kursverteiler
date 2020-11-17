@@ -25,10 +25,6 @@ module Admins
 
     protected
 
-    def authenticated_admin_root_path
-      rails_admin_path
-    end
-
     def after_sign_out_path_for(_)
       new_admin_session_path
     end

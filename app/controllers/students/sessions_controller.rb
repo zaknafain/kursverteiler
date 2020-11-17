@@ -25,10 +25,6 @@ module Students
 
     protected
 
-    def authenticated_student_root_path
-      root_path
-    end
-
     def after_sign_out_path_for(_)
       new_student_session_path
     end
