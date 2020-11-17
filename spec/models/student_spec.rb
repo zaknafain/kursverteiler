@@ -23,6 +23,46 @@ RSpec.describe Student, type: :model do
         expect(student.current_selection.id).to be(selection.id)
       end
     end
+
+    context 'current courses' do
+      let!(:selection)     { create(:selection, student: student) }
+      let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
+      let(:old_poll)       { create(:poll, :ended) }
+
+      it 'has a current top course through current selection' do
+        expect(student.current_top_course.id).to be(selection.top_course.id)
+      end
+
+      it 'has a current mid course through current selection' do
+        expect(student.current_mid_course.id).to be(selection.mid_course.id)
+      end
+
+      it 'has a current low course through current selection' do
+        expect(student.current_low_course.id).to be(selection.low_course.id)
+      end
+
+      it 'returns nil if there is no current selection' do
+        student = build(:student)
+
+        expect(student.current_top_course).to be_nil
+      end
+
+      it 'returns nil if the selection has no course' do
+        selection.update(low_course: nil)
+
+        expect(student.current_low_course).to be_nil
+      end
+    end
+
+    context 'current poll' do
+      let!(:poll) { create(:poll, grades: [student.grade]) }
+
+      it 'has one current poll' do
+        student.save!
+
+        expect(student.current_poll.id).to be(poll.id)
+      end
+    end
   end
 
   context 'validations' do

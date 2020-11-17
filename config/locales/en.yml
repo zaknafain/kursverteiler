@@ -35,11 +35,16 @@ en:
         student: Student
         top_course: First choice
       student:
+        current_low_course: Current third choice
+        current_mid_course: Current second choice
         current_selection: Current choices
+        current_top_course: Current first choice
         email: Email
         first_name: First name
         grade: Class
         last_name: Last name
+        password: Password
+        password_confirmation: Password Confirmation
     models:
       admin:
         one: Coordinator

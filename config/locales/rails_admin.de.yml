@@ -95,6 +95,12 @@ de:
       save: Speichern
       save_and_add_another: Speichern und einen weiteren hinzufügen
       save_and_edit: Speichern und bearbeiten
+    help:
+      student:
+        current_low_course: '%{help} Darf nicht der Erstwahl oder Zweitwahl entsprechen.'
+        current_mid_course: '%{help} Darf nicht der Erstwahl entsprechen.'
+        password: '%{help} Freilassen, wenn es nicht geändert werden soll.'
+        password_confirmation: '%{help} Muss dem Passwort entsprechen.'
     home:
       name: Home
     js:
