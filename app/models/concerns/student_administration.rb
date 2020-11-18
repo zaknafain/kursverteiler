@@ -34,6 +34,7 @@ module StudentAdministration
         end
         %i[top mid low].each do |priority|
           field :"current_#{priority}_course" do
+            visible { bindings[:object].current_poll.present? }
             inline_add false
             inline_edit false
             associated_collection_cache_all false
