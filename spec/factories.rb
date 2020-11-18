@@ -28,8 +28,13 @@ FactoryBot.define do
     valid_until { 6.months.from_now }
 
     trait :ended do
-      valid_from  { 18.months.ago }
+      valid_from  { 18.months.ago - 1.day }
       valid_until { 6.months.ago - 1.day }
+    end
+
+    trait :future do
+      valid_from  { 6.months.from_now + 1.day }
+      valid_until { 18.months.from_now + 1.day }
     end
   end
 
