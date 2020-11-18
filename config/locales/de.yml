@@ -15,6 +15,12 @@ de:
         teacher_name: Name der Lehrkraft
         title: Titel
         variants: Mögliche Varianten
+      current_selection:
+        low_course: Drittwahl
+        mid_course: Zweitwahl
+        poll: Kurswahl
+        student: Schüler
+        top_course: Erstwahl
       grade:
         name: Name
         polls: Kurswahlen
@@ -78,10 +84,10 @@ de:
   students:
     show:
       course:
-        focus_areas: "mögliche Schwerpunkte: %{focus_areas}"
-        min_to_max: "%{min} - %{max} Plätze"
-        teacher: "Lehrkraft: %{teacher_name}"
-        variants: "mögliche Varianten: %{variants}"
+        focus_areas: 'mögliche Schwerpunkte: %{focus_areas}'
+        min_to_max: '%{min} - %{max} Plätze'
+        teacher: 'Lehrkraft: %{teacher_name}'
+        variants: 'mögliche Varianten: %{variants}'
       headline: Kurswahlen
       no_poll: Leider findet gerade keine Wahl statt.
       prio:

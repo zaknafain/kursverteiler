@@ -25,9 +25,7 @@ RSpec.describe Student, type: :model do
     end
 
     context 'current courses' do
-      let!(:selection)     { create(:selection, student: student) }
-      let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
-      let(:old_poll)       { create(:poll, :ended) }
+      let!(:selection) { create(:selection, student: student) }
 
       it 'has a current top course through current selection' do
         expect(student.current_top_course.id).to be(selection.top_course.id)
@@ -51,6 +49,28 @@ RSpec.describe Student, type: :model do
         selection.update(low_course: nil)
 
         expect(student.current_low_course).to be_nil
+      end
+
+      it 'can be assigned and saved' do
+        expect(student.current_top_course.id).to be(selection.top_course.id)
+
+        expect do
+          student.current_top_course = selection.mid_course
+          student.current_mid_course = selection.low_course
+          student.current_low_course = selection.top_course
+          student.save!
+        end.to(change { selection.reload.top_course.id })
+      end
+
+      it 'will not destroy the selection if nil is assigned' do
+        expect(student.current_selection.id).to_not be_nil
+
+        expect do
+          student.current_top_course = nil
+          student.current_mid_course = nil
+          student.current_low_course = nil
+          student.save!
+        end.to_not(change { selection.reload.id })
       end
     end
 
