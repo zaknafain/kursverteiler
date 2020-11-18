@@ -113,5 +113,19 @@ RSpec.describe Student, type: :model do
       expect(student).to be_invalid
       expect(student.errors[:last_name]).to be_present
     end
+
+    it 'validates presence of email' do
+      expect(student).to be_valid
+
+      student.email = nil
+
+      expect(student).to be_invalid
+      expect(student.errors[:email]).to be_present
+
+      student.email = ''
+
+      expect(student).to be_invalid
+      expect(student.errors[:email]).to be_present
+    end
   end
 end
