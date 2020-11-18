@@ -39,6 +39,20 @@ RSpec.describe Grade, type: :model do
       expect(grade).to be_invalid
       expect(grade.errors[:name]).to be_present
     end
+
+    it 'presence of name' do
+      expect(grade).to be_valid
+
+      grade.name = ''
+
+      expect(grade).to be_invalid
+      expect(grade.errors[:name]).to be_present
+
+      grade.name = nil
+
+      expect(grade).to be_invalid
+      expect(grade.errors[:name]).to be_present
+    end
   end
 
   context '#student_count' do
