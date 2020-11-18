@@ -29,6 +29,7 @@ en:
         students: Students
       poll:
         courses: Courses
+        description: General Information
         grades: Classes
         grades_count: Classes count
         title: Title
