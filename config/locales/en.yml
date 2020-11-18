@@ -15,6 +15,12 @@ en:
         teacher_name: Teacher name
         title: Title
         variants: Possible variants
+      current_selection:
+        low_course: Third choice
+        mid_course: Second choice
+        poll: Poll
+        student: Student
+        top_course: First choice
       grade:
         name: Name
         polls: Polls

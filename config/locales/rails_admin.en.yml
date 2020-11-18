@@ -154,12 +154,6 @@ en:
       poll:
         _all: All
         running_at: Current Polls
-      selection:
-        _all: All
-        current: Current choices
-        low_priority: Third choices
-        medium_priority: Second choices
-        top_priority: First choices
     table_headers:
       changes: Changes
       created_at: Date/Time
