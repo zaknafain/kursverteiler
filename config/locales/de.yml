@@ -29,6 +29,7 @@ de:
         students: Schüler
       poll:
         courses: Kurse
+        description: Allgemeine Informationen
         grades: Klassen
         grades_count: Anzahl Klassen
         title: Titel

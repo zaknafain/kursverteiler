@@ -14,10 +14,12 @@ module PollAdministration
       field :title
       field :valid_from
       field :valid_until
+      field :description
 
       list do
         sort_by :valid_from
         scopes [:future, :running_at, nil]
+        exclude_fields :description
         field :grades_count
       end
       show do
