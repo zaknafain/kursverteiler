@@ -45,6 +45,17 @@ en:
         last_name: Last name
         password: Password
         password_confirmation: Password Confirmation
+    errors:
+      models:
+        selection:
+          attributes:
+            low_course:
+              taken: may not be the same as the first or second choice.
+            mid_course:
+              neglected: need to be chosen second.
+              taken: may not be the same as the first choice.
+            top_course:
+              neglected: need to be chosen first.
     models:
       admin:
         one: Coordinator

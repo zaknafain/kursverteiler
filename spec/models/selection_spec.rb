@@ -46,6 +46,55 @@ RSpec.describe Selection, type: :model do
 
       expect(selection).to be_valid
     end
+
+    it 'uniqueness of courses' do
+      expect(selection).to be_valid
+      course = selection.mid_course
+
+      selection.mid_course = selection.top_course
+
+      expect(selection).to be_invalid
+      expect(selection.errors[:mid_course]).to be_present
+
+      selection.top_course = selection.low_course
+
+      expect(selection).to be_invalid
+      expect(selection.errors[:low_course]).to be_present
+
+      selection.low_course = course
+
+      expect(selection).to be_valid
+    end
+
+    it 'uniqueness of courses except nil values' do
+      expect(selection).to be_valid
+
+      selection.low_course = selection.mid_course = nil
+
+      expect(selection).to be_valid
+
+      selection.top_course = nil
+
+      expect(selection).to be_valid
+    end
+
+    it 'prefer top course before all' do
+      expect(selection).to be_valid
+
+      selection.top_course = nil
+
+      expect(selection).to be_invalid
+      expect(selection.errors[:top_course]).to be_present
+    end
+
+    it 'prefer mid course before low course' do
+      expect(selection).to be_valid
+
+      selection.mid_course = nil
+
+      expect(selection).to be_invalid
+      expect(selection.errors[:mid_course]).to be_present
+    end
   end
 
   context 'scopes' do
