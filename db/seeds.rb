@@ -20,7 +20,9 @@ if Rails.env.development?
     title = "Kurswahl #{year}"
     log("Create #{title}")
     poll = Poll.find_or_initialize_by(title: title)
-    poll.assign_attributes({ valid_from: Date.new(year), valid_until: Date.new(year, 12, 31) })
+    poll.assign_attributes({ valid_from: Date.new(year),
+                             valid_until: Date.new(year, 12, 31),
+                             description: Faker::Lorem.paragraph(sentence_count: 10) })
     poll.save!
   end
 
