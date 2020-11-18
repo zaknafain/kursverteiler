@@ -49,8 +49,13 @@ de:
       models:
         selection:
           attributes:
-            course:
-              required: Ohne Kurs ist die Wahl nicht gültig
+            low_course:
+              taken: darf nicht gleich der Erst- oder Zweitwahl sein.
+            mid_course:
+              neglected: muss als zweites ausgewählt werden.
+              taken: darf nicht gleich der Erstwahl sein.
+            top_course:
+              neglected: muss als erstes ausgewählt werden.
     models:
       admin:
         one: Koordinator
