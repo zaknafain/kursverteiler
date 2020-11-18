@@ -96,9 +96,12 @@ de:
       save_and_add_another: Speichern und einen weiteren hinzufügen
       save_and_edit: Speichern und bearbeiten
     help:
+      admin:
+        email: Erforderlich. Muss eine gültige E-Mail Adresse sein.
       student:
         current_low_course: '%{help} Darf nicht der Erstwahl oder Zweitwahl entsprechen.'
         current_mid_course: '%{help} Darf nicht der Erstwahl entsprechen.'
+        email: Erforderlich. Muss eine gültige E-Mail Adresse sein.
         password: '%{help} Freilassen, wenn es nicht geändert werden soll.'
         password_confirmation: '%{help} Muss dem Passwort entsprechen.'
     home:
