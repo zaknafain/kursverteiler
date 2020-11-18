@@ -8,6 +8,7 @@ class Grade < ApplicationRecord
   has_many :polls,        through:   :grades_polls
   has_many :students,     dependent: :destroy
 
+  validates :name, presence: true
   validates :name, uniqueness: { case_sensitive: false }
 
   def student_count
