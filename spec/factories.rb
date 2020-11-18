@@ -26,6 +26,7 @@ FactoryBot.define do
     title       { "#{Faker::Lorem.unique.word.capitalize} #{DateTime.now.strftime('%Y')}" }
     valid_from  { 6.months.ago }
     valid_until { 6.months.from_now }
+    description { Faker::Lorem.paragraph(sentence_count: 2) }
 
     trait :ended do
       valid_from  { 18.months.ago - 1.day }
