@@ -96,9 +96,12 @@ en:
       save_and_add_another: Save and add another
       save_and_edit: Save and edit
     help:
+      admin:
+        email: Required. Must be a valid email address.
       student:
         current_low_course: '%{help} May not be the same as first or second choice.'
         current_mid_course: '%{help} May not me the same as first choice.'
+        email: Required. Must be a valid email address.
         password: '%{help} Keep it blank if no change is wanted.'
         password_confirmation: '%{help} Must be equal password.'
     home:
