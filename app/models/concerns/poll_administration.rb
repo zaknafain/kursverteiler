@@ -17,7 +17,7 @@ module PollAdministration
 
       list do
         sort_by :valid_from
-        scopes [:running_at, nil]
+        scopes [:future, :running_at, nil]
         field :grades_count
       end
       %i[courses grades].each do |asso|
