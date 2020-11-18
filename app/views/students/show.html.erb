@@ -14,6 +14,9 @@
   <div class="headline headline--title">
     <%= @poll.title %>
   </div>
+  <div class="headline headline--description">
+    <%= @poll.description %>
+  </div>
 
   <%= form_for(current_student, url: student_path(current_student.id), method: :put, class: "selections-form") do |form| %>
     <%= form.fields_for(:current_selection) do |top_form| %>

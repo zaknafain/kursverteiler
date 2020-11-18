@@ -33,11 +33,15 @@ body .page-wrapper {
 }
 
 .headline--title {
-  padding-bottom: 28px;
   font-size: 1.875rem;
   line-height: 2.25rem;
   color: #000;
   font-weight: bold;
+}
+
+.headline--description {
+  text-transform: none;
+  padding-bottom: 28px;
 }
 
 .selections-form--courses {
