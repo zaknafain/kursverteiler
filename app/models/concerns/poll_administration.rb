@@ -20,14 +20,12 @@ module PollAdministration
         scopes [:future, :running_at, nil]
         field :grades_count
       end
-      %i[courses grades].each do |asso|
-        show do
-          field asso
-        end
-        edit do
-          field asso do
-            inline_add false
-          end
+      show do
+        field :grades
+      end
+      edit do
+        field :grades do
+          inline_add false
         end
       end
       import do
