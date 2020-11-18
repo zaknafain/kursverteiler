@@ -10,6 +10,7 @@ class Poll < ApplicationRecord
   has_many :selections,   dependent: :destroy
 
   scope :running_at, ->(date = Time.zone.today) { where('valid_from <= ? AND valid_until >= ?', date, date) }
+  scope :future,     ->(date = Time.zone.today) { where('valid_from > ?', date) }
 
   validates :title, :valid_from, :valid_until, presence: true
   validate  :interval_to_be_positive
