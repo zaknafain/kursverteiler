@@ -25,9 +25,6 @@ module AdminAdministration
           end
         end
       end
-      import do
-        mapping_key :email
-      end
     end
   end
 

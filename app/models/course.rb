@@ -4,6 +4,8 @@
 class Course < ApplicationRecord
   include CourseAdministration
 
+  has_rich_text :description
+
   belongs_to :poll
   has_many :top_selections, dependent: :nullify, class_name: 'Selection',
                             foreign_key: :top_course_id, inverse_of: :top_course
