@@ -32,9 +32,6 @@ module PollAdministration
           inline_add false
         end
       end
-      import do
-        mapping_key :title
-      end
     end
   end
 end

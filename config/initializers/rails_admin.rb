@@ -77,7 +77,7 @@ RailsAdmin.config do |config|
     new
     export
     import do
-      except %w[Admin]
+      except %w[Admin Poll]
     end
     # bulk_delete
     show
