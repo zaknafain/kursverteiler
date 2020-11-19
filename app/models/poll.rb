@@ -4,6 +4,8 @@
 class Poll < ApplicationRecord
   include PollAdministration
 
+  has_rich_text :description
+
   has_many :grades_polls, dependent: :delete_all
   has_many :grades,       through:   :grades_polls
   has_many :courses,      dependent: :destroy

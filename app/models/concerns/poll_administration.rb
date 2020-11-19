@@ -14,7 +14,9 @@ module PollAdministration
       field :title
       field :valid_from
       field :valid_until
-      field :description
+      field :description do
+        js_location { bindings[:view].asset_pack_path 'actiontext.js' }
+      end
 
       list do
         sort_by :valid_from
