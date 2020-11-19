@@ -13,11 +13,16 @@ module CourseAdministration
       parent Poll
       field :title
       field :focus_areas
-      %i[minimum maximum description].each do |attribute|
+      %i[minimum maximum].each do |attribute|
         field attribute do
           searchable false
           sortable false
         end
+      end
+      field :description do
+        searchable false
+        sortable false
+        js_location { bindings[:view].asset_pack_path 'actiontext.js' }
       end
       field :variants
       field :teacher_name
