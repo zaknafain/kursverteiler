@@ -14,6 +14,7 @@ body .page-wrapper {
   justify-content: flex-start;
   align-content: flex-start;
   align-items: stretch;
+  background-color: transparent;
 
   &.page-wrapper--development {
     max-width: 1120px;
@@ -21,6 +22,7 @@ body .page-wrapper {
     overflow-y: scroll;
     margin: auto;
     margin-top: calc((100vh - 400px) / 2);
+    background-image: url(https://www.bs30.de/fileadmin/redakteur/2-Fuer-Schueler/FSP1-Hintergrundbilder-Website-3Schueler.jpg);
   }
 }
 
@@ -31,25 +33,26 @@ body .page-wrapper {
 
 .headline {
   text-transform: uppercase;
-  margin: 0;
-  padding: 0;
+  margin: 0 0 14px;
+  padding: 10px;
   border: 0;
+  background-color: #3378b3;
+  color: white;
 }
 
 .headline--general {
-  color: #3378b3;
+  margin-bottom: 10px;
 }
 
 .headline--title {
   font-size: 1.875rem;
   line-height: 2.25rem;
-  color: #000;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .headline--description {
   text-transform: none;
-  padding-bottom: 28px;
 }
 
 .selections-form--courses {
@@ -58,14 +61,15 @@ body .page-wrapper {
 }
 
 .course {
-  margin-bottom: 12px;
-  margin-right: 12px;
-  min-width: 300px;
-  max-width: 300px;
+  margin-bottom: 14px;
+  max-width: 542px;
   display: flex;
   flex-direction: row;
-  border: 1px solid grey;
+  background-color: rgba(255, 255, 255, 0.9);
 
+  &:nth-child(odd) {
+    margin-right: 20px;
+  }
   &.course__selected {
     background-color: hsl(120, 50%, 50%);
   }
@@ -82,12 +86,10 @@ body .page-wrapper {
 
 .course-description {
   padding: 4px;
-  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
-  z-index: 1;
 }
 
 .course-description--title {
-  color: #565655;
+  color: #3378b3;
   font-weight: bold;
   padding: 10px 0 5px
 }
@@ -132,8 +134,6 @@ body .page-wrapper {
   }
   &.course-priority--container__selected {
     border-left-width: 0;
-    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
-    z-index: 1;
   }
 }
 
