@@ -11,13 +11,13 @@
   </head>
 
   <body>
-    <div class="page-wrapper">
+    <%= content_tag :div, class: "page-wrapper page-wrapper--#{Rails.env}" do %>
       <% flash.each do |name, messages| %>
         <% Array(messages).each do |message| %>
           <%= content_tag :div, message, class: name %>
         <% end %>
       <% end %>
       <%= yield %>
-    </div>
+    <% end %>
   </body>
 </html>
