@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   before_action :set_locale
   skip_after_action :verify_same_origin_request
-  skip_before_action :verify_authenticity_token
+  # skip_before_action :verify_authenticity_token
 
   private
 
@@ -13,4 +13,5 @@ class ApplicationController < ActionController::Base
     I18n.locale = possible_locales.compact.detect { |l| I18n.available_locales.include?(l.to_sym) }
     session[:locale] = I18n.locale
   end
+
 end
