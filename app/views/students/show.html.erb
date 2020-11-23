@@ -25,6 +25,7 @@
       <%= top_form.hidden_field :top_course_id, value: @selection.top_course_id, data: { priority: :top } %>
       <%= top_form.hidden_field :mid_course_id, value: @selection.mid_course_id, data: { priority: :mid } %>
       <%= top_form.hidden_field :low_course_id, value: @selection.low_course_id, data: { priority: :low } %>
+      <%= hidden_field_tag :guaranteed_chosen, @selection.top_course&.guaranteed %>
     <% end %>
 
     <div class="selections-form--courses">
@@ -41,7 +42,7 @@
           </div>
           <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "course-priority" do %>
             <% %i[top mid low].each do |priority| %>
-              <%= content_tag :div, id: "course-#{course.id}-priority-#{priority}", class: "course-priority--container course-priority--container__#{priority} #{'course-priority--container__selected' if selected_prio == priority}", data: { course_id: course.id, priority: priority, selected: selected_prio } do %>
+              <%= content_tag :div, id: "course-#{course.id}-priority-#{priority}", class: "course-priority--container course-priority--container__#{priority} #{'course-priority--container__selected' if selected_prio == priority} #{'course-priority--container__disabled' if course.guaranteed? && priority != :top}", data: { course_id: course.id, priority: priority, selected: selected_prio, guaranteed: course.guaranteed? } do %>
                 <%= content_tag :div, t(".prio.#{priority}"), class: "course-priority--text" %>
               <% end %>
             <% end %>

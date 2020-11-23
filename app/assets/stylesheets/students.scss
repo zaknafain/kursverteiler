@@ -135,6 +135,11 @@ body .page-wrapper {
   &.course-priority--container__selected {
     border-left-width: 0;
   }
+  &.course-priority--container__disabled {
+    cursor: default;
+    background-color: darkgray;
+    color: gray;
+  }
 }
 
 .selections-form--submit {
