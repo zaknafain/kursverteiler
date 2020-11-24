@@ -8,7 +8,7 @@ en:
       course:
         description: Description
         focus_areas: Possible focus areas
-        guaranteed: Guaranteed
+        guaranteed: Guaranteed place
         maximum: Maximum students
         minimum: Minimum students
         poll: Poll

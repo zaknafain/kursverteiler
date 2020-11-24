@@ -98,6 +98,10 @@ en:
     help:
       admin:
         email: Required. Must be a valid email address.
+      course:
+        guaranteed: Optional. If checked, min and max students are optional.
+        maximum: '%{help} Optional if place is guaranteed.'
+        minimum: '%{help} Optional if place is guaranteed.'
       student:
         current_low_course: '%{help} May not be the same as first or second choice.'
         current_mid_course: '%{help} May not me the same as first choice.'
