@@ -69,6 +69,8 @@ RailsAdmin.config do |config|
   config.included_models = %w[Admin Grade Student Poll Course]
   config.label_methods = [:to_pretty_value]
 
+  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Distribute)
+
   config.actions do
     dashboard do                  # mandatory
       link_icon 'icon-list'
@@ -84,6 +86,9 @@ RailsAdmin.config do |config|
     edit
     delete do
       only %w[Student]
+    end
+    distribute do
+      only %w[Poll]
     end
     # show_in_app
 

@@ -16,6 +16,10 @@ de:
         link: '''%{object_label}'' löschen'
         menu: Löschen
         title: '%{model_label} ''%{object_label}'' löschen'
+      distribute:
+        breadcrumb: Verteilung
+        menu: Verteilung
+        title: '%{model_label} ''%{object_label}'' Verteilung'
       edit:
         breadcrumb: Bearbeiten
         done: aktualisiert
