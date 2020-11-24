@@ -13,6 +13,7 @@ module CourseAdministration
       parent Poll
       field :title
       field :focus_areas
+      field :guaranteed
       %i[minimum maximum].each do |attribute|
         field attribute do
           searchable false

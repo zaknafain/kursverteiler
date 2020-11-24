@@ -98,6 +98,10 @@ de:
     help:
       admin:
         email: Erforderlich. Muss eine gültige E-Mail Adresse sein.
+      course:
+        guaranteed: Optional. Wenn angehakt, dann sind minimale und maximale Schülerzahl optional.
+        maximum: '%{help} Optional, wenn ein Platz garantiert wird.'
+        minimum: '%{help} Optional, wenn ein Platz garantiert wird.'
       student:
         current_low_course: '%{help} Darf nicht der Erstwahl oder Zweitwahl entsprechen.'
         current_mid_course: '%{help} Darf nicht der Erstwahl entsprechen.'

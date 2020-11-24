@@ -8,7 +8,7 @@ de:
       course:
         description: Beschreibung
         focus_areas: Mögliche Schwerpunkte
-        guaranteed: Garantiert
+        guaranteed: Garantierter Platz
         maximum: Maximale Schülerzahl
         minimum: Minimale Schülerzahl
         poll: Kurswahl
