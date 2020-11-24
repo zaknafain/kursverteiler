@@ -51,6 +51,23 @@ RSpec.describe Course, type: :model do
       expect(course.errors[:minimum]).to be_present
     end
 
+    it 'NOT validates presence of minimum if guaranteed is true' do
+      expect(course).to be_valid
+
+      course.assign_attributes(minimum: nil, guaranteed: true)
+
+      expect(course).to be_valid
+    end
+
+    it 'validates minimum to be an integer even if guaranteed is true' do
+      expect(course).to be_valid
+
+      course.assign_attributes(minimum: 'Some Value', guaranteed: true)
+
+      expect(course).to be_invalid
+      expect(course.errors[:minimum]).to be_present
+    end
+
     it 'validates minimum to be between 0 and 100' do
       course.maximum = 99
       expect(course).to be_valid
@@ -78,6 +95,23 @@ RSpec.describe Course, type: :model do
       expect(course).to be_valid
 
       course.maximum = nil
+
+      expect(course).to be_invalid
+      expect(course.errors[:maximum]).to be_present
+    end
+
+    it 'NOT validates presence of maximum if guaranteed is true' do
+      expect(course).to be_valid
+
+      course.assign_attributes(maximum: nil, guaranteed: true)
+
+      expect(course).to be_valid
+    end
+
+    it 'validates maximum to be an integer even if guaranteed is true' do
+      expect(course).to be_valid
+
+      course.assign_attributes(maximum: 'Some Value', guaranteed: true)
 
       expect(course).to be_invalid
       expect(course.errors[:maximum]).to be_present
