@@ -16,6 +16,10 @@ en:
         link: 'Delete ''%{object_label}'''
         menu: Delete
         title: 'Delete %{model_label} ''%{object_label}'''
+      distribute:
+        breadcrumb: Distribution
+        menu: Distribution
+        title: '%{model_label} ''%{object_label}'' Distribution'
       edit:
         breadcrumb: Edit
         done: updated
