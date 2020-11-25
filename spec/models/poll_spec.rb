@@ -6,10 +6,18 @@ RSpec.describe Poll, type: :model do
   context 'relations' do
     let(:poll) { create(:poll) }
 
+    it 'has courses' do
+      expect(poll).to respond_to(:courses)
+    end
+
     it 'destroys all its courses on deletion' do
       create(:course, poll: poll)
 
       expect { poll.destroy }.to change(Course, :count).by(-1)
+    end
+
+    it 'has selections' do
+      expect(poll).to respond_to(:selections)
     end
 
     it 'destroys all its selections on deletion' do
@@ -18,10 +26,22 @@ RSpec.describe Poll, type: :model do
       expect { poll.destroy }.to change(Selection, :count).by(-1)
     end
 
+    it 'has grades_polls' do
+      expect(poll).to respond_to(:grades_polls)
+    end
+
     it 'deletes all its grades_polls on deletion' do
       poll.grades << create(:grade)
 
       expect { poll.destroy }.to change(GradesPoll, :count).by(-1)
+    end
+
+    it 'has grades' do
+      expect(poll).to respond_to(:grades)
+    end
+
+    it 'has students' do
+      expect(poll).to respond_to(:students)
     end
   end
 
