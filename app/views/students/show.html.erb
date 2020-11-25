@@ -56,7 +56,23 @@
 
   <%= javascript_pack_tag 'selections' %>
 <% else %>
-  <div class="headline headline--title">
-    <%= t('.no_poll') %>
+  <div class="headline">
+    <div class="headline--title">
+      <%= t('.no_poll') %>
+    </div>
   </div>
+<% end %>
+
+<% @past_courses.each do |course| %>
+  <div class="headline">
+    <div class="headline--title">
+      <%= course.poll.title %>
+    </div>
+  </div>
+  <%= content_tag :div, class: "course" do %>
+    <div class="course-description">
+      <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
+      <div class="course-description--teacher"><%= t('.course.teacher', teacher_name: course.teacher_name) %></div>
+    </div>
+  <% end %>
 <% end %>
