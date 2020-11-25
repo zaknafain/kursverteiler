@@ -54,6 +54,11 @@ FactoryBot.define do
     poll
   end
 
+  factory :courses_student do
+    course
+    student
+  end
+
   factory :selection do
     poll
     student

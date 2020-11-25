@@ -10,6 +10,8 @@ class Student < ApplicationRecord
 
   belongs_to :grade
   has_many :selections, dependent: :destroy
+  has_many :courses_students, dependent: :delete_all
+  has_many :courses, through: :courses_students
   has_one :current_poll, -> { running_at(Time.zone.today) }, through: :grade, source: :polls
   has_one :current_selection, -> { current }, class_name: 'Selection', inverse_of: :student, autosave: true
   has_one :current_top_course, through: :current_selection, source: :top_course
