@@ -26,6 +26,7 @@ end
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+ENV['RAILS_ADMIN_THEME'] = 'bs30'
 
 module Kursverteiler
   class Application < Rails::Application

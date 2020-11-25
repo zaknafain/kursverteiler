@@ -1,0 +1,90 @@
+// DISTRIBUTE ACTION
+
+// Students in general
+.student--container {
+  display: flex;
+  flex-direction: row;
+}
+
+.student--name {
+  flex: 1 1 auto;
+  overflow-x: hidden;
+}
+
+.selection-indicator {
+  margin: 0 2px;
+  font-size: inherit;
+}
+
+.top-indicator {
+  color: green;
+}
+
+.mid-indicator {
+  color: orange;
+}
+
+.low-indicator {
+  color: red;
+}
+
+.missing-indicator {
+  color: lightgray;
+}
+
+// Not distributed students elements at the top of the action
+.not-distributed {
+  margin-bottom: 20px;
+}
+
+.students--container {
+  border: 1px solid #ddd;
+  height: 70px;
+  width: 300px;
+  overflow-y: scroll;
+}
+
+.students--count {
+  text-align: end;
+  width: 300px;
+}
+
+// Courses at the center of the action
+.courses--container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.course {
+  display: flex;
+  flex-direction: row;
+  min-width: 400px;
+  margin: 0 10px 10px 0;
+  border: 1px solid #ddd;
+  background-color: rgba(173, 255, 47, 0.2);
+
+  &.course__guaranteed {
+    background-color: rgba(200, 200, 200, 0.2);
+  }
+}
+
+.course-students {
+  min-width: 300px;
+  height: 70px;
+  margin: 4px;
+  flex: 0 1 auto;
+  border: 1px solid #ddd;
+  background-color: white;
+}
+
+.course-description {
+  min-width: 200px;
+  margin: 4px;
+  flex: 1 1 auto;
+  text-align: right;
+}
+
+.course-description--title {
+  font-weight: bold;
+}
