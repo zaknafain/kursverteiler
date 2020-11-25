@@ -128,4 +128,10 @@ RSpec.describe Student, type: :model do
       expect(student.errors[:email]).to be_present
     end
   end
+
+  context '#full_name' do
+    it 'returns the first name and the last name seperated by a space' do
+      expect(student.full_name).to eq("#{student.first_name} #{student.last_name}")
+    end
+  end
 end
