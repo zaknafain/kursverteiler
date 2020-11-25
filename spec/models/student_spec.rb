@@ -11,6 +11,10 @@ RSpec.describe Student, type: :model do
       let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
       let(:old_poll)       { create(:poll, :ended) }
 
+      it 'has selections' do
+        expect(student).to respond_to(:selections)
+      end
+
       it 'destroys all its selections on deletion' do
         expect { student.destroy }.to change(Selection, :count).by(-2)
       end
@@ -27,12 +31,24 @@ RSpec.describe Student, type: :model do
     context 'current courses' do
       let!(:selection) { create(:selection, student: student) }
 
+      it 'has a current top course' do
+        expect(student).to respond_to(:current_top_course)
+      end
+
       it 'has a current top course through current selection' do
         expect(student.current_top_course.id).to be(selection.top_course.id)
       end
 
+      it 'has a current mid course' do
+        expect(student).to respond_to(:current_mid_course)
+      end
+
       it 'has a current mid course through current selection' do
         expect(student.current_mid_course.id).to be(selection.mid_course.id)
+      end
+
+      it 'has a current low course' do
+        expect(student).to respond_to(:current_low_course)
       end
 
       it 'has a current low course through current selection' do
@@ -78,9 +94,46 @@ RSpec.describe Student, type: :model do
       let!(:poll) { create(:poll, grades: [student.grade]) }
 
       it 'has one current poll' do
+        expect(student).to respond_to(:current_poll)
+      end
+
+      it 'has one current poll through grades' do
         student.save!
 
         expect(student.current_poll.id).to be(poll.id)
+      end
+    end
+
+    context 'courses_students' do
+      let(:course) { create(:course) }
+
+      it 'has many courses students' do
+        expect(student).to respond_to(:courses_students)
+      end
+
+      it 'destroys all courses students on deletion' do
+        student.save!
+        student.courses_students.create!(course: course)
+
+        expect { student.destroy }.to change(CoursesStudent, :count).by(-1)
+      end
+    end
+
+    context 'courses' do
+      let(:course) { create(:course) }
+
+      it 'has many courses' do
+        expect(student).to respond_to(:courses)
+      end
+
+      it 'has many courses through courses students' do
+        student.save!
+        expect(student.courses).to be_empty
+
+        student.courses_students.create!(course: course)
+
+        expect(student.courses).to_not be_empty
+        expect(student.courses.map(&:id)).to eq([course.id])
       end
     end
   end

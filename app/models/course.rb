@@ -7,6 +7,8 @@ class Course < ApplicationRecord
   has_rich_text :description
 
   belongs_to :poll
+  has_many :courses_students, dependent: :delete_all
+  has_many :students, through: :courses_students
   has_many :top_selections, dependent: :nullify, class_name: 'Selection',
                             foreign_key: :top_course_id, inverse_of: :top_course
   has_many :mid_selections, dependent: :nullify, class_name: 'Selection',
