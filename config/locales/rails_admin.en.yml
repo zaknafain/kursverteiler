@@ -160,6 +160,7 @@ en:
         current: Current Courses
       poll:
         _all: All
+        future: Future Polls
         running_at: Current Polls
     table_headers:
       changes: Changes

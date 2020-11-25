@@ -160,7 +160,8 @@ de:
         current: Aktuelle Kurse
       poll:
         _all: Alle
-        running_at: Aktuelle Kurswahlen
+        future: Kommende Kurswahlen
+        running_at: Laufende Kurswahlen
     table_headers:
       changes: Änderungen
       created_at: Datum/uhrzeit
