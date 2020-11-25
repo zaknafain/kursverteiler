@@ -119,7 +119,7 @@ RSpec.describe Poll, type: :model do
     end
 
     context 'future' do
-      it 'includes all poll with valid_from after the requested date' do
+      it 'includes all polls with valid_from after the requested date' do
         expect(Poll.future(Time.zone.today).count).to be(1)
         expect(Poll.future(Time.zone.today).first.id).to be(future_poll.id)
         expect(Poll.future(7.months.ago).count).to be(2)
@@ -130,6 +130,21 @@ RSpec.describe Poll, type: :model do
       it 'returns the future poll by default' do
         expect(Poll.future.count).to be(1)
         expect(Poll.future.first.id).to be(future_poll.id)
+      end
+    end
+
+    context 'past' do
+      it 'includes all polls with valid_until before the requested date' do
+        expect(Poll.past(Time.zone.today).count).to be(1)
+        expect(Poll.past(Time.zone.today).first.id).to be(old_poll.id)
+        expect(Poll.past(7.months.from_now).count).to be(2)
+        expect(Poll.past(7.months.from_now).pluck(:id)).to include(current_poll.id)
+        expect(Poll.past(7.months.from_now).pluck(:id)).to include(old_poll.id)
+      end
+
+      it 'returns the old poll by default' do
+        expect(Poll.past.count).to be(1)
+        expect(Poll.past.first.id).to be(old_poll.id)
       end
     end
   end
