@@ -99,14 +99,15 @@ if Rails.env.development?
 
   # Create distribution for all Polls from the past
   log('------------------ Create Distribution  for past Polls ------------------')
-  polls.select{ |p| p.valid_until < Time.zone.now }.each do |poll|
+  polls.select{ |p| p.valid_until < Time.zone.today }.each do |poll|
     log("Starting Distribution for poll #{poll.title}")
     not_distributed_students = []
 
-    poll.students.includes(selections: %i[top_course mid_course low_course]).each do |student|
-      top_course = student.current_selection&.top_course
-      mid_course = student.current_selection&.mid_course
-      low_course = student.current_selection&.low_course
+    selections = poll.selections
+    poll.students.each do |student|
+      top_course = selections.detect { |s| s.student_id == student.id }&.top_course
+      mid_course = selections.detect { |s| s.student_id == student.id }&.mid_course
+      low_course = selections.detect { |s| s.student_id == student.id }&.low_course
       if top_course&.guaranteed
         log("Distribute #{student.full_name} to guaranteed #{top_course.title}")
         student.courses_students.create!(course: top_course)
