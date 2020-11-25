@@ -18,7 +18,12 @@ en:
         title: 'Delete %{model_label} ''%{object_label}'''
       distribute:
         breadcrumb: Distribution
+        course:
+          min_to_max: '%{min} to %{max} Seats'
         menu: Distribution
+        students_count:
+          one: 1 Student
+          other: '%{count} Students'
         title: '%{model_label} ''%{object_label}'' Distribution'
       edit:
         breadcrumb: Edit

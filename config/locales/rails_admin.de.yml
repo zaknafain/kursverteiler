@@ -18,7 +18,12 @@ de:
         title: '%{model_label} ''%{object_label}'' löschen'
       distribute:
         breadcrumb: Verteilung
+        course:
+          min_to_max: '%{min} bis %{max} Plätze'
         menu: Verteilung
+        students_count:
+          one: 1 Schüler
+          other: '%{count} Schüler'
         title: '%{model_label} ''%{object_label}'' Verteilung'
       edit:
         breadcrumb: Bearbeiten
