@@ -22,8 +22,8 @@ en:
           min_to_max: '%{min} to %{max} Seats'
         menu: Distribution
         students_count:
-          one: 1 Student
-          other: '%{count} Students'
+          one: 1 student not distributed
+          other: '%{count} students not distributed'
         title: '%{model_label} ''%{object_label}'' Distribution'
       edit:
         breadcrumb: Edit

@@ -36,18 +36,20 @@
   // Not distributed students elements at the top of the action
   .not-distributed {
     margin-bottom: 20px;
+    display: flex;
+    height: 100px;
   }
 
-  .students--container {
+  .students--container,
+  .course-students {
     border: 1px solid #ddd;
-    height: 70px;
     width: 300px;
     overflow-y: scroll;
+    background-color: white;
   }
 
   .students--count {
-    text-align: end;
-    width: 300px;
+    margin-left: 10px;
   }
 
   // Courses at the center of the action
@@ -60,7 +62,9 @@
   .course {
     display: flex;
     flex-direction: row;
+    align-items: stretch;
     min-width: 400px;
+    height: 200px;
     margin: 0 10px 10px 0;
     border: 1px solid #ddd;
     background-color: rgba(173, 255, 47, 0.2);
@@ -71,12 +75,8 @@
   }
 
   .course-students {
-    min-width: 300px;
-    height: 70px;
     margin: 4px;
     flex: 0 1 auto;
-    border: 1px solid #ddd;
-    background-color: white;
   }
 
   .course-description {
@@ -84,9 +84,19 @@
     margin: 4px;
     flex: 1 1 auto;
     text-align: right;
+    display: flex;
+    flex-direction: column;
   }
 
   .course-description--title {
+    font-weight: bold;
+  }
+
+  .course-description--min-to-max {
+    flex: 1 1 auto;
+  }
+
+  .course-description--count {
     font-weight: bold;
   }
 }

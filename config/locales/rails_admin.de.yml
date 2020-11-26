@@ -22,8 +22,8 @@ de:
           min_to_max: '%{min} bis %{max} Plätze'
         menu: Verteilung
         students_count:
-          one: 1 Schüler
-          other: '%{count} Schüler'
+          one: 1 Schüler nicht verteilt
+          other: '%{count} Schüler nicht verteilt'
         title: '%{model_label} ''%{object_label}'' Verteilung'
       edit:
         breadcrumb: Bearbeiten

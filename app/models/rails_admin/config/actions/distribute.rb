@@ -16,6 +16,10 @@ module RailsAdmin
         register_instance_option :controller do
           proc do
             if request.get? # SHOW
+              @not_dist_students = @object.students.includes(courses: [:poll], selections: [:poll])
+                                          .select { |s| s.course_for(@object).nil? }.sort_by(&:full_name)
+              @courses = @object.courses.includes(students: { selections: [:poll] }).sort_by(&:title)
+
               respond_to do |format|
                 format.html { render @action.template_name }
                 format.js   { render @action.template_name, layout: false }

@@ -1,20 +1,23 @@
 <div class="not-distributed">
   <div class="students--container">
-    <%= render @object.students.order(first_name: :asc, last_name: :asc) %>
+    <%= render @not_dist_students %>
   </div>
-  <div class="students--count"><%= t('admin.actions.distribute.students_count', count: @object.students.length) %></div>
+  <div class="students--count"><%= t('admin.actions.distribute.students_count', count: @not_dist_students.length) %></div>
 </div>
 
 <div class="courses--container">
-  <% @object.courses.order(title: :asc).each do |course| %>
+  <% @courses.each do |course| %>
     <%= content_tag :div, id: "course-container-#{course.id}", class: "course #{'course__guaranteed' if course.guaranteed?}" do %>
       <div class="course-students">
-
+        <%= render course.students.sort_by(&:full_name) %>
       </div>
       <div class="course-description">
         <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
         <div class="course-description--teacher"><%= course.teacher_name %></div>
-        <div class="course-description--min-to-max"><%= t('admin.actions.distribute.course.min_to_max', min: course.minimum, max: course.maximum) %></div>
+        <div class="course-description--min-to-max">
+          <%= t('admin.actions.distribute.course.min_to_max', min: course.minimum, max: course.maximum) unless course.guaranteed? %>
+        </div>
+        <div class="course-description--count"><%= course.students.length %></div>
       </div>
     <% end %>
   <% end %>
