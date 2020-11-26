@@ -7,7 +7,7 @@
 
 <div class="courses--container">
   <% @courses.each do |course| %>
-    <%= content_tag :div, id: "course-container-#{course.id}", class: "course #{'course__guaranteed' if course.guaranteed?}" do %>
+    <%= content_tag :div, id: "course-container-#{course.id}", class: classes_for(course) do %>
       <div class="course-students">
         <%= render course.students.sort_by(&:full_name) %>
       </div>
