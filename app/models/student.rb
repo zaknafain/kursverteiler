@@ -26,6 +26,14 @@ class Student < ApplicationRecord
     end
   end
 
+  def selection_for(poll)
+    selections.detect { |s| s.poll == poll }
+  end
+
+  def course_for(poll)
+    courses.detect { |c| c.poll == poll }
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

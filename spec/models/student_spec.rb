@@ -187,4 +187,51 @@ RSpec.describe Student, type: :model do
       expect(student.full_name).to eq("#{student.first_name} #{student.last_name}")
     end
   end
+
+  context '#selection_for' do
+    let(:selection) { create(:selection) }
+    let(:student)   { selection.student }
+    let(:poll)      { selection.poll }
+
+    it 'returns the matching selection for the given poll' do
+      expect(student.selection_for(poll)).to_not be_nil
+      expect(student.selection_for(poll)).to     eq(selection)
+    end
+
+    it 'returns nil if there is no selection for the given poll' do
+      other_poll = create(:poll)
+
+      expect(student.selection_for(other_poll)).to be_nil
+    end
+
+    it 'returns nil if there is no selection at all' do
+      other_student = create(:student)
+
+      expect(other_student.selection_for(poll)).to be_nil
+    end
+  end
+
+  context '#course_for' do
+    let(:distribution) { create(:courses_student) }
+    let(:student)      { distribution.student }
+    let(:course)       { distribution.course }
+    let(:poll)         { course.poll }
+
+    it 'returns the matching course for the given poll' do
+      expect(student.course_for(poll)).to_not be_nil
+      expect(student.course_for(poll)).to     eq(course)
+    end
+
+    it 'returns nil if there is no course for the given poll' do
+      other_poll = create(:poll)
+
+      expect(student.course_for(other_poll)).to be_nil
+    end
+
+    it 'returns nil if there is no course at all' do
+      other_student = create(:student)
+
+      expect(other_student.course_for(poll)).to be_nil
+    end
+  end
 end
