@@ -1,8 +1,4 @@
 <div class="student--container">
   <div class="student--name"><%= student.full_name %></div>
-  <% %i[top mid low].each do |prio| %>
-    <%= content_tag :div, class: "selection-indicator #{student.current_selection&.send("#{prio}_course_id").present? ? "#{prio}-indicator" : 'missing-indicator'}" do %>
-      <%= content_tag :i, '', class: student.current_selection&.send("#{prio}_course_id").present? ? 'icon-ok-sign' : 'icon-remove-circle' %>
-    <% end %>
-  <% end %>
+  <% distribution_indicator_by(student, @object) %>
 </div>
