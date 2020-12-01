@@ -67,10 +67,19 @@
     height: 200px;
     margin: 0 10px 10px 0;
     border: 1px solid #ddd;
-    background-color: rgba(173, 255, 47, 0.2);
+    background-color: rgba(200, 200, 200, 0.2);
 
-    &.course__guaranteed {
-      background-color: rgba(200, 200, 200, 0.2);
+    // &.course__guaranteed,
+    // &.course__empty {
+    // }
+    &.course__too-low {
+      background-color: rgba(232, 225, 13, 0.4);
+    }
+    &.course__good {
+      background-color: rgba(37, 232, 13, 0.4);
+    }
+    &.course__too-many {
+      background-color: rgba(232, 53, 13, 0.4);
     }
   }
 
