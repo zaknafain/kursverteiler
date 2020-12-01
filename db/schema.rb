@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_25_153047) do
+ActiveRecord::Schema.define(version: 2020_12_01_120555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 2020_11_25_153047) do
     t.bigint "poll_id"
     t.string "focus_areas"
     t.string "variants"
+    t.bigint "parent_course_id"
+    t.index ["parent_course_id"], name: "index_courses_on_parent_course_id"
     t.index ["poll_id"], name: "index_courses_on_poll_id"
   end
 
@@ -134,6 +136,7 @@ ActiveRecord::Schema.define(version: 2020_11_25_153047) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "courses", "courses", column: "parent_course_id"
   add_foreign_key "courses", "polls"
   add_foreign_key "selections", "courses", column: "low_course_id"
   add_foreign_key "selections", "courses", column: "mid_course_id"
