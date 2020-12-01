@@ -12,15 +12,15 @@ RSpec.describe Course, type: :model do
       let(:mid_course) { selection.mid_course }
       let(:low_course) { selection.low_course }
 
-      it 'has many top selections' do
+      it 'responds to top selections' do
         expect(course).to respond_to(:top_selections)
       end
 
-      it 'has many mid selections' do
+      it 'responds to mid selections' do
         expect(course).to respond_to(:mid_selections)
       end
 
-      it 'has many low selections' do
+      it 'responds to low selections' do
         expect(course).to respond_to(:low_selections)
       end
 
@@ -32,7 +32,7 @@ RSpec.describe Course, type: :model do
     end
 
     context 'poll' do
-      it 'belongs to a poll' do
+      it 'responds to a poll' do
         expect(course).to respond_to(:poll)
       end
     end
@@ -40,7 +40,7 @@ RSpec.describe Course, type: :model do
     context 'courses students' do
       let(:student) { create(:student) }
 
-      it 'has many courses_students' do
+      it 'responds to courses_students' do
         expect(course).to respond_to(:courses_students)
       end
 
@@ -55,7 +55,7 @@ RSpec.describe Course, type: :model do
     context 'students' do
       let(:student) { create(:student) }
 
-      it 'has many students' do
+      it 'responds to students' do
         expect(course).to respond_to(:students)
       end
 
@@ -67,6 +67,29 @@ RSpec.describe Course, type: :model do
 
         expect(course.students).to_not be_empty
         expect(course.students.map(&:id)).to eq([student.id])
+      end
+    end
+
+    context 'courses' do
+      it 'responds to parent_course' do
+        expect(course).to respond_to(:parent_course)
+      end
+
+      it 'nullifies child courses parent_course_id on deletion' do
+        child_course = create(:course, parent_course: course)
+
+        expect { course.destroy }.to change(child_course, :parent_course_id).from(course.id).to(nil)
+      end
+
+      it 'responds to child_course' do
+        expect(course).to respond_to(:child_course)
+      end
+
+      it 'inverts child_course with parent_course' do
+        child_course = create(:course, parent_course: course)
+
+        expect(child_course.parent_course).to eq(course)
+        expect(course.child_course).to eq(child_course)
       end
     end
   end
@@ -209,6 +232,11 @@ RSpec.describe Course, type: :model do
       course.guaranteed = nil
       expect(course).to be_invalid
       expect(course.errors[:guaranteed]).to be_present
+    end
+
+    it 'NOT validates presence of parent_course' do
+      expect(course.parent_course).to be_nil
+      expect(course).to be_valid
     end
   end
 
