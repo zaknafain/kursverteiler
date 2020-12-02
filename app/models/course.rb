@@ -26,6 +26,11 @@ class Course < ApplicationRecord
   validate  :minimum_is_lesser_or_equal_than_maximum
 
   scope :current, -> { where(poll: Poll.running_at(Time.zone.today)) }
+  scope :parent_candidates_for, lambda { |course|
+    joins(:poll).includes(:child_course)
+                .where(child_courses_courses: { id: nil })
+                .where('polls.valid_until < ?', course.poll.valid_from)
+  }
 
   def selections
     Selection.where(top_course: id).or(Selection.where(mid_course: id)).or(Selection.where(low_course: id))
