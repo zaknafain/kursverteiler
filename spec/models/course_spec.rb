@@ -264,7 +264,8 @@ RSpec.describe Course, type: :model do
 
         course_child.update(parent_course: nil)
 
-        expect(Course.parent_candidates_for(course).pluck(:id)).to eq([old_course.id, old_course_parent.id])
+        expect(Course.parent_candidates_for(course).pluck(:id)).to include(old_course.id)
+        expect(Course.parent_candidates_for(course).pluck(:id)).to include(old_course_parent.id)
       end
 
       it 'scopes all courses that are older than the given one' do
