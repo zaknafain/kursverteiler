@@ -8,7 +8,8 @@ class Course < ApplicationRecord
 
   belongs_to :poll
   belongs_to :parent_course, class_name: 'Course', inverse_of: :child_course, optional: true
-  has_one    :child_course,  class_name: 'Course', inverse_of: :parent_course, dependent: :nullify, foreign_key: :parent_course_id
+  has_one    :child_course, dependent: :nullify, class_name: 'Course',
+                            foreign_key: :parent_course_id, inverse_of: :parent_course
   has_many :courses_students, dependent: :delete_all
   has_many :students, through: :courses_students
   has_many :top_selections, dependent: :nullify, class_name: 'Selection',
