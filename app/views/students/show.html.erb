@@ -30,8 +30,9 @@
 
     <div class="selections-form--courses">
       <% @courses.each do |course| %>
-        <% selected_prio = @selection.prio_for?(course) %>
-        <%= content_tag :div, id: "course-container-#{course.id}", class: "course #{'course__selected' if selected_prio} #{"course__selected--#{selected_prio}" if selected_prio}", data: { selected: selected_prio } do %>
+        <% selected_prio   = @selection.prio_for?(course) %>
+        <% course_disabled = @past_courses.any? { |c| c.id == course.parent_course_id } %>
+        <%= content_tag :div, id: "course-container-#{course.id}", class: "course#{' course__selected' if selected_prio}#{" course__selected--#{selected_prio}" if selected_prio}#{' course__disabled' if course_disabled }", data: { selected: selected_prio, disabled: course_disabled } do %>
           <div class="course-description">
             <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
             <div class="course-description--teacher"><%= t('.course.teacher', teacher_name: course.teacher_name) %></div>
@@ -42,10 +43,15 @@
           </div>
           <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "course-priority" do %>
             <% %i[top mid low].each do |priority| %>
-              <%= content_tag :div, id: "course-#{course.id}-priority-#{priority}", class: "course-priority--container course-priority--container__#{priority} #{'course-priority--container__selected' if selected_prio == priority} #{'course-priority--container__disabled' if course.guaranteed? && priority != :top}", data: { course_id: course.id, priority: priority, selected: selected_prio, guaranteed: course.guaranteed? } do %>
+              <%= content_tag :div, id: "course-#{course.id}-priority-#{priority}", class: "course-priority--container course-priority--container__#{priority} #{'course-priority--container__selected' if selected_prio == priority} #{'course-priority--container__disabled' if course.guaranteed? && priority != :top || course_disabled}", data: { course_id: course.id, priority: priority, selected: selected_prio, guaranteed: course.guaranteed? } do %>
                 <%= content_tag :div, t(".prio.#{priority}"), class: "course-priority--text" %>
               <% end %>
             <% end %>
+          <% end %>
+          <% if course_disabled %>
+            <div class="course-disabled-note">
+              <%= t('.disabled_note') %>
+            </div>
           <% end %>
         <% end %>
       <% end %>

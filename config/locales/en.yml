@@ -86,6 +86,7 @@ en:
         other: Students
   students:
     show:
+      disabled_note: You have already taken this course
       course:
         focus_areas: "possible focus areas: %{focus_areas}"
         min_to_max: "%{min} to %{max} students"

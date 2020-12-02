@@ -86,6 +86,7 @@ de:
         other: Schüler
   students:
     show:
+      disabled_note: Du hast diesen Kurs bereits belegt
       course:
         focus_areas: 'mögliche Schwerpunkte: %{focus_areas}'
         min_to_max: '%{min} - %{max} Plätze'
