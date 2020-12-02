@@ -31,9 +31,9 @@ RailsAdmin.config do |config|
   # Global RailsAdminImport options
   config.configure_with(:import) do |import_config|
     IMPORT_HEADER_MAPPING = {
-      ausbildungsrelevant:   :guaranteed,
       beschreibung:          :description,
       e_mail:                :email,
+      garantierter_platz:    :guaranteed,
       klassenname:           :grade,
       kursbeschreibung:      :description,
       kurstitel:             :title,
@@ -48,6 +48,7 @@ RailsAdmin.config do |config|
       schwerpunkte:          :focus_areas,
       titel:                 :title,
       titel_kurswahl:        :poll,
+      titel_vorheriger_kurs: :parent_course,
       varianten:             :variants,
       vorname:               :first_name,
     }
