@@ -241,17 +241,35 @@ RSpec.describe Course, type: :model do
   end
 
   context 'scopes' do
-    context 'current' do
-      let!(:course)     { create(:course, poll: poll) }
-      let!(:old_course) { create(:course, poll: old_poll) }
-      let(:poll)        { create(:poll) }
-      let(:old_poll)    { create(:poll, :ended) }
+    let!(:course)     { create(:course, poll: poll) }
+    let!(:old_course) { create(:course, poll: old_poll) }
+    let(:poll)        { create(:poll) }
+    let(:old_poll)    { create(:poll, :ended) }
 
+    context 'current' do
       it 'shows all courses for active polls' do
         expect(Course.all.count).to be(2)
 
         expect(Course.current.count).to be(1)
         expect(Course.current.pluck(:id)).to include(course.id)
+      end
+    end
+
+    context 'parent_candidates_for' do
+      let!(:course_child)     { create(:course, poll: poll, parent_course: old_course_parent) }
+      let(:old_course_parent) { create(:course, poll: old_poll) }
+
+      it 'scopes all courses that have no child' do
+        expect(Course.parent_candidates_for(course).pluck(:id)).to eq([old_course.id])
+
+        course_child.update(parent_course: nil)
+
+        expect(Course.parent_candidates_for(course).pluck(:id)).to eq([old_course.id, old_course_parent.id])
+      end
+
+      it 'scopes all courses that are older than the given one' do
+        expect(Course.parent_candidates_for(course)).to     eq([old_course])
+        expect(Course.parent_candidates_for(old_course)).to eq([])
       end
     end
   end

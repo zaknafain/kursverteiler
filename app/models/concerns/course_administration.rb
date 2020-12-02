@@ -34,11 +34,29 @@ module CourseAdministration
         searchable [:title]
         sortable :title
       end
+      field :parent_course do
+        queryable false
+        searchable false
+        sortable false
+      end
 
       list do
         sort_by :title
-        scopes [:current, nil]
+        scopes [nil, :current]
         exclude_fields :focus_areas, :description, :variants, :teacher_name
+      end
+      edit do
+        field :parent_course do
+          inline_add false
+          inline_edit false
+          associated_collection_cache_all false
+          associated_collection_scope do
+            course = bindings[:object]
+            proc do |scope|
+              scope.parent_candidates_for(course)
+            end
+          end
+        end
       end
       import do
         mapping_key :title
