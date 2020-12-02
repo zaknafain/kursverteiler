@@ -6,11 +6,13 @@ de:
         first_name: Vorname
         last_name: Nachname
       course:
+        child_course: Folgender Kurs
         description: Beschreibung
         focus_areas: Mögliche Schwerpunkte
         guaranteed: Garantierter Platz
         maximum: Maximale Schülerzahl
         minimum: Minimale Schülerzahl
+        parent_course: Vorheriger Kurs
         poll: Kurswahl
         teacher_name: Name der Lehrkraft
         title: Titel

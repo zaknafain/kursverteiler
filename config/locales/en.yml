@@ -6,11 +6,13 @@ en:
         first_name: First name
         last_name: Last name
       course:
+        child_course: Following course
         description: Description
         focus_areas: Possible focus areas
         guaranteed: Guaranteed place
         maximum: Maximum students
         minimum: Minimum students
+        parent_course: Previous course
         poll: Poll
         teacher_name: Teacher name
         title: Title
