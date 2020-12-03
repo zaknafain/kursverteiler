@@ -10,7 +10,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
 # Database for Active Record
 gem 'pg', '~> 1.2.3'
 # Use Puma as the app server
-gem 'puma', '~> 5.0.0'
+gem 'puma', '~> 5.1.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -32,7 +32,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Generate fake data for development and testing
-  gem 'faker', '~> 2.14.0'
+  gem 'faker', '~> 2.15.1'
   # FactoryBot and RSpec for testing
   gem 'factory_bot', '~> 6.1.0'
   gem 'rspec-rails', '~> 4.0.1'
