@@ -31,7 +31,11 @@ module RailsAdminHelper
   end
 
   def selection_icon_class_by(student, poll, priority)
-    student.selection_for(poll)&.send("#{priority}_course_id").present? ? 'icon-ok-sign' : 'icon-remove-circle'
+    selection_id = student.selection_for(poll)&.send("#{priority}_course_id")
+
+    return 'icon-remove-circle' if selection_id.blank?
+
+    student.courses.any? { |c| c.id == selection_id } ? 'icon-ok-sign' : 'icon-remove'
   end
 
   def selection_color_class_by(student, poll, priority)
