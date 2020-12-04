@@ -6,12 +6,13 @@
     cursor: pointer;
     display: flex;
     flex-direction: row;
-    border-radius: 0 10px 10px 0;
+    border-radius: 4px 10px 10px 4px;
   }
 
   .student--name {
     flex: 1 1 auto;
     overflow-x: hidden;
+    margin: 0 4px;
   }
 
   .student-selected {
@@ -21,6 +22,7 @@
 
   .selection-indicator {
     margin: 0 2px;
+    width: 12px;
     font-size: inherit;
   }
 
@@ -106,6 +108,7 @@
 
   .course-description--title {
     font-weight: bold;
+    max-width: 200px;
   }
 
   .course-description--min-to-max {
