@@ -20,14 +20,9 @@ module RailsAdmin
                                           .includes(courses: [:poll], selections: [:poll])
                                           .where.not(courses: { poll_id: @object.id })
                                           .order(first_name: :asc, last_name: :asc)
-              @courses = @object.courses.includes(students: { selections: [:poll] }).order(title: :asc)
+              @courses = @object.courses.includes(students: [:courses, { selections: [:poll] }]).order(title: :asc)
 
-              respond_to do |format|
-                format.html { render @action.template_name }
-                format.js   { render @action.template_name, layout: false }
-              end
-            # elsif request.put? # UPDATE
-            #   sanitize_params_for!(request.xhr? ? :modal : :update)
+              render @action.template_name
 
             #   @object.set_attributes(params[@abstract_model.param_key])
             #   @authorization_adapter.authorize(:update, @abstract_model, @object) if @authorization_adapter.present?
