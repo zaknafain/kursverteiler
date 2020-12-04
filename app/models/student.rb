@@ -26,8 +26,4 @@ class Student < ApplicationRecord
     selections.detect { |s| s.poll == poll }
   end
 
-  def course_for(poll)
-    courses.detect { |c| c.poll == poll }
-  end
-
 end
