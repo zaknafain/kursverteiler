@@ -45,7 +45,7 @@ if Rails.env.development?
       log("Create dummy Course #{course_number.to_s.rjust(2)} #{"(#{title})".ljust(39)} #{'guaranteed' if guaranteed}")
       course = Course.create!({ title: title, poll: poll, guaranteed: guaranteed,
                                 minimum: guaranteed ? nil : Faker::Number.within(range: 8..12),
-                                maximum: guaranteed ? nil : Faker::Number.within(range: 15..25),
+                                maximum: guaranteed ? nil : Faker::Number.within(range: 16..26),
                                 description: Faker::Lorem.paragraph(sentence_count: 10),
                                 teacher_name: Faker::FunnyName.two_word_name,
                                 focus_areas: Faker::Lorem.sentence(word_count: 0, random_words_to_add: 7),
