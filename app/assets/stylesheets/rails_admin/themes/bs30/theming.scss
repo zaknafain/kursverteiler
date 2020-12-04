@@ -3,13 +3,20 @@
 .rails_admin {
   // Students in general
   .student--container {
+    cursor: pointer;
     display: flex;
     flex-direction: row;
+    border-radius: 0 10px 10px 0;
   }
 
   .student--name {
     flex: 1 1 auto;
     overflow-x: hidden;
+  }
+
+  .student-selected {
+    background-color: rgba(66, 139, 202, 0.68);;
+    color: white;
   }
 
   .selection-indicator {
