@@ -74,9 +74,9 @@ Rails.application.configure do
     authentication: :plain,
     domain: 'heroku.com',
     enable_starttls_auto: true,
-    password: Rails.application.credentials.sendgrid['password'],
+    password: Rails.application.credentials.sendgrid[:password],
     port: 587,
-    user_name: Rails.application.credentials.sendgrid['user_name'],
+    user_name: Rails.application.credentials.sendgrid[:user_name],
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
