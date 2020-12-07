@@ -76,7 +76,7 @@ Rails.application.configure do
     enable_starttls_auto: true,
     password: Rails.application.credentials.sendgrid['password'],
     port: 587,
-    user_name: 'apikey',
+    user_name: Rails.application.credentials.sendgrid['user_name'],
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
