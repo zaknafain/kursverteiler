@@ -17,7 +17,12 @@
         <div class="course-description--min-to-max">
           <%= t('admin.actions.distribute.course.min_to_max', min: course.minimum, max: course.maximum) unless course.guaranteed? %>
         </div>
-        <div class="course-description--count"><%= course.students.length %></div>
+        <div class="course-description--count">
+          <% if course.maximum && course.students.length >= course.maximum %>
+            <i class="course-description--count__warning icon-warning-sign"></i>
+          <% end %>
+          <%= course.students.length %>
+        </div>
       </div>
     <% end %>
   <% end %>

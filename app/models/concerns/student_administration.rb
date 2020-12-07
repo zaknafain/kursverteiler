@@ -59,7 +59,7 @@ module StudentAdministration
   end
 
   def before_import_save(_)
-    self.password = self.password_confirmation = SecureRandom.hex unless persisted?
+    self.password = self.password_confirmation = Devise.friendly_token(50) unless persisted?
   end
 
   %i[top mid low].each do |priority|

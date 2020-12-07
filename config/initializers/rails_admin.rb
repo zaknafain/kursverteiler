@@ -71,6 +71,7 @@ RailsAdmin.config do |config|
   config.label_methods = [:to_pretty_value]
 
   RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Distribute)
+  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPassword)
 
   config.actions do
     dashboard do                  # mandatory
@@ -90,6 +91,9 @@ RailsAdmin.config do |config|
     end
     distribute do
       only %w[Poll]
+    end
+    reset_password do
+      only %w[Admin Student]
     end
     # show_in_app
 

@@ -56,6 +56,9 @@ en:
         link: 'Add a new %{model_label}'
         menu: Add new
         title: 'New %{model_label}'
+      reset_password:
+        menu: Password reset
+        done: email sent
       show:
         breadcrumb: '%{object_label}'
         menu: Show

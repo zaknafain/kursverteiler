@@ -3,17 +3,26 @@
 .rails_admin {
   // Students in general
   .student--container {
+    cursor: pointer;
     display: flex;
     flex-direction: row;
+    border-radius: 4px 10px 10px 4px;
   }
 
   .student--name {
     flex: 1 1 auto;
     overflow-x: hidden;
+    margin: 0 4px;
+  }
+
+  .student-selected {
+    background-color: rgba(66, 139, 202, 0.68);;
+    color: white;
   }
 
   .selection-indicator {
     margin: 0 2px;
+    width: 12px;
     font-size: inherit;
   }
 
@@ -99,6 +108,7 @@
 
   .course-description--title {
     font-weight: bold;
+    max-width: 200px;
   }
 
   .course-description--min-to-max {
@@ -107,5 +117,9 @@
 
   .course-description--count {
     font-weight: bold;
+  }
+
+  .course-description--count__warning {
+    color: rgba(232, 53, 13, 1);
   }
 }
