@@ -54,8 +54,21 @@ RSpec.describe RailsAdminHelper, type: :helper do
     let(:poll)      { selection.poll }
 
     %i[top mid low].each do |priority|
-      it "returns 'icon-ok-sign' if there is a #{priority} selection present for the student and poll" do
+      it "returns 'icon-ok-sign' if the #{priority} selection and distribution matches for the student" do
+        student.courses << selection.send("#{priority}_course")
+
         expect(helper.selection_icon_class_by(student, poll, priority)).to eq('icon-ok-sign')
+      end
+
+      it "returns 'icon-remove' if the #{priority} selection does not match the distribution for the student" do
+        course = create(:course, poll: poll)
+        student.courses << course
+
+        expect(helper.selection_icon_class_by(student, poll, priority)).to eq('icon-remove')
+      end
+
+      it "returns 'icon-remove' if the #{priority} selection exists but no distribution for the student" do
+        expect(helper.selection_icon_class_by(student, poll, priority)).to eq('icon-remove')
       end
 
       it "returns 'icon-remove-circle' if there is no #{priority} selection present for the student and poll" do

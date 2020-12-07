@@ -34,4 +34,10 @@ RSpec.describe Admin, type: :model do
       expect(admin.errors[:last_name]).to be_present
     end
   end
+
+  context '#full_name' do
+    it 'returns the first name and the last name seperated by a space' do
+      expect(admin.full_name).to eq("#{admin.first_name} #{admin.last_name}")
+    end
+  end
 end
