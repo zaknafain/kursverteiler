@@ -2,6 +2,7 @@
 
 # Main Mailer from Rails
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  default from: 'admins@bs30.de'
   layout 'mailer'
+
 end
