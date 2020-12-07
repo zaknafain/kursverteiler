@@ -71,9 +71,12 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
-    port: 25,
-    user_name: Rails.application.credentials.sendgrid['user_name'],
+    authentication: :plain,
+    domain: 'bs30.de',
+    enable_starttls_auto: true,
     password: Rails.application.credentials.sendgrid['password'],
+    port: 587,
+    user_name: Rails.application.credentials.sendgrid['user_name'],
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
