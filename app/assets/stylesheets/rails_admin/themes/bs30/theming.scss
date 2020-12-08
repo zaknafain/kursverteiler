@@ -16,8 +16,7 @@
   }
 
   .student-selected {
-    background-color: rgba(66, 139, 202, 0.68);;
-    color: white;
+    @extend .bg-info;
   }
 
   .selection-indicator {
@@ -27,19 +26,19 @@
   }
 
   .top-indicator {
-    color: green;
+    @extend .text-success;
   }
 
   .mid-indicator {
-    color: orange;
+    @extend .text-warning;
   }
 
   .low-indicator {
-    color: red;
+    @extend .text-danger;
   }
 
   .missing-indicator {
-    color: lightgray;
+    @extend .text-muted;
   }
 
   // Not distributed students elements at the top of the action
@@ -74,6 +73,8 @@
   }
 
   .course {
+    @extend .alert;
+    @extend .alert-info;
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -81,16 +82,15 @@
     height: 200px;
     margin: 0 10px 10px 0;
     border: 1px solid #ddd;
-    background-color: rgba(200, 200, 200, 0.2);
 
     &.course__too-low {
-      background-color: rgba(232, 225, 13, 0.4);
+      @extend .alert-warning;
     }
     &.course__good {
-      background-color: rgba(37, 232, 13, 0.4);
+      @extend .alert-success;
     }
     &.course__too-many {
-      background-color: rgba(232, 53, 13, 0.4);
+      @extend .alert-danger;
     }
   }
 
@@ -122,6 +122,6 @@
   }
 
   .course-description--count__warning {
-    color: rgba(232, 53, 13, 1);
+    @extend .text-danger;
   }
 }
