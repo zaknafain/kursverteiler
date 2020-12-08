@@ -53,4 +53,14 @@ module RailsAdminHelper
       'course__too-many'
     end
   end
+
+  def student_distribution_data(student, courses)
+    course = student.courses.detect { |c| courses.map(&:id).include?(c.id) }
+
+    {
+      selected: false,
+      course_id: course&.id,
+      student_id: student.id
+    }
+  end
 end
