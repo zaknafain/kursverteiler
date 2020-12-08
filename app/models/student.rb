@@ -16,6 +16,12 @@ class Student < ApplicationRecord
   has_one :current_mid_course, through: :current_selection, source: :mid_course
   has_one :current_low_course, through: :current_selection, source: :low_course
 
+  scope :can_vote_on, lambda { |poll_id|
+    includes(grade: [:grades_polls]).where(grade: { grades_polls: { poll_id: poll_id } })
+  }
+  scope :distributed_in,     ->(poll_id) { includes(:courses).where(courses: { poll_id: poll_id }) }
+  scope :not_distributed_in, ->(poll_id) { can_vote_on(poll_id).where.not(id: distributed_in(poll_id)) }
+
   %i[top mid low].each do |priority|
     define_method(:"current_#{priority}_course=") do |course|
       (current_selection || build_current_selection(poll: current_poll)).public_send(:"#{priority}_course=", course)
