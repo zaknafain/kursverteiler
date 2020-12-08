@@ -114,16 +114,16 @@ if Rails.env.development?
       low_course = selections.detect { |s| s.student_id == student.id }&.low_course
       if top_course&.guaranteed
         log("Distribute #{student.full_name} to guaranteed #{top_course.title}")
-        student.courses_students.create!(course: top_course)
+        student.courses << top_course
       elsif top_course && top_course.students.length < top_course.maximum
         log("Distribute #{student.full_name} to 1st choice #{top_course.title}")
-        student.courses_students.create!(course: top_course)
+        student.courses << top_course
       elsif mid_course && mid_course.students.length < mid_course.maximum
         log("Distribute #{student.full_name} to 2nd choice #{mid_course.title}")
-        student.courses_students.create!(course: mid_course)
+        student.courses << mid_course
       elsif low_course && low_course.students.length < low_course.maximum
         log("Distribute #{student.full_name} to 3rd choice #{low_course.title}")
-        student.courses_students.create!(course: low_course)
+        student.courses << low_course
       else
         not_distributed_students << student
       end
@@ -133,7 +133,7 @@ if Rails.env.development?
       poll.courses.each do |course|
         if course.guaranteed == false && course.students.length < course.maximum
           log("Distribute #{student.full_name} to #{course.title}")
-          student.courses_students.create!(course: course)
+          student.courses << course
         end
       end
     end
