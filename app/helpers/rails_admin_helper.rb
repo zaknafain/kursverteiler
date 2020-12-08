@@ -54,13 +54,17 @@ module RailsAdminHelper
     end
   end
 
-  def student_distribution_data(student, courses)
-    course = student.courses.detect { |c| courses.map(&:id).include?(c.id) }
+  def student_distribution_data(student, poll)
+    course = student.courses.detect { |c| poll.courses.map(&:id).include?(c.id) }
+    selection = student.selection_for(poll)
 
     {
       selected: false,
       course_id: course&.id,
-      student_id: student.id
+      student_id: student.id,
+      top_course_id: selection&.top_course_id,
+      mid_course_id: selection&.mid_course_id,
+      low_course_id: selection&.low_course_id
     }
   end
 end

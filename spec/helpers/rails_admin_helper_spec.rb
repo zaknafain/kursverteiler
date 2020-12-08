@@ -170,36 +170,58 @@ RSpec.describe RailsAdminHelper, type: :helper do
   end
 
   describe '#student_distribution_data' do
-    let(:student) { create(:student) }
-    let(:course)  { create(:course) }
-    let(:poll)    { course.poll }
+    let(:selection) do
+      create(:selection, poll: poll, student: student, top_course: course, mid_course: mid_course,
+                         low_course: low_course)
+    end
+    let(:student)    { create(:student) }
+    let(:course)     { create(:course) }
+    let(:mid_course) { create(:course, poll: course.poll) }
+    let(:low_course) { create(:course, poll: course.poll) }
+    let(:poll)       { course.poll }
 
     it 'allways returns "selected: false" data' do
-      expect(helper.student_distribution_data(student, [])).to include({ selected: false })
+      expect(helper.student_distribution_data(student, poll)).to include({ selected: false })
     end
 
     it 'allways returns the student_id as data' do
-      expect(helper.student_distribution_data(student, [])).to include({ student_id: student.id })
+      expect(helper.student_distribution_data(student, poll)).to include({ student_id: student.id })
     end
 
     it 'returns data with "course_id: nil" if there are no courses' do
-      expect(helper.student_distribution_data(student, [])).to include({ course_id: nil })
+      poll.courses = []
+
+      expect(helper.student_distribution_data(student, poll)).to include({ course_id: nil })
     end
 
     it 'returns data with "course_id: nil" if the student was not distributed' do
-      expect(helper.student_distribution_data(student, poll.courses)).to include({ course_id: nil })
+      expect(helper.student_distribution_data(student, poll)).to include({ course_id: nil })
     end
 
     it 'returns data with "course_id: nil" if the student was distributed in another poll' do
       student.courses << create(:course)
 
-      expect(helper.student_distribution_data(student, poll.courses)).to include({ course_id: nil })
+      expect(helper.student_distribution_data(student, poll)).to include({ course_id: nil })
     end
 
     it 'returns data with the matching course_id if the student was distributed' do
       student.courses << course
 
-      expect(helper.student_distribution_data(student, poll.courses)).to include({ course_id: course.id })
+      expect(helper.student_distribution_data(student, poll)).to include({ course_id: course.id })
+    end
+
+    it 'returns a top_course_id, mid_course_id and a low_course_id as nil per default' do
+      expect(helper.student_distribution_data(student, poll)).to include({ top_course_id: nil })
+      expect(helper.student_distribution_data(student, poll)).to include({ mid_course_id: nil })
+      expect(helper.student_distribution_data(student, poll)).to include({ low_course_id: nil })
+    end
+
+    it 'returns a top_course_id, mid_course_id and a low_course_id from the selection of the student' do
+      selection # init data
+
+      expect(helper.student_distribution_data(student, poll)).to include({ top_course_id: course.id })
+      expect(helper.student_distribution_data(student, poll)).to include({ mid_course_id: mid_course.id })
+      expect(helper.student_distribution_data(student, poll)).to include({ low_course_id: low_course.id })
     end
   end
 end

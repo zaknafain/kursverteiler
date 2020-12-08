@@ -13,34 +13,28 @@ module RailsAdmin
           'icon-share-alt'
         end
 
+        register_instance_option :http_methods do
+          %i[get put]
+        end
+
         register_instance_option :controller do
           proc do
+            students = @object.students.includes(courses: [:poll], selections: [:poll])
+            @not_dist_students = students.not_distributed_in(@object.id).order(first_name: :asc, last_name: :asc)
+            @courses = @object.courses.includes(students: [:courses, { selections: [:poll] }]).order(title: :asc)
+
             if request.get? # SHOW
-              @not_dist_students = @object.students
-                                          .includes(courses: [:poll], selections: [:poll])
-                                          .where.not(courses: { poll_id: @object.id })
-                                          .order(first_name: :asc, last_name: :asc)
-              @courses = @object.courses.includes(students: [:courses, { selections: [:poll] }]).order(title: :asc)
+              render @action.template_name
+            elsif request.put? # UPDATE
+              sanitized_params = params.require(:poll).permit(courses_students: %i[student_id course_id])
+
+              sanitized_params[:courses_students].each do |(_, param)|
+                student = students.detect { |s| s.id == param[:student_id].to_i }
+                student.courses = student.courses.reject { |c| @courses.map(&:id).include?(c.id) }
+                student.courses << @courses.detect { |c| c.id == param[:course_id].to_i } if param[:course_id].present?
+              end
 
               render @action.template_name
-
-            #   @object.set_attributes(params[@abstract_model.param_key])
-            #   @authorization_adapter.authorize(:update, @abstract_model, @object) if @authorization_adapter.present?
-            #   changes = @object.changes
-            #   if @object.save
-            #     if @auditing_adapter.present?
-            #       @auditing_adapter.update_object(@object, @abstract_model, _current_user, changes)
-            #     end
-
-            #     respond_to do |format|
-            #       format.html { redirect_to_on_success }
-            #       format.js do
-            #         render json: { id: @object.id.to_s, label: @model_config.with(object: @object).object_label }
-            #       end
-            #     end
-            #   else
-            #     handle_save_error :distribute
-            #   end
             end
           end
         end

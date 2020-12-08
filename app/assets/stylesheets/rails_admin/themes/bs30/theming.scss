@@ -57,8 +57,13 @@
     background-color: white;
   }
 
-  .students--count {
-    margin-left: 10px;
+  .students--actions {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 175px;
   }
 
   // Courses at the center of the action
@@ -78,9 +83,6 @@
     border: 1px solid #ddd;
     background-color: rgba(200, 200, 200, 0.2);
 
-    // &.course__guaranteed,
-    // &.course__empty {
-    // }
     &.course__too-low {
       background-color: rgba(232, 225, 13, 0.4);
     }
