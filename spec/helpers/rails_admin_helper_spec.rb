@@ -168,4 +168,38 @@ RSpec.describe RailsAdminHelper, type: :helper do
       expect(helper.classes_for(course)).to eq('course KLASSE')
     end
   end
+
+  describe '#student_distribution_data' do
+    let(:student) { create(:student) }
+    let(:course)  { create(:course) }
+    let(:poll)    { course.poll }
+
+    it 'allways returns "selected: false" data' do
+      expect(helper.student_distribution_data(student, [])).to include({ selected: false })
+    end
+
+    it 'allways returns the student_id as data' do
+      expect(helper.student_distribution_data(student, [])).to include({ student_id: student.id })
+    end
+
+    it 'returns data with "course_id: nil" if there are no courses' do
+      expect(helper.student_distribution_data(student, [])).to include({ course_id: nil })
+    end
+
+    it 'returns data with "course_id: nil" if the student was not distributed' do
+      expect(helper.student_distribution_data(student, poll.courses)).to include({ course_id: nil })
+    end
+
+    it 'returns data with "course_id: nil" if the student was distributed in another poll' do
+      student.courses << create(:course)
+
+      expect(helper.student_distribution_data(student, poll.courses)).to include({ course_id: nil })
+    end
+
+    it 'returns data with the matching course_id if the student was distributed' do
+      student.courses << course
+
+      expect(helper.student_distribution_data(student, poll.courses)).to include({ course_id: course.id })
+    end
+  end
 end
