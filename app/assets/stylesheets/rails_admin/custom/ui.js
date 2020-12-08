@@ -14,8 +14,6 @@ function registerStudentClick() {
   }));
 }
 
-if (document.readyState === "complete" || document.readyState === "interactive") {
+$(document).on('rails_admin.dom_ready', function() {
   setTimeout(registerStudentClick, 1);
-} else {
-  document.addEventListener("DOMContentLoaded", registerStudentClick);
-}
+});
