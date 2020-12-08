@@ -20,7 +20,9 @@ de:
         breadcrumb: Verteilung
         course:
           min_to_max: '%{min} bis %{max} Plätze'
+        distribute_all: Alle verteilen
         menu: Verteilung
+        reset_all: Alle zurücksetzen
         students_count:
           one: 1 Schüler nicht verteilt
           other: '%{count} Schüler nicht verteilt'

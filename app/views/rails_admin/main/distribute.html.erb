@@ -1,8 +1,10 @@
 <div class="not-distributed">
-  <div class="students--container">
-    <%= render @not_dist_students %>
+  <div class="students--container"><%= render @not_dist_students %></div>
+  <div class="students--actions">
+    <div class="students--count"><%= t('admin.actions.distribute.students_count', count: @not_dist_students.length) %></div>
+    <%= button_tag t('admin.actions.distribute.distribute_all'), type: 'button', id: 'distribute-all', class: 'students--distribute btn btn-primary' %>
+    <%= button_tag t('admin.actions.distribute.reset_all'), type: 'button', id: 'reset-all', class: 'students--reset btn btn-danger' %>
   </div>
-  <div class="students--count"><%= t('admin.actions.distribute.students_count', count: @not_dist_students.length) %></div>
 </div>
 
 <div class="courses--container">
