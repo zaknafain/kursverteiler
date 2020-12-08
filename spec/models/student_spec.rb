@@ -113,7 +113,7 @@ RSpec.describe Student, type: :model do
 
       it 'destroys all courses students on deletion' do
         student.save!
-        student.courses_students.create!(course: course)
+        student.courses << course
 
         expect { student.destroy }.to change(CoursesStudent, :count).by(-1)
       end
@@ -179,6 +179,64 @@ RSpec.describe Student, type: :model do
 
       expect(student).to be_invalid
       expect(student.errors[:email]).to be_present
+    end
+  end
+
+  context 'scopes' do
+    context 'not_distributed_in' do
+      let(:course)   { create(:course) }
+      let(:poll)     { course.poll }
+      let(:grade)    { create(:grade, polls: [poll]) }
+      let!(:student) { create(:student, grade: grade) }
+
+      it 'returns all students not distributed in the given poll' do
+        expect(Student.not_distributed_in(poll.id).pluck(:id)).to eq([student.id])
+
+        new_student = create(:student, grade: grade)
+
+        expect(Student.not_distributed_in(poll.id).pluck(:id)).to include(new_student.id)
+
+        new_student.courses << course
+
+        expect(Student.not_distributed_in(poll.id).pluck(:id)).to eq([student.id])
+      end
+    end
+
+    context 'can_vote_on' do
+      let(:poll)       { create(:poll) }
+      let(:grade)      { create(:grade, polls: [poll]) }
+      let!(:student_a) { create(:student, grade: grade) }
+      let!(:student_b) { create(:student) }
+
+      it 'returns all students connected to the poll via the grades' do
+        expect(Student.can_vote_on(poll.id).pluck(:id)).to eq([student_a.id])
+
+        student_b.update!(grade: grade)
+
+        expect(Student.can_vote_on(poll.id).pluck(:id)).to include(student_a.id)
+        expect(Student.can_vote_on(poll.id).pluck(:id)).to include(student_b.id)
+      end
+    end
+
+    context 'distributed_in' do
+      let(:course)     { create(:course) }
+      let(:poll)       { course.poll }
+      let(:grade)      { create(:grade, polls: [poll]) }
+      let!(:student_a) { create(:student, grade: grade) }
+      let!(:student_b) { create(:student, grade: grade) }
+
+      it 'returns all students allready distributed' do
+        expect(Student.distributed_in(poll.id).pluck(:id)).to be_empty
+
+        student_a.courses << course
+
+        expect(Student.distributed_in(poll.id).pluck(:id)).to eq([student_a.id])
+
+        student_b.courses << course
+
+        expect(Student.can_vote_on(poll.id).pluck(:id)).to include(student_a.id)
+        expect(Student.can_vote_on(poll.id).pluck(:id)).to include(student_b.id)
+      end
     end
   end
 
