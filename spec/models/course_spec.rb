@@ -46,7 +46,7 @@ RSpec.describe Course, type: :model do
 
       it 'deletes all courses_students on deletion' do
         course.save!
-        course.courses_students.create!(student: student)
+        course.students << student
 
         expect { course.destroy }.to change(CoursesStudent, :count).by(-1)
       end
