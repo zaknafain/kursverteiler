@@ -31,9 +31,9 @@ RailsAdmin.config do |config|
   # Global RailsAdminImport options
   config.configure_with(:import) do |import_config|
     IMPORT_HEADER_MAPPING = {
-      ausbildungsrelevant:   :guaranteed,
       beschreibung:          :description,
       e_mail:                :email,
+      garantierter_platz:    :guaranteed,
       klassenname:           :grade,
       kursbeschreibung:      :description,
       kurstitel:             :title,
@@ -48,6 +48,7 @@ RailsAdmin.config do |config|
       schwerpunkte:          :focus_areas,
       titel:                 :title,
       titel_kurswahl:        :poll,
+      titel_vorheriger_kurs: :parent_course,
       varianten:             :variants,
       vorname:               :first_name,
     }
@@ -69,6 +70,9 @@ RailsAdmin.config do |config|
   config.included_models = %w[Admin Grade Student Poll Course]
   config.label_methods = [:to_pretty_value]
 
+  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Distribute)
+  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPassword)
+
   config.actions do
     dashboard do                  # mandatory
       link_icon 'icon-list'
@@ -84,6 +88,12 @@ RailsAdmin.config do |config|
     edit
     delete do
       only %w[Student]
+    end
+    distribute do
+      only %w[Poll]
+    end
+    reset_password do
+      only %w[Admin Student]
     end
     # show_in_app
 

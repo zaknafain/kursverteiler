@@ -7,15 +7,17 @@
   </button>
 </div>
 
-<div class="headline headline--general">
-  <%= t('.headline') %> (<%= @grade.name %>)
-</div>
 <% if @poll %>
-  <div class="headline headline--title">
-    <%= @poll.title %>
-  </div>
-  <div class="headline headline--description">
-    <%= @poll.description %>
+  <div class="headline">
+    <div class="headline--general">
+      <%= t('.headline') %> (<%= @grade.name %>)
+    </div>
+    <div class="headline--title">
+      <%= @poll.title %>
+    </div>
+    <div class="headline--description">
+      <%= @poll.description %>
+    </div>
   </div>
 
   <%= form_for(current_student, url: student_path(current_student.id), method: :put, class: "selections-form") do |form| %>
@@ -23,12 +25,14 @@
       <%= top_form.hidden_field :top_course_id, value: @selection.top_course_id, data: { priority: :top } %>
       <%= top_form.hidden_field :mid_course_id, value: @selection.mid_course_id, data: { priority: :mid } %>
       <%= top_form.hidden_field :low_course_id, value: @selection.low_course_id, data: { priority: :low } %>
+      <%= hidden_field_tag :guaranteed_chosen, @selection.top_course&.guaranteed %>
     <% end %>
 
     <div class="selections-form--courses">
       <% @courses.each do |course| %>
-        <% selected_prio = @selection.prio_for?(course) %>
-        <%= content_tag :div, id: "course-container-#{course.id}", class: "course #{'course__selected' if selected_prio} #{"course__selected--#{selected_prio}" if selected_prio}", data: { selected: selected_prio } do %>
+        <% selected_prio   = @selection.prio_for?(course) %>
+        <% course_disabled = @past_courses.any? { |c| c.id == course.parent_course_id } %>
+        <%= content_tag :div, id: "course-container-#{course.id}", class: course_classes(selected_prio, course_disabled), data: { selected: selected_prio, disabled: course_disabled } do %>
           <div class="course-description">
             <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
             <div class="course-description--teacher"><%= t('.course.teacher', teacher_name: course.teacher_name) %></div>
@@ -39,10 +43,15 @@
           </div>
           <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "course-priority" do %>
             <% %i[top mid low].each do |priority| %>
-              <%= content_tag :div, id: "course-#{course.id}-priority-#{priority}", class: "course-priority--container course-priority--container__#{priority} #{'course-priority--container__selected' if selected_prio == priority}", data: { course_id: course.id, priority: priority, selected: selected_prio } do %>
+              <%= content_tag :div, id: "course-#{course.id}-priority-#{priority}", class: course_prio_classes(priority, selected_prio == priority, course.guaranteed?, course_disabled), data: { course_id: course.id, priority: priority, selected: selected_prio, guaranteed: course.guaranteed? } do %>
                 <%= content_tag :div, t(".prio.#{priority}"), class: "course-priority--text" %>
               <% end %>
             <% end %>
+          <% end %>
+          <% if course_disabled %>
+            <div class="course-disabled-note">
+              <%= t('.disabled_note') %>
+            </div>
           <% end %>
         <% end %>
       <% end %>
@@ -53,7 +62,23 @@
 
   <%= javascript_pack_tag 'selections' %>
 <% else %>
-  <div class="headline headline--title">
-    <%= t('.no_poll') %>
+  <div class="headline">
+    <div class="headline--title">
+      <%= t('.no_poll') %>
+    </div>
   </div>
+<% end %>
+
+<% @past_courses.each do |course| %>
+  <div class="headline">
+    <div class="headline--title">
+      <%= course.poll.title %>
+    </div>
+  </div>
+  <%= content_tag :div, class: "course" do %>
+    <div class="course-description">
+      <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
+      <div class="course-description--teacher"><%= t('.course.teacher', teacher_name: course.teacher_name) %></div>
+    </div>
+  <% end %>
 <% end %>

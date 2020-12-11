@@ -6,11 +6,13 @@ de:
         first_name: Vorname
         last_name: Nachname
       course:
+        child_course: Folgender Kurs
         description: Beschreibung
         focus_areas: Mögliche Schwerpunkte
-        guaranteed: Garantiert
+        guaranteed: Garantierter Platz
         maximum: Maximale Schülerzahl
         minimum: Minimale Schülerzahl
+        parent_course: Vorheriger Kurs
         poll: Kurswahl
         teacher_name: Name der Lehrkraft
         title: Titel
@@ -84,6 +86,7 @@ de:
         other: Schüler
   students:
     show:
+      disabled_note: Du hast diesen Kurs bereits belegt
       course:
         focus_areas: 'mögliche Schwerpunkte: %{focus_areas}'
         min_to_max: '%{min} - %{max} Plätze'

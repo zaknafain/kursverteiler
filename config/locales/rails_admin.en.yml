@@ -16,6 +16,15 @@ en:
         link: 'Delete ''%{object_label}'''
         menu: Delete
         title: 'Delete %{model_label} ''%{object_label}'''
+      distribute:
+        breadcrumb: Distribution
+        course:
+          min_to_max: '%{min} to %{max} Seats'
+        menu: Distribution
+        students_count:
+          one: 1 student not distributed
+          other: '%{count} students not distributed'
+        title: '%{model_label} ''%{object_label}'' Distribution'
       edit:
         breadcrumb: Edit
         done: updated
@@ -47,6 +56,9 @@ en:
         link: 'Add a new %{model_label}'
         menu: Add new
         title: 'New %{model_label}'
+      reset_password:
+        menu: Password reset
+        done: email sent
       show:
         breadcrumb: '%{object_label}'
         menu: Show
@@ -98,6 +110,10 @@ en:
     help:
       admin:
         email: Required. Must be a valid email address.
+      course:
+        guaranteed: Optional. If checked, min and max students are optional.
+        maximum: '%{help} Optional if place is guaranteed.'
+        minimum: '%{help} Optional if place is guaranteed.'
       student:
         current_low_course: '%{help} May not be the same as first or second choice.'
         current_mid_course: '%{help} May not me the same as first choice.'
@@ -156,6 +172,7 @@ en:
         current: Current Courses
       poll:
         _all: All
+        future: Future Polls
         running_at: Current Polls
     table_headers:
       changes: Changes

@@ -1,0 +1,125 @@
+// DISTRIBUTE ACTION
+
+.rails_admin {
+  // Students in general
+  .student--container {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    border-radius: 4px 10px 10px 4px;
+  }
+
+  .student--name {
+    flex: 1 1 auto;
+    overflow-x: hidden;
+    margin: 0 4px;
+  }
+
+  .student-selected {
+    background-color: rgba(66, 139, 202, 0.68);;
+    color: white;
+  }
+
+  .selection-indicator {
+    margin: 0 2px;
+    width: 12px;
+    font-size: inherit;
+  }
+
+  .top-indicator {
+    color: green;
+  }
+
+  .mid-indicator {
+    color: orange;
+  }
+
+  .low-indicator {
+    color: red;
+  }
+
+  .missing-indicator {
+    color: lightgray;
+  }
+
+  // Not distributed students elements at the top of the action
+  .not-distributed {
+    margin-bottom: 20px;
+    display: flex;
+    height: 100px;
+  }
+
+  .students--container,
+  .course-students {
+    border: 1px solid #ddd;
+    width: 300px;
+    overflow-y: scroll;
+    background-color: white;
+  }
+
+  .students--count {
+    margin-left: 10px;
+  }
+
+  // Courses at the center of the action
+  .courses--container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .course {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-width: 400px;
+    height: 200px;
+    margin: 0 10px 10px 0;
+    border: 1px solid #ddd;
+    background-color: rgba(200, 200, 200, 0.2);
+
+    // &.course__guaranteed,
+    // &.course__empty {
+    // }
+    &.course__too-low {
+      background-color: rgba(232, 225, 13, 0.4);
+    }
+    &.course__good {
+      background-color: rgba(37, 232, 13, 0.4);
+    }
+    &.course__too-many {
+      background-color: rgba(232, 53, 13, 0.4);
+    }
+  }
+
+  .course-students {
+    margin: 4px;
+    flex: 0 1 auto;
+  }
+
+  .course-description {
+    min-width: 200px;
+    margin: 4px;
+    flex: 1 1 auto;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .course-description--title {
+    font-weight: bold;
+    max-width: 200px;
+  }
+
+  .course-description--min-to-max {
+    flex: 1 1 auto;
+  }
+
+  .course-description--count {
+    font-weight: bold;
+  }
+
+  .course-description--count__warning {
+    color: rgba(232, 53, 13, 1);
+  }
+}

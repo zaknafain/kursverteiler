@@ -1,0 +1,4 @@
+<%= content_tag :div, id: "student-#{student.id}", class: "student--container", data: { selected: false } do %>
+  <div class="student--name"><%= student.full_name %></div>
+  <% distribution_indicator_by(student, @object) %>
+<% end %>

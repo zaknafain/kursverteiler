@@ -11,6 +11,10 @@ RSpec.describe Student, type: :model do
       let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
       let(:old_poll)       { create(:poll, :ended) }
 
+      it 'has selections' do
+        expect(student).to respond_to(:selections)
+      end
+
       it 'destroys all its selections on deletion' do
         expect { student.destroy }.to change(Selection, :count).by(-2)
       end
@@ -27,12 +31,24 @@ RSpec.describe Student, type: :model do
     context 'current courses' do
       let!(:selection) { create(:selection, student: student) }
 
+      it 'has a current top course' do
+        expect(student).to respond_to(:current_top_course)
+      end
+
       it 'has a current top course through current selection' do
         expect(student.current_top_course.id).to be(selection.top_course.id)
       end
 
+      it 'has a current mid course' do
+        expect(student).to respond_to(:current_mid_course)
+      end
+
       it 'has a current mid course through current selection' do
         expect(student.current_mid_course.id).to be(selection.mid_course.id)
+      end
+
+      it 'has a current low course' do
+        expect(student).to respond_to(:current_low_course)
       end
 
       it 'has a current low course through current selection' do
@@ -78,9 +94,46 @@ RSpec.describe Student, type: :model do
       let!(:poll) { create(:poll, grades: [student.grade]) }
 
       it 'has one current poll' do
+        expect(student).to respond_to(:current_poll)
+      end
+
+      it 'has one current poll through grades' do
         student.save!
 
         expect(student.current_poll.id).to be(poll.id)
+      end
+    end
+
+    context 'courses_students' do
+      let(:course) { create(:course) }
+
+      it 'has many courses students' do
+        expect(student).to respond_to(:courses_students)
+      end
+
+      it 'destroys all courses students on deletion' do
+        student.save!
+        student.courses_students.create!(course: course)
+
+        expect { student.destroy }.to change(CoursesStudent, :count).by(-1)
+      end
+    end
+
+    context 'courses' do
+      let(:course) { create(:course) }
+
+      it 'has many courses' do
+        expect(student).to respond_to(:courses)
+      end
+
+      it 'has many courses through courses students' do
+        student.save!
+        expect(student.courses).to be_empty
+
+        student.courses_students.create!(course: course)
+
+        expect(student.courses).to_not be_empty
+        expect(student.courses.map(&:id)).to eq([course.id])
       end
     end
   end
@@ -126,6 +179,35 @@ RSpec.describe Student, type: :model do
 
       expect(student).to be_invalid
       expect(student.errors[:email]).to be_present
+    end
+  end
+
+  context '#full_name' do
+    it 'returns the first name and the last name seperated by a space' do
+      expect(student.full_name).to eq("#{student.first_name} #{student.last_name}")
+    end
+  end
+
+  context '#selection_for' do
+    let(:selection) { create(:selection) }
+    let(:student)   { selection.student }
+    let(:poll)      { selection.poll }
+
+    it 'returns the matching selection for the given poll' do
+      expect(student.selection_for(poll)).to_not be_nil
+      expect(student.selection_for(poll)).to     eq(selection)
+    end
+
+    it 'returns nil if there is no selection for the given poll' do
+      other_poll = create(:poll)
+
+      expect(student.selection_for(other_poll)).to be_nil
+    end
+
+    it 'returns nil if there is no selection at all' do
+      other_student = create(:student)
+
+      expect(other_student.selection_for(poll)).to be_nil
     end
   end
 end

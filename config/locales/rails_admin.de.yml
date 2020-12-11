@@ -3,7 +3,7 @@ de:
     actions:
       bulk_delete:
         breadcrumb: Mehrere löschen
-        bulk_link: 'Löschen der ausgewählten %{model_label_plural}'
+        bulk_link: Ausgewählte Elemente löschen
         menu: Mehrere löschen
         title: 'Löschen %{model_label_plural}'
       dashboard:
@@ -16,6 +16,15 @@ de:
         link: '''%{object_label}'' löschen'
         menu: Löschen
         title: '%{model_label} ''%{object_label}'' löschen'
+      distribute:
+        breadcrumb: Verteilung
+        course:
+          min_to_max: '%{min} bis %{max} Plätze'
+        menu: Verteilung
+        students_count:
+          one: 1 Schüler nicht verteilt
+          other: '%{count} Schüler nicht verteilt'
+        title: '%{model_label} ''%{object_label}'' Verteilung'
       edit:
         breadcrumb: Bearbeiten
         done: aktualisiert
@@ -24,7 +33,7 @@ de:
         title: '%{model_label} ''%{object_label}'' bearbeiten'
       export:
         breadcrumb: Exportieren
-        bulk_link: 'Export ausgewählt %{model_label_plural}'
+        bulk_link: Ausgewählte Elemente exportieren
         done: exportiert
         link: 'Exportiere gefiltere %{model_label_plural}'
         menu: Exportieren
@@ -47,6 +56,9 @@ de:
         link: '%{model_label} hinzufügen'
         menu: Neu hinzufügen
         title: 'Hinzufügen %{model_label}'
+      reset_password:
+        bulk_link: Ausgewählten Elementen Passwort-Zurücksetzen E-Mails schicken
+        done: eine Passwort-Zurücksetzen E-Mail zugeschickt
       show:
         breadcrumb: '%{object_label}'
         menu: Anzeigen
@@ -78,7 +90,7 @@ de:
       model_not_found: 'Model ''%{model}'' wurde nicht gefunden'
       noaction: Keine Aktion ausgewählt
       object_not_found: '%{model} mit Id ''%{id}'' wurde nicht gefunden'
-      successful: '%{name} wurde erfolgreich %{action}'
+      successful: 'Erfolgreich %{name} %{action}'
     form:
       all_of_the_following_related_items_will_be_deleted: '? Alle der folgenden, zugehörigen Positionen werden gelöscht:'
       are_you_sure_you_want_to_delete_the_object: '%{model_name} wirklich löschen'
@@ -98,6 +110,10 @@ de:
     help:
       admin:
         email: Erforderlich. Muss eine gültige E-Mail Adresse sein.
+      course:
+        guaranteed: Optional. Wenn angehakt, dann sind minimale und maximale Schülerzahl optional.
+        maximum: '%{help} Optional, wenn ein Platz garantiert wird.'
+        minimum: '%{help} Optional, wenn ein Platz garantiert wird.'
       student:
         current_low_course: '%{help} Darf nicht der Erstwahl oder Zweitwahl entsprechen.'
         current_mid_course: '%{help} Darf nicht der Erstwahl entsprechen.'
@@ -156,7 +172,8 @@ de:
         current: Aktuelle Kurse
       poll:
         _all: Alle
-        running_at: Aktuelle Kurswahlen
+        future: Kommende Kurswahlen
+        running_at: Laufende Kurswahlen
     table_headers:
       changes: Änderungen
       created_at: Datum/uhrzeit

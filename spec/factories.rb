@@ -23,10 +23,10 @@ FactoryBot.define do
   end
 
   factory :poll do
-    title       { "#{Faker::Lorem.unique.word.capitalize} #{DateTime.now.strftime('%Y')}" }
-    valid_from  { 6.months.ago }
-    valid_until { 6.months.from_now }
-    description { Faker::Lorem.paragraph(sentence_count: 2) }
+    sequence(:title) { |n| "#{Faker::Lorem.word.capitalize} #{DateTime.now.strftime('%Y')}-#{n}" }
+    valid_from       { 6.months.ago }
+    valid_until      { 6.months.from_now }
+    description      { Faker::Lorem.paragraph(sentence_count: 2) }
 
     trait :ended do
       valid_from  { 18.months.ago - 1.day }
@@ -52,6 +52,11 @@ FactoryBot.define do
     teacher_name { Faker::FunnyName.two_word_name }
     guaranteed   { false }
     poll
+  end
+
+  factory :courses_student do
+    course
+    student
   end
 
   factory :selection do

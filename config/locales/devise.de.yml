@@ -1,0 +1,5 @@
+de:
+  devise:
+    mailer:
+      reset_password_instructions:
+        kursverteiler: Diese Nachricht wurde Ihnen von Kurswahl-Software der bs30.de zugesendet.
