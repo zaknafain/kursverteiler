@@ -3,10 +3,10 @@
 # Main Helper for RailsAdmin related views
 module RailsAdminHelper
   def classes_for(course)
-    classes = %w[course]
+    classes = %w[course alert]
 
     classes << if course.guaranteed?
-                 'course__guaranteed'
+                 'alert-info'
                else
                  student_count_to_course_class(course.students.length, course)
                end
@@ -39,18 +39,26 @@ module RailsAdminHelper
   end
 
   def selection_color_class_by(student, poll, priority)
-    student.selection_for(poll)&.send("#{priority}_course_id").present? ? "#{priority}-indicator" : 'missing-indicator'
+    if student.selection_for(poll)&.send("#{priority}_course_id").present?
+      priority_to_indicator(priority)
+    else
+      'text-muted'
+    end
+  end
+
+  def priority_to_indicator(priority)
+    { top: 'text-success', mid: 'text-warning', low: 'text-danger' }[priority]
   end
 
   def student_count_to_course_class(count, course)
     if count.zero?
-      'course__empty'
+      'alert-info'
     elsif count <  course.minimum
-      'course__too-low'
+      'alert-warning'
     elsif count >= course.minimum && count <= course.maximum
-      'course__good'
+      'alert-success'
     else
-      'course__too-many'
+      'alert-danger'
     end
   end
 

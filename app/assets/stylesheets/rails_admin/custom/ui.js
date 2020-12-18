@@ -5,10 +5,10 @@ function registerStudentClick() {
     let isSelected = studentElement.dataset.selected === 'true';
 
     if (isSelected) {
-      studentElement.classList.remove('student-selected');
+      studentElement.classList.remove('bg-info');
       studentElement.dataset.selected = false;
     } else {
-      studentElement.classList.add('student-selected');
+      studentElement.classList.add('bg-info');
       studentElement.dataset.selected = true;
     }
   }));
