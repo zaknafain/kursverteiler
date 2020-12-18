@@ -6,21 +6,21 @@ RSpec.describe RailsAdminHelper, type: :helper do
   describe '#student_count_to_course_class' do
     let(:course) { build(:course) }
 
-    it "returns 'course__empty' when given count is zero" do
-      expect(helper.student_count_to_course_class(0, course)).to eq('course__empty')
+    it "returns 'alert-info' when given count is zero" do
+      expect(helper.student_count_to_course_class(0, course)).to eq('alert-info')
     end
 
-    it "returns 'course__too-low' when given count is below minimum" do
-      expect(helper.student_count_to_course_class(course.minimum - 1, course)).to eq('course__too-low')
+    it "returns 'alert-warning' when given count is below minimum" do
+      expect(helper.student_count_to_course_class(course.minimum - 1, course)).to eq('alert-warning')
     end
 
-    it "returns 'course__good' when given count is between or equal minimum and/or maximum" do
-      expect(helper.student_count_to_course_class(course.minimum, course)).to eq('course__good')
-      expect(helper.student_count_to_course_class(course.maximum, course)).to eq('course__good')
+    it "returns 'alert-success' when given count is between or equal minimum and/or maximum" do
+      expect(helper.student_count_to_course_class(course.minimum, course)).to eq('alert-success')
+      expect(helper.student_count_to_course_class(course.maximum, course)).to eq('alert-success')
     end
 
-    it "returns 'course__too-many' when given count is greater than maximum" do
-      expect(helper.student_count_to_course_class(course.maximum + 1, course)).to eq('course__too-many')
+    it "returns 'alert-danger' when given count is greater than maximum" do
+      expect(helper.student_count_to_course_class(course.maximum + 1, course)).to eq('alert-danger')
     end
   end
 
@@ -29,22 +29,32 @@ RSpec.describe RailsAdminHelper, type: :helper do
     let(:student)   { selection.student }
     let(:poll)      { selection.poll }
 
-    %i[top mid low].each do |priority|
-      it "returns '#{priority}-indicator' if there is a #{priority} selection present for the student and poll" do
-        expect(helper.selection_color_class_by(student, poll, priority)).to eq("#{priority}-indicator")
-      end
+    it 'returns text color class if there is a selection present for the student and poll' do
+      expect(helper.selection_color_class_by(student, poll, :top)).to eq('text-success')
+      expect(helper.selection_color_class_by(student, poll, :mid)).to eq('text-warning')
+      expect(helper.selection_color_class_by(student, poll, :low)).to eq('text-danger')
+    end
 
-      it "returns 'missing-indicator' if there is no #{priority} selection present for the student and poll" do
+    %i[top mid low].each do |priority|
+      it "returns 'text-muted' if there is no #{priority} selection present for the student and poll" do
         selection.update!(top_course: nil, mid_course: nil, low_course: nil)
 
-        expect(helper.selection_color_class_by(student, poll, priority)).to eq('missing-indicator')
+        expect(helper.selection_color_class_by(student, poll, priority)).to eq('text-muted')
       end
 
-      it "returns 'missing-indicator' if there is no selection at all for the student and poll" do
+      it "returns 'text-muted' if there is no selection at all for the student and poll" do
         selection.destroy!
 
-        expect(helper.selection_color_class_by(student, poll, priority)).to eq('missing-indicator')
+        expect(helper.selection_color_class_by(student, poll, priority)).to eq('text-muted')
       end
+    end
+  end
+
+  describe '#priority_to_indicator' do
+    it 'returns text-success for top priority' do
+      expect(helper.priority_to_indicator(:top)).to eq('text-success')
+      expect(helper.priority_to_indicator(:mid)).to eq('text-warning')
+      expect(helper.priority_to_indicator(:low)).to eq('text-danger')
     end
   end
 
@@ -156,16 +166,20 @@ RSpec.describe RailsAdminHelper, type: :helper do
       expect(helper.classes_for(course)).to include('course')
     end
 
-    it 'returns also "course__guaranteed" if guaranteed is true' do
+    it 'returns "alert" in any case' do
+      expect(helper.classes_for(course)).to include('alert')
+    end
+
+    it 'returns also "alert-info" if guaranteed is true' do
       course.update!(guaranteed: true)
 
-      expect(helper.classes_for(course)).to eq('course course__guaranteed')
+      expect(helper.classes_for(course)).to eq('course alert alert-info')
     end
 
     it 'returns also the return value of student_count_to_course_class' do
       allow(helper).to receive(:student_count_to_course_class).and_return('KLASSE')
 
-      expect(helper.classes_for(course)).to eq('course KLASSE')
+      expect(helper.classes_for(course)).to eq('course alert KLASSE')
     end
   end
 

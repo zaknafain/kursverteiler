@@ -15,30 +15,10 @@
     margin: 0 4px;
   }
 
-  .student-selected {
-    @extend .bg-info;
-  }
-
   .selection-indicator {
     margin: 0 2px;
     width: 12px;
     font-size: inherit;
-  }
-
-  .top-indicator {
-    @extend .text-success;
-  }
-
-  .mid-indicator {
-    @extend .text-warning;
-  }
-
-  .low-indicator {
-    @extend .text-danger;
-  }
-
-  .missing-indicator {
-    @extend .text-muted;
   }
 
   // Not distributed students elements at the top of the action
@@ -73,8 +53,6 @@
   }
 
   .course {
-    @extend .alert;
-    @extend .alert-info;
     display: flex;
     flex-direction: row;
     align-items: stretch;
@@ -82,16 +60,6 @@
     height: 200px;
     margin: 0 10px 10px 0;
     border: 1px solid #ddd;
-
-    &.course__too-low {
-      @extend .alert-warning;
-    }
-    &.course__good {
-      @extend .alert-success;
-    }
-    &.course__too-many {
-      @extend .alert-danger;
-    }
   }
 
   .course-students {
@@ -119,9 +87,5 @@
 
   .course-description--count {
     font-weight: bold;
-  }
-
-  .course-description--count__warning {
-    @extend .text-danger;
   }
 }
