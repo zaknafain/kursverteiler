@@ -20,10 +20,11 @@ module RailsAdmin
         register_instance_option :controller do
           proc do
             students = @object.students.includes(courses: [:poll], selections: [:poll])
-            @not_dist_students = students.not_distributed_in(@object.id).order(first_name: :asc, last_name: :asc)
             @courses = @object.courses.includes(students: [:courses, { selections: [:poll] }]).order(title: :asc)
 
             if request.get? # SHOW
+              @not_dist_students = students.not_distributed_in(@object.id).order(first_name: :asc, last_name: :asc)
+
               render @action.template_name
             elsif request.put? # UPDATE
               sanitized_params = params.require(:poll).permit(courses_students: %i[student_id course_id])
@@ -33,6 +34,8 @@ module RailsAdmin
                 student.courses = student.courses.reject { |c| @courses.map(&:id).include?(c.id) }
                 student.courses << @courses.detect { |c| c.id == param[:course_id].to_i } if param[:course_id].present?
               end
+              @not_dist_students = students.not_distributed_in(@object.id).order(first_name: :asc, last_name: :asc)
+              @courses.reload
 
               render @action.template_name
             end
