@@ -20,7 +20,7 @@ de:
         breadcrumb: Verteilung
         course:
           min_to_max: '%{min} bis %{max} Plätze'
-        distribute_all: Alle verteilen
+        distribute_all: Erstwahlen verteilen
         menu: Verteilung
         reset_all: Alle zurücksetzen
         students_count:

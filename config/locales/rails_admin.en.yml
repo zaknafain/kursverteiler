@@ -20,7 +20,7 @@ en:
         breadcrumb: Distribution
         course:
           min_to_max: '%{min} to %{max} Seats'
-        distribute_all: Distribute all
+        distribute_all: First choice all
         menu: Distribution
         reset_all: Reset all
         students_count:
