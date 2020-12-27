@@ -246,7 +246,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.1)
-    rubocop (1.6.1)
+    rubocop (1.7.0)
       parallel (~> 1.10)
       parser (>= 2.7.1.5)
       rainbow (>= 2.2.2, < 4.0)
@@ -340,7 +340,7 @@ DEPENDENCIES
   rails_admin!
   rails_admin_import!
   rspec-rails (~> 4.0.1)
-  rubocop (~> 1.6.1)
+  rubocop (~> 1.7.0)
   rubocop-rails (~> 2.9.0)
   sass-rails (>= 6)
   selenium-webdriver
