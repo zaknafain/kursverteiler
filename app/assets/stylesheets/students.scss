@@ -6,6 +6,51 @@ html, body {
   font-weight: 400;
 }
 
+// HEADER
+.page-header {
+  height: 158px;
+}
+
+.page-header__home-link {
+  margin: 21px 0 0 71px;
+  width: 168px;
+  display: inline-block;
+}
+
+.link-block {
+  text-transform: uppercase;
+  text-align: left;
+  margin-bottom: 30px;
+  padding: 7px 7px 7px 7px;
+  background-color: #3378b3;
+  color: white;
+  font-size: 12px;
+  line-height: 12px;
+  width: 130px;
+  margin-right: auto;
+  font-weight: 400;
+  height: 26px;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.link-block--right {
+  text-align: right;
+  width: 350px;
+  margin-right: 0;
+  margin-left: auto;
+  background-color: #68346b;
+}
+
+.address-block {
+  font-size: 12px;
+  line-height: 18px;
+  color: #68346b;
+}
+
 body .page-wrapper {
   padding: 20px;
   display: flex;
@@ -16,16 +61,17 @@ body .page-wrapper {
   align-items: stretch;
   background-color: transparent;
 
-  &.page-wrapper--development {
-    max-width: 1120px;
-    max-height: 400px;
-    overflow-y: scroll;
-    margin: auto;
-    margin-top: calc((100vh - 400px) / 2);
-    background-image: url(https://www.bs30.de/fileadmin/redakteur/2-Fuer-Schueler/FSP1-Hintergrundbilder-Website-3Schueler.jpg);
-  }
+  // &.page-wrapper--development {
+  //   max-width: 1120px;
+  //   max-height: 400px;
+  //   overflow-y: scroll;
+  //   margin: auto;
+  //   margin-top: calc((100vh - 400px) / 2);
+  //   background-image: url(https://www.bs30.de/fileadmin/redakteur/2-Fuer-Schueler/FSP1-Hintergrundbilder-Website-3Schueler.jpg);
+  // }
 }
 
+// SELECTION
 .page-wrapper {
   .current-student {
     text-align: right;

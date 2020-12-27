@@ -13,6 +13,7 @@
   </head>
 
   <body>
+    <%= render 'header' %>
     <%= content_tag :div, class: "page-wrapper page-wrapper--#{Rails.env}" do %>
       <% flash.each do |name, messages| %>
         <% Array(messages).each do |message| %>
@@ -21,5 +22,6 @@
       <% end %>
       <%= yield %>
     <% end %>
+    <%= render 'footer' %>
   </body>
 </html>
