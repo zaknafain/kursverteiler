@@ -1,12 +1,3 @@
-<div class="current-student">
-  <span class="current-student--name">
-    <%= current_student.first_name %> <%= current_student.last_name %>
-  </span>
-  <button class="current-student--sign-out" type="button">
-    <%= link_to(t('.sign_out'), destroy_student_session_path, method: :delete) %>
-  </button>
-</div>
-
 <% if @poll %>
   <div class="headline">
     <div class="headline--general">
