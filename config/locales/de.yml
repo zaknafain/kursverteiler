@@ -84,6 +84,9 @@ de:
       student:
         one: Schüler
         other: Schüler
+  application:
+    header:
+      sign_out: Ausloggen
   students:
     show:
       disabled_note: Du hast diesen Kurs bereits belegt
@@ -98,7 +101,6 @@ de:
         low: 3
         mid: 2
         top: 1
-      sign_out: Ausloggen
       submit: Wahl speichern
     update:
       saved: Die Wahl wurde gespeichert

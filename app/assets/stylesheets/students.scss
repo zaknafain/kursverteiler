@@ -17,6 +17,10 @@ html, body {
   display: inline-block;
 }
 
+.current-student {
+  text-align: right;
+}
+
 // FOOTER
 
 .link-block {
@@ -70,10 +74,6 @@ body .page-wrapper {
 
 // SELECTION
 .page-wrapper {
-  .current-student {
-    text-align: right;
-  }
-
   .headline {
     text-transform: uppercase;
     margin: 10px 0 14px;
