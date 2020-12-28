@@ -17,6 +17,8 @@ html, body {
   display: inline-block;
 }
 
+// FOOTER
+
 .link-block {
   text-transform: uppercase;
   text-align: left;
@@ -51,6 +53,8 @@ html, body {
   color: #68346b;
 }
 
+// CONTENT
+
 body .page-wrapper {
   padding: 20px;
   display: flex;
@@ -60,15 +64,8 @@ body .page-wrapper {
   align-content: flex-start;
   align-items: stretch;
   background-color: transparent;
-
-  // &.page-wrapper--development {
-  //   max-width: 1120px;
-  //   max-height: 400px;
-  //   overflow-y: scroll;
-  //   margin: auto;
-  //   margin-top: calc((100vh - 400px) / 2);
-  //   background-image: url(https://www.bs30.de/fileadmin/redakteur/2-Fuer-Schueler/FSP1-Hintergrundbilder-Website-3Schueler.jpg);
-  // }
+  background-image: url(image_path("background.jpg"));
+  background-size: cover;
 }
 
 // SELECTION
