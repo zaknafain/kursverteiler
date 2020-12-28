@@ -1,13 +1,19 @@
 <% if @poll %>
-  <div class="headline">
-    <div class="headline--general">
-      <%= t('.headline') %> (<%= @grade.name %>)
-    </div>
-    <div class="headline--title">
-      <%= @poll.title %>
-    </div>
-    <div class="headline--description">
-      <%= @poll.description %>
+  <div class="row">
+    <div class="col-12 mb-3">
+      <div class="card bg-info text-white">
+        <h1 class="card-header">
+          <%= t('.headline') %> (<%= @grade.name %>)
+        </h1>
+        <div class="card-body">
+          <h2 class="card-title">
+            <%= @poll.title %>
+          </h2>
+          <div class="card-text">
+            <%= @poll.description %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -19,26 +25,48 @@
       <%= hidden_field_tag :guaranteed_chosen, @selection.top_course&.guaranteed %>
     <% end %>
 
-    <div class="selections-form--courses">
+    <div class="row">
       <% @courses.each do |course| %>
         <% selected_prio   = @selection.prio_for?(course) %>
         <% course_disabled = @past_courses.any? { |c| c.id == course.parent_course_id } %>
-        <%= content_tag :div, id: "course-container-#{course.id}", class: course_classes(selected_prio, course_disabled), data: { selected: selected_prio, disabled: course_disabled } do %>
-          <div class="course-description">
-            <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
-            <div class="course-description--teacher"><%= t('.course.teacher', teacher_name: course.teacher_name) %></div>
-            <div class="course-description--min-to-max"><%= t('.course.min_to_max', min: course.minimum, max: course.maximum) %></div>
-            <div class="course-description--focus-area"><%= t('.course.focus_areas', focus_areas: course.focus_areas) %></div>
-            <div class="course-description--description"><%= course.description %></div>
-            <div class="course-description--variants"><%= t('.course.variants', variants: course.variants) %></div>
-          </div>
-          <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "course-priority" do %>
-            <% %i[top mid low].each do |priority| %>
-              <%= content_tag :div, id: "course-#{course.id}-priority-#{priority}", class: course_prio_classes(priority, selected_prio == priority, course.guaranteed?, course_disabled), data: { course_id: course.id, priority: priority, selected: selected_prio, guaranteed: course.guaranteed? } do %>
-                <%= content_tag :div, t(".prio.#{priority}"), class: "course-priority--text" %>
+        <%= content_tag :div, id: "course-container-#{course.id}", class: 'col-6 mb-3 course', data: { selected: selected_prio, disabled: course_disabled } do %>
+          <div class="card h-100 bg-light">
+            <h5 class="card-header"><%= course.title %></h5>
+            <div class="card-body">
+              <div class="mb-2">
+                <strong><%= t('.course.teacher') %>:</strong>
+                <%= course.teacher_name %>
+              </div>
+              <div class="mb-2">
+                <strong><%= t('.course.seats') %>:</strong>
+                <%= t('.course.min_to_max', min: course.minimum, max: course.maximum) %>
+              </div>
+              <div class="mb-2">
+                <strong><%= t('.course.focus_areas') %>:</strong>
+                <%= course.focus_areas %>
+              </div>
+              <div class="mb-2">
+                <%= course.description %>
+              </div>
+              <div>
+                <strong><%= t('.course.variants') %>:</strong>
+                <%= course.variants %>
+              </div>
+            </div>
+            <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "card-footer" do %>
+              <%= content_tag :button, type: 'button', id: "course-#{course.id}-priority-top", disabled: course_disabled, class: "btn btn-success course-priority--top #{'course-priority--selected' if selected_prio == :top }" do %>
+                <%= t(".prio.top") %>
+              <% end %>
+              <% unless course.guaranteed? %>
+                <%= content_tag :button, type: 'button', id: "course-#{course.id}-priority-mid", disabled: course_disabled, class: "btn btn-warning course-priority--mid #{'course-priority--selected' if selected_prio == :mid }" do %>
+                  <%= t(".prio.mid") %>
+                <% end %>
+                <%= content_tag :button, type: 'button', id: "course-#{course.id}-priority-low", disabled: course_disabled, class: "btn btn-danger course-priority--low #{'course-priority--selected' if selected_prio == :low }" do %>
+                  <%= t(".prio.low") %>
+                <% end %>
               <% end %>
             <% end %>
-          <% end %>
+          </div>
           <% if course_disabled %>
             <div class="course-disabled-note">
               <%= t('.disabled_note') %>
@@ -48,28 +76,46 @@
       <% end %>
     </div>
 
-    <%= form.submit t('.submit'), class: "selections-form--submit" %>
+    <%= form.submit t('.submit'), class: "btn btn-success mb-4" %>
   <% end %>
 
   <%= javascript_pack_tag 'selections' %>
 <% else %>
-  <div class="headline">
-    <div class="headline--title">
-      <%= t('.no_poll') %>
+  <div class="row">
+    <div class="col-12 mb-3">
+      <div class="card bg-warning">
+        <div class="card-body">
+          <h2 class="card-title">
+            <%= t('.no_poll') %>
+          </h2>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>
 
 <% @past_courses.each do |course| %>
-  <div class="headline">
-    <div class="headline--title">
-      <%= course.poll.title %>
+  <div class="row">
+    <div class="col-12 mb-3">
+      <div class="card bg-info text-white">
+        <div class="card-body">
+          <h2 class="card-title">
+            <%= course.poll.title %>
+          </h2>
+        </div>
+      </div>
     </div>
   </div>
-  <%= content_tag :div, class: "course" do %>
-    <div class="course-description">
-      <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
-      <div class="course-description--teacher"><%= t('.course.teacher', teacher_name: course.teacher_name) %></div>
+
+  <%= content_tag :div, class: "mb-4 course" do %>
+    <div class="card bg-light">
+      <h5 class="card-header"><%= course.title %></h5>
+      <div class="card-body">
+        <div class="mb-2">
+          <strong><%= t('.course.teacher') %>:</strong>
+          <%= course.teacher_name %>
+        </div>
+      </div>
     </div>
   <% end %>
 <% end %>
