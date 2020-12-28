@@ -7,9 +7,9 @@ class StudentsController < ApplicationController
 
   def update
     if selection.update(update_params[:current_selection])
-      flash.now[:notice] = t('.saved')
+      flash.now[:success] = t('.saved')
     else
-      flash.now[:alert] = collect_error_messages
+      flash.now[:error] = collect_error_messages
     end
 
     render :show
