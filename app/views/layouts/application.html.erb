@@ -14,14 +14,16 @@
 
   <body>
     <%= render 'header' %>
-    <%= content_tag :div, class: "page-wrapper page-wrapper--#{Rails.env}" do %>
-      <% flash.each do |name, messages| %>
-        <% Array(messages).each do |message| %>
-          <%= content_tag :div, message, class: name %>
+    <div class="page-wrapper">
+      <div class="container">
+        <% flash.each do |name, messages| %>
+          <% Array(messages).each do |message| %>
+            <%= content_tag :div, message, class: name %>
+          <% end %>
         <% end %>
-      <% end %>
-      <%= yield %>
-    <% end %>
+        <%= yield %>
+      </div>
+    </div>
     <%= render 'footer' %>
   </body>
 </html>
