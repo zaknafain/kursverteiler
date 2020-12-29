@@ -40,8 +40,8 @@ class StudentsController < ApplicationController
   def collect_error_messages
     messages = []
 
-    selection.errors.messages.each do |_, values|
-      messages << values.join(', ')
+    selection.errors.full_messages.each do |values|
+      messages << values
     end
 
     messages
