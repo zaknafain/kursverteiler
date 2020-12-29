@@ -47,4 +47,123 @@ RSpec.describe StudentsHelper, type: :helper do
       expect(helper.course_card_classes(:low, false)).to include('bg-danger')
     end
   end
+
+  describe '#priority_button' do
+    let(:course) { build(:course) }
+
+    it 'returns a button tag' do
+      expect(helper.priority_button(course, :top, nil, false)).to start_with('<button')
+      expect(helper.priority_button(course, :top, nil, false)).to end_with('</button>')
+    end
+
+    it 'returns a button with a button type' do
+      expect(helper.priority_button(course, :top, nil, false)).to include('type="button"')
+    end
+
+    it 'returns a button with a text matching the given priority' do
+      expect(helper.priority_button(course, :top, nil, false)).to include(">#{I18n.t('students.show.prio.top')}<")
+      expect(helper.priority_button(course, :mid, nil, false)).to include(">#{I18n.t('students.show.prio.mid')}<")
+      expect(helper.priority_button(course, :low, nil, false)).to include(">#{I18n.t('students.show.prio.low')}<")
+    end
+
+    it 'returns a button with a disabled flag if needed' do
+      expect(helper.priority_button(course, :top, nil, false)).to_not include('disabled')
+      expect(helper.priority_button(course, :top, nil, true)).to      include('disabled')
+    end
+
+    it 'returns a button with the classes of the #priority_button_classes method' do
+      expect(helper).to receive(:priority_button_classes).and_return('foo bar')
+      expect(helper.priority_button(course, :top, nil, false)).to include('class="foo bar"')
+    end
+
+    it 'returns a button with the data attributes of the #priority_button_data method' do
+      expect(helper).to receive(:priority_button_data).and_return({ foo: :bar, bam: 'Boom' }).twice
+      expect(helper.priority_button(course, :top, nil, false)).to include('data-foo="bar"')
+      expect(helper.priority_button(course, :top, nil, false)).to include('data-bam="Boom"')
+    end
+  end
+
+  describe '#priority_button_classes' do
+    it 'returns a string always including "btn"' do
+      classes = helper.priority_button_classes(:top, false).split
+
+      expect(helper.priority_button_classes(:top, false).class).to eq(String)
+      expect(classes).to include('btn')
+    end
+
+    it 'returns "btn-success" for top priority' do
+      classes = helper.priority_button_classes(:top, false).split
+
+      expect(classes).to     include('btn-success')
+      expect(classes).to_not include('btn-light')
+      expect(classes).to_not include('btn-warning')
+      expect(classes).to_not include('btn-danger')
+    end
+
+    it 'returns "btn-warning" for mid priority' do
+      classes = helper.priority_button_classes(:mid, false).split
+
+      expect(classes).to     include('btn-warning')
+      expect(classes).to_not include('btn-light')
+      expect(classes).to_not include('btn-success')
+      expect(classes).to_not include('btn-danger')
+    end
+
+    it 'returns "btn-danger" for low priority' do
+      classes = helper.priority_button_classes(:low, false).split
+
+      expect(classes).to     include('btn-danger')
+      expect(classes).to_not include('btn-light')
+      expect(classes).to_not include('btn-success')
+      expect(classes).to_not include('btn-warning')
+    end
+
+    it 'returns "btn-light" is disabled is true' do
+      expect(helper.priority_button_classes(:top, true).split).to     include('btn-light')
+      expect(helper.priority_button_classes(:top, true).split).to_not include('btn-success')
+      expect(helper.priority_button_classes(:mid, true).split).to_not include('btn-warning')
+      expect(helper.priority_button_classes(:low, true).split).to_not include('btn-danger')
+    end
+
+    it 'returns "course-priority--" with the priority as ending' do
+      expect(helper.priority_button_classes(:top, false).split).to include('course-priority--top')
+      expect(helper.priority_button_classes(:mid, false).split).to include('course-priority--mid')
+      expect(helper.priority_button_classes(:low, false).split).to include('course-priority--low')
+    end
+  end
+
+  describe '#priority_button_data' do
+    let(:course) { build(:course) }
+
+    it 'returns a hash' do
+      expect(helper.priority_button_data(course, :top, nil).class).to eq(Hash)
+    end
+
+    it 'returns the key course_id with the id value of the course' do
+      course.save!
+
+      expect(helper.priority_button_data(course, :top, nil)[:course_id]).to eq(course.id)
+    end
+
+    it 'returns the key priority with the given priority value' do
+      expect(helper.priority_button_data(course, :top, nil)[:priority]).to eq(:top)
+      expect(helper.priority_button_data(course, :mid, nil)[:priority]).to eq(:mid)
+      expect(helper.priority_button_data(course, :low, nil)[:priority]).to eq(:low)
+    end
+
+    it 'returns the key selected_prio with the given selected_prio value' do
+      expect(helper.priority_button_data(course, :top, nil)[:selected_prio]).to  eq(nil)
+      expect(helper.priority_button_data(course, :top, :top)[:selected_prio]).to eq(:top)
+      expect(helper.priority_button_data(course, :top, :mid)[:selected_prio]).to eq(:mid)
+      expect(helper.priority_button_data(course, :top, :low)[:selected_prio]).to eq(:low)
+    end
+
+    it 'returns the key guaranteed with the given course guaranteed attribute value' do
+      expect(helper.priority_button_data(course, :top, nil)[:guaranteed]).to eq(course.guaranteed?)
+
+      course.guaranteed = !course.guaranteed
+
+      expect(helper.priority_button_data(course, :top, nil)[:guaranteed]).to eq(course.guaranteed?)
+    end
+  end
 end
