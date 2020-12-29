@@ -27,7 +27,7 @@ module StudentsHelper
 
   def priority_button(course, priority, selected_prio, disabled)
     tag.button(
-      t(".prio.#{priority}"),
+      t("students.show.prio.#{priority}"),
       type: 'button',
       disabled: disabled,
       class: priority_button_classes(priority, disabled),
@@ -38,10 +38,13 @@ module StudentsHelper
   def priority_button_classes(priority, disabled)
     classes = %w[btn]
 
-    classes << 'btn-success' if priority == :top
-    classes << 'btn-warning' if priority == :mid
-    classes << 'btn-danger'  if priority == :low
-    classes << 'btn-light'   if disabled
+    if disabled
+      classes << 'btn-light'
+    else
+      classes << 'btn-success' if priority == :top
+      classes << 'btn-warning' if priority == :mid
+      classes << 'btn-danger'  if priority == :low
+    end
     classes << "course-priority--#{priority}"
 
     classes.join(' ')
