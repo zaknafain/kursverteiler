@@ -23,24 +23,28 @@ RSpec.describe StudentsHelper, type: :helper do
 
   describe '#course_card_classes' do
     it 'returns always "card h-100"' do
-      expect(helper.course_card_classes(nil)).to include('card')
-      expect(helper.course_card_classes(nil)).to include('h-100')
+      expect(helper.course_card_classes(nil, false)).to include('card')
+      expect(helper.course_card_classes(nil, false)).to include('h-100')
     end
 
     it 'returns "bg-light" if there is no priority selected' do
-      expect(helper.course_card_classes(nil)).to include('bg-light')
+      expect(helper.course_card_classes(nil, false)).to include('bg-light')
+    end
+
+    it 'returns "text-muted" if the course was disabled' do
+      expect(helper.course_card_classes(nil, true)).to include('text-muted')
     end
 
     it 'returns "bg-success" if the selected priority is :top' do
-      expect(helper.course_card_classes(:top)).to include('bg-success')
+      expect(helper.course_card_classes(:top, false)).to include('bg-success')
     end
 
     it 'returns "bg-warning" if the selected priority is :mid' do
-      expect(helper.course_card_classes(:mid)).to include('bg-warning')
+      expect(helper.course_card_classes(:mid, false)).to include('bg-warning')
     end
 
     it 'returns "bg-danger" if the selected priority is :low' do
-      expect(helper.course_card_classes(:low)).to include('bg-danger')
+      expect(helper.course_card_classes(:low, false)).to include('bg-danger')
     end
   end
 end
