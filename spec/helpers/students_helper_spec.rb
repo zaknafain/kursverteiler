@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe StudentsHelper, type: :helper do
   describe '#flash_classes' do
     it 'returns always "alert"' do
-      expect(helper.flash_classes(nil)).to include('alert')
+      expect(helper.flash_classes(:foo)).to include('alert')
     end
 
     it 'returns "alert-danger" for error flashes' do
