@@ -1,8 +1,11 @@
-<header class="row page-header">
+<header class="page-header">
   <div class="container">
     <div class="row align-items-end">
-      <div class="col-6">
-        <%= link_to 'https://www.bs30.de', class: 'page-header__home-link' do %>
+      <div class="col-6 mt-4">
+        <%= link_to 'https://www.bs30.de', class: 'd-none d-md-inline-block page-header__home-link' do %>
+          <%= image_tag 'fsp-logo.svg' %>
+        <% end %>
+        <%= link_to 'https://www.bs30.de', class: 'd-md-none' do %>
           <%= image_tag 'fsp-logo.svg' %>
         <% end %>
       </div>

@@ -29,7 +29,7 @@
       <% @courses.each do |course| %>
         <% selected_prio   = @selection.prio_for?(course) %>
         <% course_disabled = @past_courses.any? { |c| c.id == course.parent_course_id } %>
-        <%= content_tag :div, id: "course-container-#{course.id}", class: 'col-6 mb-3 course', data: { selected: selected_prio, disabled: course_disabled } do %>
+        <%= content_tag :div, id: "course-container-#{course.id}", class: 'col-12 col-lg-6 mb-3 course', data: { selected: selected_prio, disabled: course_disabled } do %>
           <div class="card h-100 bg-light">
             <h5 class="card-header"><%= course.title %></h5>
             <div class="card-body">
@@ -76,7 +76,7 @@
       <% end %>
     </div>
 
-    <%= form.submit t('.submit'), class: "btn btn-success mb-4" %>
+    <%= form.submit t('.submit'), class: "btn btn-success mb-4 btn-block" %>
   <% end %>
 
   <%= javascript_pack_tag 'selections' %>
