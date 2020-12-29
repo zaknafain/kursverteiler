@@ -30,7 +30,7 @@
         <% selected_prio   = @selection.prio_for(course) %>
         <% course_disabled = @past_courses.any? { |c| c.id == course.parent_course_id } %>
         <%= content_tag :div, id: "course-container-#{course.id}", class: 'col-12 col-lg-6 mb-3 course', data: { selected: selected_prio, disabled: course_disabled } do %>
-          <%= content_tag :div, class: course_card_classes(selected_prio) do %>
+          <%= content_tag :div, class: course_card_classes(selected_prio, course_disabled) do %>
             <h5 class="card-header"><%= course.title %></h5>
             <div class="card-body">
               <div class="mb-2">
