@@ -17,15 +17,16 @@ function deselectPriority(priority) {
   let selectedCourseDiv = form.querySelector(`.course__selected--${priority}`);
 
   if (selectedCourseDiv) {
-    selectedCourseDiv.classList.remove('course__selected');
+    // Change the appearance of the course itself
     selectedCourseDiv.classList.remove(`course__selected--${priority}`);
-    delete selectedCourseDiv.dataset.selected;
+    selectedCourseDiv.classList.remove('bg-success');
+    selectedCourseDiv.classList.remove('bg-warning');
+    selectedCourseDiv.classList.remove('bg-danger');
+    selectedCourseDiv.classList.add('bg-light');
 
-    let prioDiv = selectedCourseDiv.querySelector('.course-priority--container__selected');
-    prioDiv.classList.remove('course-priority--container__selected');
-
-    let prioDivs = selectedCourseDiv.querySelectorAll('.course-priority--container');
-    prioDivs.forEach(div => delete div.dataset.selected);
+    // Change the data of the buttons of the course
+    let prioButtons = selectedCourseDiv.querySelectorAll('.js-course-priority-container button');
+    prioButtons.forEach(div => delete div.dataset.selectedPrio);
   }
 }
 
@@ -38,15 +39,20 @@ function selectCourse(courseId, priority) {
   let form = document.querySelector('form');
   let selectedCourseDiv = form.querySelector(`#course-container-${courseId}`);
 
-  selectedCourseDiv.classList.add('course__selected');
+  // Change the appearance of the course itself
   selectedCourseDiv.classList.add(`course__selected--${priority}`);
-  selectedCourseDiv.dataset.selected = priority;
+  selectedCourseDiv.classList.remove('bg-light');
+  if (priority === 'top') {
+    selectedCourseDiv.classList.add('bg-success');
+  } else if (priority === 'mid') {
+    selectedCourseDiv.classList.add('bg-warning');
+  } else {
+    selectedCourseDiv.classList.add('bg-danger');
+  }
 
-  let prioDiv = selectedCourseDiv.querySelector(`#course-${courseId}-priority-${priority}`);
-  prioDiv.classList.add('course-priority--container__selected');
-
-  let prioDivs = selectedCourseDiv.querySelectorAll('.course-priority--container');
-  prioDivs.forEach(div => div.dataset.selected = priority);
+  // Change the data of the buttons of the course
+  let prioButtons = selectedCourseDiv.querySelectorAll('.js-course-priority-container button');
+  prioButtons.forEach(div => div.dataset.selectedPrio = priority);
 }
 
 /*
@@ -66,16 +72,16 @@ function getGuaranteed() {
 }
 
 // All priority buttons that are not disabled.
-let buttons = document.querySelectorAll('.course-priority--container:not(.course-priority--container__disabled)')
+let buttons = document.querySelectorAll('.js-course-priority-container button:enabled')
 
 // Adds click event listener to all those buttons.
 buttons.forEach(button => button.addEventListener('click', () => {
-  let buttonCourseId = button.dataset.courseId;                    // Id of course the button is in.
-  let buttonPriority = button.dataset.priority;                    // Priority of the button
-  let buttonSelected = button.dataset.selected === buttonPriority; // Whether the button is already selected
-  let coursePriority = button.dataset.selected;                    // Priority of the selected course before clicking
-  let assuredChoice  = button.dataset.guaranteed    === 'true';    // Whether the course is guaranteed if chosen
-  let removeAssured  = getGuaranteed();                            // Whether the current selected top course is a guaranteed one
+  let buttonCourseId = button.dataset.courseId;                        // Id of course the button is in.
+  let buttonPriority = button.dataset.priority;                        // Priority of the button
+  let buttonSelected = button.dataset.selectedPrio === buttonPriority; // Whether the button is already selected
+  let coursePriority = button.dataset.selectedPrio;                    // Priority of the selected course before clicking
+  let assuredChoice  = button.dataset.guaranteed === 'true';           // Whether the course is guaranteed if chosen
+  let removeAssured  = getGuaranteed();                                // Whether the current selected top course is a guaranteed one
 
   deselectPriority(buttonPriority);   // Clear clicked priority in all courses
   if (assuredChoice) {

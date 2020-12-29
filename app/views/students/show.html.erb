@@ -29,8 +29,8 @@
       <% @courses.each do |course| %>
         <% selected_prio   = @selection.prio_for(course) %>
         <% course_disabled = @past_courses.any? { |c| c.id == course.parent_course_id } %>
-        <%= content_tag :div, id: "course-container-#{course.id}", class: 'col-12 col-lg-6 mb-3 course', data: { selected: selected_prio, disabled: course_disabled } do %>
-          <%= content_tag :div, class: course_card_classes(selected_prio, course_disabled) do %>
+        <%= content_tag :div, class: 'col-12 col-lg-6 mb-3 course' do %>
+          <%= content_tag :div, id: "course-container-#{course.id}", class: course_card_classes(selected_prio, course_disabled) do %>
             <h5 class="card-header"><%= course.title %></h5>
             <div class="card-body">
               <div class="mb-2">
@@ -53,17 +53,11 @@
                 <%= course.variants %>
               </div>
             </div>
-            <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "card-footer" do %>
-              <%= content_tag :button, type: 'button', id: "course-#{course.id}-priority-top", disabled: course_disabled, class: "btn btn-success course-priority--top #{'course-priority--selected' if selected_prio == :top }" do %>
-                <%= t(".prio.top") %>
-              <% end %>
+            <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "card-footer js-course-priority-container" do %>
+              <%= priority_button(course, :top, selected_prio, course_disabled) %>
               <% unless course.guaranteed? %>
-                <%= content_tag :button, type: 'button', id: "course-#{course.id}-priority-mid", disabled: course_disabled, class: "btn btn-warning course-priority--mid #{'course-priority--selected' if selected_prio == :mid }" do %>
-                  <%= t(".prio.mid") %>
-                <% end %>
-                <%= content_tag :button, type: 'button', id: "course-#{course.id}-priority-low", disabled: course_disabled, class: "btn btn-danger course-priority--low #{'course-priority--selected' if selected_prio == :low }" do %>
-                  <%= t(".prio.low") %>
-                <% end %>
+                <%= priority_button(course, :mid, selected_prio, course_disabled) %>
+                <%= priority_button(course, :low, selected_prio, course_disabled) %>
               <% end %>
             <% end %>
           <% end %>
