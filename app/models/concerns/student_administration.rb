@@ -68,7 +68,7 @@ module StudentAdministration
     end
 
     define_method(:"current_#{priority}_course_id=") do |id|
-      public_send(:"current_#{priority}_course=", current_poll.courses.find_by(id: id))
+      public_send(:"current_#{priority}_course=", current_poll&.courses&.find_by(id: id))
     end
   end
 end
