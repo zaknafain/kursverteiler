@@ -2,4 +2,4 @@ de:
   devise:
     mailer:
       reset_password_instructions:
-        kursverteiler: Diese Nachricht wurde Ihnen von Kurswahl-Software der bs30.de zugesendet.
+        kursverteiler: Diese Nachricht wurde Ihnen von der Kurswahl-Software der Staatlichen Fachschule für Sozialpädagogik zugesendet.
