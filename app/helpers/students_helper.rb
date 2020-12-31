@@ -2,23 +2,60 @@
 
 # Main Helper for Student related views
 module StudentsHelper
-  def course_classes(prio_selected, disabled)
-    classes = ['course']
+  def flash_classes(flash_type)
+    map = {
+      error: 'danger',
+      notice: 'info',
+      success: 'success'
+    }
 
-    classes << 'course__selected'                   if prio_selected.present?
-    classes << "course__selected--#{prio_selected}" if prio_selected.present?
-    classes << 'course__disabled'                   if disabled
+    "alert alert-#{map[flash_type.to_sym]}"
+  end
+
+  def course_card_classes(selected_priority, course_disabled)
+    classes = %w[card h-100]
+
+    classes << 'bg-light'                               if selected_priority.nil?
+    classes << 'bg-success'                             if selected_priority == :top
+    classes << 'bg-warning'                             if selected_priority == :mid
+    classes << 'bg-danger'                              if selected_priority == :low
+    classes << 'text-muted'                             if course_disabled
+    classes << "course__selected--#{selected_priority}" if selected_priority
 
     classes.join(' ')
   end
 
-  def course_prio_classes(priority, selected, guaranteed, disabled)
-    classes = ['course-priority--container']
+  def priority_button(course, priority, selected_prio, disabled)
+    tag.button(
+      t("students.show.prio.#{priority}"),
+      type: 'button',
+      disabled: disabled,
+      class: priority_button_classes(priority, disabled),
+      data: priority_button_data(course, priority, selected_prio)
+    )
+  end
 
-    classes << "course-priority--container__#{priority}"
-    classes << 'course-priority--container__selected' if selected
-    classes << 'course-priority--container__disabled' if disabled || guaranteed && %i[mid low].include?(priority)
+  def priority_button_classes(priority, disabled)
+    classes = %w[btn]
+
+    if disabled
+      classes << 'btn-light'
+    else
+      classes << 'btn-success' if priority == :top
+      classes << 'btn-warning' if priority == :mid
+      classes << 'btn-danger'  if priority == :low
+    end
+    classes << "course-priority--#{priority}"
 
     classes.join(' ')
+  end
+
+  def priority_button_data(course, priority, selected_prio)
+    {
+      course_id: course.id,
+      priority: priority,
+      selected_prio: selected_prio,
+      guaranteed: course.guaranteed?
+    }
   end
 end

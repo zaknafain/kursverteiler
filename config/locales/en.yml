@@ -84,21 +84,24 @@ en:
       student:
         one: Student
         other: Students
+  application:
+    header:
+      sign_out: Sign out
   students:
     show:
       disabled_note: You have already taken this course
       course:
-        focus_areas: "possible focus areas: %{focus_areas}"
-        min_to_max: "%{min} to %{max} students"
-        teacher: "Teacher: %{teacher_name}"
-        variants: "possible variants: %{variants}"
+        focus_areas: possible focus areas
+        min_to_max: "%{min} to %{max}"
+        seats: Seats
+        teacher: Teacher
+        variants: possible variants
       headline: Course poll
       no_poll: Sadly there is no poll at the moment.
       prio:
-        low: 3
-        mid: 2
-        top: 1
-      sign_out: Sign out
+        low: Third choice
+        mid: Second choice
+        top: First choice
       submit: Save choices
     update:
       saved: Your choices are saved

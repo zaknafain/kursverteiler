@@ -6,18 +6,24 @@
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
   </head>
 
   <body>
-    <%= content_tag :div, class: "page-wrapper page-wrapper--#{Rails.env}" do %>
-      <% flash.each do |name, messages| %>
-        <% Array(messages).each do |message| %>
-          <%= content_tag :div, message, class: name %>
+    <%= render 'header' %>
+    <div class="page-wrapper">
+      <div class="container">
+        <% flash.each do |name, messages| %>
+          <% Array(messages).each do |message| %>
+            <%= content_tag :div, message, class: flash_classes(name) %>
+          <% end %>
         <% end %>
-      <% end %>
-      <%= yield %>
-    <% end %>
+        <%= yield %>
+      </div>
+    </div>
+    <%= render 'footer' %>
   </body>
 </html>

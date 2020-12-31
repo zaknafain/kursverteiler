@@ -6,6 +6,58 @@ html, body {
   font-weight: 400;
 }
 
+// HEADER
+.page-header {
+  height: 158px;
+}
+
+.page-header__home-link {
+  margin-left: 71px;
+  width: 168px;
+}
+
+.current-student {
+  text-align: right;
+}
+
+// FOOTER
+
+.link-block {
+  text-transform: uppercase;
+  text-align: left;
+  margin-bottom: 30px;
+  padding: 7px 7px 7px 7px;
+  background-color: #3378b3;
+  color: white;
+  font-size: 12px;
+  line-height: 12px;
+  width: 130px;
+  margin-right: auto;
+  font-weight: 400;
+  height: 26px;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.link-block--right {
+  text-align: right;
+  width: 350px;
+  margin-right: 0;
+  margin-left: auto;
+  background-color: #68346b;
+}
+
+.address-block {
+  font-size: 12px;
+  line-height: 18px;
+  color: #68346b;
+}
+
+// CONTENT
+
 body .page-wrapper {
   padding: 20px;
   display: flex;
@@ -15,129 +67,12 @@ body .page-wrapper {
   align-content: flex-start;
   align-items: stretch;
   background-color: transparent;
-
-  &.page-wrapper--development {
-    max-width: 1120px;
-    max-height: 400px;
-    overflow-y: scroll;
-    margin: auto;
-    margin-top: calc((100vh - 400px) / 2);
-    background-image: url(https://www.bs30.de/fileadmin/redakteur/2-Fuer-Schueler/FSP1-Hintergrundbilder-Website-3Schueler.jpg);
-  }
+  background-image: url(image_path("background.jpg"));
+  background-size: cover;
 }
 
+// SELECTION
 .page-wrapper {
-  .current-student {
-    text-align: right;
-  }
-
-  .headline {
-    text-transform: uppercase;
-    margin: 10px 0 14px;
-    padding: 10px;
-    border: 0;
-    background-color: #3378b3;
-    color: white;
-  }
-
-  .headline--general {
-    margin-bottom: 10px;
-  }
-
-  .headline--title {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-
-  .headline--description {
-    text-transform: none;
-  }
-
-  .selections-form--courses {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .course {
-    margin-bottom: 14px;
-    max-width: 542px;
-    display: flex;
-    flex-direction: row;
-    background-color: rgba(255, 255, 255, 0.9);
-    position: relative;
-
-    &:nth-child(odd) {
-      margin-right: 20px;
-    }
-    &.course__selected {
-      background-color: hsl(120, 50%, 50%);
-    }
-    &.course__selected--top {
-      background-color: hsl(120, 50%, 50%);
-    }
-    &.course__selected--mid {
-      background-color: hsl(60, 50%, 50%);
-    }
-    &.course__selected--low {
-      background-color: hsl(0, 50%, 50%);
-    }
-  }
-
-  .course-description {
-    padding: 4px;
-  }
-
-  .course-description--title {
-    color: #3378b3;
-    font-weight: bold;
-    padding: 10px 0 5px
-  }
-
-  .course-description--description {
-    color: #565655;
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-
-  .course-priority {
-    min-width: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    font-size: 1.75rem;
-  }
-
-  .course-priority--container {
-    cursor: pointer;
-    flex: 1 1 auto;
-    border-color: grey;
-    border-style: solid;
-    border-right-width: 0;
-    border-left-width: 1px;
-    border-top-width: 1px;
-    border-bottom-width: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &.course-priority--container__top {
-      background-color: hsl(120, 50%, 50%);
-      border-top-width: 0;
-    }
-    &.course-priority--container__mid {
-      background-color: hsl(60, 50%, 50%);
-    }
-    &.course-priority--container__low {
-      background-color: hsl(0, 50%, 50%);
-    }
-    &.course-priority--container__selected {
-      border-left-width: 0;
-    }
-  }
-
   .course-disabled-note {
     position: absolute;
     color:  hsl(0, 50%, 50%);
@@ -145,7 +80,7 @@ body .page-wrapper {
     font-size: 1.5em;
     transform: rotate(340deg);
     left: 100px;
-    top: 100px;
+    top: 140px;
     text-shadow: 2px 1px #f3bdbd;
   }
 
@@ -155,19 +90,5 @@ body .page-wrapper {
     cursor: default;
     background-color: darkgray;
     color: gray;
-  }
-
-  .selections-form--submit {
-    appearance: none;
-    display: inline-block;
-    padding: 11px;
-    background-color: #68346b;
-    border: none;
-    cursor: pointer;
-    transition: all 0.4s;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    text-decoration: none;
   }
 }

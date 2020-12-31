@@ -84,21 +84,24 @@ de:
       student:
         one: Schüler
         other: Schüler
+  application:
+    header:
+      sign_out: Ausloggen
   students:
     show:
       disabled_note: Du hast diesen Kurs bereits belegt
       course:
-        focus_areas: 'mögliche Schwerpunkte: %{focus_areas}'
-        min_to_max: '%{min} - %{max} Plätze'
-        teacher: 'Lehrkraft: %{teacher_name}'
-        variants: 'mögliche Varianten: %{variants}'
+        focus_areas: mögliche Schwerpunkte
+        min_to_max: '%{min} bis %{max}'
+        seats: Plätze
+        teacher: Lehrkraft
+        variants: mögliche Varianten
       headline: Kurswahlen
       no_poll: Leider findet gerade keine Wahl statt.
       prio:
-        low: 3
-        mid: 2
-        top: 1
-      sign_out: Ausloggen
+        low: Drittwahl
+        mid: Zweitwahl
+        top: Erstwahl
       submit: Wahl speichern
     update:
       saved: Die Wahl wurde gespeichert
