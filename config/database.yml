@@ -15,6 +15,10 @@ test:
   <<: *default
   database: kursverteiler-test
 
+staging:
+  <<: *default
+  database: kursverteiler-staging
+
 production:
   <<: *default
   database: kursverteiler
