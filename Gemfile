@@ -28,11 +28,12 @@ gem 'devise-i18n', '~> 1.9.2'
 gem 'rails_admin', git: 'https://github.com/zaknafain/rails_admin', branch: 'multiselect_options'
 gem 'rails_admin_import', git: 'https://github.com/zaknafain/rails_admin_import', branch: 'enumeration_translation'
 
+# Generate fake data for development, testing and staging
+gem 'faker', '~> 2.15.1'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  # Generate fake data for development and testing
-  gem 'faker', '~> 2.15.1'
   # FactoryBot and RSpec for testing
   gem 'factory_bot', '~> 6.1.0'
   gem 'rspec-rails', '~> 4.0.1'
