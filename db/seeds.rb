@@ -48,8 +48,8 @@ if Rails.env.development?
                                 maximum: guaranteed ? nil : Faker::Number.within(range: 16..26),
                                 description: Faker::Lorem.paragraph(sentence_count: 10),
                                 teacher_name: Faker::FunnyName.two_word_name,
-                                focus_areas: Faker::Lorem.sentence(word_count: 0, random_words_to_add: 7),
-                                variants: Faker::Lorem.sentence(word_count: 4, random_words_to_add: 7) })
+                                focus_areas: Faker::Lorem.words((0..6).to_a.sample).join(' '),
+                                variants: Faker::Lorem.words((0..6).to_a.sample).join(' ') })
       course.update!(
         parent_course: Course.parent_candidates_for(course).detect { |c| c.title.start_with?(course.title[0..4]) }
       )

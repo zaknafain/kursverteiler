@@ -37,21 +37,21 @@
                 <strong><%= t('.course.teacher') %>:</strong>
                 <%= course.teacher_name %>
               </div>
-              <div class="mb-2">
-                <strong><%= t('.course.seats') %>:</strong>
-                <%= t('.course.min_to_max', min: course.minimum, max: course.maximum) %>
-              </div>
-              <div class="mb-2">
-                <strong><%= t('.course.focus_areas') %>:</strong>
-                <%= course.focus_areas %>
-              </div>
+              <% if course.focus_areas.present? %>
+                <div class="mb-2">
+                  <strong><%= t('.course.focus_areas') %>:</strong>
+                  <%= course.focus_areas %>
+                </div>
+              <% end %>
               <div class="mb-2">
                 <%= course.description %>
               </div>
-              <div>
-                <strong><%= t('.course.variants') %>:</strong>
-                <%= course.variants %>
-              </div>
+              <% if course.variants.present? %>
+                <div>
+                  <strong><%= t('.course.variants') %>:</strong>
+                  <%= course.variants %>
+                </div>
+              <% end %>
             </div>
             <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "card-footer js-course-priority-container" do %>
               <%= priority_button(course, :top, selected_prio, course_disabled) %>

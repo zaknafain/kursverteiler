@@ -92,7 +92,6 @@ en:
       disabled_note: You have already taken this course
       course:
         focus_areas: possible focus areas
-        min_to_max: "%{min} to %{max}"
         seats: Seats
         teacher: Teacher
         variants: possible variants
