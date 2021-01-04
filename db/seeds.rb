@@ -4,7 +4,7 @@ def log(output)
   Rails.logger.info(output)
 end
 
-if Rails.env.development?
+if Rails.application.credentials.db[:allow_seeding] || ENV.fetch('DB_ALLOW_SEEDING', false)
   log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SEEDING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
   if Admin.count.positive?
     log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DB NOT  EMPTY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
@@ -138,7 +138,7 @@ if Rails.env.development?
       end
     end
   end
-elsif Rails.env.production?
+else
   # Create new Administrator
   log('-------------------- Create new Admin  to the Rescue --------------------')
   Admin.create!(email: Rails.application.credentials.admin[:email],
