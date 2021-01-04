@@ -4,7 +4,7 @@ def log(output)
   Rails.logger.info(output)
 end
 
-if Rails.application.credentials.db[:allow_seeding] || ENV.fetch('DB_ALLOW_SEEDING', false)
+if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW_SEEDING', false)
   log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SEEDING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
   if Admin.count.positive?
     log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DB NOT  EMPTY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
@@ -48,8 +48,8 @@ if Rails.application.credentials.db[:allow_seeding] || ENV.fetch('DB_ALLOW_SEEDI
                                 maximum: guaranteed ? nil : Faker::Number.within(range: 16..26),
                                 description: Faker::Lorem.paragraph(sentence_count: 10),
                                 teacher_name: Faker::FunnyName.two_word_name,
-                                focus_areas: Faker::Lorem.words((0..6).to_a.sample).join(' '),
-                                variants: Faker::Lorem.words((0..6).to_a.sample).join(' ') })
+                                focus_areas: Faker::Lorem.words(number: (0..6).to_a.sample).join(' '),
+                                variants: Faker::Lorem.words(number: (0..6).to_a.sample).join(' ') })
       course.update!(
         parent_course: Course.parent_candidates_for(course).detect { |c| c.title.start_with?(course.title[0..4]) }
       )
@@ -138,7 +138,7 @@ if Rails.application.credentials.db[:allow_seeding] || ENV.fetch('DB_ALLOW_SEEDI
       end
     end
   end
-else
+elsif Rails.application.credentials.dig(:admin, :email)
   # Create new Administrator
   log('-------------------- Create new Admin  to the Rescue --------------------')
   Admin.create!(email: Rails.application.credentials.admin[:email],
