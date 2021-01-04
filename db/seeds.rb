@@ -4,7 +4,7 @@ def log(output)
   Rails.logger.info(output)
 end
 
-if Rails.env.development?
+if Rails.env.development? || Rails.env.staging?
   log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SEEDING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
   if Admin.count.positive?
     log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DB NOT  EMPTY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
