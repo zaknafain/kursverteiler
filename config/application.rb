@@ -58,6 +58,6 @@ module Kursverteiler
       key: '_kursverteiler_session',
       expire_after: 1.year,
       same_site: :lax,
-      secure: Rails.env.production?
+      secure: Rails.env.production? || Rails.env.staging?
   end
 end
