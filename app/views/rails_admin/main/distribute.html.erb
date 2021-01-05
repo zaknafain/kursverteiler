@@ -1,6 +1,9 @@
 <div class="distribute-container">
+  <div class="overlay"></div>
   <div class="not-distributed">
-    <div class="students--container"><%= render @not_dist_students %></div>
+    <%= form_with model: @object, url: distribute_path(model_name: 'poll', id: @object.id), method: :put, class: 'students--container' do |form| %>
+      <%= render @not_dist_students, form: form, course_id: nil %>
+    <% end %>
     <div class="students--actions">
       <div class="students--count"><%= t('admin.actions.distribute.students_count', count: @not_dist_students.length) %></div>
       <%= form_with model: @object, url: distribute_path(model_name: 'poll', id: @object.id), method: :put do |form| %>
@@ -27,9 +30,9 @@
   <div class="courses--container">
     <% @courses.each do |course| %>
       <%= content_tag :div, id: "course-container-#{course.id}", class: classes_for(course) do %>
-        <div class="course-students">
-          <%= render course.students.sort_by(&:full_name) %>
-        </div>
+        <%= form_with model: @object, url: distribute_path(model_name: 'poll', id: @object.id), method: :put, class: 'course-students', data: { course_id: course.id } do |form| %>
+          <%= render course.students.sort_by(&:full_name), form: form, course_id: course.id %>
+        <% end %>
         <div class="course-description">
           <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
           <div class="course-description--teacher"><%= course.teacher_name %></div>
