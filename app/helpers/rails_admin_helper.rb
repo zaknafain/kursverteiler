@@ -67,7 +67,6 @@ module RailsAdminHelper
     selection = student.selection_for(poll)
 
     {
-      selected: false,
       course_id: course&.id,
       student_id: student.id,
       top_course_id: selection&.top_course_id,

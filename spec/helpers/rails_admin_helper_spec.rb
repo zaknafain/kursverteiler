@@ -194,10 +194,6 @@ RSpec.describe RailsAdminHelper, type: :helper do
     let(:low_course) { create(:course, poll: course.poll) }
     let(:poll)       { course.poll }
 
-    it 'allways returns "selected: false" data' do
-      expect(helper.student_distribution_data(student, poll)).to include({ selected: false })
-    end
-
     it 'allways returns the student_id as data' do
       expect(helper.student_distribution_data(student, poll)).to include({ student_id: student.id })
     end
