@@ -97,6 +97,7 @@ en:
         variants: possible variants
       headline: Course poll
       no_poll: Sadly there is no poll at the moment.
+      not_completed_yet: The poll has not yet been completed.
       prio:
         low: Third choice
         mid: Second choice

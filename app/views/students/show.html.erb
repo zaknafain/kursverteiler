@@ -88,6 +88,23 @@
   </div>
 <% end %>
 
+<% @polls_not_completed.each do |poll| %>
+  <div class="row">
+    <div class="col-12 mb-3">
+      <div class="card bg-warning">
+        <div class="card-body">
+          <h2 class="card-title">
+            <%= poll.title %>
+          </h2>
+          <div class="card-text">
+            <%= t('.not_completed_yet') %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 <% @past_courses.each do |course| %>
   <div class="row">
     <div class="col-12 mb-3">
