@@ -61,6 +61,10 @@ de:
       reset_password:
         bulk_link: Ausgewählten Elementen Passwort-Zurücksetzen E-Mails schicken
         done: eine Passwort-Zurücksetzen E-Mail zugeschickt
+      reset_passwords:
+        bulk_link: Allen Schülern der ausgewählten Klassen Passwort-Zurücksetzen E-Mails schicken
+        done: eine Passwort-Zurücksetzen E-Mail zugeschickt
+        times: '%{count} mal'
       show:
         breadcrumb: '%{object_label}'
         menu: Anzeigen
