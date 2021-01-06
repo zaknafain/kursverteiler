@@ -3,3 +3,4 @@ en:
     mailer:
       reset_password_instructions:
         kursverteiler: This message was sent via the course selection software of 'Staatliche Fachschule für Sozialpädagogik'.
+        instruction: You can change your password through the link below.

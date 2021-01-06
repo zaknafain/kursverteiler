@@ -31,8 +31,12 @@ module RailsAdmin
 
               sanitized_params[:courses_students].each do |(_, param)|
                 student = students.detect { |s| s.id == param[:student_id].to_i }
-                student.courses = student.courses.reject { |c| @courses.map(&:id).include?(c.id) }
-                student.courses << @courses.detect { |c| c.id == param[:course_id].to_i } if param[:course_id].present?
+                student.courses = student.courses.reject do |course|
+                  @courses.map(&:id).include?(course.id) && param[:course_id].to_i != course.id
+                end
+                if param[:course_id].present? && student.courses.map(&:id).exclude?(param[:course_id].to_i)
+                  student.courses << @courses.detect { |c| c.id == param[:course_id].to_i }
+                end
               end
               @not_dist_students = students.not_distributed_in(@object.id).order(first_name: :asc, last_name: :asc)
               @courses.reload

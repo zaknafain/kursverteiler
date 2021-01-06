@@ -97,6 +97,7 @@ de:
         variants: mögliche Varianten
       headline: Kurswahlen
       no_poll: Leider findet gerade keine Wahl statt.
+      not_completed_yet: Die Wahl wurde noch nicht abgeschlossen. Die Plätze wurden noch nicht verteilt.
       prio:
         low: Drittwahl
         mid: Zweitwahl

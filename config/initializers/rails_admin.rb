@@ -69,9 +69,11 @@ RailsAdmin.config do |config|
 
   config.included_models = %w[Admin Grade Student Poll Course]
   config.label_methods = [:to_pretty_value]
+  config.default_items_per_page = 50
 
   RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Distribute)
   RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPassword)
+  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPasswords)
 
   config.actions do
     dashboard do                  # mandatory
@@ -94,6 +96,9 @@ RailsAdmin.config do |config|
     end
     reset_password do
       only %w[Admin Student]
+    end
+    reset_passwords do
+      only %w[Grade]
     end
     # show_in_app
 

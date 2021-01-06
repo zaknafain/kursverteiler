@@ -4,11 +4,13 @@ def log(output)
   Rails.logger.info(output)
 end
 
-if Rails.env.development?
+if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW_SEEDING', false)
   log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> SEEDING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
   if Admin.count.positive?
-    log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! DB NOT  EMPTY !!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-    return
+    log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!! CLEARING DB !!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    Admin.all.destroy_all
+    Poll.all.destroy_all
+    Grade.all.destroy_all
   end
 
   # Creates a dummy Admin for testing
@@ -22,7 +24,8 @@ if Rails.env.development?
     title = "Kurswahl #{year}"
     log("Create #{title}")
     Poll.create!({ title: title, valid_from: Date.new(year), valid_until: Date.new(year, 12, 31),
-                   description: Faker::Lorem.paragraph(sentence_count: 10) })
+                   description: Faker::Lorem.paragraph(sentence_count: 10),
+                   completed: Date.new(year, 12, 31) < Time.zone.today ? Date.new(year + 1, 1, 3) : nil })
   end
 
   # Create 10 dummy Classes for the upcomming Students
@@ -48,8 +51,8 @@ if Rails.env.development?
                                 maximum: guaranteed ? nil : Faker::Number.within(range: 16..26),
                                 description: Faker::Lorem.paragraph(sentence_count: 10),
                                 teacher_name: Faker::FunnyName.two_word_name,
-                                focus_areas: Faker::Lorem.words((0..6).to_a.sample).join(' '),
-                                variants: Faker::Lorem.words((0..6).to_a.sample).join(' ') })
+                                focus_areas: Faker::Lorem.words(number: (0..6).to_a.sample).join(' '),
+                                variants: Faker::Lorem.words(number: (0..6).to_a.sample).join(' ') })
       course.update!(
         parent_course: Course.parent_candidates_for(course).detect { |c| c.title.start_with?(course.title[0..4]) }
       )
@@ -138,7 +141,7 @@ if Rails.env.development?
       end
     end
   end
-elsif Rails.env.production?
+elsif Rails.application.credentials.dig(:admin, :email)
   # Create new Administrator
   log('-------------------- Create new Admin  to the Rescue --------------------')
   Admin.create!(email: Rails.application.credentials.admin[:email],

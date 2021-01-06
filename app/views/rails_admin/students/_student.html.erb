@@ -1,4 +1,8 @@
 <%= content_tag :div, id: "student-#{student.id}", class: "student--container", data: student_distribution_data(student, @object) do %>
+  <%= form.fields_for("courses_students[]", student) do |sub_form| %>
+    <%= sub_form.hidden_field :student_id, value: student.id %>
+    <%= sub_form.hidden_field :course_id, value: course_id %>
+  <% end %>
   <div class="student--name"><%= student.full_name %></div>
   <% distribution_indicator_by(student, @object) %>
 <% end %>

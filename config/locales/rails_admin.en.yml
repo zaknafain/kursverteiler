@@ -59,8 +59,12 @@ en:
         menu: Add new
         title: 'New %{model_label}'
       reset_password:
-        menu: Password reset
+        bulk_link: 'Send password reset email to selected %{model_label_plural}'
         done: email sent
+      reset_passwords:
+        bulk_link: 'Send password reset email to all students of selected %{model_label_plural}'
+        done: email sent
+        times: '%{count} times'
       show:
         breadcrumb: '%{object_label}'
         menu: Show
