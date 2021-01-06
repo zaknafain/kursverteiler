@@ -24,7 +24,8 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
     title = "Kurswahl #{year}"
     log("Create #{title}")
     Poll.create!({ title: title, valid_from: Date.new(year), valid_until: Date.new(year, 12, 31),
-                   description: Faker::Lorem.paragraph(sentence_count: 10) })
+                   description: Faker::Lorem.paragraph(sentence_count: 10),
+                   completed: Date.new(year, 12, 31) < Time.zone.today ? Date.new(year + 1, 1, 3) : nil })
   end
 
   # Create 10 dummy Classes for the upcomming Students
