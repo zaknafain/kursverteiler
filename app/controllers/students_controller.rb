@@ -23,6 +23,7 @@ class StudentsController < ApplicationController
     @courses = @poll&.courses&.order(:title)
     selection
     @polls_not_completed = @grade.polls.past.where(completed: nil)
+    @past_courses = current_student.courses.where.not(poll: [@poll] + @polls_not_completed)
   end
 
   def selection
