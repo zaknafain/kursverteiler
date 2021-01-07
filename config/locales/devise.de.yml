@@ -6,4 +6,4 @@ de:
         instruction: Klicken Sie auf den unten aufgeführten Link um Ihr Passwort zu ändern.
     sessions:
       new:
-        sign_in: Anmeldung zur Kurswahl der BS30
+        sign_in_bs30: Anmeldung zur Kurswahl der BS30

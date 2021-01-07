@@ -1,0 +1,19 @@
+<div class="row justify-content-md-center">
+  <div class="col-12 col-md-9 col-lg-6">
+    <h2><%= t('devise.passwords.new.forgot_your_password') %></h2>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "students/shared/error_messages", resource: resource %>
+
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <%= f.submit t('devise.passwords.edit.change_my_password'), class: "btn btn-primary" %>
+    <% end %>
+
+    <div class="text-right mt-2">
+      <%= link_to t('devise.shared.links.sign_in'), new_session_path(resource_name), class: "btn btn-outline-dark" %><br />
+    </div>
+  </div>
+</div>

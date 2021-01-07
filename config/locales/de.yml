@@ -5,6 +5,7 @@ de:
         email: E-Mail
         first_name: Vorname
         last_name: Nachname
+        remember_me: Angemeldet bleiben
       course:
         child_course: Folgender Kurs
         description: Beschreibung
@@ -54,6 +55,7 @@ de:
         last_name: Nachname
         password: Passwort
         password_confirmation: Passwort Bestätigung
+        remember_me: Angemeldet bleiben
     errors:
       models:
         selection:

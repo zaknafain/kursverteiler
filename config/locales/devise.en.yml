@@ -6,4 +6,4 @@ en:
         instruction: You can change your password through the link below.
     sessions:
       new:
-        sign_in: Log in for course selection of BS30
+        sign_in_bs30: Log in for course selection of BS30
