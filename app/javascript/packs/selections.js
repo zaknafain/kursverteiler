@@ -26,7 +26,12 @@ function deselectPriority(priority) {
 
     // Change the data of the buttons of the course
     let prioButtons = selectedCourseDiv.querySelectorAll('.js-course-priority-container button');
-    prioButtons.forEach(div => delete div.dataset.selectedPrio);
+    prioButtons.forEach(button => {
+      button.classList.remove('active');
+      button.classList.remove('border');
+      button.classList.remove('border-dark');
+      delete button.dataset.selectedPrio;
+    });
   }
 }
 
@@ -38,17 +43,24 @@ function deselectPriority(priority) {
 function selectCourse(courseId, priority) {
   let form = document.querySelector('form');
   let selectedCourseDiv = form.querySelector(`#course-container-${courseId}`);
+  let button;
 
   // Change the appearance of the course itself
   selectedCourseDiv.classList.add(`course__selected--${priority}`);
   selectedCourseDiv.classList.remove('bg-light');
   if (priority === 'top') {
     selectedCourseDiv.classList.add('bg-success');
+    button = selectedCourseDiv.querySelector('button.course-priority--top')
   } else if (priority === 'mid') {
     selectedCourseDiv.classList.add('bg-warning');
+    button = selectedCourseDiv.querySelector('button.course-priority--mid')
   } else {
     selectedCourseDiv.classList.add('bg-danger');
+    button = selectedCourseDiv.querySelector('button.course-priority--low')
   }
+  button.classList.add('active');
+  button.classList.add('border');
+  button.classList.add('border-dark');
 
   // Change the data of the buttons of the course
   let prioButtons = selectedCourseDiv.querySelectorAll('.js-course-priority-container button');
