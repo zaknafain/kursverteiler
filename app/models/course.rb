@@ -25,6 +25,7 @@ class Course < ApplicationRecord
   validates :minimum, :maximum, numericality: { only_integer: true, greater_than: 0, less_than: 100, allow_nil: true }
   validate  :minimum_is_lesser_or_equal_than_maximum
 
+  scope :not_guaranteed, -> { where(guaranteed: false) }
   scope :current, -> { where(poll: Poll.running_at(Time.zone.today)) }
   scope :parent_candidates_for, lambda { |course|
     joins(:poll).includes(:child_course)
