@@ -273,6 +273,17 @@ RSpec.describe Course, type: :model do
         expect(Course.parent_candidates_for(old_course)).to eq([])
       end
     end
+
+    context 'not_guaranteed' do
+      it 'scopes all courses that are not guaranteed' do
+        expect(Course.not_guaranteed.count).to be(2)
+
+        Course.first.update!(guaranteed: true)
+
+        expect(Course.not_guaranteed.count).to be(1)
+        expect(Course.not_guaranteed.first.id).to be(Course.second.id)
+      end
+    end
   end
 
   context '#selections' do

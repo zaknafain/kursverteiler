@@ -91,4 +91,9 @@ body .page-wrapper {
     background-color: darkgray;
     color: gray;
   }
+
+  .btn-sticky {
+    position: sticky;
+    bottom: 0;
+  }
 }

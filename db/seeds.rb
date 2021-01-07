@@ -85,22 +85,21 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
   log('-------------------- Create Selections  for Students --------------------')
   polls.each do |poll|
     Student.all.each do |student|
-      selection_amount = [0, 1, 2, 2, 3, 3, 3, 3].sample
+      selection_amount = [0, 3, 3, 3, 3, 3, 3, 3].sample
       selected_courses = poll.courses.where(guaranteed: false).order(Arel.sql('RANDOM()')).first(selection_amount)
-      course_names = selected_courses.map(&:title).join(', ')
-      unless selection_amount.zero?
-        log("Student #{student.id.to_s.rjust(3)} selected following courses: #{course_names}")
-      end
       selection = student.selections.build(poll: poll)
-      selection.top_course = selected_courses.pop
-      selection.mid_course = selected_courses.pop
-      selection.low_course = selected_courses.pop
-      selection.save!
-      next unless selection_amount.zero?
-
-      guaranteed_course = poll.courses.find_by(guaranteed: true)
-      selection.update!(top_course: guaranteed_course)
-      log("Student #{student.id.to_s.rjust(3)} selected guaranteed course: #{guaranteed_course.title}")
+      if selection_amount.positive?
+        course_names = selected_courses.map(&:title).join(', ')
+        selection.top_course = selected_courses.pop
+        selection.mid_course = selected_courses.pop
+        selection.low_course = selected_courses.pop
+        selection.save!
+        log("Student #{student.id.to_s.rjust(3)} selected following courses: #{course_names}")
+      else
+        guaranteed_course = poll.courses.find_by(guaranteed: true)
+        selection.update!(top_course: guaranteed_course)
+        log("Student #{student.id.to_s.rjust(3)} selected guaranteed course: #{guaranteed_course.title}")
+      end
     end
   end
 

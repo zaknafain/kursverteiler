@@ -11,6 +11,7 @@ class Selection < ApplicationRecord
   belongs_to :low_course, class_name: 'Course', optional: true
 
   validates :poll, uniqueness: { scope: [:student] }
+  validate :minimum_courses_to_be_chosen, if: :poll
   validate :mid_course_not_to_be_top_course
   validate :low_course_not_to_be_top_or_mid_course
   validate :top_course_to_be_set_first
@@ -27,6 +28,15 @@ class Selection < ApplicationRecord
   end
 
   private
+
+  def minimum_courses_to_be_chosen
+    return if top_course&.guaranteed?
+
+    min_courses = [poll.courses.not_guaranteed.length - 1, 3].min
+    return if [top_course, mid_course, low_course].compact.length >= min_courses
+
+    errors.add(:poll, I18n.t('activerecord.errors.models.selection.attributes.poll.underrated', count: min_courses))
+  end
 
   def top_course_to_be_set_first
     return if top_course.present?

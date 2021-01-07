@@ -4,3 +4,6 @@ de:
       reset_password_instructions:
         kursverteiler: Diese Nachricht wurde Ihnen von der Kurswahl-Software der Staatlichen Fachschule für Sozialpädagogik zugesendet.
         instruction: Klicken Sie auf den unten aufgeführten Link um Ihr Passwort zu ändern.
+    sessions:
+      new:
+        sign_in_bs30: Anmeldung zur Kurswahl der BS30

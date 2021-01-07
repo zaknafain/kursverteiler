@@ -18,7 +18,7 @@
       <div class="container">
         <% flash.each do |name, messages| %>
           <% Array(messages).each do |message| %>
-            <%= content_tag :div, message, class: flash_classes(name) %>
+            <%= content_tag :h4, message, class: flash_classes(name), role: 'alert' %>
           <% end %>
         <% end %>
         <%= yield %>

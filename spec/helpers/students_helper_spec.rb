@@ -85,14 +85,14 @@ RSpec.describe StudentsHelper, type: :helper do
 
   describe '#priority_button_classes' do
     it 'returns a string always including "btn"' do
-      classes = helper.priority_button_classes(:top, false).split
+      classes = helper.priority_button_classes(:top, false, false).split
 
-      expect(helper.priority_button_classes(:top, false).class).to eq(String)
+      expect(helper.priority_button_classes(:top, false, false).class).to eq(String)
       expect(classes).to include('btn')
     end
 
     it 'returns "btn-success" for top priority' do
-      classes = helper.priority_button_classes(:top, false).split
+      classes = helper.priority_button_classes(:top, false, false).split
 
       expect(classes).to     include('btn-success')
       expect(classes).to_not include('btn-light')
@@ -101,7 +101,7 @@ RSpec.describe StudentsHelper, type: :helper do
     end
 
     it 'returns "btn-warning" for mid priority' do
-      classes = helper.priority_button_classes(:mid, false).split
+      classes = helper.priority_button_classes(:mid, false, false).split
 
       expect(classes).to     include('btn-warning')
       expect(classes).to_not include('btn-light')
@@ -110,7 +110,7 @@ RSpec.describe StudentsHelper, type: :helper do
     end
 
     it 'returns "btn-danger" for low priority' do
-      classes = helper.priority_button_classes(:low, false).split
+      classes = helper.priority_button_classes(:low, false, false).split
 
       expect(classes).to     include('btn-danger')
       expect(classes).to_not include('btn-light')
@@ -119,16 +119,28 @@ RSpec.describe StudentsHelper, type: :helper do
     end
 
     it 'returns "btn-light" is disabled is true' do
-      expect(helper.priority_button_classes(:top, true).split).to     include('btn-light')
-      expect(helper.priority_button_classes(:top, true).split).to_not include('btn-success')
-      expect(helper.priority_button_classes(:mid, true).split).to_not include('btn-warning')
-      expect(helper.priority_button_classes(:low, true).split).to_not include('btn-danger')
+      expect(helper.priority_button_classes(:top, true, false).split).to     include('btn-light')
+      expect(helper.priority_button_classes(:top, true, false).split).to_not include('btn-success')
+      expect(helper.priority_button_classes(:mid, true, false).split).to_not include('btn-warning')
+      expect(helper.priority_button_classes(:low, true, false).split).to_not include('btn-danger')
     end
 
     it 'returns "course-priority--" with the priority as ending' do
-      expect(helper.priority_button_classes(:top, false).split).to include('course-priority--top')
-      expect(helper.priority_button_classes(:mid, false).split).to include('course-priority--mid')
-      expect(helper.priority_button_classes(:low, false).split).to include('course-priority--low')
+      expect(helper.priority_button_classes(:top, false, false).split).to include('course-priority--top')
+      expect(helper.priority_button_classes(:mid, false, false).split).to include('course-priority--mid')
+      expect(helper.priority_button_classes(:low, false, false).split).to include('course-priority--low')
+    end
+
+    it 'returns "active border border-dark" if selected is true' do
+      expect(helper.priority_button_classes(:top, false, true).split).to include('active')
+      expect(helper.priority_button_classes(:mid, false, true).split).to include('active')
+      expect(helper.priority_button_classes(:low, false, true).split).to include('active')
+      expect(helper.priority_button_classes(:top, false, true).split).to include('border')
+      expect(helper.priority_button_classes(:mid, false, true).split).to include('border')
+      expect(helper.priority_button_classes(:low, false, true).split).to include('border')
+      expect(helper.priority_button_classes(:top, false, true).split).to include('border-dark')
+      expect(helper.priority_button_classes(:mid, false, true).split).to include('border-dark')
+      expect(helper.priority_button_classes(:low, false, true).split).to include('border-dark')
     end
   end
 
@@ -164,6 +176,19 @@ RSpec.describe StudentsHelper, type: :helper do
       course.guaranteed = !course.guaranteed
 
       expect(helper.priority_button_data(course, :top, nil)[:guaranteed]).to eq(course.guaranteed?)
+    end
+  end
+
+  describe '#priority_to_bootstrap' do
+    it 'returns "success" for priority :top' do
+      expect(helper.priority_to_bootstrap(:top)).to eq('success')
+    end
+
+    it 'returns "warning" for priority :mid' do
+      expect(helper.priority_to_bootstrap(:mid)).to eq('warning')
+    end
+    it 'returns "danger" for priority :low' do
+      expect(helper.priority_to_bootstrap(:low)).to eq('danger')
     end
   end
 end

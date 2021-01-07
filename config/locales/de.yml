@@ -5,6 +5,7 @@ de:
         email: E-Mail
         first_name: Vorname
         last_name: Nachname
+        remember_me: Angemeldet bleiben
       course:
         child_course: Folgender Kurs
         description: Beschreibung
@@ -54,6 +55,7 @@ de:
         last_name: Nachname
         password: Passwort
         password_confirmation: Passwort Bestätigung
+        remember_me: Angemeldet bleiben
     errors:
       models:
         selection:
@@ -63,6 +65,10 @@ de:
             mid_course:
               neglected: muss als zweites ausgewählt werden.
               taken: darf nicht gleich der Erstwahl sein.
+            poll:
+              underrated:
+                one: benötigt mindestens 1 Wahl
+                other: benötigt mindestens %{count} Wahlen
             top_course:
               neglected: muss als erstes ausgewählt werden.
     models:
