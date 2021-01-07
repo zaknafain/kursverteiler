@@ -138,7 +138,7 @@ function createSortables() {
   let studentElements = document.querySelectorAll('.course-students');
   studentElements.forEach(studentElement => initializeSortable(studentElement));
   let notDistributedList = document.querySelector('.students--container');
-  initializeSortable(notDistributedList);
+  if (notDistributedList) { initializeSortable(notDistributedList); }
 }
 
 $(document).on('rails_admin.dom_ready', function() {
