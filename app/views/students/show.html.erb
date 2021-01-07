@@ -57,7 +57,9 @@
               <%= priority_button(course, :top, selected_prio, course_disabled) %>
               <% unless course.guaranteed? %>
                 <%= priority_button(course, :mid, selected_prio, course_disabled) %>
-                <%= priority_button(course, :low, selected_prio, course_disabled) %>
+                <% if @courses.length > 2 %>
+                  <%= priority_button(course, :low, selected_prio, course_disabled) %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
