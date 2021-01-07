@@ -65,6 +65,10 @@ en:
             mid_course:
               neglected: need to be chosen second.
               taken: may not be the same as the first choice.
+            poll:
+              underrated:
+                one: needs at least one selection
+                other: needs at least %{count} selections
             top_course:
               neglected: need to be chosen first.
     models:

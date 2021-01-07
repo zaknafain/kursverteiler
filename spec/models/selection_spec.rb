@@ -3,9 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe Selection, type: :model do
-  let(:student)   { create(:student) }
-  let(:poll)      { create(:poll) }
-  let(:selection) { build(:selection, student: student, poll: poll) }
+  let(:student)    { create(:student) }
+  let(:course)     { create(:course) }
+  let(:poll)       { create(:poll) }
+  let(:selection)  { build(:selection, student: student, poll: poll) }
+
+  before(:each) do
+    poll.courses = [course, selection.top_course, selection.mid_course, selection.low_course]
+  end
 
   context 'validations' do
     it 'presence of student' do
@@ -24,14 +29,6 @@ RSpec.describe Selection, type: :model do
 
       expect(selection).to be_invalid
       expect(selection.errors[:poll]).to be_present
-    end
-
-    it 'NOT presence of courses' do
-      expect(selection).to be_valid
-
-      selection.top_course = selection.mid_course = selection.low_course = nil
-
-      expect(selection).to be_valid
     end
 
     it 'uniqueness of poll scoping student' do
@@ -66,18 +63,6 @@ RSpec.describe Selection, type: :model do
       expect(selection).to be_valid
     end
 
-    it 'uniqueness of courses except nil values' do
-      expect(selection).to be_valid
-
-      selection.low_course = selection.mid_course = nil
-
-      expect(selection).to be_valid
-
-      selection.top_course = nil
-
-      expect(selection).to be_valid
-    end
-
     it 'prefer top course before all' do
       expect(selection).to be_valid
 
@@ -94,6 +79,59 @@ RSpec.describe Selection, type: :model do
 
       expect(selection).to be_invalid
       expect(selection.errors[:mid_course]).to be_present
+    end
+
+    describe 'minimum courses to be chosen' do
+      it 'is valid with three courses selected' do
+        expect(selection).to be_valid
+
+        selection.low_course = nil
+
+        expect(selection).to be_invalid
+      end
+
+      it 'is valid with only a guaranteed course chosen' do
+        selection.top_course.update!(guaranteed: true)
+        selection.mid_course = selection.low_course = nil
+
+        expect(selection).to be_valid
+      end
+
+      it 'is valid with two courses selected if the poll only has three' do
+        poll.courses = [selection.top_course, selection.mid_course, selection.low_course]
+        selection.low_course = nil
+
+        expect(selection).to be_valid
+
+        selection.mid_course = nil
+
+        expect(selection).to be_invalid
+      end
+
+      it 'is valid with one course selected if the poll only has two' do
+        poll.courses = [selection.top_course, selection.mid_course]
+        selection.mid_course = selection.low_course = nil
+
+        expect(selection).to be_valid
+
+        selection.top_course = nil
+
+        expect(selection).to be_invalid
+      end
+
+      it 'is valid on even lower selection if one course is guaranteed' do
+        selection.low_course = nil
+
+        expect(selection).to be_invalid
+
+        course.update!(guaranteed: true)
+
+        expect(selection).to be_valid
+
+        selection.mid_course = nil
+
+        expect(selection).to be_invalid
+      end
     end
   end
 
