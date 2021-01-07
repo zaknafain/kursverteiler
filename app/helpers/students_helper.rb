@@ -15,10 +15,7 @@ module StudentsHelper
   def course_card_classes(selected_priority, course_disabled)
     classes = %w[card h-100]
 
-    classes << 'bg-light'                               if selected_priority.nil?
-    classes << 'bg-success'                             if selected_priority == :top
-    classes << 'bg-warning'                             if selected_priority == :mid
-    classes << 'bg-danger'                              if selected_priority == :low
+    classes << "bg-#{priority_to_bootstrap(selected_priority)}"
     classes << 'text-muted'                             if course_disabled
     classes << "course__selected--#{selected_priority}" if selected_priority
 
@@ -30,22 +27,17 @@ module StudentsHelper
       t("students.show.prio.#{priority}"),
       type: 'button',
       disabled: disabled,
-      class: priority_button_classes(priority, disabled),
+      class: priority_button_classes(priority, disabled, selected_prio == priority),
       data: priority_button_data(course, priority, selected_prio)
     )
   end
 
-  def priority_button_classes(priority, disabled)
+  def priority_button_classes(priority, disabled, selected)
     classes = %w[btn]
 
-    if disabled
-      classes << 'btn-light'
-    else
-      classes << 'btn-success' if priority == :top
-      classes << 'btn-warning' if priority == :mid
-      classes << 'btn-danger'  if priority == :low
-    end
+    classes << "btn-#{priority_to_bootstrap(disabled ? nil : priority)}"
     classes << "course-priority--#{priority}"
+    classes << 'active border border-dark' if selected
 
     classes.join(' ')
   end
@@ -57,5 +49,16 @@ module StudentsHelper
       selected_prio: selected_prio,
       guaranteed: course.guaranteed?
     }
+  end
+
+  def priority_to_bootstrap(priority)
+    map = {
+      nil => 'light',
+      top: 'success',
+      mid: 'warning',
+      low: 'danger'
+    }
+
+    map[priority]
   end
 end
