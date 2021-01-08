@@ -184,54 +184,85 @@ RSpec.describe RailsAdminHelper, type: :helper do
   end
 
   describe '#student_distribution_data' do
-    let(:selection) do
-      create(:selection, poll: poll, student: student, top_course: course, mid_course: mid_course,
-                         low_course: low_course)
-    end
-    let(:student)    { create(:student) }
-    let(:course)     { create(:course) }
-    let(:mid_course) { create(:course, poll: course.poll) }
-    let(:low_course) { create(:course, poll: course.poll) }
-    let(:poll)       { course.poll }
+    let(:selection) { create(:selection) }
+    let(:student)   { selection.student }
+    let(:poll)      { create(:poll, courses: [selection.top_course, selection.mid_course, selection.low_course]) }
 
-    it 'allways returns the student_id as data' do
+    it 'always returns the student_id as data' do
       expect(helper.student_distribution_data(student, poll)).to include({ student_id: student.id })
     end
 
-    it 'returns data with "course_id: nil" if there are no courses' do
-      poll.courses = []
-
-      expect(helper.student_distribution_data(student, poll)).to include({ course_id: nil })
+    it 'always returns the popover toggle' do
+      expect(helper.student_distribution_data(student, poll)).to include({ toggle: 'popover' })
     end
 
-    it 'returns data with "course_id: nil" if the student was not distributed' do
-      expect(helper.student_distribution_data(student, poll)).to include({ course_id: nil })
+    it 'always returns the popover placement' do
+      expect(helper.student_distribution_data(student, poll)).to include({ placement: 'right' })
     end
 
-    it 'returns data with "course_id: nil" if the student was distributed in another poll' do
-      student.courses << create(:course)
+    it 'returns popover content from selection_to_html' do
+      expect(helper).to receive(:selection_to_html).and_return('FOOBAR')
 
-      expect(helper.student_distribution_data(student, poll)).to include({ course_id: nil })
+      expect(helper.student_distribution_data(student, poll)).to include({ content: 'FOOBAR' })
     end
 
-    it 'returns data with the matching course_id if the student was distributed' do
-      student.courses << course
+    it 'returns popover content from old_courses_to_html' do
+      expect(helper).to receive(:old_courses_to_html).and_return('FOOBAR')
 
-      expect(helper.student_distribution_data(student, poll)).to include({ course_id: course.id })
+      expect(helper.student_distribution_data(student, poll)).to include({ content: 'FOOBAR' })
+    end
+  end
+
+  describe '#selection_to_html' do
+    let(:selection) { create(:selection) }
+    let(:poll)      { create(:poll, courses: [selection.top_course, selection.mid_course, selection.low_course]) }
+
+    it 'returns the title of each selected course' do
+      expect(helper.selection_to_html(selection, poll.courses)).to include(selection.top_course.title)
+      expect(helper.selection_to_html(selection, poll.courses)).to include(selection.mid_course.title)
+      expect(helper.selection_to_html(selection, poll.courses)).to include(selection.low_course.title)
     end
 
-    it 'returns a top_course_id, mid_course_id and a low_course_id as nil per default' do
-      expect(helper.student_distribution_data(student, poll)).to include({ top_course_id: nil })
-      expect(helper.student_distribution_data(student, poll)).to include({ mid_course_id: nil })
-      expect(helper.student_distribution_data(student, poll)).to include({ low_course_id: nil })
+    it 'returns the priority of the course' do
+      expect(helper.selection_to_html(selection, poll.courses)).to include(
+        "#{I18n.t('students.show.prio.top')}: #{selection.top_course.title}"
+      )
+      expect(helper.selection_to_html(selection, poll.courses)).to include(
+        "#{I18n.t('students.show.prio.mid')}: #{selection.mid_course.title}"
+      )
+      expect(helper.selection_to_html(selection, poll.courses)).to include(
+        "#{I18n.t('students.show.prio.low')}: #{selection.low_course.title}"
+      )
+    end
+  end
+
+  describe '#old_courses_to_html' do
+    let(:student)      { create(:student, courses: [old_course]) }
+    let(:old_course)   { create(:course) }
+    let(:course)       { create(:course) }
+    let(:child_course) { create(:course, parent_course: old_course) }
+
+    it 'returns an empty string if there are no old courses matching any parent of the given courses' do
+      expect(helper.old_courses_to_html(student, [course])).to eq('')
     end
 
-    it 'returns a top_course_id, mid_course_id and a low_course_id from the selection of the student' do
-      selection # init data
+    it 'returns the title of the child course if the student was distributed to the parent before' do
+      expect(helper.old_courses_to_html(student, [course, child_course])).to include(child_course.title)
+    end
 
-      expect(helper.student_distribution_data(student, poll)).to include({ top_course_id: course.id })
-      expect(helper.student_distribution_data(student, poll)).to include({ mid_course_id: mid_course.id })
-      expect(helper.student_distribution_data(student, poll)).to include({ low_course_id: low_course.id })
+    it 'returns a warning icon for that child course' do
+      expect(helper.old_courses_to_html(student, [course, child_course])).to include("<i class='icon-warning-sign'>")
+      expect(helper.old_courses_to_html(student, [course])).to_not include("<i class='icon-warning-sign'>")
+    end
+  end
+
+  describe '#selection_title' do
+    let(:course_a) { create(:course) }
+    let(:course_b) { create(:course) }
+
+    it 'returns the title of the course with the given id' do
+      expect(helper.selection_title(course_a.id, [course_a, course_b])).to eq(course_a.title)
+      expect(helper.selection_title(course_b.id, [course_a, course_b])).to eq(course_b.title)
     end
   end
 end

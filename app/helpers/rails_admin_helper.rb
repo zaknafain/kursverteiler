@@ -63,15 +63,35 @@ module RailsAdminHelper
   end
 
   def student_distribution_data(student, poll)
-    course = student.courses.detect { |c| poll.courses.map(&:id).include?(c.id) }
     selection = student.selection_for(poll)
+    courses = poll.courses
 
     {
-      course_id: course&.id,
       student_id: student.id,
-      top_course_id: selection&.top_course_id,
-      mid_course_id: selection&.mid_course_id,
-      low_course_id: selection&.low_course_id
+      toggle: 'popover',
+      placement: 'right',
+      content: "#{selection_to_html(selection, courses)}#{old_courses_to_html(student, courses)}"
     }
+  end
+
+  def selection_to_html(selection, courses)
+    %i[top mid low].each_with_object([]) do |prio, array|
+      next if selection&.send("#{prio}_course_id").nil?
+
+      array << "#{t("students.show.prio.#{prio}")}: #{selection_title(selection&.send("#{prio}_course_id"), courses)}"
+    end.join('<br>')
+  end
+
+  def old_courses_to_html(student, courses)
+    old_courses = courses.select { |c| student.courses.map(&:id).include?(c.parent_course_id) }
+
+    return '' if old_courses.empty?
+
+    old_courses.map! { |c| "<i class='icon-warning-sign'></i> #{c.title}" }
+    "<br><br>#{old_courses.join('<br>')}"
+  end
+
+  def selection_title(course_id, courses)
+    courses.detect { |c| c.id == course_id }&.title
   end
 end
