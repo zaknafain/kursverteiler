@@ -139,6 +139,7 @@ function createSortables() {
   studentElements.forEach(studentElement => initializeSortable(studentElement));
   let notDistributedList = document.querySelector('.students--container');
   if (notDistributedList) { initializeSortable(notDistributedList); }
+  $('[data-toggle="popover"]').popover({ trigger: 'hover', html: true });
 }
 
 $(document).on('rails_admin.dom_ready', function() {
