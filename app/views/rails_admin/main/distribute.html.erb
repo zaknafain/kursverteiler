@@ -40,10 +40,19 @@
             <%= t('admin.actions.distribute.course.min_to_max', min: course.minimum, max: course.maximum) unless course.guaranteed? %>
           </div>
           <div class="course-description--count">
-            <% if course.maximum && course.students.length >= course.maximum %>
-              <i class="text-danger icon-warning-sign"></i>
+            <% if course.maximum %>
+              <% if course.students.length >= course.maximum %>
+                <i class="text-danger icon-warning-sign"></i>
+                <%= '+' if (course.students.length - course.maximum).positive? %><%= course.students.length - course.maximum %>
+              <% else %>
+                <%= course.maximum - course.students.length%>
+              <% end %>
+              <div class="progress progress-flat">
+                <%= content_tag :div, '', class: "progress-bar", role: "progressbar", style: "width: #{[100, (course.students.length.to_f / course.maximum.to_f) * 100].min}%" %>
+              </div>
+            <% else %>
+              <%= course.students.length %>
             <% end %>
-            <%= course.students.length %>
           </div>
         </div>
       <% end %>
