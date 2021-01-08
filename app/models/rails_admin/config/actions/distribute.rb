@@ -23,7 +23,7 @@ module RailsAdmin
             @courses = @object.courses.includes(students: [:courses, { selections: [:poll] }]).order(title: :asc)
 
             if request.get? # SHOW
-              @not_dist_students = students.not_distributed_in(@object.id).order(first_name: :asc, last_name: :asc)
+              @not_dist_students = students.not_distributed_in(@object.id).order(last_name: :asc, first_name: :asc)
 
               render @action.template_name
             elsif request.put? # UPDATE
@@ -38,7 +38,7 @@ module RailsAdmin
                   student.courses << @courses.detect { |c| c.id == param[:course_id].to_i }
                 end
               end
-              @not_dist_students = students.not_distributed_in(@object.id).order(first_name: :asc, last_name: :asc)
+              @not_dist_students = students.not_distributed_in(@object.id).order(last_name: :asc, first_name: :asc)
               @courses.reload
 
               render @action.template_name
