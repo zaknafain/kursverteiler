@@ -24,7 +24,7 @@ de:
         menu: Verteilung
         poll:
           complete: Abschließen
-          complete_warning: 'Warnung: Die Studenten werden informiert.'
+          complete_warning: 'Warnung: Die Schüler werden informiert.'
           completed: 'Die Verteilung wurde am %{date} abgeschlossen. Die Schüler wurden informiert.'
           not_completable_until: 'Die Wahlen laufen noch bis einschließlich %{date}.'
         reset_all: Alle zurücksetzen
