@@ -29,12 +29,12 @@
 
   <div class="courses--container">
     <% @courses.each do |course| %>
-      <%= content_tag :div, id: "course-container-#{course.id}", class: classes_for(course) do %>
+      <%= content_tag :div, class: classes_for(course) do %>
         <%= form_with model: @object, url: distribute_path(model_name: 'poll', id: @object.id), method: :put, class: 'course-students', data: { course_id: course.id } do |form| %>
           <%= render course.students.sort_by { |s| [s.last_name, s.first_name] }, form: form, course_id: course.id %>
         <% end %>
         <div class="course-description">
-          <div class="course-description--title"><%= '(G) ' if course.guaranteed? %><%= course.title %></div>
+          <div class="course-description--title"><%= course.title %></div>
           <div class="course-description--teacher"><%= course.teacher_name %></div>
           <div class="course-description--min-to-max">
             <%= t('admin.actions.distribute.course.min_to_max', min: course.minimum, max: course.maximum) unless course.guaranteed? %>
