@@ -78,12 +78,12 @@ module RailsAdminHelper
     %i[top mid low].each_with_object([]) do |prio, array|
       next if selection&.send("#{prio}_course_id").nil?
 
-      array << "#{t("students.show.prio.#{prio}")}: #{selection_title(selection&.send("#{prio}_course_id"), courses)}"
+      array << "#{send("#{prio}_translation")}: #{selection_title(selection&.send("#{prio}_course_id"), courses)}"
     end.join('<br>')
   end
 
   def old_courses_to_html(student, courses)
-    old_courses = courses.select { |c| student.courses.map(&:id).include?(c.parent_course_id) }
+    old_courses = courses.select { |c| c.parent_course_id && student.courses.map(&:id).include?(c.parent_course_id) }
 
     return '' if old_courses.empty?
 
@@ -93,5 +93,17 @@ module RailsAdminHelper
 
   def selection_title(course_id, courses)
     courses.detect { |c| c.id == course_id }&.title
+  end
+
+  def top_translation
+    @top_translation ||= t('students.show.prio.top')
+  end
+
+  def mid_translation
+    @mid_translation ||= t('students.show.prio.mid')
+  end
+
+  def low_translation
+    @low_translation ||= t('students.show.prio.low')
   end
 end
