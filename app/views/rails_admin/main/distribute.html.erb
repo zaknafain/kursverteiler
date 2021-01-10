@@ -13,7 +13,7 @@
             <%= sub_form.hidden_field :course_id, value: student.selection_for(@object)&.top_course_id %>
           <% end %>
         <% end %>
-        <%= button_tag t('admin.actions.distribute.distribute_all'), type: 'submit', disabled: @not_dist_students.empty?, id: 'distribute-all', class: 'students--distribute btn btn-primary' %>
+        <%= button_tag t('admin.actions.distribute.distribute_all'), type: 'submit', disabled: @not_dist_students.empty?, id: 'distribute-all', class: 'students--distribute btn btn-primary', data: { disable_with: '...' } %>
       <% end %>
       <%= form_with model: @object, url: distribute_path(model_name: 'poll', id: @object.id), method: :put do |form| %>
         <% @courses.map(&:students).flatten.each do |student| %>
@@ -22,7 +22,7 @@
             <%= sub_form.hidden_field :course_id, value: nil %>
           <% end %>
         <% end %>
-        <%= button_tag t('admin.actions.distribute.reset_all'), type: 'sumbit', disabled: @courses.map(&:students).flatten.empty?, id: 'reset-all', class: 'students--reset btn btn-danger' %>
+        <%= button_tag t('admin.actions.distribute.reset_all'), type: 'sumbit', disabled: @courses.map(&:students).flatten.empty?, id: 'reset-all', class: 'students--reset btn btn-danger', data: { disable_with: '...' } %>
       <% end %>
     </div>
   </div>
