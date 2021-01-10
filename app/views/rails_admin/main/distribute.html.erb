@@ -57,5 +57,25 @@
         </div>
       <% end %>
     <% end %>
+    <div class="course alert">
+      <% if @object.completed.nil? && @object.valid_until < Time.zone.today %>
+        <div class="m-auto">
+          <%= form_with model: @object, url: distribute_path(model_name: 'poll', id: @object.id), method: :put do |form| %>
+            <%= form.hidden_field :completed, value: Time.zone.now %>
+            <%= button_tag t('admin.actions.distribute.poll.complete'), type: "submit", class: "btn btn-lg btn-block btn-danger", data: { disable_with: '...' } %><br>
+            <span class="text-danger"><%= t('admin.actions.distribute.poll.complete_warning') %></span>
+          <% end %>
+        </div>
+      <% elsif @object.completed.nil? %>
+        <div class="m-auto">
+          <%= button_tag t('admin.actions.distribute.poll.complete'), type: "button", disabled: true, class: "btn btn-lg btn-block btn-default" %><br>
+          <span><%= t('admin.actions.distribute.poll.not_completable_until', date: I18n.l(@object.valid_until)) %></span>
+        </div>
+      <% else %>
+        <div class="m-auto">
+          <%= t('admin.actions.distribute.poll.completed', date: I18n.l(@object.completed, format: :short)) %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

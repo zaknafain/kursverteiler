@@ -22,6 +22,11 @@ de:
           min_to_max: '%{min} bis %{max} Plätze'
         distribute_all: Erstwahlen verteilen
         menu: Verteilung
+        poll:
+          complete: Abschließen
+          complete_warning: 'Warnung: Die Studenten werden informiert.'
+          completed: 'Die Verteilung wurde am %{date} abgeschlossen. Die Schüler wurden informiert.'
+          not_completable_until: 'Die Wahlen laufen noch bis einschließlich %{date}.'
         reset_all: Alle zurücksetzen
         students_count:
           one: 1 Schüler nicht verteilt
