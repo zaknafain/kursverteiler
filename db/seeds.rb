@@ -22,10 +22,14 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
   log('------------------------- Create 2  dummy Polls -------------------------')
   polls = [Time.zone.today.year - 1, Time.zone.today.year].map do |year|
     title = "Kurswahl #{year}"
+    end_of_year = Date.new(year, 12, 31)
+    completed = if end_of_year < Time.zone.today
+                  Faker::Time.between_dates(from: end_of_year + 1.day, to: end_of_year + 3.days, period: :day)
+                end
     log("Create #{title}")
-    Poll.create!({ title: title, valid_from: Date.new(year), valid_until: Date.new(year, 12, 31),
+    Poll.create!({ title: title, valid_from: Date.new(year), valid_until: end_of_year,
                    description: Faker::Lorem.paragraph(sentence_count: 10),
-                   completed: Date.new(year, 12, 31) < Time.zone.today ? Date.new(year + 1, 1, 3) : nil })
+                   completed: completed })
   end
 
   # Create 10 dummy Classes for the upcomming Students
