@@ -1,0 +1,9 @@
+<p>Hallo <%= @student.full_name %>,</p>
+
+<p>
+  Die Kurswahlen von <strong><%= @poll.title %></strong> wurden verteilt.<br>
+  Sie wurden dem Kurs <strong><%= @course.title %></strong> bei <strong><%= @course.teacher_name %></strong> zugeteilt.<br>
+  Unter <%= link_to 'kursverteiler.herokuapp.com', 'https://kursverteiler.herokuapp.com' %> können Sie dies erneut einsehen.
+</p>
+
+<p>Viel Freude im Kurs</p>

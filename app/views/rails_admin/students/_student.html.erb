@@ -1,4 +1,4 @@
-<%= content_tag :div, id: "student-#{student.id}", class: "student--container", data: student_distribution_data(student, @object) do %>
+<%= content_tag :div, class: "student--container", data: student_distribution_data(student, @object) do %>
   <%= form.fields_for("courses_students[]", student) do |sub_form| %>
     <%= sub_form.hidden_field :student_id, value: student.id %>
     <%= sub_form.hidden_field :course_id, value: course_id %>

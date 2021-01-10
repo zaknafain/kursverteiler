@@ -22,6 +22,11 @@ en:
           min_to_max: '%{min} to %{max} Seats'
         distribute_all: First choice all
         menu: Distribution
+        poll:
+          complete: Finish
+          complete_warning: 'Warning: The students will get informed.'
+          completed: 'The distribution was finished %{date}. The students were informed.'
+          not_completable_until: 'The poll is running till %{date} incl.'
         reset_all: Reset all
         students_count:
           one: 1 student not distributed
