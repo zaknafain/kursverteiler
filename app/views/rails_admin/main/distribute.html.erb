@@ -39,6 +39,11 @@
           <div class="course-description--min-to-max">
             <%= t('admin.actions.distribute.course.min_to_max', min: course.minimum, max: course.maximum) unless course.guaranteed? %>
           </div>
+          <% if @object.completed.present? %>
+            <%= form_with model: course, url: main_app.admins_course_path(course), method: :get do |form| %>
+              <%= button_tag t('admin.actions.distribute.course.download'), type: "submit", class: "btn btn-sm", data: { disable_with: '...' } %>
+            <% end %>
+          <% end %>
           <div class="course-description--count">
             <% if course.maximum %>
               <% if course.students.length >= course.maximum %>
