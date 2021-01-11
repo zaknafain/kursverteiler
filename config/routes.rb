@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   devise_for :students, path: 'students', controllers: { sessions: 'students/sessions' }
 
   resources :students, only: %i[show update]
+
+  namespace :admins do
+    resources :courses, only: %i[show]
+  end
 end
