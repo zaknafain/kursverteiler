@@ -103,12 +103,12 @@
     max-width: 200px;
   }
 
-  .course-description--min-to-max {
-    flex: 1 1 auto;
-  }
-
   .course-description--count {
     font-weight: bold;
+  }
+
+  .course-growing-element {
+    flex: 1 1 auto;
   }
 
   .progress-flat {
