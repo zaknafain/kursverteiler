@@ -101,6 +101,8 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
         log("Student #{student.id.to_s.rjust(3)} selected following courses: #{course_names}")
       else
         guaranteed_course = poll.courses.find_by(guaranteed: true)
+        next if guaranteed_course.top_selections.length >= 10
+
         selection.update!(top_course: guaranteed_course)
         log("Student #{student.id.to_s.rjust(3)} selected guaranteed course: #{guaranteed_course.title}")
       end
