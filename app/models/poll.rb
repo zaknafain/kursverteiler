@@ -23,6 +23,10 @@ class Poll < ApplicationRecord
     grades.length
   end
 
+  def students_without_selection
+    students.select { |s| s.selection_for(self)&.top_course_id.nil? }
+  end
+
   private
 
   def interval_to_be_positive
