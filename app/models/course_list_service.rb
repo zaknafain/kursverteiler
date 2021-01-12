@@ -11,7 +11,7 @@ class CourseListService
     @course = Course.find(course_id)
   end
 
-  def to_xslx
+  def to_xlsx
     set_column_widths
     write_headline
     write_course_details

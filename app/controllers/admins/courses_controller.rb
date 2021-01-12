@@ -10,7 +10,7 @@ module Admins
 
       service = CourseListService.new(course.id)
 
-      send_data service.to_xslx, filename: "#{poll.title} - #{course.title}.xslx", type: 'application/xml'
+      send_data service.to_xlsx, filename: "#{poll.title} - #{course.title}.xlsx", type: 'application/xml'
     end
 
   end
