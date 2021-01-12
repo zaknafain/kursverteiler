@@ -5,12 +5,10 @@ module Admins
   class CoursesController < ApplicationController
 
     def show
-      course = Course.find(params[:id])
-      poll   = course.poll
-
+      course  = Course.find(params[:id])
       service = CourseListService.new(course.id)
 
-      send_data service.to_xlsx, filename: "#{poll.title} - #{course.title}.xlsx", type: 'application/xml'
+      send_data service.to_xlsx, filename: "#{course.title} - #{course.teacher_name}.xlsx", type: 'application/xml'
     end
 
   end
