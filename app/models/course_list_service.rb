@@ -123,20 +123,6 @@ class CourseListService
     @format_normal_bold_border
   end
 
-  def format_orange
-    return @format_orange if @format_orange
-
-    @format_orange = workbook.add_format
-    @format_orange.set_font(FONT)
-    @format_orange.set_bold
-    @format_orange.set_size(FONT_REGULAR_SIZE)
-    @format_orange.set_border(1)
-    @format_orange.set_bg_color('#ffcc99')
-    @format_orange.set_align('center')
-
-    @format_orange
-  end
-
   def format_yellow
     return @format_yellow if @format_yellow
 
@@ -165,36 +151,36 @@ class CourseListService
   def set_column_widths
     worksheet.set_column('A:A', 4)
     worksheet.set_column('B:B', 22.1)
-    worksheet.set_column('C:C', 6.5)
-    worksheet.set_column('D:AA', 4)
+    worksheet.set_column('C:C', 10.4)
+    worksheet.set_column('D:Z', 4)
   end
 
   def write_headline
-    worksheet.merge_range('A1:L1', 'Arbeitsgemeinschaften / Halbjahr', format_big_bold)
-    worksheet.merge_range('M1:AA1', course.poll.title, format_big_regular)
+    worksheet.merge_range('A1:L1', course.poll.title, format_big_bold)
+    worksheet.merge_range('M1:Z1', 'SEMESTER', format_big_regular)
   end
 
   def write_course_details
     worksheet.merge_range('A3:B3', 'Nr.', format_normal_bold_centered)
     worksheet.merge_range('C3:H3', 'LehrerIn', format_normal_bold_centered)
     worksheet.merge_range('C4:H4', course.teacher_name, format_normal_bold_centered)
-    worksheet.merge_range('I3:AA3', 'Bezeichnung', format_normal_bold_centered)
-    worksheet.merge_range('I4:AA4', course.title, format_normal_bold_centered)
+    worksheet.merge_range('I3:Z3', 'Bezeichnung', format_normal_bold_centered)
+    worksheet.merge_range('I4:Z4', course.title, format_normal_bold_centered)
   end
 
   def write_student_list
     worksheet.merge_range('B6:B7', 'TeilnehmerIn', format_normal_bold_centered)
     worksheet.write('C6', 'Datum:', format_normal_bold_centered)
     worksheet.write('C7', 'Klasse:', format_normal_bold_border)
-    worksheet.write('Y6', 'Note', format_orange)
-    worksheet.merge_range('Z6:AA6', 'Fehlzeiten', format_yellow)
-    worksheet.write('Z7', 'E', format_yellow)
-    worksheet.write('AA7', 'UE', format_yellow)
+    worksheet.merge_range('X6:Z6', 'Gesamt', format_yellow)
+    worksheet.write('X7', 'E', format_yellow)
+    worksheet.write('Y7', '|', format_yellow)
+    worksheet.write('Z7', 'X', format_yellow)
   end
 
   def merge_date_fields
     worksheet.merge_range('A6:A7', '', format_normal_bold_centered)
-    ('D'..'X').to_a.each do |col|
+    ('D'..'W').to_a.each do |col|
       worksheet.merge_range("#{col}6:#{col}7", '', format_normal_bold_centered)
     end
   end
@@ -202,7 +188,7 @@ class CourseListService
   def write_students
     course.students.sort_by { |s| [s.grade.name, s.last_name, s.first_name] }.each_with_index do |student, index|
       worksheet.write("A#{8 + index}", "#{index + 1}.", format_big_regular_right)
-      worksheet.write("B#{8 + index}", student.full_name, format_big_regular_border)
+      worksheet.write("B#{8 + index}", student.full_name, format_normal_bold_border)
       worksheet.write("C#{8 + index}", student.grade.name, format_normal_bold_border)
     end
   end
@@ -210,18 +196,17 @@ class CourseListService
   def write_borders
     worksheet.merge_range('A4:B4', '', format_normal_bold_centered)
     (8..(course.students.length + 7)).to_a.each do |row|
-      ('D'..'X').to_a.each do |col|
+      ('D'..'W').to_a.each do |col|
         worksheet.write("#{col}#{row}", '', format_normal_bold_centered)
       end
     end
   end
 
   def fill_with_colors
-    worksheet.write('Y7', '', format_orange)
     (8..(course.students.length + 7)).to_a.each do |row|
-      worksheet.write("Y#{row}", '', format_orange)
+      worksheet.write("X#{row}", '', format_yellow)
+      worksheet.write("Y#{row}", '', format_yellow)
       worksheet.write("Z#{row}", '', format_yellow)
-      worksheet.write("AA#{row}", '', format_yellow)
     end
   end
 
@@ -235,7 +220,10 @@ class CourseListService
     worksheet.merge_range("A#{row_last_student + 1}:B#{row_last_student + 1}", '| = unentschuldigt', format_normal_bold)
     worksheet.merge_range("C#{row_last_student + 1}:T#{row_last_student + 1}",
                           'der Klassenleitung bei der Zensurenkonferenz zur Verfügung stehen.', format_normal_bold)
-    worksheet.merge_range("W#{row_last_student + 1}:AA#{row_last_student + 1}",
+    worksheet.merge_range("A#{row_last_student + 2}:B#{row_last_student + 2}", 'X = anwesend', format_normal_bold)
+    worksheet.merge_range("C#{row_last_student + 2}:T#{row_last_student + 2}",
+                          'Nutzen Sie hierzu bitte die grauen Kästchen.', format_normal_bold)
+    worksheet.merge_range("V#{row_last_student + 2}:Z#{row_last_student + 2}",
                           "erstellt am #{I18n.l Time.zone.today}", format_small_right)
   end
 
