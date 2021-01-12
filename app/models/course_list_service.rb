@@ -5,6 +5,7 @@ class CourseListService
   FONT              = 'Arial'
   FONT_BIG_SIZE     = 14
   FONT_REGULAR_SIZE = 10
+  FONT_SMALL_SIZE   = 8
   attr_accessor :course
 
   def initialize(course_id)
@@ -150,6 +151,17 @@ class CourseListService
     @format_yellow
   end
 
+  def format_small_right
+    return @format_small_right if @format_small_right
+
+    @format_small_right = workbook.add_format
+    @format_small_right.set_font(FONT)
+    @format_small_right.set_size(FONT_SMALL_SIZE)
+    @format_small_right.set_align('right')
+
+    @format_small_right
+  end
+
   def set_column_widths
     worksheet.set_column('A:A', 4)
     worksheet.set_column('B:B', 22.1)
@@ -216,13 +228,15 @@ class CourseListService
   def write_footer
     row_last_student = course.students.length + 8
 
-    worksheet.merge_range("A#{row_last_student}:C#{row_last_student}", 'E = entschuldigt', format_normal_bold)
-    worksheet.merge_range("H#{row_last_student}:Z#{row_last_student}",
+    worksheet.merge_range("A#{row_last_student}:B#{row_last_student}", 'E = entschuldigt', format_normal_bold)
+    worksheet.merge_range("C#{row_last_student}:T#{row_last_student}",
                           'Bitte zählen Sie die Fehlzeiten rechtzeitig vor Ende des Halbjahres zusammen, damit sie',
                           format_normal_bold)
-    worksheet.merge_range("A#{row_last_student + 1}:C#{row_last_student + 1}", '| = unentschuldigt', format_normal_bold)
-    worksheet.merge_range("H#{row_last_student + 1}:Z#{row_last_student + 1}",
+    worksheet.merge_range("A#{row_last_student + 1}:B#{row_last_student + 1}", '| = unentschuldigt', format_normal_bold)
+    worksheet.merge_range("C#{row_last_student + 1}:T#{row_last_student + 1}",
                           'der Klassenleitung bei der Zensurenkonferenz zur Verfügung stehen.', format_normal_bold)
+    worksheet.merge_range("W#{row_last_student + 1}:AA#{row_last_student + 1}",
+                          "erstellt am #{I18n.l Time.zone.today}", format_small_right)
   end
 
 end
