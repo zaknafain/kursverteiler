@@ -35,6 +35,7 @@ de:
         description: Allgemeine Informationen
         grades: Klassen
         grades_count: Anzahl Klassen
+        students_without_selection: Schüler ohne Wahlwunsch
         title: Titel
         valid_from: Startet am
         valid_until: Endet am
