@@ -188,7 +188,7 @@ class CourseListService
   end
 
   def write_students
-    course.students.sort_by { |s| [s.last_name, s.first_name] }.each_with_index do |student, index|
+    course.students.sort_by { |s| [s.grade.name, s.last_name, s.first_name] }.each_with_index do |student, index|
       worksheet.write("A#{8 + index}", "#{index + 1}.", format_big_regular_right)
       worksheet.write("B#{8 + index}", student.full_name, format_big_regular_border)
       worksheet.write("C#{8 + index}", student.grade.name, format_normal_bold_border)
