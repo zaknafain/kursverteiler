@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/zaknafain/rails_admin
-  revision: 54e838cbaf5e468f448d64dd93694e79a3933b3e
+  revision: 6820898f37428e3659fafd16688d5e7cc0ffbff7
   branch: multiselect_options
   specs:
     rails_admin (2.0.2)
@@ -357,4 +357,4 @@ RUBY VERSION
    ruby 3.0.0
 
 BUNDLED WITH
-   2.1.4
+   2.2.3
