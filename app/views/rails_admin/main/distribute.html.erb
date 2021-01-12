@@ -36,9 +36,17 @@
         <div class="course-description">
           <div class="course-description--title"><%= course.title %></div>
           <div class="course-description--teacher"><%= course.teacher_name %></div>
-          <div class="course-description--min-to-max">
+          <div class="course-growing-element">
             <%= t('admin.actions.distribute.course.min_to_max', min: course.minimum, max: course.maximum) unless course.guaranteed? %>
           </div>
+          <% if @object.completed.present? %>
+            <%= form_with model: course, url: main_app.admins_course_path(course), method: :get, class: "course-growing-element" do |form| %>
+              <%= button_tag type: "submit", class: "btn btn-sm btn-primary btn-block" do %>
+                <i class="icon-download"></i>
+                <span><%= t('admin.actions.distribute.course.download') %></span>
+              <% end %>
+            <% end %>
+          <% end %>
           <div class="course-description--count">
             <% if course.maximum %>
               <% if course.students.length >= course.maximum %>

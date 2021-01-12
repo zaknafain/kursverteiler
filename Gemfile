@@ -31,6 +31,8 @@ gem 'rails_admin_import', git: 'https://github.com/zaknafain/rails_admin_import'
 # Generate fake data for development, testing and staging
 gem 'faker', '~> 2.15.1'
 
+gem 'write_xlsx', '~> 0.99.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
