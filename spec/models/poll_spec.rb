@@ -158,4 +158,26 @@ RSpec.describe Poll, type: :model do
       expect(poll.grades_count).to be(2)
     end
   end
+
+  describe '#students_without_selection' do
+    let(:poll)    { create(:poll, grades: [student.grade]) }
+    let(:student) { create(:student) }
+
+    it 'returns all students having no matching selection' do
+      expect(poll.students_without_selection.map(&:id)).to include(student.id)
+    end
+
+    it 'returns all students having a matching selection without any choices made' do
+      student.selections.create!(poll: poll)
+
+      expect(poll.students_without_selection.map(&:id)).to include(student.id)
+    end
+
+    it 'does not return a student with a matching selection with at least a top course' do
+      poll.courses = [create(:course), create(:course)]
+      student.selections.create!(poll: poll, top_course: poll.courses.first)
+
+      expect(poll.students_without_selection).to be_empty
+    end
+  end
 end
