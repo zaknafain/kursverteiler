@@ -35,6 +35,7 @@ en:
         description: General Information
         grades: Classes
         grades_count: Classes count
+        students_without_selection: Students without selection
         title: Title
         valid_from: Beginns at
         valid_until: Ends at
