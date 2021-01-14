@@ -22,6 +22,7 @@ class CourseListService
     write_borders
     fill_with_colors
     write_footer
+    set_printer
     workbook.close
     io.rewind
 
@@ -225,6 +226,16 @@ class CourseListService
                           'Nutzen Sie hierzu bitte die grauen Kästchen.', format_normal_bold)
     worksheet.merge_range("V#{row_last_student + 2}:Z#{row_last_student + 2}",
                           "erstellt am #{I18n.l Time.zone.today}", format_small_right)
+  end
+
+  def set_printer
+    last_row = course.students.length + 10
+
+    worksheet.hide_gridlines(1)
+    worksheet.paper = 9
+    worksheet.set_landscape
+    worksheet.fit_to_pages(1, 1)
+    worksheet.print_area("A1:Z#{last_row}")
   end
 
 end
