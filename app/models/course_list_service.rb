@@ -44,122 +44,46 @@ class CourseListService
   end
 
   def format_big_bold
-    return @format_big_bold if @format_big_bold
-
-    @format_big_bold = workbook.add_format
-    @format_big_bold.set_font(FONT)
-    @format_big_bold.set_bold
-    @format_big_bold.set_size(FONT_BIG_SIZE)
-
-    @format_big_bold
+    @format_big_bold ||= workbook.add_format({ font: FONT, size: FONT_BIG_SIZE, bold: true })
   end
 
   def format_big_regular
-    return @format_big_regular if @format_big_regular
-
-    @format_big_regular = workbook.add_format
-    @format_big_regular.set_font(FONT)
-    @format_big_regular.set_size(FONT_BIG_SIZE)
-
-    @format_big_regular
+    @format_big_regular ||= workbook.add_format({ font: FONT, size: FONT_BIG_SIZE })
   end
 
   def format_big_regular_border
-    return @format_big_regular_border if @format_big_regular_border
-
-    @format_big_regular_border = workbook.add_format
-    @format_big_regular_border.set_font(FONT)
-    @format_big_regular_border.set_size(FONT_BIG_SIZE)
-    @format_big_regular_border.set_border(1)
-
-    @format_big_regular_border
+    @format_big_regular_border ||= workbook.add_format({ font: FONT, size: FONT_BIG_SIZE, border: 1 })
   end
 
   def format_big_regular_right
-    return @format_big_regular_right if @format_big_regular_right
-
-    @format_big_regular_right = workbook.add_format
-    @format_big_regular_right.set_font(FONT)
-    @format_big_regular_right.set_size(FONT_BIG_SIZE)
-    @format_big_regular_right.set_align('right')
-    @format_big_regular_right.set_border(1)
-
-    @format_big_regular_right
+    @format_big_regular_right ||= workbook.add_format({ font: FONT, size: FONT_BIG_SIZE, border: 1, align: 'right' })
   end
 
   def format_normal_bold_centered
-    return @format_normal_bold_centered if @format_normal_bold_centered
-
-    @format_normal_bold_centered = workbook.add_format
-    @format_normal_bold_centered.set_font(FONT)
-    @format_normal_bold_centered.set_bold
-    @format_normal_bold_centered.set_size(FONT_REGULAR_SIZE)
-    @format_normal_bold_centered.set_align('center')
-    @format_normal_bold_centered.set_align('vcenter')
-
-    @format_normal_bold_centered
+    @format_normal_bold_centered ||= workbook.add_format({ font: FONT, size: FONT_REGULAR_SIZE, bold: true,
+                                                           align: 'center', valign: 'vcenter' })
   end
 
   def format_normal_bold_centered_bordered
-    return @format_normal_bold_centered_bordered if @format_normal_bold_centered_bordered
-
-    @format_normal_bold_centered_bordered = workbook.add_format
-    @format_normal_bold_centered_bordered.set_font(FONT)
-    @format_normal_bold_centered_bordered.set_bold
-    @format_normal_bold_centered_bordered.set_size(FONT_REGULAR_SIZE)
-    @format_normal_bold_centered_bordered.set_align('center')
-    @format_normal_bold_centered_bordered.set_align('vcenter')
-    @format_normal_bold_centered_bordered.set_border(1)
-
-    @format_normal_bold_centered_bordered
+    @format_normal_bold_centered_bordered ||= workbook.add_format({ font: FONT, size: FONT_REGULAR_SIZE, bold: true,
+                                                                    border: 1, align: 'center', valign: 'vcenter' })
   end
 
   def format_normal_bold
-    return @format_normal_bold if @format_normal_bold
-
-    @format_normal_bold = workbook.add_format
-    @format_normal_bold.set_font(FONT)
-    @format_normal_bold.set_bold
-    @format_normal_bold.set_size(FONT_REGULAR_SIZE)
-
-    @format_normal_bold
+    @format_normal_bold ||= workbook.add_format({ font: FONT, size: FONT_REGULAR_SIZE, bold: true })
   end
 
   def format_normal_bold_border
-    return @format_normal_bold_border if @format_normal_bold_border
-
-    @format_normal_bold_border = workbook.add_format
-    @format_normal_bold_border.set_font(FONT)
-    @format_normal_bold_border.set_bold
-    @format_normal_bold_border.set_size(FONT_REGULAR_SIZE)
-    @format_normal_bold_border.set_border(1)
-
-    @format_normal_bold_border
+    @format_normal_bold_border ||= workbook.add_format({ font: FONT, size: FONT_REGULAR_SIZE, bold: true, border: 1 })
   end
 
   def format_yellow
-    return @format_yellow if @format_yellow
-
-    @format_yellow = workbook.add_format
-    @format_yellow.set_font(FONT)
-    @format_yellow.set_bold
-    @format_yellow.set_size(FONT_REGULAR_SIZE)
-    @format_yellow.set_border(1)
-    @format_yellow.set_bg_color('#ffff99')
-    @format_yellow.set_align('center')
-
-    @format_yellow
+    @format_yellow ||= workbook.add_format({ font: FONT, size: FONT_REGULAR_SIZE, bold: true, border: 1,
+                                             align: 'center', bg_color: '#ffff99' })
   end
 
   def format_small_right
-    return @format_small_right if @format_small_right
-
-    @format_small_right = workbook.add_format
-    @format_small_right.set_font(FONT)
-    @format_small_right.set_size(FONT_SMALL_SIZE)
-    @format_small_right.set_align('right')
-
-    @format_small_right
+    @format_small_right ||= workbook.add_format({ font: FONT, size: FONT_SMALL_SIZE, align: 'right' })
   end
 
   def set_column_widths
@@ -170,10 +94,12 @@ class CourseListService
   end
 
   def write_headline
-    semester = if [1, 2, 3, 4, 12].to_a.include?(course.poll.valid_until.month)
-                 "Sommersemester #{course.poll.valid_until.year}"
+    date = course.poll.valid_until
+    year = date.year
+    semester = if [1, 2, 3, 4, 12].include?(date.month)
+                 "Sommersemester #{year}"
                else
-                 "Wintersemester #{course.poll.valid_until.year}/#{course.poll.valid_until.year - 1}"
+                 "Wintersemester #{year}/#{year - 1}"
                end
 
     worksheet.merge_range('A1:L1', course.poll.title, format_big_bold)
