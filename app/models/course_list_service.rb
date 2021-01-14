@@ -170,8 +170,14 @@ class CourseListService
   end
 
   def write_headline
+    semester = if [1, 2, 3, 4, 12].to_a.include?(course.poll.valid_until.month)
+                 "Sommersemester #{course.poll.valid_until.year}"
+               else
+                 "Wintersemester #{course.poll.valid_until.year}/#{course.poll.valid_until.year - 1}"
+               end
+
     worksheet.merge_range('A1:L1', course.poll.title, format_big_bold)
-    worksheet.merge_range('M1:Z1', 'SEMESTER', format_big_regular)
+    worksheet.merge_range('M1:Z1', semester, format_big_regular)
   end
 
   def write_course_details
@@ -245,6 +251,8 @@ class CourseListService
     worksheet.paper = 9
     worksheet.set_landscape
     worksheet.fit_to_pages(1, 1)
+    worksheet.center_horizontally
+    worksheet.center_vertically
     worksheet.print_area("A1:Z#{last_row}")
   end
 
