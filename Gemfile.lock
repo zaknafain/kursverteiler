@@ -349,6 +349,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.1)
   rubocop (~> 1.8.0)
   rubocop-rails (~> 2.9.0)
+  rubyzip (~> 2.3.0)
   sass-rails (>= 6)
   selenium-webdriver
   spring

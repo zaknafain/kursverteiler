@@ -31,6 +31,7 @@ gem 'rails_admin_import', git: 'https://github.com/zaknafain/rails_admin_import'
 # Generate fake data for development, testing and staging
 gem 'faker', '~> 2.15.1'
 
+gem 'rubyzip', '~> 2.3.0'
 gem 'write_xlsx', '~> 0.99.0'
 
 group :development, :test do
