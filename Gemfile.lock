@@ -360,7 +360,7 @@ DEPENDENCIES
   write_xlsx (~> 0.99.0)
 
 RUBY VERSION
-   ruby 3.0.0
+   ruby 2.7.2p137
 
 BUNDLED WITH
    2.2.3
