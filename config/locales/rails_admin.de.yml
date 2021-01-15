@@ -19,6 +19,8 @@ de:
       distribute:
         breadcrumb: Verteilung
         course:
+          download: Herunterladen
+          download_zip: Alle herunterladen
           min_to_max: '%{min} bis %{max} Plätze'
         distribute_all: Erstwahlen verteilen
         menu: Verteilung

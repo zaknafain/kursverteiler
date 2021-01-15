@@ -12,6 +12,10 @@ class CourseListService
     @course = Course.find(course_id)
   end
 
+  def filename
+    "#{course.title} - #{course.teacher_name}.xlsx"
+  end
+
   def to_xlsx
     set_column_widths
     write_headline

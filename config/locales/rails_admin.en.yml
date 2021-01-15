@@ -19,6 +19,8 @@ en:
       distribute:
         breadcrumb: Distribution
         course:
+          download: Download
+          download_zip: Download all
           min_to_max: '%{min} to %{max} Seats'
         distribute_all: First choice all
         menu: Distribution

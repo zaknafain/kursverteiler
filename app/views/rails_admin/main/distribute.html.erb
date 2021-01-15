@@ -78,8 +78,15 @@
       <% else %>
         <div class="m-auto">
           <%= t('admin.actions.distribute.poll.completed', date: I18n.l(@object.completed, format: :short)) %>
-        </div>
-      <% end %>
+          <%= form_with url: main_app.admins_courses_path, method: :get do |form| %>
+            <%= form.hidden_field :poll_id, value: @object.id %>
+            <%= button_tag type: "submit", class: "btn btn-sm btn-primary btn-block" do %>
+              <i class="icon-download"></i>
+              <span><%= t('admin.actions.distribute.course.download_zip') %></span>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
