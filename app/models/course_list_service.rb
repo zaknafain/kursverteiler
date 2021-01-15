@@ -112,6 +112,7 @@ class CourseListService
 
   def write_course_details
     worksheet.merge_range('A3:B3', 'Nr.', format_normal_bold_centered_bordered)
+    worksheet.merge_range('A4:B4', course.number, format_normal_bold_centered_bordered)
     worksheet.merge_range('C3:H3', 'LehrerIn', format_normal_bold_centered_bordered)
     worksheet.merge_range('C4:H4', course.teacher_name, format_normal_bold_centered_bordered)
     worksheet.merge_range('I3:Z3', 'Bezeichnung', format_normal_bold_centered_bordered)
@@ -143,7 +144,6 @@ class CourseListService
   end
 
   def write_borders
-    worksheet.merge_range('A4:B4', '', format_normal_bold_centered_bordered)
     (8..(course.students.length + 7)).to_a.each do |row|
       ('D'..'X').to_a.each do |col|
         worksheet.write("#{col}#{row}", '', format_normal_bold_centered_bordered)
