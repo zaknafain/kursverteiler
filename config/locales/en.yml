@@ -13,6 +13,7 @@ en:
         guaranteed: Guaranteed place
         maximum: Maximum students
         minimum: Minimum students
+        number: DIVIS/UNITS
         parent_course: Previous course
         poll: Poll
         teacher_name: Teacher name

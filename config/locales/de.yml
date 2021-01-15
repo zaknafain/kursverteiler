@@ -13,6 +13,7 @@ de:
         guaranteed: Garantierter Platz
         maximum: Maximale Schülerzahl
         minimum: Minimale Schülerzahl
+        number: DIVIS/UNITS
         parent_course: Vorheriger Kurs
         poll: Kurswahl
         teacher_name: Name der Lehrkraft
