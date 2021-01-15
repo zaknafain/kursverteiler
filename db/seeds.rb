@@ -55,6 +55,7 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
                                 maximum: guaranteed ? nil : Faker::Number.within(range: 16..26),
                                 description: Faker::Lorem.paragraph(sentence_count: 10),
                                 teacher_name: Faker::FunnyName.two_word_name,
+                                number: Faker::Number.within(range: 1000..2000),
                                 focus_areas: Faker::Lorem.words(number: (0..6).to_a.sample).join(' '),
                                 variants: Faker::Lorem.words(number: (0..6).to_a.sample).join(' ') })
       course.update!(

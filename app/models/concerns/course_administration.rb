@@ -27,6 +27,7 @@ module CourseAdministration
       end
       field :variants
       field :teacher_name
+      field :number
       field :poll do
         inline_add false
         inline_edit false
@@ -43,7 +44,7 @@ module CourseAdministration
       list do
         sort_by :title
         scopes [nil, :current]
-        exclude_fields :focus_areas, :description, :variants, :teacher_name
+        exclude_fields :focus_areas, :description, :variants, :teacher_name, :number
       end
       edit do
         field :parent_course do
