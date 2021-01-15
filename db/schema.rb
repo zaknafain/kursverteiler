@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_06_213725) do
+ActiveRecord::Schema.define(version: 2021_01_15_213009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_213725) do
     t.string "focus_areas"
     t.string "variants"
     t.bigint "parent_course_id"
+    t.string "number"
     t.index ["parent_course_id"], name: "index_courses_on_parent_course_id"
     t.index ["poll_id"], name: "index_courses_on_poll_id"
   end
