@@ -111,7 +111,8 @@ class CourseListService
   end
 
   def write_course_details
-    worksheet.merge_range('A3:B3', 'Nr.', format_normal_bold_centered_bordered)
+    worksheet.merge_range('A3:B3', I18n.t('activerecord.attributes.course.number'),
+                          format_normal_bold_centered_bordered)
     worksheet.merge_range('A4:B4', course.number, format_normal_bold_centered_bordered)
     worksheet.merge_range('C3:H3', 'LehrerIn', format_normal_bold_centered_bordered)
     worksheet.merge_range('C4:H4', course.teacher_name, format_normal_bold_centered_bordered)
