@@ -72,6 +72,12 @@ en:
         bulk_link: 'Send password reset email to all students of selected %{model_label_plural}'
         done: email sent
         times: '%{count} times'
+      selections:
+        breadcrumb: Choices
+        chosen: Already selected
+        menu: Choices
+        not_chosen: Not selected yet
+        title: '%{model_label} ''%{object_label}'' Choices'
       show:
         breadcrumb: '%{object_label}'
         menu: Show

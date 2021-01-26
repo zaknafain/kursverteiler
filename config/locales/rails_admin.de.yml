@@ -72,6 +72,12 @@ de:
         bulk_link: Allen Schülern der ausgewählten Klassen Passwort-Zurücksetzen E-Mails schicken
         done: eine Passwort-Zurücksetzen E-Mail zugeschickt
         times: '%{count} mal'
+      selections:
+        breadcrumb: Wahlwünsche
+        chosen: Bereits gewählt
+        menu: Wahlwünsche
+        not_chosen: Noch nicht gewählt
+        title: '%{model_label} ''%{object_label}'' Wahlwünsche'
       show:
         breadcrumb: '%{object_label}'
         menu: Anzeigen
