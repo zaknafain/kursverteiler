@@ -193,6 +193,9 @@ de:
         _all: Alle
         future: Kommende Kurswahlen
         running_at: Laufende Kurswahlen
+      student:
+        _all: Alle
+        paused: Pausiert
     table_headers:
       changes: Änderungen
       created_at: Datum/uhrzeit

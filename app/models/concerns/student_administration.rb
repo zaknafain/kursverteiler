@@ -25,6 +25,7 @@ module StudentAdministration
 
       list do
         sort_by :last_name
+        scopes [nil, :paused]
       end
       edit do
         %i[password password_confirmation].each do |field_name|
