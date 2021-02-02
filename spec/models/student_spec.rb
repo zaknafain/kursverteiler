@@ -6,12 +6,18 @@ RSpec.describe Student, type: :model do
   let(:student) { build(:student) }
 
   context 'relations' do
+    context 'grade' do
+      it 'responds to grade' do
+        expect(student).to respond_to(:grade)
+      end
+    end
+
     context 'selections' do
       let!(:selection)     { create(:selection, student: student) }
       let!(:old_selection) { create(:selection, student: student, poll: old_poll) }
       let(:old_poll)       { create(:poll, :ended) }
 
-      it 'has selections' do
+      it 'responds to selections' do
         expect(student).to respond_to(:selections)
       end
 
@@ -139,6 +145,37 @@ RSpec.describe Student, type: :model do
   end
 
   context 'validations' do
+    it 'validates presence of grade' do
+      expect(student).to be_valid
+
+      student.grade = nil
+
+      expect(student).to be_invalid
+      expect(student.errors[:grade]).to be_present
+    end
+
+    it 'validates absence of grade if paused_at is set' do
+      expect(student).to be_valid
+
+      student.grade = nil
+
+      expect(student).to be_invalid
+      expect(student.errors[:grade]).to be_present
+
+      student.paused_at = Time.zone.now
+
+      expect(student).to be_valid
+    end
+
+    it 'is not valid if grade and paused_at are both set' do
+      expect(student).to be_valid
+
+      student.paused_at = Time.zone.now
+
+      expect(student).to be_invalid
+      expect(student.errors[:grade]).to be_present
+    end
+
     it 'validates presence of first_name' do
       expect(student).to be_valid
 
