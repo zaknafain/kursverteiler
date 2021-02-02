@@ -64,7 +64,7 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
     end
   end
 
-  # Create 201 more dummy Students to fill the list
+  # Create 205 more dummy Students to fill the list
   log('----------------------- Create 200 dummy Students -----------------------')
 
   # Creates first dummy Student for testing
@@ -84,6 +84,16 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
       Student.create!({ email: email, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name,
                         password: password, password_confirmation: password, grade: grade })
     end
+  end
+  ((Student.count)..(Student.count + 5)).to_a.each do |index|
+    email = Faker::Internet.unique.safe_email
+    log("Create dummy Student #{index.to_s.rjust(3)} #{"(#{email})".ljust(36)} paused")
+    password = Faker::Internet.password(min_length: 8, max_length: 20, mix_case: true, special_characters: true)
+    from     = polls.min_by(&:valid_from).valid_from + 1.day
+    to       = Time.zone.today - 1.day
+    paused   = Faker::Time.between_dates(from: from, to: to, period: :day)
+    Student.create!({ email: email, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name,
+                      password: password, password_confirmation: password, paused_at: paused })
   end
 
   # Create Selections for all Students and Polls
