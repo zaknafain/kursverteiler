@@ -19,11 +19,10 @@ class StudentsController < ApplicationController
 
   def fetch_data
     @grade   = current_student.grade
-    @poll    = @grade.running_poll
+    @poll    = @grade&.running_poll
     @courses = @poll&.courses&.order(:title)
     selection
-    @polls_not_completed = @grade.polls.past.where(completed: nil)
-    @past_courses = current_student.courses.where.not(poll: [@poll] + @polls_not_completed)
+    @past_courses = current_student.courses.where.not(poll: [@poll])
   end
 
   def selection
