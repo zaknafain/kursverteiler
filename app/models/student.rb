@@ -6,6 +6,8 @@ class Student < ApplicationRecord
   include StudentAdministration
   include SharedUserMethods
 
+  attr_accessor :paused_flag
+
   belongs_to :grade, optional: true
   has_many :selections, dependent: :destroy
   has_many :courses_students, dependent: :delete_all
@@ -26,6 +28,8 @@ class Student < ApplicationRecord
   scope :distributed_in,     ->(poll_id) { includes(:courses).where(courses: { poll_id: poll_id }) }
   scope :not_distributed_in, ->(poll_id) { can_vote_on(poll_id).where.not(id: distributed_in(poll_id)) }
 
+  before_validation :set_paused_at
+
   %i[top mid low].each do |priority|
     define_method(:"current_#{priority}_course=") do |course|
       (current_selection || build_current_selection(poll: current_poll)).public_send(:"#{priority}_course=", course)
@@ -34,6 +38,11 @@ class Student < ApplicationRecord
 
   def selection_for(poll)
     selections.detect { |s| s.poll == poll }
+  end
+
+  def set_paused_at
+    self.paused_at = Time.zone.now if paused_at.nil?     && paused_flag == '1'
+    self.paused_at = nil           if paused_at.present? && paused_flag == '0'
   end
 
 end
