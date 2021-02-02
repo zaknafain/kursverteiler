@@ -6,7 +6,7 @@ class Student < ApplicationRecord
   include StudentAdministration
   include SharedUserMethods
 
-  belongs_to :grade
+  belongs_to :grade, optional: true
   has_many :selections, dependent: :destroy
   has_many :courses_students, dependent: :delete_all
   has_many :courses, through: :courses_students
@@ -15,6 +15,9 @@ class Student < ApplicationRecord
   has_one :current_top_course, through: :current_selection, source: :top_course
   has_one :current_mid_course, through: :current_selection, source: :mid_course
   has_one :current_low_course, through: :current_selection, source: :low_course
+
+  validates :grade, absence:  true, if:     :paused_at
+  validates :grade, presence: true, unless: :paused_at
 
   scope :can_vote_on, lambda { |poll_id|
     includes(grade: [:grades_polls]).where(grade: { grades_polls: { poll_id: poll_id } })
