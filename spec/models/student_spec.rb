@@ -290,6 +290,23 @@ RSpec.describe Student, type: :model do
     end
   end
 
+  context 'hooks' do
+    it 'responds to paused_flag' do
+      expect(student).to respond_to(:paused_flag)
+    end
+
+    it 'calls the set_paused_at method before validation' do
+      student.grade = nil
+
+      expect(student).to be_invalid
+
+      student.paused_flag = '1'
+
+      expect(student).to receive(:set_paused_at).and_call_original
+      expect(student).to be_valid
+    end
+  end
+
   context '#full_name' do
     it 'returns the first name and the last name seperated by a space' do
       expect(student.full_name).to eq("#{student.first_name} #{student.last_name}")
@@ -316,6 +333,52 @@ RSpec.describe Student, type: :model do
       other_student = create(:student)
 
       expect(other_student.selection_for(poll)).to be_nil
+    end
+  end
+
+  context '#set_paused_at' do
+    it 'sets the paused_at attribute if the paused_flag is "1"' do
+      expect(student.paused_at).to be_nil
+
+      student.set_paused_at
+
+      expect(student.paused_at).to be_nil
+
+      student.paused_flag = '1'
+      student.set_paused_at
+
+      expect(student.paused_at).to be_present
+    end
+
+    it 'sets the paused_at attribute to nil if the paused_flag is "0"' do
+      student.paused_at = Time.zone.now
+      expect(student.paused_at).to be_present
+
+      student.set_paused_at
+
+      expect(student.paused_at).to be_present
+
+      student.paused_flag = '0'
+      student.set_paused_at
+
+      expect(student.paused_at).to be_nil
+    end
+
+    it 'leaves the paused_at attribute untouched when it is already set and paused_flag is "1"' do
+      three_days_ago = Time.zone.now - 3.days
+      student.paused_at = three_days_ago
+      expect(student.paused_at).to be_present
+
+      student.set_paused_at
+
+      expect(student.paused_at).to be_present
+      expect(student.paused_at.strftime('%d')).to eq(three_days_ago.strftime('%d'))
+
+      student.paused_flag = '1'
+      student.set_paused_at
+
+      expect(student.paused_at).to be_present
+      expect(student.paused_at.strftime('%d')).to eq(three_days_ago.strftime('%d'))
     end
   end
 end

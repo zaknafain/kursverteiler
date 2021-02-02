@@ -137,6 +137,7 @@ de:
         current_low_course: '%{help} Darf nicht der Erstwahl oder Zweitwahl entsprechen.'
         current_mid_course: '%{help} Darf nicht der Erstwahl entsprechen.'
         email: Erforderlich. Muss eine gültige E-Mail Adresse sein.
+        grade: Erforderlich wenn nicht pausiert. Muss leer sein, wenn pausiert.
         password: '%{help} Freilassen, wenn es nicht geändert werden soll.'
         password_confirmation: '%{help} Muss dem Passwort entsprechen.'
     home:

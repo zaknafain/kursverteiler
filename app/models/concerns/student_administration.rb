@@ -28,6 +28,11 @@ module StudentAdministration
         scopes [nil, :paused]
       end
       edit do
+        field :paused_flag, :boolean do
+          formatted_value do
+            bindings[:object].paused_at.present?
+          end
+        end
         %i[password password_confirmation].each do |field_name|
           field field_name do
             default_value ''
