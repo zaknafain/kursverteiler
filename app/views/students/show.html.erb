@@ -90,23 +90,6 @@
   </div>
 <% end %>
 
-<% @polls_not_completed.each do |poll| %>
-  <div class="row">
-    <div class="col-12 mb-3">
-      <div class="card bg-warning">
-        <div class="card-body">
-          <h2 class="card-title">
-            <%= poll.title %>
-          </h2>
-          <div class="card-text">
-            <%= t('.not_completed_yet') %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>
-
 <% @past_courses.each do |course| %>
   <div class="row">
     <div class="col-12 mb-3">
@@ -115,20 +98,27 @@
           <h2 class="card-title">
             <%= course.poll.title %>
           </h2>
+          <% unless course.poll.completed %>
+            <div class="card-text">
+              <%= t('.not_completed_yet') %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
 
-  <%= content_tag :div, class: "mb-4 course" do %>
-    <div class="card bg-light">
-      <h5 class="card-header"><%= course.title %></h5>
-      <div class="card-body">
-        <div class="mb-2">
-          <strong><%= t('.course.teacher') %>:</strong>
-          <%= course.teacher_name %>
+  <% if course.poll.completed %>
+    <%= content_tag :div, class: "mb-4 course" do %>
+      <div class="card bg-light">
+        <h5 class="card-header"><%= course.title %></h5>
+        <div class="card-body">
+          <div class="mb-2">
+            <strong><%= t('.course.teacher') %>:</strong>
+            <%= course.teacher_name %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 <% end %>
