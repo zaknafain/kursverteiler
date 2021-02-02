@@ -193,6 +193,9 @@ en:
         _all: All
         future: Future Polls
         running_at: Current Polls
+      student:
+        _all: All
+        paused: Paused
     table_headers:
       changes: Changes
       created_at: Date/Time
