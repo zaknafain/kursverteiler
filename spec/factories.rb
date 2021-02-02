@@ -20,6 +20,11 @@ FactoryBot.define do
     password              { '12345678' }
     password_confirmation { '12345678' }
     grade
+
+    trait :paused do
+      grade     { nil }
+      paused_at { Time.zone.now }
+    end
   end
 
   factory :poll do

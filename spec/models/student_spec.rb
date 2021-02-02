@@ -220,6 +220,19 @@ RSpec.describe Student, type: :model do
   end
 
   context 'scopes' do
+    context 'paused' do
+      let!(:student)        { create(:student) }
+      let!(:paused_student) { create(:student, :paused) }
+
+      it 'returns all students wich are paused' do
+        expect(Student.paused.pluck(:id)).to eq([paused_student.id])
+
+        new_student = create(:student, :paused)
+
+        expect(Student.paused.pluck(:id)).to include(new_student.id)
+      end
+    end
+
     context 'not_distributed_in' do
       let(:course)   { create(:course) }
       let(:poll)     { course.poll }

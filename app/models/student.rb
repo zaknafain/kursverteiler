@@ -19,6 +19,7 @@ class Student < ApplicationRecord
   validates :grade, absence:  true, if:     :paused_at
   validates :grade, presence: true, unless: :paused_at
 
+  scope :paused, -> { where.not(paused_at: nil) }
   scope :can_vote_on, lambda { |poll_id|
     includes(grade: [:grades_polls]).where(grade: { grades_polls: { poll_id: poll_id } })
   }
