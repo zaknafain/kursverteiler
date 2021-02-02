@@ -24,6 +24,12 @@ RSpec.describe StudentsController, type: :controller do
 
       expect { get :show, params: { id: student.id } }.to_not raise_error
     end
+
+    it 'throws no error if student is paused' do
+      student.update!(grade: nil, paused_at: Time.zone.now)
+
+      expect { get :show, params: { id: student.id } }.to_not raise_error
+    end
   end
 
   context 'update' do
