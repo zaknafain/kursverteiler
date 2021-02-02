@@ -85,21 +85,24 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
                         password: password, password_confirmation: password, grade: grade })
     end
   end
+  from = polls.min_by(&:valid_from).valid_from + 1.day
   ((Student.count)..(Student.count + 5)).to_a.each do |index|
     email = Faker::Internet.unique.safe_email
     log("Create dummy Student #{index.to_s.rjust(3)} #{"(#{email})".ljust(36)} paused")
     password = Faker::Internet.password(min_length: 8, max_length: 20, mix_case: true, special_characters: true)
-    from     = polls.min_by(&:valid_from).valid_from + 1.day
     to       = Time.zone.today - 1.day
     paused   = Faker::Time.between_dates(from: from, to: to, period: :day)
     Student.create!({ email: email, first_name: Faker::Name.first_name, last_name: Faker::Name.last_name,
                       password: password, password_confirmation: password, paused_at: paused })
+    from = paused
   end
 
   # Create Selections for all Students and Polls
   log('-------------------- Create Selections  for Students --------------------')
   polls.each do |poll|
     Student.all.each do |student|
+      next if student.paused_at && student.paused_at < poll.valid_until
+
       selection_amount = [0, 3, 3, 3, 3, 3, 3, 3].sample
       selected_courses = poll.courses.where(guaranteed: false).order(Arel.sql('RANDOM()')).first(selection_amount)
       selection = student.selections.build(poll: poll)
@@ -122,12 +125,12 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
 
   # Create distribution for all Polls from the past
   log('------------------ Create Distribution  for past Polls ------------------')
-  polls.select{ |p| p.valid_until < Time.zone.today }.each do |poll|
+  polls.select{ |p| p.completed.present? }.each do |poll|
     log("Starting Distribution for poll #{poll.title}")
     not_distributed_students = []
 
     selections = poll.selections
-    poll.students.each do |student|
+    selections.map(&:student).flatten.each do |student|
       top_course = selections.detect { |s| s.student_id == student.id }&.top_course
       mid_course = selections.detect { |s| s.student_id == student.id }&.mid_course
       low_course = selections.detect { |s| s.student_id == student.id }&.low_course
