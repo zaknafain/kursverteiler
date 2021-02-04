@@ -65,6 +65,9 @@ en:
         link: 'Add a new %{model_label}'
         menu: Add new
         title: 'New %{model_label}'
+      pause:
+        menu: Pause
+        success: 'Successfully paused %{object_label}'
       reset_password:
         bulk_link: 'Send password reset email to selected %{model_label_plural}'
         done: email sent

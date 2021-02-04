@@ -71,6 +71,7 @@ RailsAdmin.config do |config|
   config.label_methods = [:to_pretty_value]
   config.default_items_per_page = 50
 
+  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Pause)
   RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Selections)
   RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Distribute)
   RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPassword)
@@ -90,6 +91,9 @@ RailsAdmin.config do |config|
     show
     edit
     selections do
+      only %w[Student]
+    end
+    pause do
       only %w[Student]
     end
     delete do
