@@ -65,6 +65,9 @@ de:
         link: '%{model_label} hinzufügen'
         menu: Neu hinzufügen
         title: 'Hinzufügen %{model_label}'
+      pause:
+        menu: Pausieren
+        success: '%{object_label} erfolgreich pausiert'
       reset_password:
         bulk_link: Ausgewählten Elementen Passwort-Zurücksetzen E-Mails schicken
         done: eine Passwort-Zurücksetzen E-Mail zugeschickt
