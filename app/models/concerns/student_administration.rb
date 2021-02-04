@@ -29,6 +29,9 @@ module StudentAdministration
       end
       edit do
         field :paused_flag, :boolean do
+          visible do
+            bindings[:object].paused_at.present?
+          end
           formatted_value do
             bindings[:object].paused_at.present?
           end
