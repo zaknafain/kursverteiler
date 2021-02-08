@@ -96,6 +96,16 @@ de:
   application:
     header:
       sign_out: Ausloggen
+  i18n:
+    transliterate:
+      rule:
+        Ä: Ae
+        ä: ae
+        Ö: Oe
+        ö: oe
+        Ü: Ue
+        ü: ue
+        ß: ss
   students:
     show:
       disabled_note: Du hast diesen Kurs bereits belegt

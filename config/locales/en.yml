@@ -96,6 +96,16 @@ en:
   application:
     header:
       sign_out: Sign out
+  i18n:
+    transliterate:
+      rule:
+        Ä: Ae
+        ä: ae
+        Ö: Oe
+        ö: oe
+        Ü: Ue
+        ü: ue
+        ß: ss
   students:
     show:
       disabled_note: You have already taken this course
