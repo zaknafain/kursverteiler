@@ -20,7 +20,11 @@ module RailsAdmin
         register_instance_option :controller do
           proc do
             @selections = @object.selections.includes(poll: [:courses]).order('polls.valid_until desc')
-            @polls      = @object.grade.polls.includes(:courses).where.not(id: @selections.map(&:poll_id))
+            @polls = if @object.grade
+                       @object.grade.polls.includes(:courses).where.not(id: @selections.map(&:poll_id))
+                     else
+                       []
+                     end
 
             if request.get? # SHOW
               render @action.template_name
@@ -38,7 +42,11 @@ module RailsAdmin
               flash[:error] = selection.errors.full_messages.join('. ') unless selection.save
 
               @selections = @object.selections.includes(poll: [:courses]).order('polls.valid_until desc')
-              @polls      = @object.grade.polls.includes(:courses).where.not(id: @selections.map(&:poll_id))
+              @polls = if @object.grade
+                         @object.grade.polls.includes(:courses).where.not(id: @selections.map(&:poll_id))
+                       else
+                         []
+                       end
 
               render @action.template_name
             end
