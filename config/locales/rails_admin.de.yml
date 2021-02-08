@@ -81,6 +81,8 @@ de:
         menu: Wahlwünsche
         not_chosen: Noch nicht gewählt
         title: '%{model_label} ''%{object_label}'' Wahlwünsche'
+        update:
+          success: 'Wahlwünsche von %{object_label} gespeichert'
       show:
         breadcrumb: '%{object_label}'
         menu: Anzeigen
