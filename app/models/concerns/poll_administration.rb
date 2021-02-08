@@ -35,7 +35,7 @@ module PollAdministration
                 url = view.rails_admin.show_path(model_name: 'student', id: student.id)
 
                 link_list << view.tag.br if student.grade_id != grade_id && grade_id.present?
-                link_list << view.tag.span("#{student.grade.name}: ") if student.grade_id != grade_id
+                link_list << view.tag.span("#{student.grade&.name}: ") if student.grade_id != grade_id
                 link_list << view.link_to(student&.to_pretty_value, url, class: 'pjax')
                 link_list << ', '
                 grade_id = student.grade_id
