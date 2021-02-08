@@ -25,6 +25,7 @@ module RailsAdmin
                      else
                        []
                      end
+            @courses = @object.courses
 
             if request.get? # SHOW
               render @action.template_name

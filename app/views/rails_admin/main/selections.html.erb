@@ -2,44 +2,62 @@
 <div class="row">
   <% @selections.each do |selection| %>
     <div class="col-sm-4">
-      <h4><%= selection.poll.title %></h4>
-      <%= form_with model: @object, url: selections_path(model_name: 'student', id: @object.id), method: :put, class: "form-horizontal denser" do |form| %>
-        <fieldset>
-          <div class="form-group control-group">
-            <%= hidden_field_tag "students[selections][poll_id]", selection.poll_id %>
-            <label class="col-sm-2 control-label" for="top_course_id"><%= t("activerecord.attributes.selection.top_course") %></label>
-            <div class="col-sm-10 controls">
-              <%= select_tag "students[selections][top_course_id]",
-                  options_from_collection_for_select(selection.poll.courses.sort_by { |c| [c.title] }, 'id', 'title', selection.top_course_id),
-                  { include_blank: true, multiple: false, data: { enumeration: true } } %>
-            </div>
-          </div>
-          <div class="form-group control-group">
-            <label class="col-sm-2 control-label" for="mid_course_id"><%= t("activerecord.attributes.selection.mid_course") %></label>
-            <div class="col-sm-10 controls">
-              <%= select_tag "students[selections][mid_course_id]",
-                  options_from_collection_for_select(selection.poll.courses.sort_by { |c| [c.title] }, 'id', 'title', selection.mid_course_id),
-                  { include_blank: true, multiple: false, data: { enumeration: true } } %>
-            </div>
-          </div>
-          <div class="form-group control-group">
-            <label class="col-sm-2 control-label" for="low_course_id"><%= t("activerecord.attributes.selection.low_course") %></label>
-            <div class="col-sm-10 controls">
-              <%= select_tag "students[selections][low_course_id]",
-                  options_from_collection_for_select(selection.poll.courses.sort_by { |c| [c.title] }, 'id', 'title', selection.low_course_id),
-                  { include_blank: true, multiple: false, data: { enumeration: true } } %>
-            </div>
-          </div>
-        </fieldset>
-        <div class="form-group form-actions">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-primary" type="submit">
-              <i class="icon-white icon-ok"></i>
-              <%= t("admin.form.save") %>
-            </button>
-          </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title"><%= selection.poll.title %></h4>
         </div>
-      <% end %>
+        <div class="panel-body">
+          <% distributed_course = @courses.detect { |c| c.poll_id == selection.poll_id } %>
+          <% if distributed_course %>
+            <% if distributed_course.id == selection.top_course_id %>
+              <div class="alert alert-success"><%= distributed_course.title %></div>
+            <% elsif distributed_course.id == selection.mid_course_id %>
+              <div class="alert alert-warning"><%= distributed_course.title %></div>
+            <% elsif distributed_course.id == selection.low_course_id %>
+              <div class="alert alert-danger"><%= distributed_course.title %></div>
+            <% else %>
+              <div class="alert alert-info"><%= distributed_course.title %></div>
+            <% end %>
+          <% end %>
+          <%= form_with model: @object, url: selections_path(model_name: 'student', id: @object.id), method: :put, class: "form-horizontal denser" do |form| %>
+            <fieldset>
+              <div class="form-group control-group">
+                <%= hidden_field_tag "students[selections][poll_id]", selection.poll_id %>
+                <label class="col-sm-2 control-label" for="top_course_id"><%= t("activerecord.attributes.selection.top_course") %></label>
+                <div class="col-sm-10 controls">
+                  <%= select_tag "students[selections][top_course_id]",
+                      options_from_collection_for_select(selection.poll.courses.sort_by { |c| [c.title] }, 'id', 'title', selection.top_course_id),
+                      { include_blank: true, multiple: false, data: { enumeration: true } } %>
+                </div>
+              </div>
+              <div class="form-group control-group">
+                <label class="col-sm-2 control-label" for="mid_course_id"><%= t("activerecord.attributes.selection.mid_course") %></label>
+                <div class="col-sm-10 controls">
+                  <%= select_tag "students[selections][mid_course_id]",
+                      options_from_collection_for_select(selection.poll.courses.sort_by { |c| [c.title] }, 'id', 'title', selection.mid_course_id),
+                      { include_blank: true, multiple: false, data: { enumeration: true } } %>
+                </div>
+              </div>
+              <div class="form-group control-group">
+                <label class="col-sm-2 control-label" for="low_course_id"><%= t("activerecord.attributes.selection.low_course") %></label>
+                <div class="col-sm-10 controls">
+                  <%= select_tag "students[selections][low_course_id]",
+                      options_from_collection_for_select(selection.poll.courses.sort_by { |c| [c.title] }, 'id', 'title', selection.low_course_id),
+                      { include_blank: true, multiple: false, data: { enumeration: true } } %>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-group form-actions">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-primary" type="submit">
+                  <i class="icon-white icon-ok"></i>
+                  <%= t("admin.form.save") %>
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
@@ -48,44 +66,54 @@
   <div class="row">
     <% @polls.each do |poll| %>
       <div class="col-sm-4">
-        <h4><%= poll.title %></h4>
-        <%= form_with model: @object, url: selections_path(model_name: 'student', id: @object.id), method: :put, class: "form-horizontal denser" do |form| %>
-          <fieldset>
-            <div class="form-group control-group">
-              <%= hidden_field_tag "students[selections][poll_id]", poll.id %>
-              <label class="col-sm-2 control-label" for="top_course_id"><%= t("activerecord.attributes.selection.top_course") %></label>
-              <div class="col-sm-10 controls">
-                <%= select_tag "students[selections][top_course_id]",
-                    options_from_collection_for_select(poll.courses.sort_by { |c| [c.title] }, 'id', 'title', nil),
-                    { include_blank: true, multiple: false, data: { enumeration: true } } %>
-              </div>
-            </div>
-            <div class="form-group control-group">
-              <label class="col-sm-2 control-label" for="mid_course_id"><%= t("activerecord.attributes.selection.mid_course") %></label>
-              <div class="col-sm-10 controls">
-                <%= select_tag "students[selections][mid_course_id]",
-                    options_from_collection_for_select(poll.courses.sort_by { |c| [c.title] }, 'id', 'title', nil),
-                    { include_blank: true, multiple: false, data: { enumeration: true } } %>
-              </div>
-            </div>
-            <div class="form-group control-group">
-              <label class="col-sm-2 control-label" for="low_course_id"><%= t("activerecord.attributes.selection.low_course") %></label>
-              <div class="col-sm-10 controls">
-                <%= select_tag "students[selections][low_course_id]",
-                    options_from_collection_for_select(poll.courses.sort_by { |c| [c.title] }, 'id', 'title', nil),
-                    { include_blank: true, multiple: false, data: { enumeration: true } } %>
-              </div>
-            </div>
-          </fieldset>
-          <div class="form-group form-actions">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button class="btn btn-primary" type="submit">
-                <i class="icon-white icon-ok"></i>
-                <%= t("admin.form.save") %>
-              </button>
-            </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4><%= poll.title %></h4>
           </div>
-        <% end %>
+          <div class="panel-body">
+            <% distributed_course = @courses.detect { |c| c.poll_id == poll.id } %>
+            <% if distributed_course %>
+              <div class="alert alert-info"><%= distributed_course.title %></div>
+            <% end %>
+            <%= form_with model: @object, url: selections_path(model_name: 'student', id: @object.id), method: :put, class: "form-horizontal denser" do |form| %>
+              <fieldset>
+                <div class="form-group control-group">
+                  <%= hidden_field_tag "students[selections][poll_id]", poll.id %>
+                  <label class="col-sm-2 control-label" for="top_course_id"><%= t("activerecord.attributes.selection.top_course") %></label>
+                  <div class="col-sm-10 controls">
+                    <%= select_tag "students[selections][top_course_id]",
+                        options_from_collection_for_select(poll.courses.sort_by { |c| [c.title] }, 'id', 'title', nil),
+                        { include_blank: true, multiple: false, data: { enumeration: true } } %>
+                  </div>
+                </div>
+                <div class="form-group control-group">
+                  <label class="col-sm-2 control-label" for="mid_course_id"><%= t("activerecord.attributes.selection.mid_course") %></label>
+                  <div class="col-sm-10 controls">
+                    <%= select_tag "students[selections][mid_course_id]",
+                        options_from_collection_for_select(poll.courses.sort_by { |c| [c.title] }, 'id', 'title', nil),
+                        { include_blank: true, multiple: false, data: { enumeration: true } } %>
+                  </div>
+                </div>
+                <div class="form-group control-group">
+                  <label class="col-sm-2 control-label" for="low_course_id"><%= t("activerecord.attributes.selection.low_course") %></label>
+                  <div class="col-sm-10 controls">
+                    <%= select_tag "students[selections][low_course_id]",
+                        options_from_collection_for_select(poll.courses.sort_by { |c| [c.title] }, 'id', 'title', nil),
+                        { include_blank: true, multiple: false, data: { enumeration: true } } %>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="form-group form-actions">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button class="btn btn-primary" type="submit">
+                    <i class="icon-white icon-ok"></i>
+                    <%= t("admin.form.save") %>
+                  </button>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>
