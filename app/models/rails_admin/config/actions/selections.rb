@@ -39,7 +39,11 @@ module RailsAdmin
                                           mid_course_id: sanitized_params[:selections][:mid_course_id].to_i,
                                           low_course_id: sanitized_params[:selections][:low_course_id].to_i)
 
-              flash[:error] = selection.errors.full_messages.join('. ') unless selection.save
+              if selection.save
+                flash[:success] = t('admin.actions.selections.update.success', object_label: @object.to_pretty_value)
+              else
+                flash[:error] = selection.errors.full_messages.join('. ')
+              end
 
               @selections = @object.selections.includes(poll: [:courses]).order('polls.valid_until desc')
               @polls = if @object.grade

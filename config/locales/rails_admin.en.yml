@@ -81,6 +81,8 @@ en:
         menu: Choices
         not_chosen: Not selected yet
         title: '%{model_label} ''%{object_label}'' Choices'
+        update:
+          success: 'Choices of %{object_label} saved'
       show:
         breadcrumb: '%{object_label}'
         menu: Show
