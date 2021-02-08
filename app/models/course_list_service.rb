@@ -13,7 +13,7 @@ class CourseListService
   end
 
   def filename
-    "#{course.title} - #{course.teacher_name}.xlsx"
+    I18n.transliterate("#{course.title} - #{course.teacher_name}.xlsx")
   end
 
   def to_xlsx

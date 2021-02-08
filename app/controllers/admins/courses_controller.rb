@@ -7,7 +7,7 @@ module Admins
     def index
       poll = Poll.find(params[:poll_id])
 
-      zip_filename = "#{poll.title} - #{I18n.l Time.zone.today}.zip"
+      zip_filename = I18n.transliterate("#{poll.title} - #{I18n.l Time.zone.today}.zip")
       zip = zip_file(poll.courses)
 
       send_data zip.string, type: 'application/zip', filename: zip_filename
