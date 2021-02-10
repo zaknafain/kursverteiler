@@ -36,9 +36,9 @@ module RailsAdmin
               poll_id = sanitized_params[:selections][:poll_id].to_i
               selection = @selections.find_by(poll_id: poll_id) ||
                           @polls.find(poll_id).selections.build(student_id: @object.id)
-              selection.assign_attributes(top_course_id: sanitized_params[:selections][:top_course_id].to_i,
-                                          mid_course_id: sanitized_params[:selections][:mid_course_id].to_i,
-                                          low_course_id: sanitized_params[:selections][:low_course_id].to_i)
+              selection.assign_attributes(top_course_id: sanitized_params[:selections][:top_course_id],
+                                          mid_course_id: sanitized_params[:selections][:mid_course_id],
+                                          low_course_id: sanitized_params[:selections][:low_course_id])
 
               if selection.save
                 flash[:success] = t('admin.actions.selections.update.success', object_label: @object.to_pretty_value)
