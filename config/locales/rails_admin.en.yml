@@ -136,15 +136,15 @@ en:
         email: Required. Must be a valid email address.
       course:
         guaranteed: Optional. If checked, min and max students are optional.
-        maximum: '%{help} Optional if place is guaranteed.'
-        minimum: '%{help} Optional if place is guaranteed.'
+        maximum: 'Required. Optional if place is guaranteed.'
+        minimum: 'Required. Optional if place is guaranteed.'
       student:
         current_low_course: '%{help} May not be the same as first or second choice.'
         current_mid_course: '%{help} May not me the same as first choice.'
         email: Required. Must be a valid email address.
         grade: Required if not paused. Must be blank if paused.
-        password: '%{help} Keep it blank if no change is wanted.'
-        password_confirmation: '%{help} Must be equal password.'
+        password: '%{help}. Keep it blank if no change is wanted.'
+        password_confirmation: '%{help}. Must be equal password.'
     home:
       name: Home
     js:
