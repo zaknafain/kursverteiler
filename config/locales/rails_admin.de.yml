@@ -136,15 +136,15 @@ de:
         email: Erforderlich. Muss eine gültige E-Mail Adresse sein.
       course:
         guaranteed: Optional. Wenn angehakt, dann sind minimale und maximale Schülerzahl optional.
-        maximum: '%{help} Optional, wenn ein Platz garantiert wird.'
-        minimum: '%{help} Optional, wenn ein Platz garantiert wird.'
+        maximum: 'Erforderlich. Optional, wenn ein Platz garantiert wird.'
+        minimum: 'Erforderlich. Optional, wenn ein Platz garantiert wird.'
       student:
-        current_low_course: '%{help} Darf nicht der Erstwahl oder Zweitwahl entsprechen.'
-        current_mid_course: '%{help} Darf nicht der Erstwahl entsprechen.'
+        current_low_course: '%{help}. Darf nicht der Erstwahl oder Zweitwahl entsprechen.'
+        current_mid_course: '%{help}. Darf nicht der Erstwahl entsprechen.'
         email: Erforderlich. Muss eine gültige E-Mail Adresse sein.
         grade: Erforderlich wenn nicht pausiert. Muss leer sein, wenn pausiert.
-        password: '%{help} Freilassen, wenn es nicht geändert werden soll.'
-        password_confirmation: '%{help} Muss dem Passwort entsprechen.'
+        password: '%{help}. Freilassen, wenn es nicht geändert werden soll.'
+        password_confirmation: '%{help}. Muss dem Passwort entsprechen.'
     home:
       name: Home
     js:
