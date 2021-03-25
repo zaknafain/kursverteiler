@@ -32,7 +32,7 @@ gem 'rails_admin_import', git: 'https://github.com/zaknafain/rails_admin_import'
 gem 'faker', '~> 2.16.0'
 
 gem 'rubyzip', '~> 2.3.0'
-gem 'write_xlsx', '~> 1.04.0'
+gem 'write_xlsx', '~> 1.07.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
