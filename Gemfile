@@ -51,7 +51,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   # Rubocop for linting
   gem 'rubocop', '~> 1.11.0', require: false
-  gem 'rubocop-rails', '~> 2.9.0', require: false
+  gem 'rubocop-rails', '~> 2.10.1', require: false
 end
 
 group :test do
