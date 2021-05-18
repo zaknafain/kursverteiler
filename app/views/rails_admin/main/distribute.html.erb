@@ -2,7 +2,7 @@
   <div class="overlay"></div>
   <div class="not-distributed">
     <%= form_with model: @object, url: distribute_path(model_name: 'poll', id: @object.id), method: :put, class: 'students--container' do |form| %>
-      <%= render @not_dist_students, form: form, course_id: nil %>
+      <%= render @not_dist_students, form: form, course: nil %>
     <% end %>
     <div class="students--actions">
       <div class="students--count"><%= t('admin.actions.distribute.students_count', count: @not_dist_students.length) %></div>
@@ -31,7 +31,7 @@
     <% @courses.each do |course| %>
       <%= content_tag :div, class: classes_for(course) do %>
         <%= form_with model: @object, url: distribute_path(model_name: 'poll', id: @object.id), method: :put, class: 'course-students', data: { course_id: course.id } do |form| %>
-          <%= render course.students.sort_by { |s| [s.last_name, s.first_name] }, form: form, course_id: course.id %>
+          <%= render course.students.sort_by { |s| [s.last_name, s.first_name] }, form: form, course: course %>
         <% end %>
         <div class="course-description">
           <div class="course-description--title"><%= course.title %></div>
