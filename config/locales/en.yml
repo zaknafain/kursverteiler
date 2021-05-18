@@ -31,6 +31,7 @@ en:
         running_poll: Running poll
         student_count: Student count
         students: Students
+        valid_until: Valid until
       poll:
         courses: Courses
         description: General Information

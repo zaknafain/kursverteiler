@@ -29,9 +29,11 @@ module GradeAdministration
         end
       end
       show do
+        field :valid_until
         field :students
       end
       edit do
+        field :valid_until
         field :students do
           inline_add false
         end

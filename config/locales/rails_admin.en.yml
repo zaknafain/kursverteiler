@@ -138,6 +138,8 @@ en:
         guaranteed: Optional. If checked, min and max students are optional.
         maximum: 'Required. Optional if place is guaranteed.'
         minimum: 'Required. Optional if place is guaranteed.'
+      grade:
+        valid_until: Optional. Will get set to three years automatically. Deleting classes is only possible after this timespan elapsed.
       student:
         current_low_course: '%{help} May not be the same as first or second choice.'
         current_mid_course: '%{help} May not me the same as first choice.'
