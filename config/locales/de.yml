@@ -31,6 +31,7 @@ de:
         running_poll: Laufende Kurswahl
         student_count: Anzahl Schüler
         students: Schüler
+        valid_until: Gültig bis
       poll:
         courses: Kurse
         description: Allgemeine Informationen

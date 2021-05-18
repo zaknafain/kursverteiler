@@ -138,6 +138,8 @@ de:
         guaranteed: Optional. Wenn angehakt, dann sind minimale und maximale Schülerzahl optional.
         maximum: 'Erforderlich. Optional, wenn ein Platz garantiert wird.'
         minimum: 'Erforderlich. Optional, wenn ein Platz garantiert wird.'
+      grade:
+        valid_until: Optional. Wird automatisch auf drei Jahre festgelegt. Erst nach Ablauf lassen sich Klassen löschen.
       student:
         current_low_course: '%{help}. Darf nicht der Erstwahl oder Zweitwahl entsprechen.'
         current_mid_course: '%{help}. Darf nicht der Erstwahl entsprechen.'
