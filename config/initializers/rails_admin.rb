@@ -97,7 +97,14 @@ RailsAdmin.config do |config|
       only %w[Student]
     end
     delete do
-      only %w[Student]
+      visible do
+        object = bindings[:object]
+        case object
+        when Grade then object.valid_until < Time.zone.today
+        when Student then true
+        else false
+        end
+      end
     end
     distribute do
       only %w[Poll]
