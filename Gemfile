@@ -22,7 +22,7 @@ gem 'bcrypt', '~> 3.1.16'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 # Handle Authentication for users
-gem 'devise', '~> 4.7.3'
+gem 'devise', '~> 4.8.0'
 gem 'devise-i18n', '~> 1.9.2'
 # Dashboard for admins
 gem 'rails_admin', git: 'https://github.com/zaknafain/rails_admin', branch: 'multiselect_options'
