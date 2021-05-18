@@ -55,6 +55,13 @@ RSpec.describe Grade, type: :model do
     end
   end
 
+  context 'hooks' do
+    it 'calls the set_valid_until method before validation' do
+      expect(grade).to receive(:set_valid_until).and_call_original
+      expect(grade).to be_valid
+    end
+  end
+
   context '#student_count' do
     it 'fetches the latest amount of students' do
       3.times { create(:student, grade: grade) }
