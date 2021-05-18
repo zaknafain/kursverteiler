@@ -11,6 +11,7 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
     Admin.all.destroy_all
     Poll.all.destroy_all
     Grade.all.destroy_all
+    Student.all.destroy_all
   end
 
   # Creates a dummy Admin for testing
