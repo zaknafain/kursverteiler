@@ -11,12 +11,18 @@ class Grade < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: { case_sensitive: false }
 
+  before_validation :set_valid_until
+
   def student_count
     students.length
   end
 
   def running_poll
     polls.running_at(Time.zone.today).first
+  end
+
+  def set_valid_until
+    self.valid_until = 3.years.from_now if valid_until.nil?
   end
 
 end
