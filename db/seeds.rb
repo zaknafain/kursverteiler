@@ -97,22 +97,23 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
     from = paused
   end
 
-  # Create Selections for all Students and Polls
-  log('-------------------- Create Selections  for Students --------------------')
+  # Create distribution for all Polls from the past
   polls.each do |poll|
+    log("Starting Selections for poll #{poll.title}")
     Student.all.each do |student|
       next if student.paused_at && student.paused_at < poll.valid_until
 
       selection_amount = [0, 3, 3, 3, 3, 3, 3, 3].sample
-      selected_courses = poll.courses.where(guaranteed: false).order(Arel.sql('RANDOM()')).first(selection_amount)
+      selected_courses = poll.courses.where(guaranteed: false).to_a.shuffle
+      selected_courses = selected_courses.select { |c| student.courses.map(&:id).exclude?(c.parent_course_id) }
       selection = student.selections.build(poll: poll)
-      if selection_amount.positive?
-        course_names = selected_courses.map(&:title).join(', ')
+      if selection_amount.positive? && selected_courses.length >= 3
+        course_names = selected_courses.first(3).map(&:title).join(', ')
+        log("Student #{student.id.to_s.rjust(3)} selected following courses: #{course_names}")
         selection.top_course = selected_courses.pop
         selection.mid_course = selected_courses.pop
         selection.low_course = selected_courses.pop
         selection.save!
-        log("Student #{student.id.to_s.rjust(3)} selected following courses: #{course_names}")
       else
         guaranteed_course = poll.courses.find_by(guaranteed: true)
         next if guaranteed_course.top_selections.length >= 10
@@ -121,19 +122,17 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
         log("Student #{student.id.to_s.rjust(3)} selected guaranteed course: #{guaranteed_course.title}")
       end
     end
-  end
 
-  # Create distribution for all Polls from the past
-  log('------------------ Create Distribution  for past Polls ------------------')
-  polls.select{ |p| p.completed.present? }.each do |poll|
+    next if poll.completed.blank?
+
     log("Starting Distribution for poll #{poll.title}")
     not_distributed_students = []
 
-    selections = poll.selections
-    selections.map(&:student).flatten.each do |student|
-      top_course = selections.detect { |s| s.student_id == student.id }&.top_course
-      mid_course = selections.detect { |s| s.student_id == student.id }&.mid_course
-      low_course = selections.detect { |s| s.student_id == student.id }&.low_course
+    Student.all.each do |student|
+      selection  = poll.selections.detect { |s| s.student_id == student.id }
+      top_course = selection&.top_course
+      mid_course = selection&.mid_course
+      low_course = selection&.low_course
       if top_course&.guaranteed
         log("Distribute #{student.full_name} to guaranteed #{top_course.title}")
         student.courses << top_course
@@ -152,14 +151,14 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
     end
 
     not_distributed_students.each do |student|
-      poll.courses.each do |course|
-        if course.guaranteed == false && course.students.length < course.maximum
-          log("Distribute #{student.full_name} to #{course.title}")
-          student.courses << course
-        end
-      end
+      courses = poll.courses.where(guaranteed: false).to_a.shuffle
+      course  = courses.detect { |c| c.students.length < c.maximum } || courses.first
+      student.courses << course
+      log("Distribute #{student.full_name} to #{course.title}")
     end
   end
+
+  log('----------------------------- Seeding  done -----------------------------')
 elsif Rails.application.credentials.dig(:admin, :email)
   # Create new Administrator
   log('-------------------- Create new Admin  to the Rescue --------------------')
