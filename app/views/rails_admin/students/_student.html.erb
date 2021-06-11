@@ -3,7 +3,7 @@
     <%= sub_form.hidden_field :student_id, value: student.id %>
     <%= sub_form.hidden_field :course_id, value: course&.id %>
   <% end %>
-  <div class="student--name"><%= student.full_name %></div>
+  <div class="student--name"><%= student.official_name %></div>
   <% if student.courses.map(&:id).include?(course&.parent_course_id) %>
     <div class="text-danger"><i class='icon-warning-sign'></i></div>
   <% end %>
