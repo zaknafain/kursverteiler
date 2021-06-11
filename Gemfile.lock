@@ -316,7 +316,7 @@ GEM
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
     websocket (1.2.9)
-    websocket-driver (0.7.3)
+    websocket-driver (0.7.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     write_xlsx (1.07.0)
