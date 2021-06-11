@@ -313,6 +313,12 @@ RSpec.describe Student, type: :model do
     end
   end
 
+  context '#official_name' do
+    it 'returns the last name and the first name seperated by comma and space' do
+      expect(student.official_name).to eq("#{student.last_name}, #{student.first_name}")
+    end
+  end
+
   context '#selection_for' do
     let(:selection) { create(:selection) }
     let(:student)   { selection.student }

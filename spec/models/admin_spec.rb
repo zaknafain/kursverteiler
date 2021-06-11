@@ -40,4 +40,10 @@ RSpec.describe Admin, type: :model do
       expect(admin.full_name).to eq("#{admin.first_name} #{admin.last_name}")
     end
   end
+
+  context '#official_name' do
+    it 'returns the last name and the first name seperated by comma and space' do
+      expect(admin.official_name).to eq("#{admin.last_name}, #{admin.first_name}")
+    end
+  end
 end
