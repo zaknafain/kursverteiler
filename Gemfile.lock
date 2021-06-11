@@ -112,7 +112,7 @@ GEM
       xpath (~> 3.2)
     charlock_holmes (0.7.7)
     childprocess (4.1.0)
-    concurrent-ruby (1.1.8)
+    concurrent-ruby (1.1.9)
     crass (1.0.6)
     devise (4.8.0)
       bcrypt (~> 3.0)
