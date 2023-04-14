@@ -23,7 +23,10 @@ module RailsAdmin
               ids = params[:bulk_ids] || Array(@object.id)
 
               ids.each do |id|
-                object = params[:model_name].classify.safe_constantize.find_by(id: id)
+                model_class = [Student, Admin].find { |klass| params[:model_name].classify == klass.name }
+                next unless model_class
+
+                object = model_class.find_by(id: id)
                 object&.send_reset_password_instructions
               end
 
