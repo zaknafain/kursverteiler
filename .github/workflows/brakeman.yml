@@ -20,7 +20,7 @@ jobs:
     - name: Scan
       continue-on-error: true
       run: |
-        brakeman -f sarif -o output.sarif.json .
+        brakeman -f sarif -o results.sarif .
     - name: Upload SARIF
       uses: github/codeql-action/upload-sarif@v2
       with:
