@@ -51,6 +51,7 @@ jobs:
         DB_PORT: 5432
         DB_USERNAME: test-user
         DB_PASSWORD: test-pass
+        NODE_OPTIONS: "--openssl-legacy-provider"
       run: |
         if [[ ! -d public/packs-test ]]; then
           bin/rails webpacker:compile
