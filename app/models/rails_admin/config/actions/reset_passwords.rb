@@ -24,7 +24,10 @@ module RailsAdmin
               email_count = 0
 
               ids.each do |id|
-                grade = params[:model_name].classify.safe_constantize.find_by(id: id)
+                model_class = [Grade].find { |klass| params[:model_name].classify == klass.name }
+                next unless model_class
+
+                grade = model_class.find_by(id: id)
                 grade&.students&.map(&:send_reset_password_instructions)
                 email_count += grade&.students&.length || 0
               end

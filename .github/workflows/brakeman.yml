@@ -14,11 +14,11 @@ jobs:
         bundler-cache: true
     - name: Setup Brakeman
       env:
-        BRAKEMAN_VERSION: '4.10.1'
+        BRAKEMAN_VERSION: '5.4.1'
       run: |
         gem install brakeman --version $BRAKEMAN_VERSION
     - name: Scan
-      continue-on-error: true
+      continue-on-error: false
       run: |
         brakeman -f sarif -o results.sarif .
     - name: Upload SARIF
