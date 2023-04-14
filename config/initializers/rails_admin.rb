@@ -101,6 +101,7 @@ RailsAdmin.config do |config|
         object = bindings[:object]
         case object
         when Grade then object.valid_until < Time.zone.today
+        when Poll then object.grades_count == 0
         when Student then true
         else false
         end
