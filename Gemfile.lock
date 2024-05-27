@@ -174,7 +174,7 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.6)
-    minitest (5.23.0)
+    minitest (5.23.1)
     msgpack (1.7.2)
     nested_form (0.3.2)
     net-imap (0.4.10)
@@ -344,7 +344,7 @@ GEM
       zip-zip
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.14)
+    zeitwerk (2.6.15)
     zip-zip (0.3)
       rubyzip (>= 1.0.0)
 
