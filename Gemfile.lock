@@ -199,7 +199,7 @@ GEM
     public_suffix (5.0.4)
     puma (5.6.8)
       nio4r (~> 2.0)
-    racc (1.8.0)
+    racc (1.8.1)
     rack (2.2.9)
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
@@ -344,7 +344,7 @@ GEM
       zip-zip
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.16)
+    zeitwerk (2.6.17)
     zip-zip (0.3)
       rubyzip (>= 1.0.0)
 
