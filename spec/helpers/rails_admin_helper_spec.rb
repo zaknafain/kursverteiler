@@ -203,13 +203,29 @@ RSpec.describe RailsAdminHelper, type: :helper do
     it 'returns popover content from selection_to_html' do
       expect(helper).to receive(:selection_to_html).and_return('FOOBAR')
 
-      expect(helper.student_distribution_data(student, poll)).to include({ content: 'FOOBAR' })
+      content = helper.student_distribution_data(student, poll)[:content]
+
+      expect(content).to include('FOOBAR')
     end
 
     it 'returns popover content from old_courses_to_html' do
-      expect(helper).to receive(:old_courses_to_html).and_return('FOOBAR')
+      expect(helper).to receive(:old_courses_to_html).and_return('BAMBAZ')
 
-      expect(helper.student_distribution_data(student, poll)).to include({ content: 'FOOBAR' })
+      content = helper.student_distribution_data(student, poll)[:content]
+
+      expect(content).to include('BAMBAZ')
+    end
+
+    it 'returns popover content with the official name of the student' do
+      content = helper.student_distribution_data(student, poll)[:content]
+
+      expect(content).to include(student.official_name)
+    end
+
+    it 'returns popover content with the name of the grade of the student' do
+      content = helper.student_distribution_data(student, poll)[:content]
+
+      expect(content).to include(student.grade.name)
     end
   end
 
