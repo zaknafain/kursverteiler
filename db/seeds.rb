@@ -17,7 +17,7 @@ if Rails.application.credentials.dig(:db, :allow_seeding) || ENV.fetch('DB_ALLOW
   # Creates a dummy Admin for testing
   log('Create a dummy Admin for testing (admin@example.com)')
   Admin.create!({ email: 'admin@example.com', first_name: 'John', last_name: 'Doe', password: 'foobar20',
-                  password_confirmation: 'foobar20' })
+                  password_confirmation: 'foobar20', coordinator: true })
 
   # Create 2 dummy Polls for the courses following
   log('------------------------- Create 2  dummy Polls -------------------------')
@@ -167,5 +167,6 @@ elsif Rails.application.credentials.dig(:admin, :email)
                 first_name: Rails.application.credentials.admin[:first_name],
                 last_name: Rails.application.credentials.admin[:last_name],
                 password: Rails.application.credentials.admin[:password],
-                password_confirmation: Rails.application.credentials.admin[:password])
+                password_confirmation: Rails.application.credentials.admin[:password],
+                coordinator: false)
 end
