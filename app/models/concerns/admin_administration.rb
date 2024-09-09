@@ -14,6 +14,7 @@ module AdminAdministration
       field :email
       field :first_name
       field :last_name
+      field :coordinator
 
       list do
         sort_by :last_name
