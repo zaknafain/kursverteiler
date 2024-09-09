@@ -6,10 +6,8 @@ class Admin < ApplicationRecord
   include AdminAdministration
   include SharedUserMethods
 
-  scope :koordinators_only, lambda {
-    backup_email = Rails.application.credentials.dig(:admin, :email)
+  validates :coordinator, inclusion: { in: [true, false] }
 
-    where.not(email: backup_email)
-  }
+  scope :coordinators, -> { where(coordinator: true) }
 
 end
