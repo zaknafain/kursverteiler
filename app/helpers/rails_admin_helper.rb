@@ -70,15 +70,22 @@ module RailsAdminHelper
       student_id: student.id,
       toggle: 'popover',
       placement: 'right',
-      content: "#{selection_to_html(selection, courses)}#{old_courses_to_html(student, courses)}"
+      content: "
+        #{student.official_name} (#{student.grade.name})
+        <br><br>
+        #{selection_to_html(selection, courses)}
+        #{old_courses_to_html(student, courses)}
+      "
     }
   end
 
   def selection_to_html(selection, courses)
     %i[top mid low].each_with_object([]) do |prio, array|
-      next if selection&.send("#{prio}_course_id").nil?
-
-      array << "#{send("#{prio}_translation")}: #{selection_title(selection&.send("#{prio}_course_id"), courses)}"
+      array << if selection&.send("#{prio}_course_id").nil?
+                 "#{send("#{prio}_translation")}: ---"
+               else
+                 "#{send("#{prio}_translation")}: #{selection_title(selection&.send("#{prio}_course_id"), courses)}"
+               end
     end.join('<br>')
   end
 
