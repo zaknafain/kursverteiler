@@ -16,7 +16,6 @@
     "yarn-deduplicate": "^3.1.0"
   },
   "engines": {
-    "node": "20.17.0",
-    "yarn": "1.22.19"
+    "node": "20.17.0"
   }
 }
