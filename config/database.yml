@@ -9,11 +9,11 @@ default: &default
 
 development:
   <<: *default
-  database: kursverteiler-development
+  database: kursverteiler_development
 
 test:
   <<: *default
-  database: kursverteiler-test
+  database: kursverteiler_test
 
 production:
   <<: *default
