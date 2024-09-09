@@ -2,6 +2,7 @@ de:
   activerecord:
     attributes:
       admin:
+        coordinator: Anspechpartner
         email: E-Mail
         first_name: Vorname
         last_name: Nachname
