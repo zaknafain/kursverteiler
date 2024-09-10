@@ -98,16 +98,20 @@ class CourseListService
   end
 
   def write_headline
-    date = course.poll.valid_until
-    year = date.year
-    semester = if [1, 2, 3, 4, 12].include?(date.month)
-                 "Sommersemester #{year}"
-               else
-                 "Wintersemester #{year}/#{year - 1}"
-               end
-
     worksheet.merge_range('A1:L1', course.poll.title, format_big_bold)
-    worksheet.merge_range('M1:Z1', semester, format_big_regular)
+    worksheet.merge_range('M1:Z1', semester_for_course(course), format_big_regular)
+  end
+
+  def semester_for_course(course)
+    poll_until     = course.poll.valid_until # poll runs till this time
+    approx_running = poll_until + 2.months   # probably running at this time
+    year           = approx_running.year
+
+    if (2..7).cover?(approx_running.month)
+      "Sommersemester #{year}"
+    else
+      "Wintersemester #{year}/#{year + 1}"
+    end
   end
 
   def write_course_details
