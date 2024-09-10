@@ -6,10 +6,11 @@ class CourseListService
   FONT_BIG_SIZE     = 14
   FONT_REGULAR_SIZE = 10
   FONT_SMALL_SIZE   = 8
-  attr_accessor :course
+  attr_accessor :course, :students
 
   def initialize(course_id)
-    @course = Course.find(course_id)
+    @course   = Course.find(course_id)
+    @students = @course.students
   end
 
   def filename
@@ -141,7 +142,7 @@ class CourseListService
   end
 
   def write_students
-    course.students.sort_by { |s| [s.grade&.name || '', s.last_name, s.first_name] }.each_with_index do |student, index|
+    students.sort_by { |s| [s.grade&.name || '', s.last_name, s.first_name] }.each_with_index do |student, index|
       write_student_row(student, index)   # add the student to the list
     end
   end
@@ -153,7 +154,7 @@ class CourseListService
   end
 
   def write_borders
-    (8..(course.students.length + 7)).to_a.each do |row|
+    (8..(students.length + 7)).to_a.each do |row|
       ('D'..'X').to_a.each do |col|
         worksheet.write("#{col}#{row}", '', format_normal_bold_centered_bordered)
       end
@@ -161,14 +162,14 @@ class CourseListService
   end
 
   def fill_with_colors
-    (8..(course.students.length + 7)).to_a.each do |row|
+    (8..(students.length + 7)).to_a.each do |row|
       worksheet.write("Y#{row}", '', format_yellow)
       worksheet.write("Z#{row}", '', format_yellow)
     end
   end
 
   def write_footer
-    row_last_student = course.students.length + 9
+    row_last_student = students.length + 9
 
     worksheet.write("A#{row_last_student}", t('missing_excused_abbr'), format_normal_bold_centered)
     worksheet.write_string("B#{row_last_student}", t('missing_excused'), format_normal_bold)
@@ -183,7 +184,7 @@ class CourseListService
   end
 
   def set_printer
-    last_row = course.students.length + 10
+    last_row = students.length + 10
 
     worksheet.hide_gridlines(1)
     worksheet.paper = 9
