@@ -98,6 +98,22 @@ en:
   application:
     header:
       sign_out: Sign out
+  course_list_service:
+    course_title: Title
+    created_at: 'created at %{date}'
+    date: 'Date:'
+    grade: 'Class:'
+    missing_excused: '= excused'
+    missing_excused_abbr: E
+    missing_explanation_line1: Please add up the absences in good time before the end of the semester
+    missing_explanation_line2: so that they are available to the class teacher at the grading conference.
+    missing_unexcused: '= unexcused'
+    missing_unexcused_abbr: I
+    student: Student
+    summer_semester: 'Summer semester %{year}'
+    teacher: Teacher
+    total_missing_header: Total
+    winter_semester: 'Winter semester %{year1}/%{year2}'
   i18n:
     transliterate:
       rule:
