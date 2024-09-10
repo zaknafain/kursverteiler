@@ -142,10 +142,14 @@ class CourseListService
 
   def write_students
     course.students.sort_by { |s| [s.grade&.name || '', s.last_name, s.first_name] }.each_with_index do |student, index|
-      worksheet.write("A#{8 + index}", "#{index + 1}.", format_big_regular_right)
-      worksheet.write("B#{8 + index}", student.official_name, format_normal_bold_border)
-      worksheet.write("C#{8 + index}", student.grade&.name, format_normal_bold_border)
+      write_student_row(student, index)   # add the student to the list
     end
+  end
+
+  def write_student_row(student, index)
+    worksheet.write("A#{8 + index}", "#{index + 1}.", format_big_regular_right)
+    worksheet.write("B#{8 + index}", student.official_name, format_normal_bold_border)
+    worksheet.write("C#{8 + index}", student.grade&.name, format_normal_bold_border)
   end
 
   def write_borders
@@ -164,7 +168,7 @@ class CourseListService
   end
 
   def write_footer
-    row_last_student = course.students.length + 8
+    row_last_student = course.students.length + 9
 
     worksheet.write("A#{row_last_student}", 'E', format_normal_bold_centered)
     worksheet.write_string("B#{row_last_student}", '= entschuldigt', format_normal_bold)
@@ -180,7 +184,7 @@ class CourseListService
   end
 
   def set_printer
-    last_row = course.students.length + 9
+    last_row = course.students.length + 10
 
     worksheet.hide_gridlines(1)
     worksheet.paper = 9
