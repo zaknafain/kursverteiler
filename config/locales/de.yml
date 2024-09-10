@@ -98,6 +98,22 @@ de:
   application:
     header:
       sign_out: Ausloggen
+  course_list_service:
+    course_title: Bezeichnung
+    created_at: 'erstellt am %{date}'
+    date: 'Datum:'
+    grade: 'Klasse:'
+    missing_excused: '= entschuldigt'
+    missing_excused_abbr: E
+    missing_explanation_line1: Bitte zählen Sie die Fehlzeiten rechtzeitig vor Ende des Halbjahres zusammen,
+    missing_explanation_line2: damit sie der Klassenleitung bei der Zensurenkonferenz zur Verfügung stehen.
+    missing_unexcused: '= unentschuldigt'
+    missing_unexcused_abbr: I
+    student: TeilnehmerIn
+    summer_semester: 'Sommersemester %{year}'
+    teacher: LehrerIn
+    total_missing_header: Gesamt
+    winter_semester: 'Wintersemester %{year1}/%{year2}'
   i18n:
     transliterate:
       rule:

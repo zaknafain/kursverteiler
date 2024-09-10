@@ -108,9 +108,9 @@ class CourseListService
     year           = approx_running.year
 
     if (2..7).cover?(approx_running.month)
-      "Sommersemester #{year}"
+      t('summer_semester', year: year)
     else
-      "Wintersemester #{year}/#{year + 1}"
+      t('winter_semester', year1: year, year2: year + 1)
     end
   end
 
@@ -118,19 +118,19 @@ class CourseListService
     worksheet.merge_range('A3:B3', I18n.t('activerecord.attributes.course.number'),
                           format_normal_bold_centered_bordered)
     worksheet.merge_range('A4:B4', course.number, format_normal_bold_centered_bordered)
-    worksheet.merge_range('C3:H3', 'LehrerIn', format_normal_bold_centered_bordered)
+    worksheet.merge_range('C3:H3', t('teacher'), format_normal_bold_centered_bordered)
     worksheet.merge_range('C4:H4', course.teacher_name, format_normal_bold_centered_bordered)
-    worksheet.merge_range('I3:Z3', 'Bezeichnung', format_normal_bold_centered_bordered)
+    worksheet.merge_range('I3:Z3', t('course_title'), format_normal_bold_centered_bordered)
     worksheet.merge_range('I4:Z4', course.title, format_normal_bold_centered_bordered)
   end
 
   def write_student_list
-    worksheet.merge_range('B6:B7', 'TeilnehmerIn', format_normal_bold_centered_bordered)
-    worksheet.write('C6', 'Datum:', format_normal_bold_centered_bordered)
-    worksheet.write('C7', 'Klasse:', format_normal_bold_border)
-    worksheet.merge_range('Y6:Z6', 'Gesamt', format_yellow)
-    worksheet.write('Y7', 'E', format_yellow)
-    worksheet.write('Z7', '|', format_yellow)
+    worksheet.merge_range('B6:B7', t('student'), format_normal_bold_centered_bordered)
+    worksheet.write('C6', t('date'), format_normal_bold_centered_bordered)
+    worksheet.write('C7', t('grade'), format_normal_bold_border)
+    worksheet.merge_range('Y6:Z6', t('total_missing_header'), format_yellow)
+    worksheet.write('Y7', t('missing_excused_abbr'), format_yellow)
+    worksheet.write('Z7', t('missing_unexcused_abbr'), format_yellow)
   end
 
   def merge_date_fields
@@ -170,17 +170,16 @@ class CourseListService
   def write_footer
     row_last_student = course.students.length + 9
 
-    worksheet.write("A#{row_last_student}", 'E', format_normal_bold_centered)
-    worksheet.write_string("B#{row_last_student}", '= entschuldigt', format_normal_bold)
-    worksheet.merge_range("C#{row_last_student}:T#{row_last_student}",
-                          'Bitte zählen Sie die Fehlzeiten rechtzeitig vor Ende des Halbjahres zusammen, damit sie',
+    worksheet.write("A#{row_last_student}", t('missing_excused_abbr'), format_normal_bold_centered)
+    worksheet.write_string("B#{row_last_student}", t('missing_excused'), format_normal_bold)
+    worksheet.merge_range("C#{row_last_student}:T#{row_last_student}", t('missing_explanation_line1'),
                           format_normal_bold)
     worksheet.write("A#{row_last_student + 1}", '|', format_normal_bold_centered)
-    worksheet.write_string("B#{row_last_student + 1}", '= unentschuldigt', format_normal_bold)
-    worksheet.merge_range("C#{row_last_student + 1}:T#{row_last_student + 1}",
-                          'der Klassenleitung bei der Zensurenkonferenz zur Verfügung stehen.', format_normal_bold)
+    worksheet.write_string("B#{row_last_student + 1}", t('missing_unexcused'), format_normal_bold)
+    worksheet.merge_range("C#{row_last_student + 1}:T#{row_last_student + 1}", t('missing_explanation_line2'),
+                          format_normal_bold)
     worksheet.merge_range("V#{row_last_student + 1}:Z#{row_last_student + 1}",
-                          "erstellt am #{I18n.l Time.zone.today}", format_small_right)
+                          t('created_at', date: I18n.l(Time.zone.today)), format_small_right)
   end
 
   def set_printer
@@ -193,6 +192,10 @@ class CourseListService
     worksheet.center_horizontally
     worksheet.center_vertically
     worksheet.print_area("A1:Z#{last_row}")
+  end
+
+  def t(key, options = {})
+    I18n.t("course_list_service.#{key}", **options)
   end
 
 end
