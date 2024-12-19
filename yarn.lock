@@ -6585,10 +6585,10 @@ toidentifier@1.0.1:
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.1.tgz#3be34321a88a820ed1bd80dfaa33e479fbb8dd35"
   integrity sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==
 
-trix@^2.1.10:
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-2.1.10.tgz#6f048115c2c20206067abbab8a6e7308710c39e0"
-  integrity sha512-PrMOKriE76tJbjqiOFpjTiRkOomWBiGPT/YrBw83HJ5SlFAcybYZVjVlkDkOrFZoYI4qCfWUw42BTAjSE9KSYQ==
+trix@^2.1.11:
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-2.1.11.tgz#503fc059d247e0ac7a32f8defe6009e9b835caa6"
+  integrity sha512-xAndkKAQCZ7DbLvfU5svNEEo3+nnIh4uUTwZ3VAPgDfhGv0m82yjxS6b1BR3c8YnBM9brJgFsAZKwBHiMl2kjA==
   dependencies:
     dompurify "^3.2.3"
 
