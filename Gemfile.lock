@@ -381,7 +381,7 @@ DEPENDENCIES
   write_xlsx (~> 1.07.0)
 
 RUBY VERSION
-   ruby 3.1.6
+   ruby 3.2.7
 
 BUNDLED WITH
    2.5.18
