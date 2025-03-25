@@ -42,7 +42,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # FactoryBot and RSpec for testing
   gem 'factory_bot', '~> 6.5.1'
-  gem 'rspec-rails', '~> 5.0.1'
+  gem 'rspec-rails', '~> 6.1.5'
 end
 
 group :development do
