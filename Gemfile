@@ -3,14 +3,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.6'
+ruby '3.2.7'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.0', '>= 6.0.3.3'
 # Database for Active Record
-gem 'pg', '~> 1.2.3'
+gem 'pg', '~> 1.3.5'
 # Use Puma as the app server
-gem 'puma', '~> 5.6.5'
+gem 'puma', '~> 5.6.9'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -33,6 +33,9 @@ gem 'faker', '~> 2.18.0'
 
 gem 'rubyzip', '~> 2.3.0'
 gem 'write_xlsx', '~> 1.07.0'
+
+# Fix for the time being. Remove when rails updated to 7.x
+gem 'concurrent-ruby', '1.3.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

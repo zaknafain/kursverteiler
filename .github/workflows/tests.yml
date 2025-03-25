@@ -33,7 +33,7 @@ jobs:
         node-version-file: 'package.json'
         cache: 'yarn'
     - name: Assets cache
-      uses: actions/cache@v2
+      uses: actions/cache@v4
       with:
         path: public/packs-test
         key: ${{ runner.os }}-assets-${{ hashFiles('./app/javascript/packs/**') }}
