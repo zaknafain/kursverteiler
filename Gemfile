@@ -34,6 +34,9 @@ gem 'faker', '~> 2.18.0'
 gem 'rubyzip', '~> 2.3.0'
 gem 'write_xlsx', '~> 1.07.0'
 
+# Fix for the time being. Remove when rails updated to 7.x
+gem 'concurrent-ruby', '1.3.4'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
