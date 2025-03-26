@@ -85,12 +85,13 @@ RailsAdmin.config do |config|
 
   config.actions do
     dashboard do                  # mandatory
-      link_icon 'icon-list'
+      link_icon 'fas fa-list'
     end
     index                         # mandatory
     new
     export
     import do
+      link_icon 'fas fa-folder-open'
       except %w[Admin Poll]
     end
     # bulk_delete
