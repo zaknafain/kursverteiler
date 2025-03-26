@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+require Rails.root.join('lib', 'rails_admin', 'actions', 'pause.rb')
+require Rails.root.join('lib', 'rails_admin', 'actions', 'selections.rb')
+require Rails.root.join('lib', 'rails_admin', 'actions', 'distribute.rb')
+require Rails.root.join('lib', 'rails_admin', 'actions', 'reset_password.rb')
+require Rails.root.join('lib', 'rails_admin', 'actions', 'reset_passwords.rb')
+
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Pause)
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Selections)
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Distribute)
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPassword)
+RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPasswords)
+
 RailsAdmin.config do |config|
   config.parent_controller = '::ApplicationController'
 
@@ -70,12 +82,6 @@ RailsAdmin.config do |config|
   config.included_models = %w[Admin Grade Student Poll Course]
   config.label_methods = [:to_pretty_value]
   config.default_items_per_page = 50
-
-  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Pause)
-  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Selections)
-  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::Distribute)
-  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPassword)
-  RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPasswords)
 
   config.actions do
     dashboard do                  # mandatory
