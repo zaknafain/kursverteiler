@@ -58,6 +58,7 @@ de:
       index:
         breadcrumb: '%{model_label_plural}'
         menu: Liste
+        no_records: 'Keine Einträge gefunden'
         title: 'Liste der %{model_label_plural}'
       new:
         breadcrumb: Hinzufügen
