@@ -11,9 +11,6 @@ gem 'pg', '~> 1.3.5'
 # Use Puma as the app server
 gem 'puma', '~> 6.6.0'
 # Use SCSS for stylesheets
-gem 'cssbundling-rails'
-gem 'jsbundling-rails'
-gem 'propshaft'
 gem 'sassc-rails'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 
@@ -27,8 +24,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise', '~> 4.8.0'
 gem 'devise-i18n', '~> 1.9.2'
 # Dashboard for admins
-gem 'rails_admin', git: 'https://github.com/zaknafain/rails_admin', branch: 'multiselect_options'
-gem 'rails_admin_import', git: 'https://github.com/zaknafain/rails_admin_import', branch: 'enumeration_translation'
+gem 'rails_admin'
+gem 'rails_admin_import'
 
 # Generate fake data for development, testing and staging
 gem 'faker', '~> 2.18.0'
@@ -67,5 +64,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem "sassc-rails"
-gem "sassc-rails"
