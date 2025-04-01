@@ -10,7 +10,7 @@ module RailsAdmin
         end
 
         register_instance_option :link_icon do
-          'icon-share-alt'
+          'fas fa-share'
         end
 
         register_instance_option :http_methods do

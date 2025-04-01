@@ -10,7 +10,7 @@ module RailsAdmin
         end
 
         register_instance_option :link_icon do
-          'icon-pause'
+          'fas fa-pause'
         end
 
         register_instance_option :http_methods do

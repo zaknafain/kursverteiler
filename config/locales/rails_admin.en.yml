@@ -58,6 +58,7 @@ en:
       index:
         breadcrumb: '%{model_label_plural}'
         menu: List
+        no_records: 'No records found'
         title: 'List of %{model_label_plural}'
       new:
         breadcrumb: New
