@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_09_09_131325) do
-
+ActiveRecord::Schema[7.0].define(version: 2025_04_01_095834) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,8 +19,8 @@ ActiveRecord::Schema.define(version: 2024_09_09_131325) do
     t.text "body"
     t.string "record_type", null: false
     t.bigint "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -30,7 +29,7 @@ ActiveRecord::Schema.define(version: 2024_09_09_131325) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -41,8 +40,8 @@ ActiveRecord::Schema.define(version: 2024_09_09_131325) do
     t.string "content_type"
     t.text "metadata"
     t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.string "checksum"
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -57,10 +56,10 @@ ActiveRecord::Schema.define(version: 2024_09_09_131325) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.boolean "coordinator", default: false, null: false
@@ -74,8 +73,8 @@ ActiveRecord::Schema.define(version: 2024_09_09_131325) do
     t.integer "maximum"
     t.string "teacher_name"
     t.boolean "guaranteed", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "poll_id"
     t.string "focus_areas"
     t.string "variants"
@@ -93,8 +92,8 @@ ActiveRecord::Schema.define(version: 2024_09_09_131325) do
 
   create_table "grades", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.date "valid_until"
     t.index ["name"], name: "index_grades_on_name", unique: true
   end
@@ -109,15 +108,15 @@ ActiveRecord::Schema.define(version: 2024_09_09_131325) do
     t.string "title", null: false
     t.date "valid_from", null: false
     t.date "valid_until", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.datetime "completed", precision: 6
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "completed"
   end
 
   create_table "selections", force: :cascade do |t|
     t.bigint "student_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "top_course_id"
     t.bigint "mid_course_id"
     t.bigint "low_course_id"
@@ -134,14 +133,14 @@ ActiveRecord::Schema.define(version: 2024_09_09_131325) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.bigint "grade_id"
-    t.datetime "paused_at", precision: 6
+    t.datetime "paused_at"
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["grade_id"], name: "index_students_on_grade_id"
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
