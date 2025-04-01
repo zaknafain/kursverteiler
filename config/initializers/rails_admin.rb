@@ -13,6 +13,7 @@ RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPassword)
 RailsAdmin::Config::Actions.register(RailsAdmin::Config::Actions::ResetPasswords)
 
 RailsAdmin.config do |config|
+  config.asset_source = :sprockets
   config.parent_controller = '::ApplicationController'
 
   config.main_app_name = ['Kursverteiler Web', 'Administration']
