@@ -20,7 +20,7 @@ jobs:
         bundler-cache: true
     - name: Setup Brakeman
       env:
-        BRAKEMAN_VERSION: '5.4.1'
+        BRAKEMAN_VERSION: '7.0.0'
       run: |
         gem install brakeman --version $BRAKEMAN_VERSION
     - name: Scan
