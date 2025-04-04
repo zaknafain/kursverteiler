@@ -1,12 +1,12 @@
 require:
-  - rubocop-capybara
-  - rubocop-rspec_rails
+  - rubocop-rails
 
 plugins:
+  - rubocop-capybara
   - rubocop-factory_bot
-  - rubocop-rails
   - rubocop-rake
   - rubocop-rspec
+  - rubocop-rspec_rails
   - rubocop-performance
 
 AllCops:
