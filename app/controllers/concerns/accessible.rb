@@ -16,7 +16,7 @@ module Accessible
   end
 
   def authenticated_admin_root_path
-    rails_admin_path
+    root_path
   end
 
   def check_user

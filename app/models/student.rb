@@ -3,7 +3,6 @@
 # Database Model for the regular student user.
 # For admins see Admin class.
 class Student < ApplicationRecord
-  include StudentAdministration
   include SharedUserMethods
 
   attr_accessor :paused_flag

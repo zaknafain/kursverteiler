@@ -1,15 +1,15 @@
-name: Tests
+name: Tests & Linter
 
-on: [push]
+on:
+  - push
 
 jobs:
-  test:
 
+  rspec:
     runs-on: ubuntu-latest
-
     services:
       postgres:
-        image: postgres:12.4
+        image: postgres:16.2
         env:
           POSTGRES_USER: test-user
           POSTGRES_PASSWORD: test-pass
@@ -19,55 +19,73 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: DB Init
+        env:
+          RAILS_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USERNAME: test-user
+          DB_PASSWORD: test-pass
+        run: bin/rails db:prepare
+
+      - name: Run Tests
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USERNAME: test-user
+          DB_PASSWORD: test-pass
+        run: bin/rspec
+
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run Rubocop
+        run: bin/rubocop -f github
+
+  scan_ruby:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Scan for common Rails security vulnerabilities using static analysis
+        run: bin/brakeman --no-pager
+
+  scan_js:
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version-file: 'package.json'
-        cache: 'yarn'
-    - name: Assets cache
-      uses: actions/cache@v4
-      with:
-        path: public/packs-test
-        key: ${{ runner.os }}-assets-${{ hashFiles('./app/javascript/packs/**') }}
-        restore-keys: |
-          ${{ runner.os }}-assets-
-    - name: Yarn Install
-      run: yarn check || bin/rails yarn:install
-    - name: Compile Packs
-      env:
-        RAILS_ENV: test
-        DB_ALLOW_SEEDING: false
-        DB_HOST: localhost
-        DB_PORT: 5432
-        DB_USERNAME: test-user
-        DB_PASSWORD: test-pass
-        NODE_OPTIONS: "--openssl-legacy-provider"
-      run: |
-        if [[ ! -d public/packs-test ]]; then
-          bin/rails webpacker:compile
-        else
-          echo "No need to compile assets."
-        fi
-    - name: DB Init
-      env:
-        RAILS_ENV: test
-        DB_HOST: localhost
-        DB_PORT: 5432
-        DB_USERNAME: test-user
-        DB_PASSWORD: test-pass
-      run: bin/rails db:prepare
-    - name: Run Tests
-      env:
-        DB_HOST: localhost
-        DB_PORT: 5432
-        DB_USERNAME: test-user
-        DB_PASSWORD: test-pass
-      run: bundle exec rspec
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Scan for security vulnerabilities in JavaScript dependencies
+        run: bin/importmap audit

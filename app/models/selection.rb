@@ -2,8 +2,6 @@
 
 # Represents the actual course selection of the student of a poll.
 class Selection < ApplicationRecord
-  include SelectionAdministration
-
   belongs_to :student
   belongs_to :poll
   belongs_to :top_course, class_name: 'Course', optional: true
