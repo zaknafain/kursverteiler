@@ -2,8 +2,6 @@
 
 # Database Model for a poll in which students may choose courses.
 class Poll < ApplicationRecord
-  include PollAdministration
-
   has_rich_text :description
 
   has_many :grades_polls, dependent: :delete_all

@@ -2,8 +2,6 @@
 
 # Database Model for classes the student can choose.
 class Course < ApplicationRecord
-  include CourseAdministration
-
   has_rich_text :description
 
   belongs_to :poll
