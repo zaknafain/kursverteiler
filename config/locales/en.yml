@@ -95,8 +95,8 @@ en:
       student:
         one: Student
         other: Students
-  application:
-    header:
+  layouts:
+    application:
       sign_out: Sign out
   course_list_service:
     course_title: Title
