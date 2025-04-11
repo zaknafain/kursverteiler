@@ -24,12 +24,10 @@
       <% @courses.each do |course| %>
         <% selected_prio = @selection.prio_for(course) %>
         <% course_disabled = @past_courses.any? { |c| c.id == course.parent_course_id } %>
-        <%= content_tag :div, class: course_card_classes(selected_prio, course_disabled) do %>
+        <%= content_tag :div, class: course_card_classes(selected_prio, course_disabled), data: { course_id: course.id } do %>
           <div class="px-4 py-5 sm:px-6 flex justify-between">
             <h3 class="text-base font-semibold"><%= course.title %></h3>
-            <%= content_tag :span, class: priority_color_text(selected_prio) do %>
-              <%= check_icon if selected_prio %>
-            <% end %>
+            <%= check_icon(selected_prio) %>
           </div>
           <div class="px-4 py-5 sm:p-6">
             <div class="mt-2 text-sm">

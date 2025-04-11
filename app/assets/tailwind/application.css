@@ -1,1 +1,31 @@
 @import "tailwindcss";
+
+@layer components {
+  .selected {
+    @apply ring-2;
+  }
+
+  .selected.low {
+    @apply border-rose-600 ring-rose-600;
+
+    svg {
+      @apply text-rose-600;
+    }
+  }
+
+  .selected.mid {
+    @apply border-amber-600 ring-amber-600;
+
+    svg {
+      @apply text-amber-600;
+    }
+  }
+
+  .selected.top {
+    @apply border-emerald-600 ring-emerald-600;
+
+    svg {
+      @apply text-emerald-600;
+    }
+  }
+}
