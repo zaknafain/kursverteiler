@@ -5,14 +5,14 @@ class StudentsController < ApplicationController
   before_action :authenticate_student!
   before_action :fetch_data
 
+  def show; end
+
   def update
     if selection.update(update_params[:current_selection])
-      flash.now[:success] = t('.saved')
+      redirect_to student_path, notice: t('.saved'), status: :see_other
     else
-      flash.now[:error] = collect_error_messages
+      redirect_to student_path, alert: selection.errors.full_messages, status: :see_other
     end
-
-    render :show
   end
 
   private
@@ -35,16 +35,6 @@ class StudentsController < ApplicationController
 
   def update_params
     params.require(:student).permit(current_selection: %i[top_course_id mid_course_id low_course_id])
-  end
-
-  def collect_error_messages
-    messages = []
-
-    selection.errors.full_messages.each do |values|
-      messages << values
-    end
-
-    messages
   end
 
 end

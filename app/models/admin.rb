@@ -3,7 +3,6 @@
 # Database Model for the Administrators. Hence they are no students, they live in their own table.
 # For student users see Student class.
 class Admin < ApplicationRecord
-  include AdminAdministration
   include SharedUserMethods
 
   validates :coordinator, inclusion: { in: [true, false] }

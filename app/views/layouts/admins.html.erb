@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class="h-full bg-gray-100">
+  <head>
+    <title><%= content_for(:title) || "Kursverteiler" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="h-full">
+    <nav class="bg-white shadow-xs">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 justify-between">
+          <div class="flex">
+            <div class="flex shrink-0 items-center">
+              <%= link_to "https://www.bs30.de", class: "block" do %>
+                <%= image_tag "fsp-logo.svg", class: "h-8 w-auto" %>
+              <% end %>
+            </div>
+          </div>
+          <div class="ml-6 flex items-center">
+            <% if current_admin %>
+              <span class="text-xs text-gray-700"><%= current_admin.first_name %> <%= current_admin.last_name %></span>
+              <%= button_to t(".sign_out"), destroy_admin_session_path, method: :delete, form_class: "inline", class: "inline-flex items-center ml-3 rounded-sm bg-white px-2 py-1 text-xs font-semibold text-rose-500 ring-1 shadow-xs ring-rose-500 ring-inset hover:bg-rose-50" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="py-6">
+      <header>
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <% flash.each do |name, messages| %>
+            <% Array(messages).each do |message| %>
+              <div class="rounded-md <%= name == "alert" ? "bg-rose-50" : "bg-teal-50" %> p-4 my-4 js-flash-notice">
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <% if name == "alert" %>
+                      <svg class="size-5 text-rose-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z" clip-rule="evenodd" />
+                      </svg>
+                    <% else %>
+                      <svg class="h-5 w-5 text-teal-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/>
+                      </svg>
+                    <% end %>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium <%= name == "alert" ? "text-rose-800" : "text-teal-800" %>"><%= message %></p>
+                  </div>
+                  <div class="ml-auto pl-3">
+                    <div class="-mx-1.5 -my-1.5">
+                      <button onclick="document.querySelector('.js-flash-notice').remove()" type="button" class="inline-flex rounded-md <%= name == "alert" ? "bg-rose-50 text-rose-500 hover:bg-rose-100 focus:ring-rose-600 focus:ring-offset-rose-50" : "bg-teal-50 text-teal-500 hover:bg-teal-100 focus:ring-teal-600 focus:ring-offset-teal-50" %> p-1.5 focus:outline-none focus:ring-2 focus:ring-offset-2">
+                        <span class="sr-only">Schließen</span>
+                        <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"/>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </header>
+      <main>
+        <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <%= yield %>
+        </div>
+      </main>
+    </div>
+    <footer class="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8 text-xs/3">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-gray-200 py-8">
+      </div>
+    </footer>
+  </body>
+</html>

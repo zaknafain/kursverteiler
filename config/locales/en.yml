@@ -1,3 +1,4 @@
+---
 en:
   activerecord:
     attributes:
@@ -95,12 +96,9 @@ en:
       student:
         one: Student
         other: Students
-  application:
-    header:
-      sign_out: Sign out
   course_list_service:
     course_title: Title
-    created_at: 'created at %{date}'
+    created_at: created at %{date}
     date: 'Date:'
     grade: 'Class:'
     missing_excused: '= excused'
@@ -110,28 +108,33 @@ en:
     missing_unexcused: '= unexcused'
     missing_unexcused_abbr: I
     student: Student
-    summer_semester: 'Summer semester %{year}'
+    summer_semester: Summer semester %{year}
     teacher: Teacher
     total_missing_header: Total
-    winter_semester: 'Winter semester %{year1}/%{year2}'
+    winter_semester: Winter semester %{year1}/%{year2}
   i18n:
     transliterate:
       rule:
         Ä: Ae
-        ä: ae
         Ö: Oe
-        ö: oe
         Ü: Ue
-        ü: ue
         ß: ss
+        ä: ae
+        ö: oe
+        ü: ue
+  layouts:
+    admins:
+      sign_out: Sign out
+    application:
+      sign_out: Sign out
   students:
     show:
-      disabled_note: You have already taken this course
       course:
         focus_areas: possible focus areas
         seats: Seats
         teacher: Teacher
         variants: possible variants
+      disabled_note: You have already taken this course
       headline: Course poll
       no_poll: Sadly there is no poll at the moment.
       not_completed_yet: The poll has not yet been completed.

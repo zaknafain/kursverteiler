@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/administration', as: 'rails_admin'
+  get "up" => "rails/health#show", as: :rails_health_check
 
   root to: 'students#show'
 
@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :students, only: %i[show update]
 
   namespace :admins do
+    resource :dashboard, only: %i[show]
     resources :courses, only: %i[index show]
   end
 end

@@ -1,37 +1,60 @@
-<div class="row justify-content-md-center">
-  <div class="col-12 col-md-9 col-lg-6">
-    <h2>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "mb-12 mx-auto max-w-7xl" }) do |f| %>
+  <div class="mx-auto max-w-lg">
+    <h1 class="text-2xl font-bold leading-7 text-gray-900">
       <% if resource_name == :student %>
         <%= t('devise.sessions.new.sign_in_bs30') %>
       <% else %>
         <%= t('devise.sessions.new.sign_in') %>
       <% end %>
-    </h2>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="form-group">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    </h1>
+
+    <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+      <div class="col-span-full">
+        <%= f.label :email, class: "block text-sm/6 font-medium text-gray-900" %>
+        <div class="mt-2">
+          <div class="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-sky-600">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "block min-w-0 grow py-1.5 pr-3 pl-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6", placeholder: "deine.email@example.de" %>
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      <div class="col-span-full">
+        <%= f.label :password, class: "block text-sm/6 font-medium text-gray-900"%>
+        <div class="mt-2">
+          <div class="flex items-center rounded-md bg-white outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-sky-600">
+            <%= f.password_field :password, autofocus: true, autocomplete: "current-password", class: "block min-w-0 grow py-1.5 pr-3 pl-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6", placeholder: "Dein Passwort" %>
+          </div>
+        </div>
       </div>
 
       <% if devise_mapping.rememberable? %>
-        <div class="form-group form-check">
-          <%= f.check_box :remember_me, class: "form-check-input" %>
-          <%= f.label :remember_me, class: "form-check-label" %>
+        <div class="col-span-full">
+          <div class="flex gap-3">
+            <div class="flex h-6 shrink-0 items-center">
+              <div class="group grid size-4 grid-cols-1">
+                <%= f.check_box :remember_me, class: "col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-sky-700 checked:bg-sky-700 indeterminate:border-sky-700 indeterminate:bg-sky-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto" %>
+                <svg class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-disabled:stroke-gray-950/25" viewBox="0 0 14 14" fill="none">
+                  <path class="opacity-0 group-has-checked:opacity-100" d="M3 8L6 11L11 3.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path class="opacity-0 group-has-indeterminate:opacity-100" d="M3 7H11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+            </div>
+            <div class="text-sm/6">
+              <%= f.label :remember_me, class: "font-medium text-gray-900" %>
+            </div>
+          </div>
         </div>
       <% end %>
 
-      <%= f.submit t('devise.sessions.new.sign_in'), class: "btn btn-primary" %>
-    <% end %>
+    </div>
 
-    <% if devise_mapping.recoverable? %>
-      <div class="text-right mt-2">
-        <%= link_to t('devise.shared.links.forgot_your_password'), new_password_path(resource_name), class: "btn btn-outline-dark" %><br />
-      </div>
-    <% end %>
+    <div class="mt-6 flex items-center justify-start gap-x-6">
+      <%= f.submit t('devise.sessions.new.sign_in'), class: "rounded-md bg-sky-700 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-sky-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-700" %>
+      <% if devise_mapping.recoverable? %>
+        <div class="text-right my-auto">
+          <%= link_to t('devise.shared.links.forgot_your_password'), new_password_path(resource_name), class: "text-sm/6 font-semibold text-gray-900" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>

@@ -1,4 +1,13 @@
-require: rubocop-rails
+require:
+  - rubocop-rails
+
+plugins:
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-rspec_rails
+  - rubocop-performance
 
 AllCops:
   RubyInterpreters:
@@ -60,7 +69,6 @@ AllCops:
     - '**/Vagabondfile'
     - '**/Vagrantfile'
   Exclude:
-    - 'node_modules/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
     - '.git/**/*'
@@ -68,6 +76,8 @@ AllCops:
     - 'db/migrate/**/*'
     - '*/schema.rb'
     - 'bin/**/*'
+    - 'Gemfile.lock'
+
   # Default formatter will be used if no `-f/--format` option is given.
   DefaultFormatter: progress
   # Cop names are displayed in offense messages by default. Change behavior
@@ -141,16 +151,39 @@ AllCops:
   # is specified in the Gemfile or gems.rb file, RuboCop reads the final value
   # from the lock file.) If the Ruby version is still unresolved, RuboCop will
   # use the oldest officially supported Ruby version (currently Ruby 2.4).
-  TargetRubyVersion: 2.7.2
+  TargetRubyVersion: 3.3
 
 Layout/EmptyLinesAroundClassBody:
   Enabled: true
-  EnforcedStyle: empty_lines_special
+  EnforcedStyle: 'empty_lines_special'
 
 Metrics/BlockLength:
-  Enabled: true
-  Exclude:
-    - 'spec/**/*'
+  AllowedMethods:
+    - 'describe'
+    - 'context'
+    - 'namespace'
 
-Rails/LexicallyScopedActionFilter:
+# Rails/HasAndBelongsToMany:
+#   Enabled: false
+
+# Rails/LexicallyScopedActionFilter:
+#   Enabled: false
+
+# Rails/UniqueValidationWithoutIndex:
+#   Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+# RSpec/NestedGroups:
+#   Enabled: true
+#   Max: 4
+
+# RSpec/ExampleLength:
+#   Enabled: false
+
+Style/Documentation:
   Enabled: false

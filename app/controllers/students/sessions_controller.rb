@@ -5,7 +5,7 @@ module Students
   # see: https://github.com/heartcombo/devise/wiki/How-to-Setup-Multiple-Devise-User-Models
   class SessionsController < Devise::SessionsController
     include Accessible
-    skip_before_action :check_user, only: :destroy
+    skip_before_action :check_user, only: :destroy # rubocop:disable Rails/LexicallyScopedActionFilter
     # before_action :configure_sign_in_params, only: [:create]
 
     # GET /resource/sign_in
