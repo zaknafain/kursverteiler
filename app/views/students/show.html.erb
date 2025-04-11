@@ -12,11 +12,11 @@
     </div>
   </div>
 
-  <%= form_for(current_student, url: student_path(current_student.id), method: :put, class: "selections-form") do |form| %>
+  <%= form_for(current_student, url: student_path(current_student.id), method: :put, data: { controller: "selection-form" }) do |form| %>
     <%= form.fields_for(:current_selection) do |top_form| %>
-      <%= top_form.hidden_field :top_course_id, value: @selection.top_course_id, data: { priority: :top } %>
-      <%= top_form.hidden_field :mid_course_id, value: @selection.mid_course_id, data: { priority: :mid } %>
-      <%= top_form.hidden_field :low_course_id, value: @selection.low_course_id, data: { priority: :low } %>
+      <%= top_form.hidden_field :top_course_id, value: @selection.top_course_id, data: { selection_form_target: "topId" } %>
+      <%= top_form.hidden_field :mid_course_id, value: @selection.mid_course_id, data: { selection_form_target: "midId" } %>
+      <%= top_form.hidden_field :low_course_id, value: @selection.low_course_id, data: { selection_form_target: "lowId" } %>
       <%= hidden_field_tag :guaranteed_chosen, @selection.top_course&.guaranteed %>
     <% end %>
 

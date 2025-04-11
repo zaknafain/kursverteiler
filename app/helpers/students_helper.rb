@@ -53,7 +53,10 @@ module StudentsHelper
       course_id: course.id,
       priority: priority,
       selected_prio: selected_prio,
-      guaranteed: course.guaranteed?
+      guaranteed: course.guaranteed?,
+      selection_form_course_id_param: course.id,
+      selection_form_course_prio_param: priority,
+      action: 'click->selection-form#toggle'
     }
   end
 
