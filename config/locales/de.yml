@@ -1,3 +1,4 @@
+---
 de:
   activerecord:
     attributes:
@@ -95,12 +96,9 @@ de:
       student:
         one: Schüler
         other: Schüler
-  layouts:
-    application:
-      sign_out: Ausloggen
   course_list_service:
     course_title: Bezeichnung
-    created_at: 'erstellt am %{date}'
+    created_at: erstellt am %{date}
     date: 'Datum:'
     grade: 'Klasse:'
     missing_excused: '= entschuldigt'
@@ -110,28 +108,33 @@ de:
     missing_unexcused: '= unentschuldigt'
     missing_unexcused_abbr: I
     student: TeilnehmerIn
-    summer_semester: 'Sommersemester %{year}'
+    summer_semester: Sommersemester %{year}
     teacher: LehrerIn
     total_missing_header: Gesamt
-    winter_semester: 'Wintersemester %{year1}/%{year2}'
+    winter_semester: Wintersemester %{year1}/%{year2}
   i18n:
     transliterate:
       rule:
         Ä: Ae
-        ä: ae
         Ö: Oe
-        ö: oe
         Ü: Ue
-        ü: ue
         ß: ss
+        ä: ae
+        ö: oe
+        ü: ue
+  layouts:
+    admins:
+      sign_out: Ausloggen
+    application:
+      sign_out: Ausloggen
   students:
     show:
-      disabled_note: Du hast diesen Kurs bereits belegt
       course:
         focus_areas: mögliche Schwerpunkte
         seats: Plätze
         teacher: Lehrkraft
         variants: mögliche Varianten
+      disabled_note: Du hast diesen Kurs bereits belegt
       headline: Kurswahlen
       no_poll: Leider findet gerade keine Wahl statt.
       not_completed_yet: Die Wahl wurde noch nicht abgeschlossen. Die Plätze wurden noch nicht verteilt.

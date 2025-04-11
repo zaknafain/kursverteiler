@@ -25,9 +25,9 @@
             </div>
           </div>
           <div class="ml-6 flex items-center">
-            <% if current_student %>
-              <span class="text-xs text-gray-700"><%= current_student.first_name %> <%= current_student.last_name %></span>
-              <%= button_to t(".sign_out"), destroy_student_session_path, method: :delete, form_class: "inline", class: "inline-flex items-center ml-3 rounded-sm bg-white px-2 py-1 text-xs font-semibold text-rose-500 ring-1 shadow-xs ring-rose-500 ring-inset hover:bg-rose-50" %>
+            <% if current_admin %>
+              <span class="text-xs text-gray-700"><%= current_admin.first_name %> <%= current_admin.last_name %></span>
+              <%= button_to t(".sign_out"), destroy_admin_session_path, method: :delete, form_class: "inline", class: "inline-flex items-center ml-3 rounded-sm bg-white px-2 py-1 text-xs font-semibold text-rose-500 ring-1 shadow-xs ring-rose-500 ring-inset hover:bg-rose-50" %>
             <% end %>
           </div>
         </div>
