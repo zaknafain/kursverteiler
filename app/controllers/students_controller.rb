@@ -5,6 +5,8 @@ class StudentsController < ApplicationController
   before_action :authenticate_student!
   before_action :fetch_data
 
+  def show; end
+
   def update
     if selection.update(update_params[:current_selection])
       redirect_to student_path, notice: t('.saved'), status: :see_other
