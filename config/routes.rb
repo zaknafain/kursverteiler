@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :students, only: %i[show update]
 
   namespace :admins do
+    resource :dashboard, only: %i[show]
     resources :courses, only: %i[index show]
   end
 end

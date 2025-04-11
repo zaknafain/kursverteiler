@@ -15,4 +15,5 @@ class ApplicationController < ActionController::Base
     I18n.locale = possible_locales.compact.detect { |l| I18n.available_locales.include?(l.to_sym) }
     session[:locale] = I18n.locale
   end
+
 end
