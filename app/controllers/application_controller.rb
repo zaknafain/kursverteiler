@@ -2,7 +2,7 @@
 
 # Rails base controller
 class ApplicationController < ActionController::Base
-  allow_browser versions: :modern
+  # allow_browser versions: :modern
   protect_from_forgery with: :null_session
   before_action :set_locale
   skip_after_action :verify_same_origin_request

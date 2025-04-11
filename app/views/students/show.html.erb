@@ -1,18 +1,13 @@
+<h1 class="text-xl font-semibold text-gray-900 mb-8"><%= t('.headline') %> (<%= @grade.name %>)</h1>
+
 <% if @poll %>
-  <div class="row">
-    <div class="col-12 mb-3">
-      <div class="card bg-info text-white">
-        <h1 class="card-header">
-          <%= t('.headline') %> (<%= @grade.name %>)
-        </h1>
-        <div class="card-body">
-          <h2 class="card-title">
-            <%= @poll.title %>
-          </h2>
-          <div class="card-text">
-            <%= @poll.description %>
-          </div>
-        </div>
+  <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm mb-4">
+    <div class="px-4 py-5 sm:px-6">
+      <h2 class="text-base font-semibold text-gray-900"><%= @poll.title %></h2>
+    </div>
+    <div class="px-4 py-5 sm:p-6">
+      <div class="mt-2 text-sm text-gray-900">
+        <%= @poll.description %>
       </div>
     </div>
   </div>
@@ -25,14 +20,19 @@
       <%= hidden_field_tag :guaranteed_chosen, @selection.top_course&.guaranteed %>
     <% end %>
 
-    <div class="row">
+    <div class="columns-xs">
       <% @courses.each do |course| %>
-        <% selected_prio   = @selection.prio_for(course) %>
+        <% selected_prio = @selection.prio_for(course) %>
         <% course_disabled = @past_courses.any? { |c| c.id == course.parent_course_id } %>
-        <%= content_tag :div, class: 'col-12 col-lg-6 mb-3 course' do %>
-          <%= content_tag :div, id: "course-container-#{course.id}", class: course_card_classes(selected_prio, course_disabled) do %>
-            <h5 class="card-header"><%= course.title %></h5>
-            <div class="card-body">
+        <%= content_tag :div, class: course_card_classes(selected_prio, course_disabled) do %>
+          <div class="px-4 py-5 sm:px-6 flex justify-between">
+            <h3 class="text-base font-semibold"><%= course.title %></h3>
+            <%= content_tag :span, class: priority_color_text(selected_prio) do %>
+              <%= check_icon if selected_prio %>
+            <% end %>
+          </div>
+          <div class="px-4 py-5 sm:p-6">
+            <div class="mt-2 text-sm">
               <div class="mb-2">
                 <strong><%= t('.course.teacher') %>:</strong>
                 <%= course.teacher_name %>
@@ -53,72 +53,61 @@
                 </div>
               <% end %>
             </div>
-            <%= content_tag :div, id: "course-#{course.id}-priority-container", class: "card-footer js-course-priority-container" do %>
-              <%= priority_button(course, :top, selected_prio, course_disabled) %>
+          </div>
+          <% if course_disabled %>
+            <div class="px-4 py-4 sm:px-6">
+              <%= t('.disabled_note') %>
+            </div>
+          <% else %>
+            <div class="px-4 py-4 sm:px-6 grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-4">
+              <%= priority_button(course, :top, selected_prio) %>
               <% unless course.guaranteed? %>
-                <%= priority_button(course, :mid, selected_prio, course_disabled) %>
+                <%= priority_button(course, :mid, selected_prio) %>
                 <% if @courses.length > 2 %>
-                  <%= priority_button(course, :low, selected_prio, course_disabled) %>
+                  <%= priority_button(course, :low, selected_prio) %>
                 <% end %>
               <% end %>
-            <% end %>
-          <% end %>
-          <% if course_disabled %>
-            <div class="course-disabled-note">
-              <%= t('.disabled_note') %>
             </div>
           <% end %>
         <% end %>
       <% end %>
     </div>
 
-    <%= form.submit t('.submit'), class: "btn btn-success mb-4 btn-block btn-lg btn-sticky border border-dark" %>
+    <div class="flex justify-center mt-4">
+      <%= form.submit t('.submit'), class: "rounded-md bg-emerald-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-xs hover:bg-emerald-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600" %>
+    </div>
   <% end %>
-
-  <%= javascript_pack_tag 'selections' %>
 <% else %>
-  <div class="row">
-    <div class="col-12 mb-3">
-      <div class="card bg-warning">
-        <div class="card-body">
-          <h2 class="card-title">
-            <%= t('.no_poll') %>
-          </h2>
-        </div>
-      </div>
+  <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm mb-4">
+    <div class="px-4 py-5 sm:px-6">
+      <h3 class="text-base font-semibold text-gray-900"><%= t('.no_poll') %></h3>
     </div>
   </div>
 <% end %>
 
-<% @past_courses.each do |course| %>
-  <div class="row">
-    <div class="col-12 mb-3">
-      <div class="card bg-info text-white">
-        <div class="card-body">
-          <h2 class="card-title">
-            <%= course.poll.title %>
-          </h2>
-          <% unless course.poll.completed %>
-            <div class="card-text">
+<% if @past_courses.present? %>
+  <div class="columns-xs border-t border-gray-200 pt-8 mt-8">
+    <% @past_courses.each do |course| %>
+      <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-sm mb-4">
+        <div class="px-4 py-5 sm:px-6">
+          <h2 class="text-base font-semibold text-gray-900"><%= course.poll.title %></h2>
+        </div>
+        <div class="px-4 py-5 sm:p-6">
+          <% if course.poll.completed %>
+            <h3 class="text-base font-semibold text-gray-900">
+              <%= course.title %>
+            </h3>
+            <div class="mt-2 text-sm text-gray-500">
+              <strong><%= t('.course.teacher') %>:</strong>
+              <%= course.teacher_name %>
+            </div>
+          <% else %>
+            <div class="mt-2 text-sm text-gray-500">
               <%= t('.not_completed_yet') %>
             </div>
           <% end %>
         </div>
       </div>
-    </div>
-  </div>
-
-  <% if course.poll.completed %>
-    <%= content_tag :div, class: "mb-4 course" do %>
-      <div class="card bg-light">
-        <h5 class="card-header"><%= course.title %></h5>
-        <div class="card-body">
-          <div class="mb-2">
-            <strong><%= t('.course.teacher') %>:</strong>
-            <%= course.teacher_name %>
-          </div>
-        </div>
-      </div>
     <% end %>
-  <% end %>
+  </div>
 <% end %>
