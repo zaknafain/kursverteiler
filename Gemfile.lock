@@ -129,7 +129,7 @@ GEM
       activesupport (>= 6.1.0)
     faker (2.18.0)
       i18n (>= 1.6, < 2)
-    ffi (1.17.1)
+    ffi (1.17.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     haml (5.2.2)
@@ -195,7 +195,7 @@ GEM
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    parallel (1.26.3)
+    parallel (1.27.0)
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
