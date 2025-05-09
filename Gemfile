@@ -8,7 +8,7 @@ ruby '3.2.7'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1.0', '>= 6.0.3.3'
 # Database for Active Record
-gem 'pg', '~> 1.3.5'
+gem 'pg', '~> 1.5.9'
 # Use Puma as the app server
 gem 'puma', '~> 6.6.0'
 # Use SCSS for stylesheets
