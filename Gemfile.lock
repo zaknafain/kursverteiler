@@ -283,12 +283,12 @@ GEM
     rubocop-ast (1.44.1)
       parser (>= 3.3.7.2)
       prism (~> 1.4)
-    rubocop-rails (2.31.0)
+    rubocop-rails (2.32.0)
       activesupport (>= 4.2.0)
       lint_roller (~> 1.1)
       rack (>= 1.1)
       rubocop (>= 1.75.0, < 2.0)
-      rubocop-ast (>= 1.38.0, < 2.0)
+      rubocop-ast (>= 1.44.0, < 2.0)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     sass-rails (6.0.0)
@@ -378,7 +378,7 @@ DEPENDENCIES
   rails_admin_import!
   rspec-rails (~> 6.1.5)
   rubocop (~> 1.75.5)
-  rubocop-rails (~> 2.31.0)
+  rubocop-rails (~> 2.32.0)
   rubyzip (~> 2.3.0)
   sass-rails (>= 6)
   selenium-webdriver
