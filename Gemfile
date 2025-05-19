@@ -23,7 +23,7 @@ gem 'bcrypt', '~> 3.1.16'
 gem 'bootsnap', '>= 1.4.2', require: false
 # Handle Authentication for users
 gem 'devise', '~> 4.9.4'
-gem 'devise-i18n', '~> 1.9.2'
+gem 'devise-i18n', '~> 1.13.0'
 # Dashboard for admins
 gem 'rails_admin', git: 'https://github.com/zaknafain/rails_admin', branch: 'multiselect_options'
 gem 'rails_admin_import', git: 'https://github.com/zaknafain/rails_admin_import', branch: 'enumeration_translation'
