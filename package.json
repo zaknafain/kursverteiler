@@ -12,7 +12,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^5.2.1",
+    "webpack-dev-server": "^5.2.2",
     "yarn-deduplicate": "^6.0.2"
   },
   "engines": {
