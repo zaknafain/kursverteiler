@@ -203,7 +203,7 @@ GEM
     pg (1.6.2)
     prism (1.4.0)
     public_suffix (5.0.4)
-    puma (6.6.1)
+    puma (7.0.1)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.17)
@@ -376,7 +376,7 @@ DEPENDENCIES
   jbuilder (~> 2.10)
   listen (~> 3.2)
   pg (~> 1.6.0)
-  puma (~> 6.6.0)
+  puma (~> 7.0.1)
   rails (~> 6.1.0, >= 6.0.3.3)
   rails_admin!
   rails_admin_import!
