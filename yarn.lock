@@ -994,10 +994,10 @@
     "@parcel/watcher-win32-ia32" "2.5.1"
     "@parcel/watcher-win32-x64" "2.5.1"
 
-"@rails/actioncable@^6.1.5":
-  version "6.1.5"
-  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.1.5.tgz#c24ec8123a8e7e239ceabda29078df9c93752394"
-  integrity sha512-bV4/Q7NweGFm7t3GvUFm19UF2WKmcvlOXy7AxMWEZCwDxQLagAXhUpKb1AJ6Rg88cPHqXSQHaGKr84lIMd607A==
+"@rails/actioncable@^8.0.300":
+  version "8.0.300"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-8.0.300.tgz#ae78fbb42ae688f66852206ba02fea3518749791"
+  integrity sha512-X+jxLnyYciTciEeM9crFFsR6DCodCsnoQIzv4hEST6Lx1rEBEjNQbBopnyDT4gr7lBeHJNfb6fEcvZuWFxUSQg==
 
 "@rails/actiontext@^6.1.5":
   version "6.1.5"
