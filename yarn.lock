@@ -1122,10 +1122,10 @@
     tslib "^2.8.1"
     tsyringe "^4.10.0"
 
-"@rails/actioncable@^6.1.5":
-  version "6.1.5"
-  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.1.5.tgz#c24ec8123a8e7e239ceabda29078df9c93752394"
-  integrity sha512-bV4/Q7NweGFm7t3GvUFm19UF2WKmcvlOXy7AxMWEZCwDxQLagAXhUpKb1AJ6Rg88cPHqXSQHaGKr84lIMd607A==
+"@rails/actioncable@^8.1.200":
+  version "8.1.200"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-8.1.200.tgz#acecf74ab4846144eefdbc16618786df0cebedf9"
+  integrity sha512-on0DSb7AFUkq1ocxivDNQhhGW/RQpY91zvRVyyaEWP4gOOZWy33P/UyxjQk74IENWNrTqs8+zOGHwTjiiFruRw==
 
 "@rails/actiontext@^6.1.5":
   version "6.1.5"
