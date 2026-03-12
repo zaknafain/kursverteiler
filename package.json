@@ -8,7 +8,7 @@
     "@rails/ujs": "^6.1.5",
     "@rails/webpacker": "5.4.4",
     "sortablejs": "^1.15.7",
-    "trix": "^2.1.16"
+    "trix": "^2.1.17"
   },
   "version": "0.1.0",
   "devDependencies": {
