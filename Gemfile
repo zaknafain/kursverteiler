@@ -32,7 +32,7 @@ gem 'rails_admin_import', git: 'https://github.com/zaknafain/rails_admin_import'
 gem 'faker', '~> 2.18.0'
 
 gem 'rubyzip', '~> 3.2.2'
-gem 'write_xlsx', '~> 1.12.3'
+gem 'write_xlsx', '~> 1.13.0'
 
 # Fix for the time being. Remove when rails updated to 7.x
 gem 'concurrent-ruby', '1.3.4'
