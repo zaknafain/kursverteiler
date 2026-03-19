@@ -40,7 +40,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-assets-
     - name: Yarn Install
-      run: yarn check || bin/rails yarn:install
+      run: yarn install --frozen-lockfile
     - name: Compile Packs
       env:
         RAILS_ENV: test
