@@ -2,6 +2,7 @@
 
 require_relative 'boot'
 
+require 'logger'
 # require 'rails/all'
 # action_mailbox/engine
 require 'rails'
