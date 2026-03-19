@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.0', '>= 6.0.3.3'
+gem 'rails', '~> 8.1.2'
 # Database for Active Record
 gem 'pg', '~> 1.6.0'
 # Use Puma as the app server
@@ -22,7 +22,7 @@ gem 'bcrypt', '~> 3.1.16'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 # Handle Authentication for users
-gem 'devise', '~> 4.9.4'
+gem 'devise', '~> 5.0.3'
 gem 'devise-i18n', '~> 1.15.0'
 # Dashboard for admins
 gem 'rails_admin', git: 'https://github.com/zaknafain/rails_admin', branch: 'multiselect_options'
