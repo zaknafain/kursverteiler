@@ -28,8 +28,6 @@
 
 # Ignore keys for decrypting credentials and more.
 /config/master.key
-/config/credentials/development.key
-/config/credentials/test.key
 
 # Ignore downloaded or compiled assets
 /public/packs
