@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
+# Explicitly load custom RailsAdmin actions so they are available during
+# initialization. Zeitwerk does not autoload files that extend gem-owned
+# namespaces (like RailsAdmin::Config::Actions) until after the initializer
+# runs, so we require them upfront.
+Dir[Rails.root.join('app/models/rails_admin/config/actions/*.rb')].each { |f| require f }
+
 RailsAdmin.config do |config|
+  config.asset_source = :sprockets
   config.parent_controller = '::ApplicationController'
 
   config.main_app_name = ['Kursverteiler Web', 'Administration']
