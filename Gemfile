@@ -7,8 +7,8 @@ ruby '3.2.10'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.0'
-# Logger pinned to the version shipped as a default gem with Ruby 3.2.x to avoid
-# "already activated logger 1.5.3, but your Gemfile requires logger 1.7.0" conflicts
+# Logger pinned to match the default gem shipped with Ruby 3.2.x (1.5.3) to avoid
+# conflicts when newer versions are resolved by bundler
 gem 'logger', '~> 1.5.0'
 # Database for Active Record
 gem 'pg', '~> 1.6.0'
