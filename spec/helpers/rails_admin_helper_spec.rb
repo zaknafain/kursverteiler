@@ -153,9 +153,9 @@ RSpec.describe RailsAdminHelper, type: :helper do
 
     it 'concats the three indicator tags to the output_buffer' do
       helper.distribution_indicator_by(:student, :poll)
-      expect(helper.output_buffer).to start_with('<span>')
-      expect(helper.output_buffer).to end_with('</span>')
-      expect(helper.output_buffer).to include('</span><span>').twice
+      expect(helper.output_buffer.to_s).to start_with('<span>')
+      expect(helper.output_buffer.to_s).to end_with('</span>')
+      expect(helper.output_buffer.to_s).to include('</span><span>').twice
     end
   end
 
