@@ -4,7 +4,11 @@
 # initialization. Zeitwerk does not autoload files that extend gem-owned
 # namespaces (like RailsAdmin::Config::Actions) until after the initializer
 # runs, so we require them upfront.
-Dir[Rails.root.join('app/models/rails_admin/config/actions/*.rb')].each { |f| require f }
+Rails.application.config.to_prepare do
+  Dir[Rails.root.join('app/models/rails_admin/config/actions/*.rb')].sort.each do |file|
+    require_dependency file
+  end
+end
 
 RailsAdmin.config do |config|
   config.asset_source = :sprockets
