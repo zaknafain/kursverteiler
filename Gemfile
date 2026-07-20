@@ -53,7 +53,7 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   # Rubocop for linting
-  gem 'rubocop', '~> 1.85.1', require: false
+  gem 'rubocop', '~> 1.88.2', require: false
   gem 'rubocop-rails', '~> 2.34.3', require: false
 end
 
