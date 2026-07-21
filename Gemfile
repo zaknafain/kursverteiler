@@ -29,7 +29,7 @@ gem 'rails_admin', git: 'https://github.com/zaknafain/rails_admin', branch: 'mul
 gem 'rails_admin_import', git: 'https://github.com/zaknafain/rails_admin_import', branch: 'enumeration_translation'
 
 # Generate fake data for development, testing and staging
-gem 'faker', '~> 2.18.0'
+gem 'faker', '~> 3.8.0'
 
 gem 'rubyzip', '~> 3.4.1'
 gem 'write_xlsx', '~> 1.13.0'
