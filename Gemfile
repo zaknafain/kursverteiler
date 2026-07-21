@@ -31,7 +31,7 @@ gem 'rails_admin_import', git: 'https://github.com/zaknafain/rails_admin_import'
 # Generate fake data for development, testing and staging
 gem 'faker', '~> 2.18.0'
 
-gem 'rubyzip', '~> 3.2.2'
+gem 'rubyzip', '~> 3.4.1'
 gem 'write_xlsx', '~> 1.13.0'
 
 # Fix for the time being. Remove when rails updated to 7.x
