@@ -203,7 +203,7 @@ GEM
     puma (8.0.2)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (2.2.22)
+    rack (2.2.23)
     rack-proxy (0.7.6)
       rack
     rack-test (2.2.0)
@@ -282,7 +282,7 @@ GEM
     rubocop-ast (1.50.0)
       parser (>= 3.3.7.2)
       prism (~> 1.7)
-    rubocop-rails (2.34.3)
+    rubocop-rails (2.36.0)
       activesupport (>= 4.2.0)
       lint_roller (~> 1.1)
       rack (>= 1.1)
@@ -380,7 +380,7 @@ DEPENDENCIES
   rails_admin_import!
   rspec-rails (~> 6.1.5)
   rubocop (~> 1.88.2)
-  rubocop-rails (~> 2.34.3)
+  rubocop-rails (~> 2.36.0)
   rubyzip (~> 3.4.1)
   sass-rails (>= 6)
   selenium-webdriver
