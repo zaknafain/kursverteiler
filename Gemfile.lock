@@ -289,7 +289,7 @@ GEM
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.44.0, < 2.0)
     ruby-progressbar (1.13.0)
-    rubyzip (3.4.1)
+    rubyzip (3.5.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
@@ -381,7 +381,7 @@ DEPENDENCIES
   rspec-rails (~> 6.1.5)
   rubocop (~> 1.89.0)
   rubocop-rails (~> 2.36.0)
-  rubyzip (~> 3.4.1)
+  rubyzip (~> 3.5.0)
   sass-rails (>= 6)
   selenium-webdriver
   spring
